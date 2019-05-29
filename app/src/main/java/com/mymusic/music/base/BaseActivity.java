@@ -1,4 +1,4 @@
-package com.mymusic.base;
+package com.mymusic.music.base;
 
 import android.content.Intent;
 import android.os.Bundle;

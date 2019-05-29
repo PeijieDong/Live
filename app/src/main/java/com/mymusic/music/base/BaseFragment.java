@@ -1,4 +1,4 @@
-package com.mymusic.base;
+package com.mymusic.music.base;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,7 +22,7 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(view == null){
             view = CreateView(inflater,container);
-            ButterKnife.bind(inflater,view);
+            ButterKnife.bind(this,view);
             initVariables(getArguments());
             initViews(savedInstanceState);
             LoadData();

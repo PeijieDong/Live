@@ -1,4 +1,4 @@
-package com.mymusic.Util;
+package com.mymusic.music.Util;
 
 import android.app.Activity;
 import android.content.Intent;

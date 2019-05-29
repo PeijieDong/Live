@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mymusic.DiyTab;
+package com.mymusic.music.DiyTab;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -36,7 +36,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RestrictTo;
 import android.support.annotation.StringRes;
-import android.support.design.R;
 import android.support.v4.util.Pools;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;

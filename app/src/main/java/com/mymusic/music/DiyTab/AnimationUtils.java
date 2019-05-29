@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mymusic.DiyTab;
+package com.mymusic.music.DiyTab;
 
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;

@@ -1,4 +1,4 @@
-package com.mymusic.base;
+package com.mymusic.music.base;
 
 import android.support.v7.app.AppCompatActivity;
 

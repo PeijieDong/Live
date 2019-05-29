@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mymusic.DiyTab;
+package com.mymusic.music.DiyTab;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

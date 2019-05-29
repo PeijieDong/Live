@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mymusic.DiyTab;
+package com.mymusic.music.DiyTab;
 
 import android.content.Context;
 import android.content.res.TypedArray;
