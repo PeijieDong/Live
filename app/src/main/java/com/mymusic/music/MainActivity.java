@@ -44,9 +44,9 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
     protected void LoadData() {
         list = new ArrayList<>();
         list.add(new HomeFragment());
-        list.add(new VideoFragment());
-        list.add(new LiveFragment());
-        list.add(new FriendFragment());
+//        list.add(new VideoFragment());
+//        list.add(new LiveFragment());
+//        list.add(new FriendFragment());
         list.add(new MyFragment());
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         for(int i=0;i<list.size();i++){
@@ -55,14 +55,14 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
         transaction.commit();
         bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
         .setPressedIcon(R.drawable.ic_launcher_background).setText("首页"));
-        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
-                .setPressedIcon(R.drawable.ic_launcher_background).setText("视频"));
-        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
-                .setPressedIcon(R.drawable.ic_launcher_background).setText("直播"));
-        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
-                .setPressedIcon(R.drawable.ic_launcher_background).setText("圈子"));
-        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
-                .setPressedIcon(R.drawable.ic_launcher_background).setText("我的"));
+//        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
+//                .setPressedIcon(R.drawable.ic_launcher_background).setText("视频"));
+//        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
+//                .setPressedIcon(R.drawable.ic_launcher_background).setText("直播"));
+//        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
+//                .setPressedIcon(R.drawable.ic_launcher_background).setText("圈子"));
+//        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
+//                .setPressedIcon(R.drawable.ic_launcher_background).setText("我的"));
         bottomNavigation.setOnTabChechListener(this);
         bottomNavigation.setCurrentItem(0);
     }
