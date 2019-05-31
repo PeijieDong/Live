@@ -21,4 +21,5 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<String,BaseVi
     protected void convert(BaseViewHolder helper, String item) {
 
     }
+
 }

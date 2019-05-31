@@ -1789,7 +1789,8 @@ public class TabLayout extends HorizontalScrollView {
         int mSelectedPosition = -1;
         float mSelectionOffset;
 
-        private int mSelectedIndicatorWidth =  dpToPx(27);;
+        //设置tablayout的tab长度
+        private int mSelectedIndicatorWidth =  dpToPx(20);
         private int mMinTabWidth = Integer.MAX_VALUE;
 
         private int mLayoutDirection = -1;

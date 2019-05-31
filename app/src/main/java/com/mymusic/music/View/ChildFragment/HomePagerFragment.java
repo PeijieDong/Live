@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,8 @@ public class HomePagerFragment extends BaseFragment {
 
     @BindView(R.id.home_pager_Rc)
     RecyclerView homePagerRecyclerview;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout refresh;
 
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
@@ -37,7 +40,7 @@ public class HomePagerFragment extends BaseFragment {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-
+        refresh.autoRefresh();
     }
 
     @Override

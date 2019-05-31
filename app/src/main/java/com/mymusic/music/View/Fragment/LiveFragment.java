@@ -15,7 +15,7 @@ import com.mymusic.music.R;
 public class LiveFragment extends BaseFragment {
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_home,container,false);
+        return inflater.inflate(R.layout.fragment_live,container,false);
     }
 
     @Override

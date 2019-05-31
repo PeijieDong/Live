@@ -16,7 +16,7 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_home,container,false);
+        return inflater.inflate(R.layout.fragment_my,container,false);
     }
 
     @Override

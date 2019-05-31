@@ -2,16 +2,15 @@ package com.mymusic.music.View.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.View.ChildFragment.HomePagerFragment;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;

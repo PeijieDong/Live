@@ -72,9 +72,9 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         for(int i = 0;i<list.size();i++){
             if(i == position){
-                transaction.show(list.get(position));
+                transaction.show(list.get(i));
             }else{
-                transaction.hide(list.get(position));
+                transaction.hide(list.get(i));
             }
         }
         transaction.commit();
