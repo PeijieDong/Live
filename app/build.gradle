@@ -44,5 +44,4 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     //刷新控件
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-27'
-    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-27'
 }

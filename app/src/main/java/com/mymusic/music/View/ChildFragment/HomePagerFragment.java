@@ -50,6 +50,6 @@ public class HomePagerFragment extends BaseFragment {
             list.add("sss");
         }
         homePagerRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-        homePagerRecyclerview.setAdapter(new HomePagerRecyclerViewAdapter(R.layout.home_pager_layout,list));
+        homePagerRecyclerview.setAdapter(new HomePagerRecyclerViewAdapter(list));
     }
 }
