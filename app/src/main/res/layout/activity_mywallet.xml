@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".View.Activity.MyActivity.MywalletActivity">
+    tools:context=".View.Activity.MyChildActivity.My.MywalletActivity">
     <RelativeLayout
         android:id="@+id/wallet_head"
         android:layout_width="match_parent"
@@ -83,8 +83,8 @@
                     android:id="@+id/my_icon5"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/icon_wallet"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView

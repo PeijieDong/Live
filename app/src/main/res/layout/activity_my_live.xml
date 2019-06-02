@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".View.Activity.MyActivity.MyLiveActivity">
+    tools:context=".View.Activity.MyChildActivity.My.MyLiveActivity">
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -27,6 +27,7 @@
             android:textColor="#030303" />
     </RelativeLayout>
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/live_level"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
@@ -34,8 +35,8 @@
             android:id="@+id/my_icon1"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher_background"
+            android:padding="13dp"
+            android:src="@drawable/live_level"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="10dp"/>
         <TextView
@@ -55,6 +56,7 @@
             android:src="@drawable/icon_next"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/live_host"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
@@ -62,8 +64,8 @@
             android:id="@+id/my_icon2"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher_background"
+            android:padding="13dp"
+            android:src="@drawable/live_host"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="10dp"/>
         <TextView
@@ -83,6 +85,7 @@
             android:src="@drawable/icon_next"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/live_gift"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
@@ -90,8 +93,8 @@
             android:id="@+id/my_icon3"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher_background"
+            android:padding="13dp"
+            android:src="@drawable/live_gift"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="10dp"/>
         <TextView
@@ -111,6 +114,7 @@
             android:src="@drawable/icon_next"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/live_history"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
@@ -118,8 +122,8 @@
             android:id="@+id/my_icon4"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher_background"
+            android:padding="13dp"
+            android:src="@drawable/live_history"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="10dp"/>
         <TextView

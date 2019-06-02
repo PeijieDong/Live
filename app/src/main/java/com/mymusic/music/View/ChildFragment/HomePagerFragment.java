@@ -1,5 +1,6 @@
 package com.mymusic.music.View.ChildFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
@@ -21,7 +24,7 @@ import butterknife.BindView;
  * Create By mr.mao in 2019/5/29 22:19
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class HomePagerFragment extends BaseFragment {
+public class HomePagerFragment extends BaseFragment implements BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.home_pager_Rc)
     RecyclerView homePagerRecyclerview;
@@ -50,6 +53,16 @@ public class HomePagerFragment extends BaseFragment {
             list.add("sss");
         }
         homePagerRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-        homePagerRecyclerview.setAdapter(new HomePagerRecyclerViewAdapter(list));
+        HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(list);
+        adapter.setOnItemClickListener(this);
+        homePagerRecyclerview.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        Intent intent = new Intent(getContext(), DetailsActivity.class);
+        startActivity(intent);
     }
 }
+

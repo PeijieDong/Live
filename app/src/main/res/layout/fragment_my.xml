@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/my_setting"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="13dp"
+        <RelativeLayout
+            android:id="@+id/rl_my_setting"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/white"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="14dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/setting"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/my_setting"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="13dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="14dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/my_icon_setting"/>
+        </RelativeLayout>
         <android.support.constraint.ConstraintLayout
             android:id="@+id/cl1"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            app:layout_constraintTop_toBottomOf="@id/my_setting"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/rl_my_setting"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
             <de.hdodenhof.circleimageview.CircleImageView
@@ -40,20 +50,30 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_margin="20dp"
                 android:text="喵哥是小姐姐"/>
+            <ImageView
+                android:id="@+id/logo_level"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintLeft_toRightOf="@id/my_user_head"
+                app:layout_constraintTop_toBottomOf="@id/my_user_name"
+                android:src="@drawable/my_icon_level"/>
             <TextView
+                android:id="@+id/my_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"
                 android:textColor="#B3842B"
                 app:layout_constraintTop_toBottomOf="@id/my_user_name"
-                app:layout_constraintLeft_toRightOf="@id/my_user_head"
+                app:layout_constraintLeft_toRightOf="@id/logo_level"
                 android:text="LV1丶经验值 40 >"/>
         </android.support.constraint.ConstraintLayout>
         <android.support.constraint.ConstraintLayout
             android:id="@+id/cl2"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:background="@color/white"
             app:layout_constraintTop_toBottomOf="@id/cl1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
@@ -77,7 +97,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textColor="#999999"
-                    android:text="关注"/>
+                    android:text="@string/my_focus"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/my_fans"
@@ -99,10 +119,10 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textColor="#999999"
-                    android:text="粉丝"/>
+                    android:text="@string/my_fans"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/my_release"
+                android:id="@+id/my_publish"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -121,7 +141,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textColor="#999999"
-                    android:text="发布"/>
+                    android:text="@string/my_publish"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/my_collection"
@@ -143,68 +163,74 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textColor="#999999"
-                    android:text="收藏"/>
+                    android:text="@string/my_collection"/>
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
+
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/cl3"
+            android:id="@+id/my_cl_task"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_margin="15dp"
+            android:background="@color/white"
             android:elevation="5dp"
-            app:layout_constraintTop_toBottomOf="@id/cl2">
+            app:layout_constraintTop_toBottomOf="@id/cl2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
             <TextView
                 android:id="@+id/my_videoVip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#333333"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_margin="15dp"
-                android:text="观影权益"/>
+                android:text="@string/my_equity"
+                android:textColor="#333333"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/my_number"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"
-                android:text="今日免费观影次数"/>
+                android:text="@string/my_equityNum"
+                app:layout_constraintRight_toLeftOf="@id/my_number"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/my_totalNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_margin="15dp"
-                android:text="/30"/>
+                android:text="/30"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/my_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                app:layout_constraintRight_toLeftOf="@id/my_totalNumber"
-                app:layout_constraintTop_toTopOf="parent"
+                android:text="30"
                 android:textColor="#EB5F59"
-                android:text="30"/>
+                app:layout_constraintRight_toLeftOf="@id/my_totalNumber"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@id/my_videoVip"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_margin="15dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher_background"/>
+                android:src="@drawable/my_user_task"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/my_videoVip" />
         </android.support.constraint.ConstraintLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/cl3">
+            app:layout_constraintTop_toBottomOf="@id/my_cl_task">
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/my_wallet"
                 android:layout_width="match_parent"
@@ -214,8 +240,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:id="@+id/my_icon1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_icon_wallet"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -226,13 +252,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon1"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="我的钱包"/>
+                    android:text="@string/my_wallet"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/my_live"
@@ -243,8 +269,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:id="@+id/my_icon11"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_icon_live"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -255,24 +281,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon11"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="我的直播"/>
+                    android:text="@string/my_live"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_exchange"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="1dp">
+                android:layout_marginTop="1dp"
+                android:background="@color/white">
                 <ImageView
                     android:id="@+id/my_icon2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_exchange_zone"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -283,24 +311,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon2"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="兑换专区"/>
+                    android:text="@string/my_exchange"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_message"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="1dp">
+                android:layout_marginTop="1dp"
+                android:background="@color/white">
                 <ImageView
                     android:id="@+id/my_icon3"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_icon_message"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -311,24 +341,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon3"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="消息通知"/>
+                    android:text="@string/my_message"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_comment"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@color/white"
                 android:layout_marginTop="5dp">
                 <ImageView
                     android:id="@+id/my_icon4"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_icon_comment"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -339,24 +371,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon4"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="我的评论"/>
+                    android:text="@string/my_comment"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_like"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@color/white"
                 android:layout_marginTop="1dp">
                 <ImageView
                     android:id="@+id/my_icon5"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_icon_like"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -367,24 +401,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon5"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="我的点赞"/>
+                    android:text="@string/my_like"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_history"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@color/white"
                 android:layout_marginTop="1dp">
                 <ImageView
                     android:id="@+id/my_icon6"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_icon_history"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -395,24 +431,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon6"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="浏览记录"/>
+                    android:text="@string/my_history"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_feedback"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@color/white"
                 android:layout_marginTop="1dp">
                 <ImageView
                     android:id="@+id/my_icon7"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_icon_feedback"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -423,24 +461,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon7"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="意见回馈"/>
+                    android:text="@string/my_feedback"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_about"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@color/white"
                 android:layout_marginTop="5dp">
                 <ImageView
                     android:id="@+id/my_icon8"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_icon_about"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -451,24 +491,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon8"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="关于我们"/>
+                    android:text="@string/my_about"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_community"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@color/white"
                 android:layout_marginTop="1dp">
                 <ImageView
                     android:id="@+id/my_icon9"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_icon_community"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -479,24 +521,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon9"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="社区交流群"/>
+                    android:text="@string/my_community"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_share"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@color/white"
                 android:layout_marginTop="1dp">
                 <ImageView
                     android:id="@+id/my_icon10"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:padding="13dp"
+                    android:src="@drawable/my_icon_share"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -507,13 +551,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     app:layout_constraintLeft_toRightOf="@id/my_icon10"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="分享给Ta"/>
+                    android:text="@string/my_share"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/icon_next"/>
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

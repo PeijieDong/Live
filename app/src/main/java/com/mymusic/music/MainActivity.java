@@ -54,14 +54,14 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
         }
         transaction.commit();
         bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
-        .setPressedIcon(R.drawable.ic_launcher_background).setText("首页"));
-        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
+        .setPressedIcon(R.drawable.icon_home_pressed).setText("首页"));
+        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_video_normal)
                 .setPressedIcon(R.drawable.ic_launcher_background).setText("视频"));
-        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
+        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_live_normal)
                 .setPressedIcon(R.drawable.ic_launcher_background).setText("直播"));
-        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
+        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_friend_normal)
                 .setPressedIcon(R.drawable.ic_launcher_background).setText("圈子"));
-        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
+        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_my_normal)
                 .setPressedIcon(R.drawable.ic_launcher_background).setText("我的"));
         bottomNavigation.setOnTabChechListener(this);
         bottomNavigation.setCurrentItem(0);

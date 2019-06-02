@@ -1,4 +1,4 @@
-package com.mymusic.music.View.Activity.MyActivity;
+package com.mymusic.music.View.Activity.MyChildActivity.My;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +7,7 @@ import android.os.Bundle;
 import com.mymusic.music.R;
 import com.mymusic.music.base.BaseActivity;
 
-public class MyLiveActivity extends BaseActivity {
-
+public class MyhistoryActivity extends BaseActivity {
 
 
     @Override
@@ -18,7 +17,7 @@ public class MyLiveActivity extends BaseActivity {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_my_live);
+        setContentView(R.layout.activity_myhistory);
     }
 
     @Override
