@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="你听过三月的风八月的雨吗？"/>
+        android:text="你听过七月的风八月的雨吗？"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

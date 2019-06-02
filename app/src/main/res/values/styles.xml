@@ -12,6 +12,16 @@
         <item name="android:textColor">@color/text_gray</item>
     </style>
 
+    <declare-styleable name="SwitchButton">
+        <attr name="border_width" format="dimension"></attr>
+        <attr name="border_color" format="color"></attr>
+        <attr name="bg_color" format="color"></attr>
+        <attr name="checked_color" format="color"></attr>
+        <attr name="shadow_color" format="color"></attr>
+        <attr name="button_color" format="color"></attr>
+        <attr name="animation_duration" format="integer"></attr>
+    </declare-styleable>
+
 
 
 

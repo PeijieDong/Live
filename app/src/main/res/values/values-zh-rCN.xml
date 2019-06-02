@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="welcome">欢迎登陆</string>
+    <string name="LoginBt">登陆</string>
+    <string name="goRegister"><![CDATA[快速注册>]]></string>
+    <string name="LoginDes">登陆代表您确认并同意</string>
+    <string name="LoginDes2">《用户协议》</string>
+    <string name="phoneLogin">手机号登录</string>
+    <string name="forgetPwd">忘记密码？</string>
+    <string name="userInfo">个人信息</string>
+    <string name="touxiang">头像</string>
+    <string name="ningcheng">昵称</string>
+    <string name="qianming">个人签名</string>
+    <string name="xingbie">性别</string>
+    <string name="shengri">生日</string>
+    <string name="diqu">地区</string>
+    <string name="xingquxiang">性取向</string>
+    <string name="hunlian">婚恋</string>
+    <string name="jiaoyouyixiang">交友意向</string>
+    <string name="wallet_des">*民谣官方代理，极速到账，交易无忧*</string>
+    <string name="wallet_des_details">代理匹配成功后，请使用自助充值，获取最新的收款账 号后进行转账，切勿对历史收款账号转账，以免您的资 金收到损失。</string>
+    <string name="wallet_question">问题反馈</string>
+    <string name="wallet_top_up">确认充值</string>
+    <string name="wallet_detail">明细</string>
+    <string name="wallet_balance">余额</string>
+    <string name="title_mylive">我的直播</string>
+    <string name="live_history">观看记录</string>
+    <string name="live_gift">礼物明细</string>
+    <string name="live_host">主播认证</string>
+    <string name="live_levl">我的等级</string>
+</resources>

@@ -43,7 +43,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<String,BaseVi
                     case "adv":
                         return ADV;
                 }
-                return 0;
+                return 1;
             }
         });
         getMultiTypeDelegate().registerItemType(PICTURE,R.layout.home_rc_item_picture)

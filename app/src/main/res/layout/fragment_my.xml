@@ -206,6 +206,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/cl3">
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_wallet"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp">
@@ -234,6 +235,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:src="@drawable/ic_launcher_background"/>
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_live"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp">

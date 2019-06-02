@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".View.Activity.Login.LoginActivity" />
+        <activity android:name=".View.Activity.Login.LoginPhoneActivity" />
+        <activity android:name=".View.Activity.Login.RegisterActivity" />
+        <activity android:name=".View.Activity.Login.ForgetPwdActivity" />
+        <activity android:name=".View.Activity.user.UserActivity" />
+        <activity android:name=".View.Activity.Detail.DetailsActivity" />
+        <activity android:name=".View.Activity.MyActivity.MywalletActivity" />
+        <activity android:name=".View.Activity.MyActivity.MyLiveActivity"></activity>
     </application>
 
 </manifest>

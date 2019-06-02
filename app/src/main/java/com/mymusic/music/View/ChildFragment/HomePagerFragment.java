@@ -40,7 +40,7 @@ public class HomePagerFragment extends BaseFragment {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-        refresh.autoRefresh();
+
     }
 
     @Override
