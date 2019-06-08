@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mymusic.music.Util.BottomNavigation;
+import com.mymusic.music.Util.SharedPrefrenceUtils;
+import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.LockScreenActivity;
 import com.mymusic.music.View.Fragment.FriendFragment;
 import com.mymusic.music.View.Fragment.HomeFragment;
 import com.mymusic.music.View.Fragment.LiveFragment;
@@ -53,16 +55,16 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
             transaction.add(R.id.containter,list.get(i));
         }
         transaction.commit();
-        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.ic_launcher_background)
+        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_home_normal)
         .setPressedIcon(R.drawable.icon_home_pressed).setText("首页"));
         bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_video_normal)
-                .setPressedIcon(R.drawable.ic_launcher_background).setText("视频"));
+                .setPressedIcon(R.drawable.icon_video_pressed).setText("视频"));
         bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_live_normal)
-                .setPressedIcon(R.drawable.ic_launcher_background).setText("直播"));
+                .setPressedIcon(R.drawable.icon_live_pressed).setText("直播"));
         bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_friend_normal)
-                .setPressedIcon(R.drawable.ic_launcher_background).setText("圈子"));
+                .setPressedIcon(R.drawable.icon_friend_pressed).setText("圈子"));
         bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_my_normal)
-                .setPressedIcon(R.drawable.ic_launcher_background).setText("我的"));
+                .setPressedIcon(R.drawable.icon_my_pressed).setText("我的"));
         bottomNavigation.setOnTabChechListener(this);
         bottomNavigation.setCurrentItem(0);
     }

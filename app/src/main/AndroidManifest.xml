@@ -3,7 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mymusic.music">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
+        android:name=".Live"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -48,7 +55,11 @@
         <activity android:name=".View.Activity.MyChildActivity.SettingActivity.LanguageActivity" />
         <activity android:name=".View.Activity.MyChildActivity.LiveActivity.LivelevelActivity" />
         <activity android:name=".View.Activity.MyChildActivity.LiveActivity.LiveHostAuthenticationActivity" />
-        <activity android:name=".View.Activity.MyChildActivity.LiveActivity.LiveGiftActivity"></activity>
+        <activity android:name=".View.Activity.MyChildActivity.LiveActivity.LiveGiftActivity" />
+        <activity android:name=".View.Activity.Detail.UserDetailActivity" />
+        <activity android:name=".View.Activity.Community.CommunityAdviceActivity" />
+        <activity android:name=".View.Activity.Community.CommunityReportActivity" />
+        <activity android:name=".View.Activity.FoundActivity" />
     </application>
 
 </manifest>

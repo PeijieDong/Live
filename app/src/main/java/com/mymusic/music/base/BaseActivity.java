@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mymusic.music.Util.SharedPrefrenceUtils;
+import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.LockScreenActivity;
+
 import butterknife.ButterKnife;
 
 /**
@@ -45,5 +48,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ActivityCollector.removeActivity(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 }

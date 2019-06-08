@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mymusic.music.View.Activity.Detail.DetailsActivity;
+import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyLiveActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyaboutActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MycollectionActivity;
@@ -70,7 +73,7 @@ public class MyFragment extends BaseFragment {
                 goActivity(MylevelActivity.class);
                 break;
             case R.id.my_user_head:
-                goActivity(MyhomeActivity.class);
+                goActivity(UserDetailActivity.class);
                 break;
             case R.id.my_foucus:
                 goActivity(MyfocusActivity.class);
@@ -117,7 +120,7 @@ public class MyFragment extends BaseFragment {
             case R.id.my_community:
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.VIEW");
-                Uri uri = Uri.parse("http:www.baidu.com");
+                Uri uri = Uri.parse("http://www.baidu.com");
                 intent.setData(uri);
                 startActivity(intent);
                 break;
