@@ -4,219 +4,254 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".View.Activity.Detail.DetailsActivity">
-    <android.support.v4.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp">
+        <cn.jzvd.JZVideoPlayerStandard
+            android:id="@+id/video_play"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp">
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:padding="5dp"
-                    android:src="@drawable/icon_back"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"/>
-            </RelativeLayout>
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:padding="15dp">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/detail_head"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/ic_launcher_background"/>
-                <TextView
-                    android:id="@+id/detail_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/detail_head"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="10dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/detail_name"
-                    app:layout_constraintLeft_toRightOf="@id/detail_head"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="2dp"/>
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="24dp"
-                    android:textColor="@color/white"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginRight="16dp"/>
-            </android.support.constraint.ConstraintLayout>
+            android:layout_height="200dp"
+            android:visibility="gone"/>
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="15dp"/>
-                <TextView
-                    android:layout_width="87dp"
-                    android:layout_height="25dp" />
-            </LinearLayout>
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp">
-    
-            </FrameLayout>
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <ImageView
-                    android:id="@+id/image1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:padding="5dp"
-                    android:gravity="center"
-                    android:layout_marginLeft="5dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:src="@drawable/home_share"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/image1"
-                    android:text="12"/>
-    
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:padding="5dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/commentNum"
-                    android:src="@drawable/home_comment"/>
-                <TextView
-                    android:id="@+id/commentNum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:text="12"/>
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:padding="5dp"
-                    app:layout_constraintRight_toLeftOf="@id/likeNum"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/home_like"/>
-    
-                <TextView
-                    android:id="@+id/likeNum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:layout_marginRight="10dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:text="12"/>
-            </android.support.constraint.ConstraintLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
-                <LinearLayout
-                    android:id="@+id/changeState"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_centerVertical="true"
-                    android:gravity="center"
-                    android:padding="15dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="5dp"
+                        android:src="@drawable/icon_back"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <ImageView
-                        android:layout_width="11dp"
-                        android:layout_height="14dp"
-                        android:src="@drawable/ic_launcher_background"
-                        android:layout_marginLeft="4dp"/>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:padding="15dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/detail_head"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/ic_launcher_background"/>
+                    <TextView
+                        android:id="@+id/detail_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/detail_head"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"/>
+                    <TextView
+                        android:id="@+id/detail_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/detail_name"
+                        app:layout_constraintLeft_toRightOf="@id/detail_head"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"/>
+                    <TextView
+                        android:id="@+id/detail_focus"
+                        android:layout_width="60dp"
+                        android:layout_height="24dp"
+                        android:textColor="@color/white"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginRight="16dp"/>
+                </android.support.constraint.ConstraintLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:id="@+id/signTv"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:background="@drawable/icon_home"
+                        android:text="#"/>
+                    <TextView
+                        android:id="@+id/home_rc_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toRightOf="@id/signTv"
+                        android:gravity="center"
+                        android:textColor="#FF5252"
+                        android:textSize="12sp"
+                        android:padding="5dp"
+                        android:background="@drawable/back_home_top" />
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/detail_ll"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/switchBt"
-                    android:layout_marginRight="7dp"/>
-                <com.mymusic.music.Util.DiyView.SwitchButton
-                    android:id="@+id/switchBt"
-                    android:layout_width="27dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
-            </RelativeLayout>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/detail_Rc"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                </LinearLayout>
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white">
+                    <ImageView
+                        android:id="@+id/icon_share"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="15dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:src="@drawable/home_share"/>
+                    <TextView
+                        android:id="@+id/shareNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/icon_share"
+                        android:text="12"/>
+
+                    <ImageView
+                        android:id="@+id/icon_comment"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="5dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/commentNum"
+                        android:src="@drawable/home_comment"/>
+                    <TextView
+                        android:id="@+id/commentNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="35dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:text="12"/>
+                    <ImageView
+                        android:id="@+id/icon_like"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="5dp"
+                        app:layout_constraintRight_toLeftOf="@id/likeNum"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/home_like"/>
+
+                    <TextView
+                        android:id="@+id/likeNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:text="12"/>
+                </android.support.constraint.ConstraintLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+                    <LinearLayout
+                        android:id="@+id/changeState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:padding="15dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_launcher_background"
+                            android:layout_marginLeft="4dp"/>
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/switchBt"
+                        android:layout_marginRight="7dp"/>
+                    <com.mymusic.music.Util.DiyView.SwitchButton
+                        android:id="@+id/switchBt"
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+                </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/detail_Rc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true">
         <ImageView
-            android:layout_width="26dp"
-            android:layout_height="26dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginLeft="27dp"/>
+            android:layout_marginLeft="20dp"/>
         <EditText
+            android:id="@+id/detail_et"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:textSize="12sp"
+            android:padding="5dp"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="7dp"
             android:layout_marginRight="78dp"
-            android:layout_marginLeft="65dp"/>
-        <ImageView
-            android:id="@+id/comment"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="65dp"
+            android:hint="@string/detail_comment"/>
+        <TextView
+            android:id="@+id/detail_post"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/detail_et"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-        <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginRight="12dp"
-            app:layout_constraintRight_toLeftOf="@id/comment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/detail_post"/>
     </android.support.constraint.ConstraintLayout>
 </RelativeLayout>

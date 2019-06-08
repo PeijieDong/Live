@@ -15,6 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.PhotoShowDialog;
 import com.mymusic.music.base.BaseActivity;
 
 import java.util.List;
@@ -63,7 +64,8 @@ public class HomeGridAdapter extends BaseAdapter {
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                PhotoShowDialog dialog = new PhotoShowDialog(context, data, i);
+                dialog.show();
             }
         });
         ImageView typeImage = v.findViewById(R.id.grid_image);

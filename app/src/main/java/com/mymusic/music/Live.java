@@ -1,10 +1,16 @@
 package com.mymusic.music;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 
+import com.danikula.videocache.HttpProxyCacheServer;
 import com.mymusic.music.Util.LocaleUtils;
+import com.mymusic.music.Util.MyFileNameGenerator;
+
+import org.litepal.LitePal;
+import org.litepal.LitePalApplication;
 
 import java.util.Locale;
 
@@ -13,11 +19,19 @@ import java.util.Locale;
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
 public class Live extends Application {
+
+    private HttpProxyCacheServer proxy;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        LitePal.initialize(this);
 //        Locale _UserLocale=LocaleUtils.getUserLocale(this);
 //        LocaleUtils.updateLocale(this, _UserLocale);
+    }
+    public static HttpProxyCacheServer getProxy(Context context) {
+        Live app = (Live) context.getApplicationContext();
+        return app.proxy == null ? (app.proxy = app.newProxy()) : app.proxy;
     }
 
 //    @Override
@@ -36,4 +50,11 @@ public class Live extends Application {
 //            getResources().updateConfiguration(_Configuration, getResources().getDisplayMetrics());
 //        }
 //    }
+
+    private HttpProxyCacheServer newProxy() {
+        return new HttpProxyCacheServer.Builder(this)
+                .maxCacheSize(1024 * 1024 * 1024)       // 1 Gb for cache
+                .fileNameGenerator(new MyFileNameGenerator())
+                .build();
+    }
 }

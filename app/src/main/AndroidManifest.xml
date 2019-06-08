@@ -60,6 +60,8 @@
         <activity android:name=".View.Activity.Community.CommunityAdviceActivity" />
         <activity android:name=".View.Activity.Community.CommunityReportActivity" />
         <activity android:name=".View.Activity.FoundActivity" />
+        <activity android:name=".View.Activity.Detail.FriendDetailActivity" />
+        <activity android:name=".View.Activity.PostArtActivity.PostArtActivity"></activity>
     </application>
 
 </manifest>

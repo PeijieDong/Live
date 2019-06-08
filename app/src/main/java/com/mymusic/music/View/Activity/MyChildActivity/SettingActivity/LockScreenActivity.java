@@ -71,7 +71,6 @@ public class LockScreenActivity extends BaseActivity {
                     lockToast.setText(getResources().getString(R.string.lock_error));
                 }
             } else {
-
                 //设置密码
                 lockPassword.add(pattern);
                 if (lockPassword.size() == 1) {
@@ -82,6 +81,7 @@ public class LockScreenActivity extends BaseActivity {
                                 .equals(PatternLockUtils.patternToString(mPatternLockView, lockPassword.get(1)))) {
                     Toast.makeText(LockScreenActivity.this, "两次绘制不一致", Toast.LENGTH_SHORT).show();
                     SharedPrefrenceUtils.clearn(LockScreenActivity.this, "Password");
+                    lockPassword.clear();
                 } else if (lockPassword.size() == 2 &&
                         PatternLockUtils.patternToString(mPatternLockView, lockPassword.get(0))
                                 .equals(PatternLockUtils.patternToString(mPatternLockView, lockPassword.get(1)))) {

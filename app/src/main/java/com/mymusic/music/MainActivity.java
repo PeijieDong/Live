@@ -81,4 +81,9 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
         }
         transaction.commit();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }
