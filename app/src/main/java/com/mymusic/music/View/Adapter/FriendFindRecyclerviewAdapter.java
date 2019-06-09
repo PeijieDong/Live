@@ -2,6 +2,7 @@ package com.mymusic.music.View.Adapter;
 
 import android.media.Image;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -34,10 +35,10 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
                 .setText(R.id.tv4,item.getTui())
                 .setText(R.id.image_type_1,item.getList().get(0).getType())
                 .setText(R.id.image_type_2,item.getList().get(1).getType())
-                .setText(R.id.image_type_3,item.getList().get(1).getType())
-                .setText(R.id.image_type_4,item.getList().get(1).getType())
-                .setText(R.id.image_type_5,item.getList().get(1).getType())
-                .setText(R.id.image_type_6,item.getList().get(1).getType());
+                .setText(R.id.image_type_3,item.getList().get(2).getType())
+                .setText(R.id.image_type_4,item.getList().get(3).getType())
+                .setText(R.id.image_type_5,item.getList().get(4).getType())
+                .setText(R.id.image_type_6,item.getList().get(5).getType());
         ImageView head = helper.getView(R.id.friend_find_head);
         ImageView one = helper.getView(R.id.friend_find_one);
         ImageView two = helper.getView(R.id.friend_find_two);
@@ -49,12 +50,16 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
         CircleImageView ci2 = (CircleImageView)helper.getView(R.id.ci2);
         CircleImageView ci3 = (CircleImageView)helper.getView(R.id.ci3);
         CircleImageView ci4 = (CircleImageView)helper.getView(R.id.ci4);
+//        Glide.with(mContext).load(split[0]).into(ci1);
+//        Glide.with(mContext).load(split[1]).into(ci2);
+//        Glide.with(mContext).load(split[2]).into(ci3);
+//        Glide.with(mContext).load(split[3]).into(ci4);
         Glide.with(mContext).load(item.getIcon()).into(head);
         Glide.with(mContext).load(item.getList().get(0).getImage()).into(one);
         Glide.with(mContext).load(item.getList().get(1).getImage()).into(two);
-        Glide.with(mContext).load(item.getList().get(1).getImage()).into(three);
-        Glide.with(mContext).load(item.getList().get(1).getImage()).into(four);
-        Glide.with(mContext).load(item.getList().get(1).getImage()).into(five);
-        Glide.with(mContext).load(item.getList().get(1).getImage()).into(six);
+        Glide.with(mContext).load(item.getList().get(2).getImage()).into(three);
+        Glide.with(mContext).load(item.getList().get(3).getImage()).into(four);
+        Glide.with(mContext).load(item.getList().get(4).getImage()).into(five);
+        Glide.with(mContext).load(item.getList().get(5).getImage()).into(six);
     }
 }

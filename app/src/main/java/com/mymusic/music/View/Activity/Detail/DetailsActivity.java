@@ -54,9 +54,10 @@ public class DetailsActivity extends BaseActivity {
     @BindView(R.id.detail_head)
     CircleImageView detail_head;
     @BindView(R.id.video_play)
-    JZVideoPlayerStandard video_play;
+    JZVideoPlayerStandard VideoPlay;
     @BindView(R.id.detail_ll)
     LinearLayout detail_ll;
+
 
 
 
@@ -64,11 +65,10 @@ public class DetailsActivity extends BaseActivity {
     protected void initVariables(Intent intent) {
         String id = intent.getStringExtra("id");
         HashMap<String, String> map = new HashMap<>();
-        map.put("id","1");
-        NetRequest.postFormRequest(UrlManager.HOME_DETAILS, map, new NetRequest.DataCallBack() {
+        map.put("id",id);
+        NetRequest.getFormRequest(UrlManager.HOME_DETAILS, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Log.e("33",result);
                 DetailData data = GsonUtil.GsonToBean(result, DetailData.class);
                 initView(data);
             }
@@ -82,7 +82,9 @@ public class DetailsActivity extends BaseActivity {
 
     private void initView(DetailData data) {
         if(data.getData().getList().getType().equals("视频")){
-            video_play.setVisibility(View.VISIBLE);
+            VideoPlay.setVisibility(View.VISIBLE);
+            VideoPlay.setUp(data.getData().getList().getContent(),
+                    JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL);
         }else if(data.getData().getList().getType().equals("文字")){
             TextView view = (TextView) LayoutInflater.from(this).inflate(R.layout.detail_text_item, null);
             view.setText(data.getData().getList().getContent());

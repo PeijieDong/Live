@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="25dp"
         android:layout_margin="10dp">
         <TextView
             android:id="@+id/signTv"
@@ -21,7 +21,7 @@
         <TextView
             android:id="@+id/home_rc_type"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:layout_toRightOf="@id/signTv"
             android:gravity="center"
             android:textColor="#FF5252"

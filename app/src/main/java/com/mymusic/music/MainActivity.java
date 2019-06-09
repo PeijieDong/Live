@@ -1,10 +1,17 @@
 package com.mymusic.music;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.mymusic.music.Util.BottomNavigation;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
@@ -30,6 +37,10 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
 
     @BindView(R.id.bottom_navigation)
     BottomNavigation bottomNavigation;
+    @BindView(R.id.containter)
+    FrameLayout containter;
+    @BindView(R.id.main_rl)
+    RelativeLayout rl;
     private List<Fragment> list;
 
     @Override
@@ -69,11 +80,20 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
         bottomNavigation.setCurrentItem(0);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onTabSelected(View v, int position) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) containter.getLayoutParams();
         for(int i = 0;i<list.size();i++){
             if(i == position){
+                if(position == 1){
+                    params.removeRule(RelativeLayout.ABOVE);
+                    bottomNavigation.setBackgroundColor(getResources().getColor(R.color.transparent));
+                }else {
+                    params.addRule(RelativeLayout.ABOVE, R.id.bottom_navigation);
+                    bottomNavigation.setBackgroundColor(getResources().getColor(R.color.white));
+                }
                 transaction.show(list.get(i));
             }else{
                 transaction.hide(list.get(i));

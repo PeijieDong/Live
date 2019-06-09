@@ -84,7 +84,7 @@ public class FriendFindData {
             private String name;
             private int isguanzhu;
             private List<ListBean> list;
-            private List<?> ulist;
+            private List<String> ulist;
 
             public String getCid() {
                 return cid;
@@ -150,11 +150,11 @@ public class FriendFindData {
                 this.list = list;
             }
 
-            public List<?> getUlist() {
+            public List<String> getUlist() {
                 return ulist;
             }
 
-            public void setUlist(List<?> ulist) {
+            public void setUlist(List<String> ulist) {
                 this.ulist = ulist;
             }
 

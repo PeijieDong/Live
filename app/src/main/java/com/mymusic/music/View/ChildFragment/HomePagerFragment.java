@@ -97,8 +97,7 @@ public class HomePagerFragment extends BaseFragment implements BaseQuickAdapter.
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         Intent intent = new Intent(getContext(), DetailsActivity.class);
-        Intent intent1 = new Intent();
-        intent1.putExtra("id",list.get(position).getId());
+        intent.putExtra("id",list.get(position).getId());
         startActivity(intent);
     }
 

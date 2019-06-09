@@ -95,6 +95,8 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         Intent intent = new Intent(getContext(), FriendDetailActivity.class);
+        String cid = data.getData().getList().get(position).getCid();
+        intent.putExtra("id",cid);
         startActivity(intent);
     }
 }

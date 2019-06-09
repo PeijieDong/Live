@@ -1,13 +1,16 @@
 package com.mymusic.music.View.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.mymusic.music.DiyTab.TabLayout;
+import com.mymusic.music.View.Activity.FriendFoundActivity;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
 import com.mymusic.music.View.ChildFragment.FriendAllFragment;
 import com.mymusic.music.View.ChildFragment.FriendFindFragment;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Create By mr.mao in 2019/5/29 21:31
@@ -29,6 +33,8 @@ public class FriendFragment extends BaseFragment {
     TabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
+    @BindView(R.id.friend_found_bt)
+    ImageView friendFound;
 
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
@@ -55,5 +61,14 @@ public class FriendFragment extends BaseFragment {
         list.add(new FriendAllFragment());
         viewPager.setAdapter(new ViewpagerAdapter(getChildFragmentManager(),title,list));
         tabLayout.setupWithViewPager(viewPager);
+    }
+    @OnClick({R.id.friend_found_bt})
+    public void ClickEvent(View view){
+        switch (view.getId()){
+            case R.id.friend_found_bt:
+                Intent intent = new Intent(getContext(), FriendFoundActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
