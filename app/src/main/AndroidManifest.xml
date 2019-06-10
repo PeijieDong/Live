@@ -63,7 +63,8 @@
         <activity android:name=".View.Activity.Detail.FriendDetailActivity" />
         <activity android:name=".View.Activity.PostArtActivity.PostArtActivity" />
         <activity android:name=".View.Activity.FriendFoundActivity" />
-        <activity android:name=".View.Activity.Detail.FriendDetailTwoActivity"></activity>
+        <activity android:name=".View.Activity.Detail.FriendDetailTwoActivity" />
+        <activity android:name=".View.Activity.putContentActivity"></activity>
     </application>
 
 </manifest>

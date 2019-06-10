@@ -101,4 +101,9 @@
     <string name="detail_post">发送</string>
     <string name="detail_comment">请输入您想说的</string>
     <string name="friend_detail">详情</string>
+    <string name="put_art">发布</string>
+    <string name="chose_friend">选择圈子</string>
+    <string name="chose_des">能获得更多的赞和评论></string>
+    <string name="put_content_hint">标题：4-50字（必填）</string>
+    <string name="null_sign">添加标签优先审核</string>
 </resources>
