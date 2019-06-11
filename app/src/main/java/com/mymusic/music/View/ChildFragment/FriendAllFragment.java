@@ -73,6 +73,7 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
         NetRequest.getFormRequest(UrlManager.FRIEND_ALL, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 FriendAllTitle title = GsonUtil.GsonToBean(result, FriendAllTitle.class);
                 initTab(title.getData().getList());
             }

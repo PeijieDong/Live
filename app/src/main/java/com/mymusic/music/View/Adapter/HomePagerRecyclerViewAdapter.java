@@ -4,6 +4,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -21,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Create By mr.mao in 2019/5/29 22:22
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.DataBean.ListBean,BaseViewHolder> {
+public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.DataBean.ListBean,BaseViewHolder> implements View.OnClickListener {
 
     private final int PICTURE = 1;
     private final int ARTICLE = 2;
@@ -64,6 +66,18 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     @Override
     protected void convert(BaseViewHolder helper, HomeData.DataBean.ListBean item) {
         int type = helper.getItemViewType();
+        ImageView like = helper.getView(R.id.icon_like);
+        like.setOnClickListener(this);
+        ImageView comment = helper.getView(R.id.icon_comment);
+        comment.setOnClickListener(this);
+        ImageView share = helper.getView(R.id.icon_share);
+        share.setOnClickListener(this);
+        RelativeLayout themeBt = helper.getView(R.id.themeBt);
+        themeBt.setOnClickListener(this);
+        ImageView more = helper.getView(R.id.icon_more);
+        more.setOnClickListener(this);
+        LinearLayout userBt = helper.getView(R.id.userBt);
+        userBt.setOnClickListener(this);
         switch (type){
             case PICTURE:
                 helper.setText(R.id.likeNum,item.getZan())
@@ -105,5 +119,38 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 break;
         }
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.icon_like:
+                initLike();
+                break;
+            case R.id.icon_comment:
+                initComment();
+                break;
+            case R.id.icon_share:
+                initShare();
+                break;
+            case R.id.themeBt:
+                break;
+            case R.id.icon_more:
+                break;
+            case R.id.userBt:
+                break;
+        }
+    }
+    private void initLike() {
+
+    }
+    private void initComment() {
+
+    }
+    private void initShare() {
+
+    }
+
+
+
 
 }

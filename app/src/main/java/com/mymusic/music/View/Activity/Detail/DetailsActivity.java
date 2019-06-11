@@ -57,13 +57,12 @@ public class DetailsActivity extends BaseActivity {
     JZVideoPlayerStandard VideoPlay;
     @BindView(R.id.detail_ll)
     LinearLayout detail_ll;
-
-
+    private String id;
 
 
     @Override
     protected void initVariables(Intent intent) {
-        String id = intent.getStringExtra("id");
+        id = intent.getStringExtra("id");
         HashMap<String, String> map = new HashMap<>();
         map.put("id",id);
         NetRequest.getFormRequest(UrlManager.HOME_DETAILS, map, new NetRequest.DataCallBack() {
@@ -106,6 +105,25 @@ public class DetailsActivity extends BaseActivity {
         commentNum.setText(data.getData().getList().getComment());
         likeNum.setText(data.getData().getList().getZan());
         Glide.with(this).load(data.getData().getList().getAvatar()).into(detail_head);
+        initComment("new","0");
+    }
+
+    private void initComment(String type,String somebody) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id",id);
+        map.put("sortby",type);
+        map.put("uid",somebody);
+        NetRequest.getFormRequest(UrlManager.Detail_Comment, map, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
     }
 
     @Override

@@ -16,4 +16,6 @@ public class UrlManager {
     public static final String FRIEND_ALL = BaseUrl+"index/all";
     //圈子详情
     public static final String FRIEND_DETAILS = BaseUrl+"index/qinfo";
+    //详情页评论获取
+    public static final String Detail_Comment = BaseUrl+"index/getComment";
 }

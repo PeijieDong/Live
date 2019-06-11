@@ -25,5 +25,5 @@
         app:layout_constraintRight_toRightOf="@id/video_image"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:layout_margin="5dp"/>
+        android:layout_margin="3dp"/>
 </android.support.constraint.ConstraintLayout>

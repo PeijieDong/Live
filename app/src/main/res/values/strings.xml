@@ -106,4 +106,9 @@
     <string name="chose_des">能获得更多的赞和评论></string>
     <string name="put_content_hint">标题：4-50字（必填）</string>
     <string name="null_sign">添加标签优先审核</string>
+    <string name="detail">详情</string>
+    <string name="detail_des">圈子详情</string>
+    <string name="detail_icon">圈子ICON</string>
+    <string name="detail_name">圈子名称</string>
+    <string name="detail_type">所属分类</string>
 </resources>
