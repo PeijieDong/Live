@@ -68,7 +68,7 @@ public class VideoFragment extends BaseFragment {
         helper.attachToRecyclerView(videoRc);
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         videoRc.setLayoutManager(layoutManager);
-        videoRc.setAdapter(new VideoRecyclerViewAdapter(list));
+        videoRc.setAdapter(new VideoRecyclerViewAdapter(getContext(),list));
         videoRc.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {

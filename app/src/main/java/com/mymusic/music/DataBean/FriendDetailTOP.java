@@ -53,7 +53,7 @@ public class FriendDetailTOP implements Serializable {
         this.state = state;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * list : {"cid":"2","title":"测试推荐","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"1","name":"美图","official":"0","gnum":"2","tiezi":"9","ulist":["http://live.shuiqiao.net/default_thumb.jpg","http://live.shuiqiao.net/default_thumb.jpg"]}
          */
@@ -68,7 +68,7 @@ public class FriendDetailTOP implements Serializable {
             this.list = list;
         }
 
-        public static class ListBean {
+        public static class ListBean implements Serializable {
             /**
              * cid : 2
              * title : 测试推荐

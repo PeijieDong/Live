@@ -111,4 +111,13 @@
     <string name="detail_icon">圈子ICON</string>
     <string name="detail_name">圈子名称</string>
     <string name="detail_type">所属分类</string>
+    <string name="account">账号安全</string>
+    <string name="account_name">账号</string>
+    <string name="phone_bind">手机号绑定</string>
+    <string name="change_pas">修改密码</string>
+    <string name="integral">积分</string>
+    <string name="task_share">推广任务</string>
+    <string name="today_share">日常任务</string>
+    <string name="task">任务中心</string>
+    <string name="text_hint">仅显示前20位最近活跃用户</string>
 </resources>

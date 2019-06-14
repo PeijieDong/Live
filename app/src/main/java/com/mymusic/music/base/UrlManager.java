@@ -18,4 +18,6 @@ public class UrlManager {
     public static final String FRIEND_DETAILS = BaseUrl+"index/qinfo";
     //详情页评论获取
     public static final String Detail_Comment = BaseUrl+"index/getComment";
+    //详情页评论获取
+    public static final String Focus_List = BaseUrl+"index/userlist/id/2";
 }

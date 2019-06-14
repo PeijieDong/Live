@@ -31,6 +31,7 @@
                 android:textSize="14sp"
                 android:hint="请输入关键字搜索"/>
             <ImageView
+                android:id="@+id/put_content"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:padding="10dp"
@@ -52,5 +53,5 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
+    
 </android.support.design.widget.CoordinatorLayout>

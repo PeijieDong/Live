@@ -1,6 +1,9 @@
 package com.mymusic.music.View.Adapter;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -14,6 +17,8 @@ import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.MyGridView;
+import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
+import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 
 import java.util.List;
 
@@ -133,10 +138,15 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 initShare();
                 break;
             case R.id.themeBt:
+                Intent intent = new Intent(mContext, FriendDetailActivity.class);
+                mContext.startActivity(intent);
                 break;
             case R.id.icon_more:
+                showBottomSheetDialog();
                 break;
             case R.id.userBt:
+                Intent intent1 = new Intent(mContext, UserDetailActivity.class);
+                mContext.startActivity(intent1);
                 break;
         }
     }
@@ -149,7 +159,13 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     private void initShare() {
 
     }
-
+    void showBottomSheetDialog(){
+        BottomSheetDialog bottomSheet = new BottomSheetDialog(mContext);//实例化
+        bottomSheet.setCancelable(true);//设置点击外部是否可以取消
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_layout, null);
+        bottomSheet.setContentView(view);//设置对框框中的布局
+        bottomSheet.show();//显示弹窗
+    }
 
 
 

@@ -1,7 +1,9 @@
 package com.mymusic.music.View.Adapter;
 
+import android.content.Intent;
 import android.media.Image;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mymusic.music.DataBean.FriendFindData;
 import com.mymusic.music.R;
+import com.mymusic.music.View.Activity.user.ListUserActivity;
 
 import java.util.List;
 
@@ -20,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Create By mr.mao in 2019/6/1 16:47
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindData.DataBean.ListBeanX,BaseViewHolder> {
+public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindData.DataBean.ListBeanX,BaseViewHolder> implements View.OnClickListener {
 
     public FriendFindRecyclerviewAdapter(int layoutResId, @Nullable List<FriendFindData.DataBean.ListBeanX> data) {
         super(layoutResId, data);
@@ -61,5 +64,13 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
         Glide.with(mContext).load(item.getList().get(3).getImage()).into(four);
         Glide.with(mContext).load(item.getList().get(4).getImage()).into(five);
         Glide.with(mContext).load(item.getList().get(5).getImage()).into(six);
+
+        ConstraintLayout fourHead = helper.getView(R.id.four_head);
+        fourHead.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        mContext.startActivity(new Intent(mContext,ListUserActivity.class));
     }
 }

@@ -43,8 +43,11 @@ public class FriendDetailActivity extends BaseActivity {
     TabLayout tab;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
+    @BindView(R.id.friend_detail_focus)
+    TextView focus;
     private String id;
     private FriendDetailTOP bean;
+    private Boolean focuslogo;
 
 
     @Override
@@ -84,6 +87,7 @@ public class FriendDetailActivity extends BaseActivity {
     }
 
     private void initView() {
+        focus(focuslogo);
         List<String> title = new ArrayList<>();
         List<Fragment> list = new ArrayList<>();
         title.add(getResources().getString(R.string.dynamic));
@@ -101,7 +105,7 @@ public class FriendDetailActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.friend_detail_go,R.id.back})
+    @OnClick({R.id.friend_detail_go,R.id.back,R.id.friend_detail_focus})
     public void ClickEvent(View v){
         switch (v.getId()){
             case R.id.back:
@@ -112,6 +116,22 @@ public class FriendDetailActivity extends BaseActivity {
                 intent.putExtra("frienddetail",bean);
                 startActivity(intent);
                 break;
+            case R.id.friend_detail_focus:
+                focus(focuslogo);
+                break;
+        }
+    }
+
+
+    public void focus(boolean isfocus){
+        if(isfocus){
+            focus.setText("取消关注");
+            focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
+            focuslogo = false;
+        }else{
+            focus.setText("+关注");
+            focus.setBackgroundResource(R.drawable.back_friend_detail_focus);
+            focuslogo = true;
         }
     }
 }

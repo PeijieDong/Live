@@ -3,18 +3,25 @@ package com.mymusic.music.View.ChildFragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mymusic.music.DataBean.Focus;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Adapter.FocusRcAdaper;
 import com.mymusic.music.base.BaseFragment;
+import com.mymusic.music.base.UrlManager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import okhttp3.Request;
 
 /**
  * Create By mr.mao in 2019/6/2 20:41
@@ -36,13 +43,30 @@ public class FocusFragment extends BaseFragment {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-        List<String> list = new ArrayList<>();
-        focusRc.setLayoutManager(new LinearLayoutManager(getContext()));
-        focusRc.setAdapter(new FocusRcAdaper(R.layout.focus_rc_layout,list));
+
     }
 
     @Override
     protected void LoadData() {
+        initNet();
+    }
 
+    private void initNet() {
+        NetRequest.getFormRequest(UrlManager.Focus_List, null, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                Focus bean = GsonUtil.GsonToBean(result, Focus.class);
+                focusRc.setLayoutManager(new LinearLayoutManager(getContext()));
+                FocusRcAdaper adaper = new FocusRcAdaper(R.layout.focus_rc_layout, bean.getData().getList());
+                adaper.setOnItemClickListener(this);
+                focusRc.setAdapter(adaper);
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
     }
 }

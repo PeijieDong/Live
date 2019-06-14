@@ -65,11 +65,12 @@
                         app:layout_constraintLeft_toRightOf="@id/friend_detail_head"
                         android:textColor="#333333"/>
                     <TextView
+                        android:id="@+id/friend_detail_focus"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="10dp"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
                 </android.support.constraint.ConstraintLayout>
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -90,12 +91,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginLeft="20dp"
                         android:textColor="#999999"
                         android:textSize="14sp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@id/userDetail_username"
+                        app:layout_constraintLeft_toRightOf="@id/friend_detail_fansnum"
                         android:paddingLeft="5dp"/>
                 </android.support.constraint.ConstraintLayout>
                 <LinearLayout

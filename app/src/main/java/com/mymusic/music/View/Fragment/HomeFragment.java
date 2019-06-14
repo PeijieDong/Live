@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.View.Activity.FoundActivity;
+import com.mymusic.music.View.Activity.putContentActivity;
 import com.mymusic.music.View.ChildFragment.HomePagerFragment;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
@@ -92,12 +93,15 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.home_find})
+    @OnClick({R.id.home_find,R.id.put_content})
     public void OnclickEvent(View view){
         switch (view.getId()){
             case R.id.home_find:
                 Intent intent = new Intent(getContext(), FoundActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.put_content:
+                startActivity(new Intent(getContext(),putContentActivity.class));
                 break;
         }
     }
