@@ -1,7 +1,6 @@
 package com.mymusic.music.DataBean;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Create By mr.mao in 2019/6/9 21:17
@@ -9,8 +8,9 @@ import java.util.List;
  **/
 public class FriendDetailTOP implements Serializable {
 
+
     /**
-     * data : {"list":{"cid":"2","title":"测试推荐","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"1","name":"美图","official":"0","gnum":"2","tiezi":"9","ulist":["http://live.shuiqiao.net/default_thumb.jpg","http://live.shuiqiao.net/default_thumb.jpg"]}}
+     * data : {"list":{"cid":"1","title":"出品","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"0","name":"交友","official":"0","gnum":"0","tiezi":"9","zhiding":null,"gonggao":null,"ulist":{"head1":"","head2":"","head3":"","head4":""}}}
      * status : 1
      * referer :
      * state : 1
@@ -53,9 +53,9 @@ public class FriendDetailTOP implements Serializable {
         this.state = state;
     }
 
-    public static class DataBean implements Serializable {
+    public static class DataBean implements Serializable{
         /**
-         * list : {"cid":"2","title":"测试推荐","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"1","name":"美图","official":"0","gnum":"2","tiezi":"9","ulist":["http://live.shuiqiao.net/default_thumb.jpg","http://live.shuiqiao.net/default_thumb.jpg"]}
+         * list : {"cid":"1","title":"出品","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"0","name":"交友","official":"0","gnum":"0","tiezi":"9","zhiding":null,"gonggao":null,"ulist":{"head1":"","head2":"","head3":"","head4":""}}
          */
 
         private ListBean list;
@@ -68,18 +68,20 @@ public class FriendDetailTOP implements Serializable {
             this.list = list;
         }
 
-        public static class ListBean implements Serializable {
+        public static class ListBean implements Serializable{
             /**
-             * cid : 2
-             * title : 测试推荐
+             * cid : 1
+             * title : 出品
              * icon : http://live.shuiqiao.net/default.jpg
              * description : 这里是描述
-             * tui : 1
-             * name : 美图
+             * tui : 0
+             * name : 交友
              * official : 0
-             * gnum : 2
+             * gnum : 0
              * tiezi : 9
-             * ulist : ["http://live.shuiqiao.net/default_thumb.jpg","http://live.shuiqiao.net/default_thumb.jpg"]
+             * zhiding : null
+             * gonggao : null
+             * ulist : {"head1":"","head2":"","head3":"","head4":""}
              */
 
             private String cid;
@@ -91,7 +93,9 @@ public class FriendDetailTOP implements Serializable {
             private String official;
             private String gnum;
             private String tiezi;
-            private List<String> ulist;
+            private Object zhiding;
+            private Object gonggao;
+            private UlistBean ulist;
 
             public String getCid() {
                 return cid;
@@ -165,12 +169,74 @@ public class FriendDetailTOP implements Serializable {
                 this.tiezi = tiezi;
             }
 
-            public List<String> getUlist() {
+            public Object getZhiding() {
+                return zhiding;
+            }
+
+            public void setZhiding(Object zhiding) {
+                this.zhiding = zhiding;
+            }
+
+            public Object getGonggao() {
+                return gonggao;
+            }
+
+            public void setGonggao(Object gonggao) {
+                this.gonggao = gonggao;
+            }
+
+            public UlistBean getUlist() {
                 return ulist;
             }
 
-            public void setUlist(List<String> ulist) {
+            public void setUlist(UlistBean ulist) {
                 this.ulist = ulist;
+            }
+
+            public static class UlistBean implements Serializable{
+                /**
+                 * head1 :
+                 * head2 :
+                 * head3 :
+                 * head4 :
+                 */
+
+                private String head1;
+                private String head2;
+                private String head3;
+                private String head4;
+
+                public String getHead1() {
+                    return head1;
+                }
+
+                public void setHead1(String head1) {
+                    this.head1 = head1;
+                }
+
+                public String getHead2() {
+                    return head2;
+                }
+
+                public void setHead2(String head2) {
+                    this.head2 = head2;
+                }
+
+                public String getHead3() {
+                    return head3;
+                }
+
+                public void setHead3(String head3) {
+                    this.head3 = head3;
+                }
+
+                public String getHead4() {
+                    return head4;
+                }
+
+                public void setHead4(String head4) {
+                    this.head4 = head4;
+                }
             }
         }
     }

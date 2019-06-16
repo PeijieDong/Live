@@ -149,7 +149,7 @@ public class MyVideoPlayer extends JZVideoPlayerStandard {
      *
      * @return
      */
-    private boolean isPlay() {
+    public boolean isPlay() {
         if (currentState == CURRENT_STATE_PREPARING || currentState == CURRENT_STATE_PLAYING || currentState == -1) {
             return true;
         }

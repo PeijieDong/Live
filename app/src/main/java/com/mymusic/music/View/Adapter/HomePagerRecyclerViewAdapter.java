@@ -1,5 +1,8 @@
 package com.mymusic.music.View.Adapter;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
@@ -9,6 +12,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -17,6 +21,7 @@ import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.MyGridView;
+import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 
@@ -35,6 +40,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     private final int VIDEO = 3;
     private final int RECOMMEND = 4;
     private final int ADV = 5;
+    HomeData.DataBean.ListBean item;
 
     public HomePagerRecyclerViewAdapter(@Nullable List<HomeData.DataBean.ListBean> data) {
         super(data);
@@ -58,7 +64,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                     case "关注":
                         return ADV;
                 }
-                return 1;
+                return 5;
             }
         });
         getMultiTypeDelegate().registerItemType(PICTURE,R.layout.home_rc_item_picture)
@@ -70,21 +76,11 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
 
     @Override
     protected void convert(BaseViewHolder helper, HomeData.DataBean.ListBean item) {
+        this.item = item;
         int type = helper.getItemViewType();
-        ImageView like = helper.getView(R.id.icon_like);
-        like.setOnClickListener(this);
-        ImageView comment = helper.getView(R.id.icon_comment);
-        comment.setOnClickListener(this);
-        ImageView share = helper.getView(R.id.icon_share);
-        share.setOnClickListener(this);
-        RelativeLayout themeBt = helper.getView(R.id.themeBt);
-        themeBt.setOnClickListener(this);
-        ImageView more = helper.getView(R.id.icon_more);
-        more.setOnClickListener(this);
-        LinearLayout userBt = helper.getView(R.id.userBt);
-        userBt.setOnClickListener(this);
         switch (type){
             case PICTURE:
+                initListener(helper);
                 helper.setText(R.id.likeNum,item.getZan())
                         .setText(R.id.commentNum,item.getComment())
                         .setText(R.id.shareNum,item.getShare())
@@ -98,6 +94,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 grid.setAdapter(adapter);
                 break;
             case ARTICLE:
+                initListener(helper);
                 helper.setText(R.id.likeNum,item.getZan())
                         .setText(R.id.commentNum,item.getComment())
                         .setText(R.id.shareNum,item.getShare())
@@ -108,6 +105,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .into((CircleImageView) helper.getView(R.id.userHead));
                 break;
             case VIDEO:
+                initListener(helper);
                 helper.setText(R.id.likeNum,item.getZan())
                         .setText(R.id.commentNum,item.getComment())
                         .setText(R.id.shareNum,item.getShare())
@@ -125,6 +123,20 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         }
     }
 
+    public void initListener(BaseViewHolder helper){
+        ImageView like = helper.getView(R.id.icon_like);
+        like.setOnClickListener(this);
+        ImageView comment = helper.getView(R.id.icon_comment);
+        comment.setOnClickListener(this);
+        ImageView share = helper.getView(R.id.icon_share);
+        share.setOnClickListener(this);
+        RelativeLayout themeBt = helper.getView(R.id.themeBt);
+        themeBt.setOnClickListener(this);
+        ImageView more = helper.getView(R.id.icon_more);
+        more.setOnClickListener(this);
+        LinearLayout userBt = helper.getView(R.id.userBt);
+        userBt.setOnClickListener(this);
+    };
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -157,7 +169,10 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
 
     }
     private void initShare() {
-
+        ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText(null, item.getContent());
+        clipboard.setPrimaryClip(clipData);
+        Toast.makeText(mContext,"分享内容复制成功",Toast.LENGTH_SHORT).show();
     }
     void showBottomSheetDialog(){
         BottomSheetDialog bottomSheet = new BottomSheetDialog(mContext);//实例化

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,7 +48,7 @@ public class FriendDetailActivity extends BaseActivity {
     TextView focus;
     private String id;
     private FriendDetailTOP bean;
-    private Boolean focuslogo;
+    private Boolean focuslogo = false;
 
 
     @Override
@@ -71,6 +72,7 @@ public class FriendDetailActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.FRIEND_DETAILS, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 bean = GsonUtil.GsonToBean(result, FriendDetailTOP.class);
                 Glide.with(FriendDetailActivity.this).load(bean.getData().getList().getIcon()).into(head);
                 title.setText(bean.getData().getList().getTitle());

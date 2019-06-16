@@ -11,17 +11,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.mymusic.music.DataBean.VideoData;
+import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.View.Adapter.VideoRecyclerViewAdapter;
 import com.mymusic.music.View.Adapter.VideoViewHolder;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
+import com.mymusic.music.base.UrlManager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import cn.jzvd.JZVideoPlayer;
+import okhttp3.Request;
 
 /**
  * Create By mr.mao in 2019/5/29 21:30
@@ -52,23 +58,31 @@ public class VideoFragment extends BaseFragment {
 
     @Override
     protected void LoadData() {
-        List<String> list = new ArrayList<>();
-        list.add("http://chuangfen.oss-cn-hangzhou.aliyuncs.com/public/attachment/201811/26/09/5bfb4c55633c9.mp4");
-        list.add("http://chuangfen.oss-cn-hangzhou.aliyuncs.com/public/attachment/201805/100651/201805181532123423.mp4");
-        list.add("http://chuangfen.oss-cn-hangzhou.aliyuncs.com/public/attachment/201803/100651/201803151735198462.mp4");
-        list.add("http://chuangfen.oss-cn-hangzhou.aliyuncs.com/public/attachment/201803/100651/201803150923220770.mp4");
-        list.add("http://chuangfen.oss-cn-hangzhou.aliyuncs.com/public/attachment/201803/100651/201803150922255785.mp4");
-        list.add("http://chuangfen.oss-cn-hangzhou.aliyuncs.com/public/attachment/201803/100651/201803150920130302.mp4");
-        list.add("http://chuangfen.oss-cn-hangzhou.aliyuncs.com/public/attachment/201803/100651/201803141625005241.mp4");
-        list.add("http://chuangfen.oss-cn-hangzhou.aliyuncs.com/public/attachment/201803/100651/201803141624378522.mp4");
-        list.add("http://chuangfen.oss-cn-hangzhou.aliyuncs.com/public/attachment/201803/100651/201803131546119319.mp4");
+        initNet();
+    }
 
+    private void initNet() {
+        NetRequest.postFormRequest(UrlManager.Video_List, null, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                VideoData bean = GsonUtil.GsonToBean(result, VideoData.class);
+                initView(bean);
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
+    }
+
+    private void initView(VideoData bean) {
         //Recycleview页面滑动
         helper = new PagerSnapHelper();
         helper.attachToRecyclerView(videoRc);
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         videoRc.setLayoutManager(layoutManager);
-        videoRc.setAdapter(new VideoRecyclerViewAdapter(getContext(),list));
+        videoRc.setAdapter(new VideoRecyclerViewAdapter(getContext(),bean.getData().getList()));
         videoRc.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {

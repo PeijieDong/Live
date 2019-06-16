@@ -3,6 +3,7 @@ package com.mymusic.music.View.Activity.Detail;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,18 +12,23 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.mymusic.music.DataBean.CommentData;
 import com.mymusic.music.DataBean.DetailData;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.MyGridView;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Adapter.DetailCommentRcAdapter;
 import com.mymusic.music.View.Adapter.HomeGridAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
+import org.w3c.dom.Comment;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -37,8 +43,6 @@ import okhttp3.Request;
 
 public class DetailsActivity extends BaseActivity {
 
-    @BindView(R.id.detail_Rc)
-    RecyclerView recyclerView;
     @BindView(R.id.detail_name)
     TextView detail_name;
     @BindView(R.id.detail_time)
@@ -57,9 +61,17 @@ public class DetailsActivity extends BaseActivity {
     JZVideoPlayerStandard VideoPlay;
     @BindView(R.id.detail_ll)
     LinearLayout detail_ll;
+    @BindView(R.id.detail_Rc)
+    RecyclerView detailRc;
+    @BindView(R.id.switchBt)
+    SwitchButton switchBt;
     private String id;
+    private DetailCommentRcAdapter adapter;
 
-
+    @Override
+    protected void initViews(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_details);
+    }
     @Override
     protected void initVariables(Intent intent) {
         id = intent.getStringExtra("id");
@@ -78,6 +90,7 @@ public class DetailsActivity extends BaseActivity {
             }
         });
     }
+
 
     private void initView(DetailData data) {
         if(data.getData().getList().getType().equals("视频")){
@@ -110,13 +123,14 @@ public class DetailsActivity extends BaseActivity {
 
     private void initComment(String type,String somebody) {
         HashMap<String, String> map = new HashMap<>();
-        map.put("id",id);
+        map.put("id","2");
         map.put("sortby",type);
         map.put("uid",somebody);
         NetRequest.getFormRequest(UrlManager.Detail_Comment, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-
+                CommentData bean = GsonUtil.GsonToBean(result, CommentData.class);
+                initCommentList(bean.getData().getList());
             }
 
             @Override
@@ -126,13 +140,25 @@ public class DetailsActivity extends BaseActivity {
         });
     }
 
-    @Override
-    protected void initViews(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_details);
+    private void initCommentList(List<CommentData.DataBean.ListBean> list) {
+        detailRc.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new DetailCommentRcAdapter(R.layout.detail_item_layout,list);
+        detailRc.setAdapter(adapter);
     }
+
+
 
     @Override
     protected void LoadData() {
-
+        switchBt.setOnCheckListener(new SwitchButton.OnCheckListener() {
+            @Override
+            public void onCheck(boolean isCheck) {
+                if(isCheck){
+                    initComment("new","楼主");
+                }else{
+                    initComment("new","0");
+                }
+            }
+        });
     }
 }

@@ -1,5 +1,6 @@
 package com.mymusic.music.View.ChildFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.mymusic.music.DataBean.FriendAllData;
 import com.mymusic.music.DataBean.FriendAllTitle;
@@ -15,6 +17,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.TopNavigation;
+import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Adapter.FriendAllAdapter;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
@@ -73,7 +76,6 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
         NetRequest.getFormRequest(UrlManager.FRIEND_ALL, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Log.e("33",result);
                 FriendAllTitle title = GsonUtil.GsonToBean(result, FriendAllTitle.class);
                 initTab(title.getData().getList());
             }
@@ -111,6 +113,14 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
     private void initRc(List<FriendAllData.DataBean.ListBeanX> list) {
         rc.setLayoutManager(new LinearLayoutManager(getContext()));
         FriendAllAdapter adapter = new FriendAllAdapter(R.layout.fragment_friend_all_item,list);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getContext(), FriendDetailActivity.class);
+                intent.putExtra("id",list.get(position).getCid());
+                startActivity(intent);
+            }
+        });
         adapter.notifyDataSetChanged();
         rc.setAdapter(adapter);
     }

@@ -49,7 +49,7 @@ public class FriendDetailFragment2 extends BaseFragment {
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
         map.put("id",id);
-        map.put("type","2");
+        map.put("type","0");
         NetRequest.postFormRequest(UrlManager.FRIEND_DETAILS, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

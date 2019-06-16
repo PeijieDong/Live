@@ -20,4 +20,8 @@ public class UrlManager {
     public static final String Detail_Comment = BaseUrl+"index/getComment";
     //详情页评论获取
     public static final String Focus_List = BaseUrl+"index/userlist/id/2";
+    //视频列表
+    public static final String Video_List = BaseUrl+"video/index";
+    //活跃用户列表
+    public static final String User_List = BaseUrl+"index/userlist";
 }

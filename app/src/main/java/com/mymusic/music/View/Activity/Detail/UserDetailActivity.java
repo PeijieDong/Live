@@ -34,10 +34,11 @@ public class UserDetailActivity extends BaseActivity {
     TabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
+    private String id;
 
     @Override
     protected void initVariables(Intent intent) {
-
+        id = intent.getStringExtra("UserId");
     }
 
     @Override

@@ -53,7 +53,8 @@
                     <ImageView
                         android:id="@+id/friend_detail_head"
                         android:layout_width="70dp"
-                        android:layout_height="70dp" />
+                        android:layout_height="70dp"
+                        android:padding="10dp"/>
                     <TextView
                         android:id="@+id/friend_detail_title"
                         android:layout_width="wrap_content"
@@ -69,6 +70,8 @@
                         android:layout_width="70dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </android.support.constraint.ConstraintLayout>
@@ -139,6 +142,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="5dp"
+                    android:layout_marginTop="7dp"
                     android:background="#F4F4F6"/>
             </LinearLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -152,18 +156,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:navigationIcon="@drawable/icon_back"/>
             <com.mymusic.music.DiyTab.TabLayout
                 android:id="@+id/tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabIndicatorColor="@color/navi_title_color"
                 app:tabIndicatorHeight="2dp"
+                android:background="@color/white"
                 app:tabSelectedTextColor="@color/navi_title_color"
                 app:tabTextAppearance="@style/TabLayoutTextStyle"
                 android:padding="5dp"/>
