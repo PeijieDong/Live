@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.google.gson.Gson;
+import com.mymusic.music.Live;
 
 import java.io.File;
 import java.io.IOException;
@@ -107,6 +108,10 @@ public class NetRequest {
         getInstance().inner_postFormAsync(url, params, callBack);
     }
 
+
+    public static void postFormHeadRequest(String url, Map<String, String> params,String head, DataCallBack callBack) {
+        getInstance().inner_postFormAsync2(url,head, params, callBack);
+    }
 /**
      * 建立网络框架，获取网络数据，异步post请求（json）
      *
@@ -263,6 +268,64 @@ public class NetRequest {
         }
         requestBody = builder.build();
         //结果返回
+        Request.Builder builder1 = new Request.Builder();
+        final Request request = new Request.Builder().url(url)
+                .post(requestBody).build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                deliverDataFailure(request, e, callBack);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) { // 请求成功
+                    //执行请求成功的操作
+                    String result = response.body().string();
+                    deliverDataSuccess(result, callBack);
+                } else {
+                    throw new IOException(response + "");
+                }
+            }
+        });
+    }
+
+    /**
+     * 异步post请求（Form）,内部实现方法
+     *
+     * @param url      url
+     * @param params   params
+     * @param callBack callBack
+     */
+    private void inner_postFormAsync2(String url,String head, Map<String, String> params, final DataCallBack callBack) {
+        RequestBody requestBody;
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        FormBody.Builder builder = new FormBody.Builder();
+        /**
+         * 在这对添加的参数进行遍历
+         */
+        for (Map.Entry<String, String> map : params.entrySet()) {
+            String key = map.getKey();
+            String value;
+            /**
+             * 判断值是否是空的
+             */
+            if (map.getValue() == null) {
+                value = "";
+            } else {
+                value = map.getValue();
+            }
+            /**
+             * 把key和value添加到formbody中
+             */
+            builder.add(key, value);
+        }
+        requestBody = builder.build();
+        //结果返回
+        Request.Builder builder1 = new Request.Builder();
+        builder1.addHeader("token",head);
         final Request request = new Request.Builder().url(url)
                 .post(requestBody).build();
         okHttpClient.newCall(request).enqueue(new Callback() {

@@ -1,5 +1,8 @@
 package com.mymusic.music.View.Activity.Detail;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.mymusic.music.DataBean.CommentData;
 import com.mymusic.music.DataBean.DetailData;
+import com.mymusic.music.DataBean.Details;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.GsonUtil;
@@ -37,6 +42,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Request;
@@ -53,8 +60,6 @@ public class DetailsActivity extends BaseActivity {
     TextView shareNum;
     @BindView(R.id.commentNum)
     TextView commentNum;
-    @BindView(R.id.likeNum)
-    TextView likeNum;
     @BindView(R.id.detail_head)
     CircleImageView detail_head;
     @BindView(R.id.video_play)
@@ -65,8 +70,16 @@ public class DetailsActivity extends BaseActivity {
     RecyclerView detailRc;
     @BindView(R.id.switchBt)
     SwitchButton switchBt;
+    @BindView(R.id.detail_et)
+    EditText detailEt;
+    @BindView(R.id.icon_like)
+    ImageView likeicon;
+    @BindView(R.id.likeNum)
+    TextView likenum;
     private String id;
     private DetailCommentRcAdapter adapter;
+    private DetailData data;
+    private List<CommentData.DataBean.ListBean> list = new ArrayList<>();
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
@@ -80,7 +93,7 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.HOME_DETAILS, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                DetailData data = GsonUtil.GsonToBean(result, DetailData.class);
+                data = GsonUtil.GsonToBean(result, DetailData.class);
                 initView(data);
             }
 
@@ -116,7 +129,7 @@ public class DetailsActivity extends BaseActivity {
         home_rc_type.setText(data.getData().getList().getType());
         shareNum.setText(data.getData().getList().getShare());
         commentNum.setText(data.getData().getList().getComment());
-        likeNum.setText(data.getData().getList().getZan());
+        likenum.setText(data.getData().getList().getZan());
         Glide.with(this).load(data.getData().getList().getAvatar()).into(detail_head);
         initComment("new","0");
     }
@@ -129,7 +142,9 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.Detail_Comment, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                list.clear();
                 CommentData bean = GsonUtil.GsonToBean(result, CommentData.class);
+                list = bean.getData().getList();
                 initCommentList(bean.getData().getList());
             }
 
@@ -146,7 +161,66 @@ public class DetailsActivity extends BaseActivity {
         detailRc.setAdapter(adapter);
     }
 
+    @OnClick({R.id.detail_post,R.id.icon_like,R.id.icon_share})
+    public void Click(View view){
+        switch (view.getId()){
+            case R.id.detail_post:
+                initNet();
+                break;
+            case R.id.icon_like:
+                initNet2();
+                break;
+            case R.id.icon_share:
+                ClipboardManager clipboard = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText(null, list.get(0).getContent());
+                clipboard.setPrimaryClip(clipData);
+                Toast.makeText(DetailsActivity.this,"复制成功,快去分享吧",Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+        //点赞
+    private void initNet2() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type","1");
+        map.put("id",id);
+        NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Toast.makeText(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT).show();
+                likeicon.setBackground(getResources().getDrawable(R.drawable.ic_launcher_background));
+                likeicon.setClickable(false);
+                likenum.setText(Integer.valueOf(likenum.getText().toString())+1+"");
+            }
 
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(DetailsActivity.this,"点赞失败",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void initNet() {
+        if(detailEt.getText().toString().trim().equals("")){
+            Toast.makeText(this,"内容不能为空",Toast.LENGTH_SHORT).show();
+        }else{
+            HashMap<String, String> map = new HashMap<>();
+            map.put("vid","1");
+            map.put("pid",id);
+            map.put("content",detailEt.getText().toString());
+            NetRequest.postFormRequest(UrlManager.Detail_Comment_Put, map, new NetRequest.DataCallBack() {
+                @Override
+                public void requestSuccess(String result) throws Exception {
+                    Toast.makeText(DetailsActivity.this,"提交评论成功",Toast.LENGTH_SHORT).show();
+                    detailEt.setText("");
+                }
+
+                @Override
+                public void requestFailure(Request request, IOException e) {
+                    Toast.makeText(DetailsActivity.this,"提交评论失败",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
 
     @Override
     protected void LoadData() {
@@ -160,5 +234,17 @@ public class DetailsActivity extends BaseActivity {
                 }
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        if (JZVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JZVideoPlayer.releaseAllVideos();
     }
 }

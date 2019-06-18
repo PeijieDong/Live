@@ -2,25 +2,46 @@ package com.mymusic.music;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.os.Build;
 
 import com.danikula.videocache.HttpProxyCacheServer;
-import com.mymusic.music.Util.LocaleUtils;
+import com.mymusic.music.DataBean.User;
+import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.MyFileNameGenerator;
+import com.mymusic.music.Util.SharedPrefrenceUtils;
 
 import org.litepal.LitePal;
-import org.litepal.LitePalApplication;
-
-import java.util.Locale;
 
 /**
  * Create By mr.mao in 2019/6/7 20:39
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
 public class Live extends Application {
-
+    private static Live live;
     private HttpProxyCacheServer proxy;
+
+    public static Live getInstance() {
+        if(live != null){
+            return live;
+        }
+        return new Live();
+    }
+
+    public User get(Context context){
+        String user = SharedPrefrenceUtils.getString(context, "user", null);
+        User bean = GsonUtil.GsonToBean(user, User.class);
+        return bean;
+    }
+
+    public String getToken(Context context){
+        String user = SharedPrefrenceUtils.getString(context, "user", null);
+        User bean = GsonUtil.GsonToBean(user, User.class);
+
+        return bean.getList().getToken();
+    }
+
+    public void put(Context context,String s){
+        SharedPrefrenceUtils.getString(context,"user",s);
+    }
 
     @Override
     public void onCreate() {

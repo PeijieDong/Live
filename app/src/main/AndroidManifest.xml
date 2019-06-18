@@ -30,7 +30,9 @@
         <activity android:name=".View.Activity.Login.RegisterActivity" />
         <activity android:name=".View.Activity.Login.ForgetPwdActivity" />
         <activity android:name=".View.Activity.user.UserActivity" />
-        <activity android:name=".View.Activity.Detail.DetailsActivity" />
+        <activity android:name=".View.Activity.Detail.DetailsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".View.Activity.MyChildActivity.My.MywalletActivity" />
         <activity android:name=".View.Activity.MyChildActivity.My.MyLiveActivity" />
         <activity android:name=".View.Activity.MyChildActivity.My.MysettingActivity" />
@@ -52,7 +54,6 @@
         <activity android:name=".View.Activity.MyChildActivity.SettingActivity.BacklistActivity" />
         <activity android:name=".View.Activity.MyChildActivity.SettingActivity.AccountActivity" />
         <activity android:name=".View.Activity.MyChildActivity.SettingActivity.LockScreenActivity" />
-        <activity android:name=".View.Activity.MyChildActivity.SettingActivity.LanguageActivity" />
         <activity android:name=".View.Activity.MyChildActivity.LiveActivity.LivelevelActivity" />
         <activity android:name=".View.Activity.MyChildActivity.LiveActivity.LiveHostAuthenticationActivity" />
         <activity android:name=".View.Activity.MyChildActivity.LiveActivity.LiveGiftActivity" />

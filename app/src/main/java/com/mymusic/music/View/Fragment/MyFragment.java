@@ -3,10 +3,13 @@ package com.mymusic.music.View.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mymusic.music.Live;
+import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyLiveActivity;
@@ -29,8 +32,13 @@ import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
+import com.mymusic.music.base.UrlManager;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 import butterknife.OnClick;
+import okhttp3.Request;
 
 /**
  * Create By mr.mao in 2019/5/29 21:31
@@ -38,7 +46,7 @@ import butterknife.OnClick;
  **/
 public class MyFragment extends BaseFragment {
 
-
+    private String token;
 
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
@@ -52,11 +60,26 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-
+        token = Live.getInstance().getToken(getContext());
     }
 
     @Override
     protected void LoadData() {
+        initNet();
+    }
+
+    private void initNet() {
+        NetRequest.postFormHeadRequest(UrlManager.UserInfo,null,Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
 
     }
 

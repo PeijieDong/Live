@@ -18,10 +18,19 @@ public class UrlManager {
     public static final String FRIEND_DETAILS = BaseUrl+"index/qinfo";
     //详情页评论获取
     public static final String Detail_Comment = BaseUrl+"index/getComment";
+    public static final String Detail_Comment_Put = BaseUrl+"index/putComment";
     //详情页评论获取
     public static final String Focus_List = BaseUrl+"index/userlist/id/2";
     //视频列表
     public static final String Video_List = BaseUrl+"video/index";
     //活跃用户列表
     public static final String User_List = BaseUrl+"index/userlist";
+
+    public static final String Like = BaseUrl+"index/zan";
+
+    public static final String Login = BaseUrl+"index/login";
+
+    public static final String UserInfo = BaseUrl+"index/getLoginUserInfo";
+
+
 }

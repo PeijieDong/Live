@@ -46,7 +46,8 @@
                         android:layout_height="45dp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:src="@drawable/ic_launcher_background"/>
+                        android:src="@drawable/ic_launcher_background"
+                        tools:ignore="MissingConstraints" />
                     <TextView
                         android:id="@+id/detail_name"
                         android:layout_width="wrap_content"
@@ -217,6 +218,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:focusable="true"
+        android:focusableInTouchMode="false"
         android:layout_alignParentBottom="true">
         <ImageView
             android:layout_width="40dp"
@@ -240,11 +243,12 @@
             android:layout_marginBottom="7dp"
             android:layout_marginRight="78dp"
             android:layout_marginLeft="65dp"
+            android:background="@color/white"
             android:hint="@string/detail_comment"/>
         <TextView
             android:id="@+id/detail_post"
             android:layout_width="60dp"
-            android:layout_height="match_parent"
+            android:layout_height="30dp"
             android:layout_margin="5dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -252,6 +256,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:gravity="center"
             android:textColor="@color/white"
+            android:background="@drawable/post_back"
             android:text="@string/detail_post"/>
     </android.support.constraint.ConstraintLayout>
 </RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import com.mymusic.music.base.BaseRecAdapter;
 import com.mymusic.music.base.BaseRecViewHolder;
 
 import java.util.List;
+import java.util.Timer;
 
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
