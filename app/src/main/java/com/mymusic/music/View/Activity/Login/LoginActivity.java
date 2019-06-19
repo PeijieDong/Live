@@ -3,9 +3,13 @@ package com.mymusic.music.View.Activity.Login;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mymusic.music.Live;
@@ -30,6 +34,10 @@ public class LoginActivity extends BaseActivity {
     EditText userPwd;
     @BindView(R.id.bt_login)
     EditText login;
+    @BindView(R.id.phone_login)
+    TextView phoneLogin;
+    @BindView(R.id.bt_login)
+    Button Login;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -43,7 +51,42 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
-
+        userName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!userName.getText().toString().equals("")&& !userPwd.getText().toString().equals("")){
+                    Login.setBackground(getResources().getDrawable(R.drawable.login_press));
+                    Login.setClickable(true);
+                }else{
+                    Login.setBackground(getResources().getDrawable(R.drawable.login_normal));
+                    Login.setClickable(false);
+                }
+            }
+        });
+        userPwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!userName.getText().toString().equals("")&& !userPwd.getText().toString().equals("")){
+                    Login.setBackground(getResources().getDrawable(R.drawable.login_press));
+                    Login.setClickable(true);
+                }else{
+                    Login.setBackground(getResources().getDrawable(R.drawable.login_normal));
+                    Login.setClickable(false);
+                }
+            }
+        });
     }
 
     @OnClick({R.id.bt_login,R.id.phone_login,R.id.forget_pwd})
@@ -72,8 +115,14 @@ public class LoginActivity extends BaseActivity {
                     break;
                 }
             case R.id.phone_login:
-                Intent intent = new Intent(LoginActivity.this, LoginPhoneActivity.class);
-                startActivity(intent);
+                if(phoneLogin.getText().toString().equals("手机号登录")){
+                    userName.setHint("请输入手机号");
+                    phoneLogin.setHint("账号登录");
+                }else{
+                    userName.setHint("请输入账号");
+                    phoneLogin.setHint("手机号登录");
+                }
+
                 break;
             case R.id.forget_pwd:
                 Intent intent1 = new Intent(LoginActivity.this, ForgetPwdActivity.class);

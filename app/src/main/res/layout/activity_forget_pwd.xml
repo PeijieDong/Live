@@ -1,9 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".View.Activity.Login.ForgetPwdActivity">
-
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white">
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:src="@drawable/icon_back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:text="@string/find_pwd"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="@string/forget_pwd"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+        android:textColor="#000"
+        android:paddingLeft="20dp"
+        android:text="@string/forget_pwd_2"/>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <EditText
+            android:id="@+id/register_userName"
+            android:layout_width="135dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:paddingLeft="20dp"
+            android:textSize="14sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="30dp"
+            android:hint="@string/please_phone"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E3E3E3"
+            app:layout_constraintTop_toBottomOf="@id/register_userName"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+        <EditText
+            android:id="@+id/register_userPwd"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/register_userName"
+            android:hint="@string/please_pwd"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/register_userName"
+            app:layout_constraintLeft_toRightOf="@id/register_userPwd"
+            android:text="@string/get_code"/>
+        <View
+            android:id="@+id/login_3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E3E3E3"
+            app:layout_constraintTop_toBottomOf="@id/register_userPwd"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:background="@drawable/login_normal"
+            app:layout_constraintTop_toBottomOf="@id/login_3"
+            android:text="@string/RegisterBt"/>
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>

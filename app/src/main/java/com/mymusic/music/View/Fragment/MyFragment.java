@@ -60,12 +60,12 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-        token = Live.getInstance().getToken(getContext());
+//        token = Live.getInstance().getToken(getContext());
     }
 
     @Override
     protected void LoadData() {
-        initNet();
+//        initNet();
     }
 
     private void initNet() {

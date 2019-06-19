@@ -64,6 +64,7 @@ public class HomePagerFragment extends BaseFragment implements BaseQuickAdapter.
         NetRequest.getFormRequest(UrlManager.HOME_DATA, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 HomeData data = GsonUtil.GsonToBean(result, HomeData.class);
                 initRc(data.getData().getList());
             }

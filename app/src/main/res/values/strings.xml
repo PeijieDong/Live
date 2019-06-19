@@ -120,4 +120,13 @@
     <string name="today_share">日常任务</string>
     <string name="task">任务中心</string>
     <string name="text_hint">仅显示前20位最近活跃用户</string>
+    <string name="please_pwd">请输入密码</string>
+    <string name="please_username">请输入账号</string>
+    <string name="please_phone">请输入手机号码</string>
+    <string name="get_code">获取验证码</string>
+    <string name="RegisterDes">注册表示您确认自身满18周岁并同意</string>
+    <string name="RegisterBt">下一步</string>
+    <string name="find_pwd">找回密码</string>
+    <string name="forget_pwd">忘记登录密码？</string>
+    <string name="forget_pwd_2">通过绑定的手机号找回</string>
 </resources>
