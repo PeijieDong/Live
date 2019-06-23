@@ -1,13 +1,29 @@
 package com.mymusic.music.View.Activity.MyChildActivity.My;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
+import com.mymusic.music.View.Adapter.ViewpagerAdapter;
+import com.mymusic.music.View.ChildFragment.CommentArtFragment;
+import com.mymusic.music.View.ChildFragment.CommentPPFragment;
 import com.mymusic.music.base.BaseActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+
 public class MycommentActivity extends BaseActivity {
+
+    @BindView(R.id.tab)
+    TabLayout tab;
+    @BindView(R.id.viewpager)
+    ViewPager viewPager;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -21,6 +37,17 @@ public class MycommentActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
+        initView();
+    }
 
+    private void initView() {
+        List<String> title = new ArrayList<>();
+        List<Fragment> list = new ArrayList<>();
+        title.add("帖子评论");
+        title.add("啪啪评论");
+        list.add(new CommentArtFragment());
+        list.add(new CommentPPFragment());
+        viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager(),title,list));
+        tab.setupWithViewPager(viewPager);
     }
 }

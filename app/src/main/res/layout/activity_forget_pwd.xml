@@ -63,21 +63,25 @@
             android:layout_marginRight="10dp"/>
         <EditText
             android:id="@+id/register_userPwd"
-            android:layout_width="280dp"
+            android:layout_width="230dp"
             android:layout_height="45dp"
             android:background="@null"
             android:layout_marginTop="20dp"
             android:paddingLeft="20dp"
             android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+
             app:layout_constraintTop_toBottomOf="@id/register_userName"
             android:hint="@string/please_pwd"/>
         <TextView
-            android:layout_width="100dp"
+            android:id="@+id/get_code"
+            android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/register_userName"
             app:layout_constraintLeft_toRightOf="@id/register_userPwd"
+            app:layout_constraintRight_toRightOf="parent"
             android:text="@string/get_code"/>
         <View
             android:id="@+id/login_3"

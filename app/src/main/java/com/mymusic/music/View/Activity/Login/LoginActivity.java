@@ -32,8 +32,6 @@ public class LoginActivity extends BaseActivity {
     EditText userName;
     @BindView(R.id.login_userPwd)
     EditText userPwd;
-    @BindView(R.id.bt_login)
-    EditText login;
     @BindView(R.id.phone_login)
     TextView phoneLogin;
     @BindView(R.id.bt_login)
@@ -78,7 +76,7 @@ public class LoginActivity extends BaseActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
-                if(!userName.getText().toString().equals("")&& !userPwd.getText().toString().equals("")){
+                if(!userName.getText().toString().equals("") && !userPwd.getText().toString().equals("")){
                     Login.setBackground(getResources().getDrawable(R.drawable.login_press));
                     Login.setClickable(true);
                 }else{
@@ -89,7 +87,7 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.bt_login,R.id.phone_login,R.id.forget_pwd})
+    @OnClick({R.id.bt_login,R.id.phone_login,R.id.forget_pwd,R.id.register_fast})
     public void OnclickEvent(View view) {
         switch (view.getId()) {
             case R.id.bt_login:
@@ -116,17 +114,26 @@ public class LoginActivity extends BaseActivity {
                 }
             case R.id.phone_login:
                 if(phoneLogin.getText().toString().equals("手机号登录")){
+                    phoneLogin.setText("账号登录");
                     userName.setHint("请输入手机号");
-                    phoneLogin.setHint("账号登录");
-                }else{
+                    userPwd.setHint("请输入密码");
+                    userName.setText("");
+                    userPwd.setText("");
+                }else if(phoneLogin.getText().toString().equals("账号登录")){
+                    phoneLogin.setText("手机号登录");
                     userName.setHint("请输入账号");
-                    phoneLogin.setHint("手机号登录");
+                    userPwd.setHint("请输入密码");
+                    userName.setText("");
+                    userPwd.setText("");
                 }
-
                 break;
             case R.id.forget_pwd:
                 Intent intent1 = new Intent(LoginActivity.this, ForgetPwdActivity.class);
                 startActivity(intent1);
+                break;
+            case R.id.register_fast:
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
                 break;
         }
     }

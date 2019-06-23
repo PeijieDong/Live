@@ -3,15 +3,20 @@ package com.mymusic.music.View.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.mymusic.music.DataBean.User;
 import com.mymusic.music.Live;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyLiveActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyaboutActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MycollectionActivity;
@@ -34,10 +39,14 @@ import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
 import com.mymusic.music.base.UrlManager;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.HashMap;
 
+import butterknife.BindView;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Request;
 
 /**
@@ -47,7 +56,17 @@ import okhttp3.Request;
 public class MyFragment extends BaseFragment {
 
     private String token;
-
+    @BindView(R.id.my_user_head)
+    CircleImageView head;
+    @BindView(R.id.my_user_name)
+    TextView name;
+    @BindView(R.id.focus_num)
+    TextView focusNum;
+    @BindView(R.id.my_level)
+    TextView level;
+    @BindView(R.id.cl1)
+    ConstraintLayout cll;
+    private User user;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_my,container,false);
@@ -60,27 +79,33 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-//        token = Live.getInstance().getToken(getContext());
+
     }
 
     @Override
     protected void LoadData() {
-//        initNet();
+        initLogin();
     }
 
-    private void initNet() {
-        NetRequest.postFormHeadRequest(UrlManager.UserInfo,null,Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
-            @Override
-            public void requestSuccess(String result) throws Exception {
-                Log.e("33",result);
-            }
-
-            @Override
-            public void requestFailure(Request request, IOException e) {
-
-            }
-        });
-
+    private void initLogin() {
+        if(Live.getInstance().get(getContext()) != null){
+            user = Live.getInstance().get(getContext());
+            Glide.with(this).load(user.getList().getAvatar()).into(head);
+            name.setText(user.getList().getUser_nicename());
+//            focusNum.setText(user.getList().get);
+            level.setText("LV"+user.getList().getLevel()+"经验值 40 >");
+        }else{
+            cll.removeAllViews();
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.no_login, null);
+            cll.addView(view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @OnClick({R.id.my_setting,R.id.my_level,R.id.my_user_head,
@@ -90,52 +115,84 @@ public class MyFragment extends BaseFragment {
     public void onClick(View view){
         switch (view.getId()){
             case R.id.my_setting:
-                goActivity(MysettingActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MysettingActivity.class);
+                }
                 break;
             case R.id.my_level:
-                goActivity(MylevelActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MylevelActivity.class);
+                }
                 break;
             case R.id.my_user_head:
-                goActivity(UserDetailActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(UserDetailActivity.class);
+                }
                 break;
             case R.id.my_foucus:
-                goActivity(MyfocusActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MyfocusActivity.class);
+                }
                 break;
             case R.id.my_fans:
-                goActivity(MyfansActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MyfansActivity.class);
+                }
                 break;
             case R.id.my_publish:
-                goActivity(MypubliskActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MypubliskActivity.class);
+                }
                 break;
             case R.id.my_collection:
-                goActivity(MycollectionActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MycollectionActivity.class);
+                }
                 break;
             case R.id.my_cl_task:
-                goActivity(MytaskActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MytaskActivity.class);
+                }
                 break;
             case R.id.my_wallet:
-                goActivity(MywalletActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MywalletActivity.class);
+                }
                 break;
             case R.id.my_live:
-                goActivity(MyLiveActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MyLiveActivity.class);
+                }
                 break;
             case R.id.my_exchange:
-                goActivity(MyexchangeActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MyexchangeActivity.class);
+                }
                 break;
             case R.id.my_message:
-                goActivity(MymessageActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MymessageActivity.class);
+                }
                 break;
             case R.id.my_comment:
-                goActivity(MycommentActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MycommentActivity.class);
+                }
                 break;
             case R.id.my_like:
-                goActivity(MylikeActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MylikeActivity.class);
+                }
                 break;
             case R.id.my_history:
-                goActivity(MyhistoryActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MyhistoryActivity.class);
+                }
                 break;
             case R.id.my_feedback:
-                goActivity(MyfeedbackActivity.class);
+                if(Live.getInstance().get(getContext()) != null){
+                    goActivity(MyfeedbackActivity.class);
+                }
                 break;
             case R.id.my_about:
                 goActivity(MyaboutActivity.class);

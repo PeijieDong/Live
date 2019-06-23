@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mymusic.music.DataBean.Focus;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
@@ -52,7 +53,7 @@ public class FocusFragment extends BaseFragment {
     }
 
     private void initNet() {
-        NetRequest.getFormRequest(UrlManager.Focus_List, null, new NetRequest.DataCallBack() {
+        NetRequest.postFormHeadRequest(UrlManager.Focus_List, null, Live.getInstance().getToken(getContext()),new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);

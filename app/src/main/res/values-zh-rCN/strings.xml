@@ -129,4 +129,20 @@
     <string name="find_pwd">找回密码</string>
     <string name="forget_pwd">忘记登录密码？</string>
     <string name="forget_pwd_2">通过绑定的手机号找回</string>
+    <string name="register">快速注册</string>
+    <string name="please_code">请输入验证码</string>
+    <string name="again_pwd">设置密码</string>
+    <string name="one_pwd">输入密码</string>
+    <string name="two_pwd">确认密码</string>
+    <string name="one_pwd_six">请至少输入6个字符</string>
+    <string name="please_pwd_again">请再次输入密码</string>
+    <string name="sure">确定</string>
+    <string name="come">来吧，尽情发挥。。</string>
+    <string name="chose_sign">选择标签</string>
+    <string name="chose_sign_press">已选标签</string>
+    <string name="gologin">立即登录</string>
+    <string name="chose_sign_des">亲，添加标签除享受优先审核特权外，同时可获得更多经验值和积分。（最多可添加6个标签））</string>
+    <string name="look_one">只看楼主</string>
+    <string name="newhot">最新</string>
+    <string name="focus">+关注</string>
 </resources>

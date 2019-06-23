@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.mymusic.music.Util.BottomNavigation;
+import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.LockScreenActivity;
 import com.mymusic.music.View.Fragment.FriendFragment;
@@ -79,6 +80,7 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
         bottomNavigation.setOnTabChechListener(this);
         bottomNavigation.setCurrentItem(0);
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override

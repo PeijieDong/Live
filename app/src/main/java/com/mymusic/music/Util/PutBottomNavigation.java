@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -76,7 +77,7 @@ public class PutBottomNavigation extends LinearLayout implements View.OnClickLis
 
     //添加Tab的方法
     public void addTab(Tab tab){
-        View view = LayoutInflater.from(context).inflate(R.layout.bottomnavigation_layout, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.putbottomnavigation_layout, null);
         ImageView btImage = view.findViewById(R.id.btImage);
         TextView btText = view.findViewById(R.id.btText);
         btImage.setImageResource(tab.normalIcon);
@@ -117,8 +118,10 @@ public class PutBottomNavigation extends LinearLayout implements View.OnClickLis
             btText.setText(Tabs.get(i).text);
             if(i == position){
                 btImage.setImageResource(Tabs.get(i).pressedIcon);
+                btText.setTextColor(ContextCompat.getColor(context,Tabs.get(i).textColor));
             }else{
                 btImage.setImageResource(Tabs.get(i).normalIcon);
+                btText.setTextColor(ContextCompat.getColor(context,R.color.text_gray));
             }
         }
     }
@@ -141,6 +144,7 @@ public class PutBottomNavigation extends LinearLayout implements View.OnClickLis
         private int pressedIcon;
         //名称
         private String text;
+        private int textColor;
 
         public int getNormalIcon() {
             return normalIcon;
@@ -166,6 +170,15 @@ public class PutBottomNavigation extends LinearLayout implements View.OnClickLis
 
         public Tab setText(String text) {
             this.text = text;
+            return this;
+        }
+
+        public int getTextColor() {
+            return textColor;
+        }
+
+        public Tab setTextColor(int textColor) {
+            this.textColor = textColor;
             return this;
         }
     }

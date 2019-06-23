@@ -10,16 +10,13 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.View.Activity.FoundActivity;
-import com.mymusic.music.View.Activity.putContentActivity;
+import com.mymusic.music.View.Activity.post.putContentActivity;
 import com.mymusic.music.View.ChildFragment.HomePagerFragment;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;

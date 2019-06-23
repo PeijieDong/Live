@@ -30,9 +30,10 @@
         <activity android:name=".View.Activity.Login.RegisterActivity" />
         <activity android:name=".View.Activity.Login.ForgetPwdActivity" />
         <activity android:name=".View.Activity.user.UserActivity" />
-        <activity android:name=".View.Activity.Detail.DetailsActivity"
+        <activity
+            android:name=".View.Activity.Detail.DetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity android:name=".View.Activity.MyChildActivity.My.MywalletActivity" />
         <activity android:name=".View.Activity.MyChildActivity.My.MyLiveActivity" />
         <activity android:name=".View.Activity.MyChildActivity.My.MysettingActivity" />
@@ -65,8 +66,10 @@
         <activity android:name=".View.Activity.PostArtActivity.PostArtActivity" />
         <activity android:name=".View.Activity.FriendFoundActivity" />
         <activity android:name=".View.Activity.Detail.FriendDetailTwoActivity" />
-        <activity android:name=".View.Activity.putContentActivity" />
-        <activity android:name=".View.Activity.user.ListUserActivity"></activity>
+        <activity android:name=".View.Activity.post.putContentActivity" />
+        <activity android:name=".View.Activity.user.ListUserActivity" />
+        <activity android:name=".View.Activity.Login.SetPasswordActivity" />
+        <activity android:name=".View.Activity.post.SignActivity"></activity>
     </application>
 
 </manifest>

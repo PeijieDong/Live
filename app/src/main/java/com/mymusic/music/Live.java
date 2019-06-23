@@ -27,9 +27,13 @@ public class Live extends Application {
     }
 
     public User get(Context context){
-        String user = SharedPrefrenceUtils.getString(context, "user", null);
-        User bean = GsonUtil.GsonToBean(user, User.class);
-        return bean;
+        if(SharedPrefrenceUtils.getString(context, "user", null) == null){
+            return null;
+        }else{
+            String user = SharedPrefrenceUtils.getString(context, "user", null);
+            User bean = GsonUtil.GsonToBean(user, User.class);
+            return bean;
+        }
     }
 
     public String getToken(Context context){
@@ -40,7 +44,11 @@ public class Live extends Application {
     }
 
     public void put(Context context,String s){
-        SharedPrefrenceUtils.getString(context,"user",s);
+        SharedPrefrenceUtils.saveString(context,"user",s);
+    }
+
+    public void clear(Context context){
+        SharedPrefrenceUtils.clearn(context,"user");
     }
 
     @Override

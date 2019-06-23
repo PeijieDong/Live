@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,7 +22,6 @@ import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.MyGridView;
 import com.mymusic.music.Util.NetRequest;
-import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.base.UrlManager;
@@ -86,7 +84,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         int type = helper.getItemViewType();
         switch (type){
             case PICTURE:
-                initListener(helper);
+                initListener(helper,item);
                 helper.setText(R.id.likeNum,item.getZan())
                         .setText(R.id.commentNum,item.getComment())
                         .setText(R.id.shareNum,item.getShare())
@@ -100,7 +98,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 grid.setAdapter(adapter);
                 break;
             case ARTICLE:
-                initListener(helper);
+                initListener(helper, item);
                 helper.setText(R.id.likeNum,item.getZan())
                         .setText(R.id.commentNum,item.getComment())
                         .setText(R.id.shareNum,item.getShare())
@@ -111,7 +109,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .into((CircleImageView) helper.getView(R.id.userHead));
                 break;
             case VIDEO:
-                initListener(helper);
+                initListener(helper, item);
                 helper.setText(R.id.likeNum,item.getZan())
                         .setText(R.id.commentNum,item.getComment())
                         .setText(R.id.shareNum,item.getShare())
@@ -130,7 +128,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     }
     ImageView like;
     TextView likeNum;
-    public void initListener(BaseViewHolder helper){
+    public void initListener(BaseViewHolder helper, HomeData.DataBean.ListBean item){
         like = helper.getView(R.id.icon_like);
         like.setOnClickListener(this);
         likeNum = helper.getView(R.id.likeNum);
@@ -172,23 +170,23 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     }
     private void initLike() {
         //点赞
-//        HashMap<String, String> map = new HashMap<>();
-//        map.put("type","1");
-//        map.put("id",item.getId());
-//        NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
-//            @Override
-//            public void requestSuccess(String result) throws Exception {
-//                Toast.makeText(mContext,"点赞成功",Toast.LENGTH_SHORT).show();
-//                like.setBackground(mContext.getResources().getDrawable(R.drawable.ic_launcher_background));
-//                like.setClickable(false);
-//                likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
-//            }
-//
-//            @Override
-//            public void requestFailure(Request request, IOException e) {
-//                Toast.makeText(mContext,"点赞失败",Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type","1");
+        map.put("id",item.getId());
+        NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Toast.makeText(mContext,"点赞成功",Toast.LENGTH_SHORT).show();
+                like.setBackground(mContext.getResources().getDrawable(R.drawable.ic_launcher_background));
+                like.setClickable(false);
+                likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(mContext,"点赞失败",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     private void initComment() {
 
@@ -203,6 +201,13 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         BottomSheetDialog bottomSheet = new BottomSheetDialog(mContext);//实例化
         bottomSheet.setCancelable(true);//设置点击外部是否可以取消
         View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_layout, null);
+        TextView cencel = view.findViewById(R.id.cencel);
+        cencel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheet.dismiss();
+            }
+        });
         bottomSheet.setContentView(view);//设置对框框中的布局
         bottomSheet.show();//显示弹窗
     }

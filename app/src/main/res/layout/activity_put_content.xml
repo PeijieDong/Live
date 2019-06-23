@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".View.Activity.putContentActivity">
+    tools:context=".View.Activity.post.putContentActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
@@ -16,10 +16,12 @@
             android:layout_marginLeft="20dp"
             android:src="@drawable/ic_launcher_background"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/post"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:textSize="16sp"
             android:textColor="#999999"
+            android:gravity="center"
             android:layout_alignParentRight="true"
             android:layout_margin="10dp"
             android:text="@string/put_art"/>
@@ -28,7 +30,9 @@
         android:id="@+id/choseFriend"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
         <TextView
             android:id="@+id/signTv"
             android:layout_width="30dp"
@@ -36,12 +40,14 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:background="@drawable/icon_home"
+            android:layout_centerVertical="true"
             android:text="#"/>
         <TextView
             android:id="@+id/home_rc_type"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_toRightOf="@id/signTv"
+            android:layout_centerVertical="true"
             android:gravity="center"
             android:textColor="#000"
             android:textSize="12sp"
@@ -75,37 +81,64 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-        <LinearLayout
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/back_gray_radio">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_launcher_background" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="@string/null_sign"/>
-        </LinearLayout>
+        android:layout_weight="1"
+        android:padding="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_margin="5dp" />
+        <GridView
+            android:id="@+id/grid_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"
+            android:visibility="gone"/>
+        <EditText
+            android:id="@+id/content_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/come"
+            android:gravity="top"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:background="@color/white"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/image_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/chose_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/back_gray_radio">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_launcher_background" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/null_sign"/>
+    </LinearLayout>
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/flowLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:visibility="gone"/>
     <com.mymusic.music.Util.PutBottomNavigation
         android:id="@+id/navigation_put"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp"
+        android:gravity="center"/>
 </LinearLayout>

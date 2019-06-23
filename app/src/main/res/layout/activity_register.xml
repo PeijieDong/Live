@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".View.Activity.Login.RegisterActivity">
 
     <TextView
@@ -24,7 +25,7 @@
         android:textSize="24sp"
         android:layout_marginTop="17dp"
         android:layout_marginLeft="29dp"
-        android:text="@string/welcome"/>
+        android:text="@string/register"/>
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -55,19 +56,21 @@
         android:layout_marginRight="10dp"/>
     <EditText
         android:id="@+id/register_userPwd"
-        android:layout_width="280dp"
+        android:layout_width="250dp"
         android:layout_height="45dp"
         android:background="@null"
         android:layout_marginTop="20dp"
         android:paddingLeft="20dp"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/register_userName"
-        android:hint="@string/please_pwd"/>
+        android:hint="@string/please_code"/>
     <TextView
-        android:layout_width="100dp"
+        android:id="@+id/get_code"
+        android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/register_userName"
         app:layout_constraintLeft_toRightOf="@id/register_userPwd"
         android:text="@string/get_code"/>

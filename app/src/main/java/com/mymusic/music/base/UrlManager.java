@@ -5,6 +5,7 @@ package com.mymusic.music.base;
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
 public class UrlManager {
+
     private static final String BaseUrl = "http://live.shuiqiao.net/";
     //home页
     public static final String HOME_DATA = BaseUrl+"index/homepage";
@@ -15,7 +16,7 @@ public class UrlManager {
     //圈子全部
     public static final String FRIEND_ALL = BaseUrl+"index/all";
     //圈子详情
-    public static final String FRIEND_DETAILS = BaseUrl+"index/qinfo";
+    public static final String FRIEND_DETAILS = BaseUrl+"index/qinfolist";
     //详情页评论获取
     public static final String Detail_Comment = BaseUrl+"index/getComment";
     public static final String Detail_Comment_Put = BaseUrl+"index/putComment";
@@ -32,5 +33,17 @@ public class UrlManager {
 
     public static final String UserInfo = BaseUrl+"index/getLoginUserInfo";
 
+    public static final String Register =BaseUrl+"index/register" ;
 
+    public static final String Forget = BaseUrl+"index/findPass" ;
+
+    public static final String GetTag =  BaseUrl+"video/gettag";
+
+    public static final String GetFans = BaseUrl+"users/fans";
+
+    public static final String History = BaseUrl+"users/gethistory";
+
+    public static final String MyLike = BaseUrl+"users/getzan";
+
+    public static final String My_Comment = BaseUrl+"users/getComment";
 }

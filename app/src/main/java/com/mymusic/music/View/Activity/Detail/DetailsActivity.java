@@ -4,6 +4,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +25,7 @@ import com.google.gson.Gson;
 import com.mymusic.music.DataBean.CommentData;
 import com.mymusic.music.DataBean.DetailData;
 import com.mymusic.music.DataBean.Details;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.GsonUtil;
@@ -76,9 +79,14 @@ public class DetailsActivity extends BaseActivity {
     ImageView likeicon;
     @BindView(R.id.likeNum)
     TextView likenum;
+    @BindView(R.id.detail_focus)
+    TextView focus;
+    @BindView(R.id.hot)
+    TextView hot;
     private String id;
     private DetailCommentRcAdapter adapter;
     private DetailData data;
+    private boolean isFocus = false;
     private List<CommentData.DataBean.ListBean> list = new ArrayList<>();
 
     @Override
@@ -93,6 +101,7 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.HOME_DETAILS, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 data = GsonUtil.GsonToBean(result, DetailData.class);
                 initView(data);
             }
@@ -109,7 +118,8 @@ public class DetailsActivity extends BaseActivity {
         if(data.getData().getList().getType().equals("视频")){
             VideoPlay.setVisibility(View.VISIBLE);
             VideoPlay.setUp(data.getData().getList().getContent(),
-                    JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL);
+                    JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
+            Glide.with(this).load(data.getData().getList().getImage()).into(VideoPlay.thumbImageView);
         }else if(data.getData().getList().getType().equals("文字")){
             TextView view = (TextView) LayoutInflater.from(this).inflate(R.layout.detail_text_item, null);
             view.setText(data.getData().getList().getContent());
@@ -136,7 +146,7 @@ public class DetailsActivity extends BaseActivity {
 
     private void initComment(String type,String somebody) {
         HashMap<String, String> map = new HashMap<>();
-        map.put("id","2");
+        map.put("id",id);
         map.put("sortby",type);
         map.put("uid",somebody);
         NetRequest.getFormRequest(UrlManager.Detail_Comment, map, new NetRequest.DataCallBack() {
@@ -158,10 +168,11 @@ public class DetailsActivity extends BaseActivity {
     private void initCommentList(List<CommentData.DataBean.ListBean> list) {
         detailRc.setLayoutManager(new LinearLayoutManager(this));
         adapter = new DetailCommentRcAdapter(R.layout.detail_item_layout,list);
+        adapter.notifyDataSetChanged();
         detailRc.setAdapter(adapter);
     }
 
-    @OnClick({R.id.detail_post,R.id.icon_like,R.id.icon_share})
+    @OnClick({R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.back})
     public void Click(View view){
         switch (view.getId()){
             case R.id.detail_post:
@@ -176,9 +187,37 @@ public class DetailsActivity extends BaseActivity {
                 clipboard.setPrimaryClip(clipData);
                 Toast.makeText(DetailsActivity.this,"复制成功,快去分享吧",Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.detail_focus:
+                initFocus();
+                break;
+            case R.id.changeState:
+                if(hot.getText().toString().equals("最新")){
+                    hot.setText("最热");
+                    initComment("hot","0");
+                }else{
+                    hot.setText("最新");
+                    initComment("new","0");
+                }
+                break;
+            case R.id.back:
+                finish();
+                break;
         }
     }
-        //点赞
+
+    private void initFocus() {
+        if(isFocus){
+            isFocus = false;
+            focus.setBackgroundResource(R.drawable.focus);
+            focus.setText("+关注");
+        }else{
+            isFocus = true;
+            focus.setBackgroundResource(R.drawable.isfocus);
+            focus.setText("已关注");
+        }
+    }
+
+    //点赞
     private void initNet2() {
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
@@ -204,12 +243,13 @@ public class DetailsActivity extends BaseActivity {
             Toast.makeText(this,"内容不能为空",Toast.LENGTH_SHORT).show();
         }else{
             HashMap<String, String> map = new HashMap<>();
-            map.put("vid","1");
-            map.put("pid",id);
+            map.put("vid",id);
+            map.put("pid","0");
             map.put("content",detailEt.getText().toString());
-            NetRequest.postFormRequest(UrlManager.Detail_Comment_Put, map, new NetRequest.DataCallBack() {
+            NetRequest.postFormHeadRequest(UrlManager.Detail_Comment_Put, map,Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
                 @Override
                 public void requestSuccess(String result) throws Exception {
+                    Log.e("333",result);
                     Toast.makeText(DetailsActivity.this,"提交评论成功",Toast.LENGTH_SHORT).show();
                     detailEt.setText("");
                 }

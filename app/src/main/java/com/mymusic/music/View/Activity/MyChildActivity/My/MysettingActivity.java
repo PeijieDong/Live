@@ -7,6 +7,9 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.mymusic.music.DataBean.User;
+import com.mymusic.music.Live;
 import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.DiyView.SwitchButton;
@@ -22,6 +25,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MysettingActivity extends BaseActivity {
 
@@ -30,6 +34,10 @@ public class MysettingActivity extends BaseActivity {
     TextView Language;
     @BindView(R.id.setting_lockScreen)
     SwitchButton lockBt;
+    @BindView(R.id.setting_user_head)
+    CircleImageView head;
+    User user;
+
 
     @Override
     protected void initVariables(Intent intent) {
@@ -39,6 +47,12 @@ public class MysettingActivity extends BaseActivity {
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.activity_mysetting);
+        initView();
+    }
+
+    private void initView() {
+        user = Live.getInstance().get(this);
+        Glide.with(this).load(user.getList().getAvatar()).into(head);
     }
 
     @Override
@@ -106,7 +120,8 @@ public class MysettingActivity extends BaseActivity {
                 goActivity(MyaboutActivity.class);
                 break;
             case R.id.setting_loginBack:
-
+                Live.getInstance().clear(this);
+                goActivity(MainActivity.class);
                 break;
         }
     }
