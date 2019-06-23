@@ -11,4 +11,6 @@
     <color name="friend_text_normal">#999999</color>
     <color name="transparent">#00000000</color>
     <color name="login_normal">#CECECE</color>
+    <color name="text_light_gray">#666666</color>
+    <color name="light_gray">#F5F5F6</color>
 </resources>

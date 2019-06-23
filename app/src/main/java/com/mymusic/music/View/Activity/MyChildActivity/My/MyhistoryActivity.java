@@ -42,17 +42,14 @@ public class MyhistoryActivity extends BaseActivity {
     @Override
     protected void LoadData() {
         initNet();
-        List<String> list = new ArrayList<>();
-        historyRc.setLayoutManager(new LinearLayoutManager(this));
-        historyRc.setAdapter(new HistoryRcAdapter(R.layout.history_rc_item,list));
     }
 
     private void initNet() {
         NetRequest.postFormHeadRequest(UrlManager.History, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-//                History bean = GsonUtil.GsonToBean(result, History.class);
-                Log.e("333",result);
+                History bean = GsonUtil.GsonToBean(result, History.class);
+                initView(bean);
             }
 
             @Override
@@ -60,5 +57,11 @@ public class MyhistoryActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void initView(History bean) {
+        historyRc.setLayoutManager(new LinearLayoutManager(this));
+        HistoryRcAdapter adapter = new HistoryRcAdapter(R.layout.history_rc_item, bean.getData().getList());
+        historyRc.setAdapter(adapter);
     }
 }

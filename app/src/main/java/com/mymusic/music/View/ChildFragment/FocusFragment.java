@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.Focus;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
@@ -32,6 +34,8 @@ public class FocusFragment extends BaseFragment {
 
     @BindView(R.id.focus_Rc)
     RecyclerView focusRc;
+    @BindView(R.id.focus_tv)
+    TextView focusTv;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_focus,container,false);
@@ -56,10 +60,24 @@ public class FocusFragment extends BaseFragment {
         NetRequest.postFormHeadRequest(UrlManager.Focus_List, null, Live.getInstance().getToken(getContext()),new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Log.e("33",result);
+                Log.e("3333",result);
                 Focus bean = GsonUtil.GsonToBean(result, Focus.class);
+
                 focusRc.setLayoutManager(new LinearLayoutManager(getContext()));
                 FocusRcAdaper adaper = new FocusRcAdaper(R.layout.focus_rc_layout, bean.getData().getList());
+                adaper.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                    @Override
+                    public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                        TextView focus = view.findViewById(R.id.focus_rc_focusbt);
+                        if(focus.getText().toString().equals("+关注")){
+                            focus.setText("取消关注");
+                            focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
+                        }else{
+                            focus.setText("+关注");
+                            focus.setBackgroundResource(R.drawable.back_friend_detail_focus);
+                        }
+                    }
+                });
                 adaper.setOnItemClickListener(this);
                 focusRc.setAdapter(adaper);
             }

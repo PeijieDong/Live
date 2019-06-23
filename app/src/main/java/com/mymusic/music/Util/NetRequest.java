@@ -327,7 +327,7 @@ public class NetRequest {
         Request.Builder builder1 = new Request.Builder();
         builder1.addHeader("token",head);
         final Request request = new Request.Builder().url(url)
-                .post(requestBody).build();
+                .post(requestBody).addHeader("token",head).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

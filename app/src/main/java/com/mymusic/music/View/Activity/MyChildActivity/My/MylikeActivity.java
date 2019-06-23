@@ -3,23 +3,30 @@ package com.mymusic.music.View.Activity.MyChildActivity.My;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.DataBean.Like;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
 import java.util.HashMap;
 
+import butterknife.BindView;
 import okhttp3.Request;
 
 public class MylikeActivity extends BaseActivity {
 
+    @BindView(R.id.like_Rc)
+    RecyclerView rc;
     @Override
     protected void initVariables(Intent intent) {
 
@@ -42,7 +49,8 @@ public class MylikeActivity extends BaseActivity {
         NetRequest.postFormRequest(UrlManager.MyLike, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Like bean = GsonUtil.GsonToBean(result, Like.class);
+                HomeData bean = GsonUtil.GsonToBean(result, HomeData.class);
+                initView(bean);
             }
 
             @Override
@@ -50,5 +58,11 @@ public class MylikeActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void initView(HomeData bean) {
+        rc.setLayoutManager(new LinearLayoutManager(this));
+        HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(bean.getData().getList());
+        rc.setAdapter(adapter);
     }
 }

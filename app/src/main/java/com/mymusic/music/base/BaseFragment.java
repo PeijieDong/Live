@@ -38,4 +38,9 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initViews(Bundle savedInstanceState);
 
     protected abstract void LoadData();
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

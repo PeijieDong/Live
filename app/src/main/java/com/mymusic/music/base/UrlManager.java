@@ -6,6 +6,7 @@ package com.mymusic.music.base;
  **/
 public class UrlManager {
 
+
     private static final String BaseUrl = "http://live.shuiqiao.net/";
     //home页
     public static final String HOME_DATA = BaseUrl+"index/homepage";
@@ -16,7 +17,9 @@ public class UrlManager {
     //圈子全部
     public static final String FRIEND_ALL = BaseUrl+"index/all";
     //圈子详情
-    public static final String FRIEND_DETAILS = BaseUrl+"index/qinfolist";
+    public static final String FRIEND_DETAILS = BaseUrl+"index/qinfo";
+
+    public static final String FRIEND_DETAILS_LIST = BaseUrl+"index/qinfolist";
     //详情页评论获取
     public static final String Detail_Comment = BaseUrl+"index/getComment";
     public static final String Detail_Comment_Put = BaseUrl+"index/putComment";
@@ -46,4 +49,11 @@ public class UrlManager {
     public static final String MyLike = BaseUrl+"users/getzan";
 
     public static final String My_Comment = BaseUrl+"users/getComment";
+
+    public static final String Post_Video = BaseUrl+"video/addArticle";
+
+    public static final String Post_Art = BaseUrl+"video/addArticle";
+
+    public static final String Get_Wallet = BaseUrl+"users/wallet";
+
 }

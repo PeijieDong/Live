@@ -28,6 +28,7 @@ public class LeftNavigation extends LinearLayout implements View.OnClickListener
     private List<Tab> Tabs;//保存tab
     private Context context;
     private OnTabCheckListener tabCheckListener;
+    private int position;
 
     public LeftNavigation(Context context) {
         super(context);
@@ -55,6 +56,10 @@ public class LeftNavigation extends LinearLayout implements View.OnClickListener
         this.context = context;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
     //对图标的点击事件接口
     public interface OnTabCheckListener{
         void onTabSelected(View v, int position);
@@ -73,7 +78,7 @@ public class LeftNavigation extends LinearLayout implements View.OnClickListener
 
     //添加Tab的方法
     public void addTab(Tab tab){
-        View view = LayoutInflater.from(context).inflate(R.layout.top_navigation_layout, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.left_navigation_layout, null);
         TextView btText = view.findViewById(R.id.tv_name);
         btText.setText(tab.text);
         view.setTag(Tabs.size());
@@ -87,7 +92,7 @@ public class LeftNavigation extends LinearLayout implements View.OnClickListener
     //图标的点击事件
     @Override
     public void onClick(View view) {
-        int position = (int)view.getTag();
+        position = (int)view.getTag();
         if(tabCheckListener != null){
             tabCheckListener.onTabSelected(view,position);
         }
@@ -110,7 +115,7 @@ public class LeftNavigation extends LinearLayout implements View.OnClickListener
             btText.setText(Tabs.get(i).text);
             if(i == position){
                 btText.setTextColor(getResources().getColor(R.color.friend_text_pressed));
-                btText.setBackgroundResource(R.drawable.back_friend_all_pressed);
+                btText.setBackgroundResource(R.drawable.back_friend_pressed);
             }else{
                 btText.setTextColor(getResources().getColor(R.color.friend_text_normal));
                 btText.setBackgroundResource(R.drawable.back_friend_all_normal);
@@ -123,8 +128,8 @@ public class LeftNavigation extends LinearLayout implements View.OnClickListener
         super.onAttachedToWindow();
 //        for(int i = 0;i<TabView.size();i++){
 //            View view = TabView.get(i);
-//            int width = getResources().getDisplayMetrics().widthPixels / Tabs.size();
-//            LayoutParams params = new LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            int height = getResources().getDisplayMetrics().heightPixels / Tabs.size();
+//            LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,height);
 //            view.setLayoutParams(params);
 //        }
     }
@@ -132,7 +137,6 @@ public class LeftNavigation extends LinearLayout implements View.OnClickListener
     public static class Tab {
         //名称
         private String text;
-
 
         public String getText() {
             return text;
@@ -142,5 +146,7 @@ public class LeftNavigation extends LinearLayout implements View.OnClickListener
             this.text = text;
             return this;
         }
+
+
     }
 }

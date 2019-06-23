@@ -12,10 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mymusic.music.DataBean.User;
 import com.mymusic.music.Live;
 import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.base.ActivityCollector;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
@@ -100,9 +103,15 @@ public class LoginActivity extends BaseActivity {
                     NetRequest.postFormRequest(UrlManager.Login, map, new NetRequest.DataCallBack() {
                         @Override
                         public void requestSuccess(String result) throws Exception {
-                            Live.getInstance().put(LoginActivity.this,result);
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
+                            User user = GsonUtil.GsonToBean(result, User.class);
+                            if(user.getMsg().equals("登录成功")){
+                                Live.getInstance().put(LoginActivity.this,result);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                Toast.makeText(LoginActivity.this,user.getMsg(),Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override

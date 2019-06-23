@@ -50,7 +50,7 @@ public class FriendDetailFragment1 extends BaseFragment {
         HashMap<String, String> map = new HashMap<>();
         map.put("id",id);
         map.put("type","1");
-        NetRequest.postFormRequest(UrlManager.FRIEND_DETAILS, map, new NetRequest.DataCallBack() {
+        NetRequest.postFormRequest(UrlManager.FRIEND_DETAILS_LIST, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 HomeData data = GsonUtil.GsonToBean(result, HomeData.class);

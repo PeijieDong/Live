@@ -31,6 +31,7 @@ public class PutBottomNavigation extends LinearLayout implements View.OnClickLis
     private List<Tab> Tabs;//保存tab
     private Context context;
     private OnTabCheckListener tabCheckListener;
+    private int position;
 
     public PutBottomNavigation(Context context) {
         super(context);
@@ -94,7 +95,7 @@ public class PutBottomNavigation extends LinearLayout implements View.OnClickLis
     //图标的点击事件
     @Override
     public void onClick(View view) {
-        int position = (int)view.getTag();
+        position = (int)view.getTag();
         if(tabCheckListener != null){
             tabCheckListener.onTabSelected(view,position);
         }
@@ -108,6 +109,10 @@ public class PutBottomNavigation extends LinearLayout implements View.OnClickLis
         }
         TabView.get(position).performClick();
         updateState(position);
+    }
+    //获取当前选中位置
+    public int getPosition(){
+        return position;
     }
     //更新状态
     public void updateState(int position){

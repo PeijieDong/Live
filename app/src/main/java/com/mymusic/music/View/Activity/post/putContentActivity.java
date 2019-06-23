@@ -15,29 +15,37 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.BottomNavigation;
+import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.PutBottomNavigation;
 import com.mymusic.music.View.Activity.Community.CommunityAdviceActivity;
 import com.mymusic.music.View.Activity.FriendFoundActivity;
 import com.mymusic.music.View.Adapter.CommunityRcAdapter;
+import com.mymusic.music.View.Adapter.FocusRcAdaper;
 import com.mymusic.music.base.BaseActivity;
+import com.mymusic.music.base.UrlManager;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 public class putContentActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.flowLayout)
-    TagFlowLayout flowLayout;
+
     @BindView(R.id.chose_sign)
     LinearLayout choseSign;
     @BindView(R.id.navigation_put)
@@ -46,10 +54,18 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     EditText text;
     @BindView(R.id.image_icon)
     RecyclerView rc;
+    @BindView(R.id.have_chose)
+    TextView haveChose;
+    @BindView(R.id.home_rc_type)
+    TextView typeTitle;
     private boolean isVideo = true;
     private List<Uri> image = new ArrayList<>();
     private int REQUEST_CODE_CHOOSE = 2;
+    private String cid = "";
     CommunityRcAdapter adapter;
+    private String type ;
+    private StringBuilder tag;
+    private List<String> list = new ArrayList<>();
     @Override
     protected void initVariables(Intent intent) {
 
@@ -101,6 +117,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         switch (view.getId()){
             case R.id.choseFriend:
                 Intent intent1 = new Intent(putContentActivity.this, FriendFoundActivity.class);
+                intent1.putExtra("chose",true);
                 startActivityForResult(intent1,100);
                 break;
             case R.id.chose_sign:
@@ -108,35 +125,67 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 startActivityForResult(intent,200);
                 break;
             case R.id.post:
+                switch (navigation.getPosition()){
+                    case 0:
+                        type = "5";
+                        break;
+                    case 1:
+                        type = "4";
+                        break;
+                    case 2:
+                        type = "3";
+                        break;
+                }
+                for (int i = 0;i<list.size();i++){
+                    tag.append(list.get(i));
+                    tag.append(",");
+                }
                 initNet();
                 break;
         }
     }
 
     private void initNet() {
+        String url = "";
+        if(navigation.getPosition() == 0){
+            url = UrlManager.Post_Video;
+        }else{
+            url = UrlManager.Post_Art;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("cate",cid);
+        map.put("type",type);
+        map.put("file","Dsds");
+        map.put("tag",tag.toString());
+        NetRequest.postFormHeadRequest(UrlManager.Post_Video, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
 
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 200 && resultCode == 100){
-            List<String> list = (List<String>)data.getStringArrayListExtra("data");
-            if(list.size() > 0){
-                choseSign.setVisibility(View.GONE);
-                flowLayout.setVisibility(View.VISIBLE);
-                flowLayout.setAdapter(new TagAdapter<String>(list) {
-                    @Override
-                    public View getView(FlowLayout parent, int position, String s) {
-                        TextView textView = (TextView) LayoutInflater.from(putContentActivity.this).inflate(R.layout.search_page_flowlayout_tv2,null);
-                        textView.setText(s);
-                        return textView;
-                    }
-                });
+            int i = data.getIntExtra("data", 0);
+            list = (List<String>)data.getStringArrayListExtra("tag");
+            if(i == 0){
+
             }else{
-                choseSign.setVisibility(View.VISIBLE);
-                flowLayout.setVisibility(View.GONE);
+                haveChose.setText("已选"+i+"个标签");
             }
+        }
+        if(requestCode == 100 && resultCode == 300){
+            cid = data.getStringExtra("cid");
+            String title = data.getStringExtra("title");
+            typeTitle.setText(title);
         }
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             image = Matisse.obtainResult(data);

@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
+        android:id="@+id/image"
         android:layout_width="82dp"
         android:layout_height="82dp"
         android:layout_marginRight="15dp"

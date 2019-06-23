@@ -105,29 +105,35 @@ public class SignActivity extends BaseActivity implements TagFlowListener {
         }else{
             des.setVisibility(View.GONE);
             flowLayout.setVisibility(View.VISIBLE);
-            flowLayout.setAdapter(new TagAdapter<String>(list) {
-                @Override
-                public View getView(FlowLayout parent, int position, String s) {
-                    TextView textView = (TextView) LayoutInflater.from(SignActivity.this).inflate(R.layout.search_page_flowlayout_tv3,null);
-                    textView.setText(s);
-                    return textView;
-                }
-            });
-            flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
-                @Override
-                public boolean onTagClick(View view, int position, FlowLayout parent) {
-                    list.remove(position);
-                    listener.AcClick(list.get(position));
-                    flowLayout.getAdapter().notifyDataChanged();
-                    return false;
-                }
-            });
+            initFlow();
         }
+    }
+    public void initFlow(){
+        flowLayout.setAdapter(new TagAdapter<String>(list) {
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView textView = (TextView) LayoutInflater.from(SignActivity.this).inflate(R.layout.search_page_flowlayout_tv3,null);
+                textView.setText(s);
+                return textView;
+            }
+        });
     }
 
     @Override
     public void AcClick(String s) {
-
+        for (int i = 0;i<list.size();i++){
+            if(list.get(i).equals(s)){
+                list.remove(s);
+                initFlow();
+            }
+        }
+        if(list.size() == 0){
+            des.setVisibility(View.VISIBLE);
+            flowLayout.setVisibility(View.GONE);
+        }else{
+            des.setVisibility(View.GONE);
+            flowLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @OnClick({R.id.back})
@@ -135,7 +141,8 @@ public class SignActivity extends BaseActivity implements TagFlowListener {
         switch (view.getId()){
             case R.id.back:
                 Intent intent = new Intent();
-                intent.putStringArrayListExtra("data", (ArrayList<String>) list);
+                intent.putExtra("data", list.size());
+                intent.putStringArrayListExtra("tag", (ArrayList<String>) list);
                 setResult(100,intent);
                 this.finish();
                 break;
@@ -144,7 +151,8 @@ public class SignActivity extends BaseActivity implements TagFlowListener {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Intent intent = new Intent();
-        intent.putStringArrayListExtra("data", (ArrayList<String>) list);
+        intent.putExtra("data", list.size());
+        intent.putStringArrayListExtra("tag", (ArrayList<String>) list);
         setResult(100,intent);
         this.finish();
         return true;

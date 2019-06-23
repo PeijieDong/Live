@@ -2,8 +2,11 @@ package com.mymusic.music.View.Adapter;
 
 import android.support.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.mymusic.music.DataBean.History;
+import com.mymusic.music.R;
 
 import java.util.List;
 
@@ -11,14 +14,16 @@ import java.util.List;
  * Create By mr.mao in 2019/6/7 10:17
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class HistoryRcAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
+public class HistoryRcAdapter extends BaseQuickAdapter<History.DataBean.ListBean,BaseViewHolder> {
 
-    public HistoryRcAdapter(int layoutResId, @Nullable List<String> data) {
+    public HistoryRcAdapter(int layoutResId, @Nullable List<History.DataBean.ListBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, History.DataBean.ListBean item) {
+        helper.setText(R.id.history_rc_time,item.getCreatetime())
+                .setText(R.id.history_rc_title,item.getTitle());
 
     }
 }

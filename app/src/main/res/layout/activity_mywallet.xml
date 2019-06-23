@@ -25,14 +25,10 @@
             android:textColor="@color/white"
             android:text="@string/wallet_detail"/>
     </RelativeLayout>
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_below="@id/wallet_head">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="vertical">
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -68,63 +64,15 @@
                     app:layout_constraintLeft_toRightOf="@id/wallet_balance_num"
                     app:layout_constraintTop_toBottomOf="@id/wallet_balance"/>
             </android.support.constraint.ConstraintLayout>
-            <android.support.design.widget.TabLayout
+            <com.mymusic.music.DiyTab.TabLayout
+                android:id="@+id/tab"
                 android:layout_width="200dp"
                 android:layout_height="40dp"/>
-            <FrameLayout
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"/>
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
-                <ImageView
-                    android:id="@+id/my_icon5"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:padding="13dp"
-                    android:src="@drawable/icon_wallet"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_margin="10dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/my_icon5"
-                    android:textSize="16sp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#333333"
-                    android:text="订单查询"/>
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:padding="15dp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:src="@drawable/icon_next"/>
-            </android.support.constraint.ConstraintLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="15dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#666666"
-                    android:text="@string/wallet_des"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:textSize="14sp"
-                    android:textColor="#989CAA"
-                    android:text="@string/wallet_des_details"/>
-            </LinearLayout>
+                android:layout_height="wrap_content" />
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"

@@ -1,16 +1,23 @@
 package com.mymusic.music.View.ChildFragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mymusic.music.DataBean.Art;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Adapter.ArRcAdpater;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
+
+import org.w3c.dom.Comment;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -53,7 +60,8 @@ public class CommentArtFragment extends BaseFragment {
         NetRequest.postFormHeadRequest(UrlManager.My_Comment, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-
+                Art bean = GsonUtil.GsonToBean(result, Art.class);
+                initView(bean);
             }
 
             @Override
@@ -61,5 +69,11 @@ public class CommentArtFragment extends BaseFragment {
 
             }
         });
+    }
+
+    private void initView(Art bean) {
+        rc.setLayoutManager(new LinearLayoutManager(getContext()));
+        ArRcAdpater adpater = new ArRcAdpater(R.layout.art_rc_layout,bean.getData().getList());
+        rc.setAdapter(adpater);
     }
 }

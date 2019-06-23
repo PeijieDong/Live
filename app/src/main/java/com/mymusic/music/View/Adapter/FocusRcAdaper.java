@@ -21,7 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Create By mr.mao in 2019/6/7 9:59
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class FocusRcAdaper extends BaseQuickAdapter<Focus.DataBean.ListBean,BaseViewHolder> implements View.OnClickListener {
+public class FocusRcAdaper extends BaseQuickAdapter<Focus.DataBean.ListBean,BaseViewHolder>  {
 
     public FocusRcAdaper(int layoutResId, @Nullable List<Focus.DataBean.ListBean> data) {
         super(layoutResId, data);
@@ -34,13 +34,9 @@ public class FocusRcAdaper extends BaseQuickAdapter<Focus.DataBean.ListBean,Base
                 .setText(R.id.focus_rc_dec,item.getSignature())
                 .setText(R.id.focus_rc_focusbt,item.getGuanzhu());
         Glide.with(mContext).load(item.getAvatar()).into(head);
-        helper.getView(R.id.focus_rc_focusbt).setOnClickListener(this);
+        helper.addOnClickListener(R.id.focus_rc_focusbt);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 
     public void setOnItemClickListener(NetRequest.DataCallBack dataCallBack) {
         Intent intent = new Intent(mContext, UserDetailActivity.class);

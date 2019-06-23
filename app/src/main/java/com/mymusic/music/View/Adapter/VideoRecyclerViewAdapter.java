@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,13 +74,31 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.video_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                BottomSheetDialog bottomSheet = new BottomSheetDialog(context);//实例化
+                bottomSheet.setCancelable(true);//设置点击外部是否可以取消
+                View view = LayoutInflater.from(context).inflate(R.layout.dialog_video_layout, null);
+                TextView cencel = view.findViewById(R.id.cencel);
+                LinearLayout copy = view.findViewById(R.id.copy);
+                cencel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomSheet.dismiss();
+                    }
+                });
+                copy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CopyText(list.get(position).getContent());
+                    }
+                });
+                bottomSheet.setContentView(view);//设置对框框中的布局
+                bottomSheet.show();//显示弹窗
             }
         });
         holder.video_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                initLike();
             }
         });
         holder.video_comment.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +143,23 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.des.setText(bean.getUser_nicename());
     }
 
+
+    private void initLike() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type","1");
+        map.put("id",list.get(position).getId());
+        NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
+    }
 
 
     @Override

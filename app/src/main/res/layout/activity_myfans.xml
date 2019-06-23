@@ -28,12 +28,14 @@
             android:text="@string/fans_title"/>
     </RelativeLayout>
     <TextView
+        android:id="@+id/fans_num"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="50dp"
         android:textColor="#999999"
         android:textSize="14sp"
-        android:gravity="center_vertical"
-        android:layout_margin="15dp" />
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="15dp" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fans_Rc"
         android:layout_width="match_parent"

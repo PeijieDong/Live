@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".View.Activity.FriendFoundActivity">
     <LinearLayout
         android:id="@+id/find_ll"
@@ -44,12 +47,14 @@
     <com.mymusic.music.Util.LeftNavigation
         android:id="@+id/leftNavigation"
         android:layout_below="@id/find_ll"
-        android:layout_width="70dp"
+        android:background="@color/light_gray"
+        android:layout_width="100dp"
         android:layout_height="match_parent"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/friend_found_rc"
         android:layout_toRightOf="@id/leftNavigation"
         android:layout_below="@id/find_ll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:padding="5dp"/>
 </RelativeLayout>

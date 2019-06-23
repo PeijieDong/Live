@@ -1,8 +1,11 @@
 package com.mymusic.music.View.Adapter;
 
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mymusic.music.R;
@@ -21,6 +24,7 @@ public class VideoViewHolder extends BaseRecViewHolder {
     public ConstraintLayout container;
     public TextView title;
     public TextView des;
+
 
 
     public VideoViewHolder(View rootView) {

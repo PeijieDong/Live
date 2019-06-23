@@ -125,17 +125,12 @@
             android:layout_height="20dp"
             android:src="@drawable/ic_launcher_background" />
         <TextView
+            android:id="@+id/have_chose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="@string/null_sign"/>
     </LinearLayout>
-    <com.zhy.view.flowlayout.TagFlowLayout
-        android:id="@+id/flowLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:visibility="gone"/>
     <com.mymusic.music.Util.PutBottomNavigation
         android:id="@+id/navigation_put"
         android:layout_width="match_parent"

@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -66,6 +68,12 @@ public class MyFragment extends BaseFragment {
     TextView level;
     @BindView(R.id.cl1)
     ConstraintLayout cll;
+    @BindView(R.id.cl3)
+    ConstraintLayout cl3;
+    @BindView(R.id.cl4)
+    ConstraintLayout cl4;
+    @BindView(R.id.go_login)
+    Button goLogin;
     private User user;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
@@ -89,16 +97,17 @@ public class MyFragment extends BaseFragment {
 
     private void initLogin() {
         if(Live.getInstance().get(getContext()) != null){
+            cl3.setVisibility(View.GONE);
+            cl4.setVisibility(View.VISIBLE);
             user = Live.getInstance().get(getContext());
             Glide.with(this).load(user.getList().getAvatar()).into(head);
             name.setText(user.getList().getUser_nicename());
 //            focusNum.setText(user.getList().get);
             level.setText("LV"+user.getList().getLevel()+"经验值 40 >");
         }else{
-            cll.removeAllViews();
-            View view = LayoutInflater.from(getContext()).inflate(R.layout.no_login, null);
-            cll.addView(view);
-            view.setOnClickListener(new View.OnClickListener() {
+            cl3.setVisibility(View.VISIBLE);
+            cl4.setVisibility(View.GONE);
+            goLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), LoginActivity.class);
@@ -219,4 +228,9 @@ public class MyFragment extends BaseFragment {
         startActivity(intent);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initLogin();
+    }
 }

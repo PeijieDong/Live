@@ -33,41 +33,74 @@
             app:layout_constraintTop_toBottomOf="@id/rl_my_setting"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/my_user_head"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_launcher_background"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cl4"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/my_user_head"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_margin="15dp"/>
+                <TextView
+                    android:id="@+id/my_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@id/my_user_head"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_margin="20dp"
+                    android:text="喵哥是小姐姐"/>
+                <ImageView
+                    android:id="@+id/logo_level"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintLeft_toRightOf="@id/my_user_head"
+                    app:layout_constraintTop_toBottomOf="@id/my_user_name"
+                    android:src="@drawable/my_icon_level"/>
+                <TextView
+                    android:id="@+id/my_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#B3842B"
+                    app:layout_constraintTop_toBottomOf="@id/my_user_name"
+                    app:layout_constraintLeft_toRightOf="@id/logo_level"
+                    android:text="LV1丶经验值 40 >"/>
+            </android.support.constraint.ConstraintLayout>
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cl3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_margin="15dp"/>
-            <TextView
-                android:id="@+id/my_user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toRightOf="@id/my_user_head"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="20dp"
-                android:text="喵哥是小姐姐"/>
-            <ImageView
-                android:id="@+id/logo_level"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintLeft_toRightOf="@id/my_user_head"
-                app:layout_constraintTop_toBottomOf="@id/my_user_name"
-                android:src="@drawable/my_icon_level"/>
-            <TextView
-                android:id="@+id/my_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="#B3842B"
-                app:layout_constraintTop_toBottomOf="@id/my_user_name"
-                app:layout_constraintLeft_toRightOf="@id/logo_level"
-                android:text="LV1丶经验值 40 >"/>
+                android:visibility="gone">
+                <Button
+                    android:id="@+id/go_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/no_login"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:text="@string/gologin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"/>
+            </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
         <android.support.constraint.ConstraintLayout
             android:id="@+id/cl2"

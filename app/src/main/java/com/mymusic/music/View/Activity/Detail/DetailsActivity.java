@@ -183,7 +183,7 @@ public class DetailsActivity extends BaseActivity {
                 break;
             case R.id.icon_share:
                 ClipboardManager clipboard = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clipData = ClipData.newPlainText(null, list.get(0).getContent());
+                ClipData clipData = ClipData.newPlainText(null, data.getData().getList().getContent());
                 clipboard.setPrimaryClip(clipData);
                 Toast.makeText(DetailsActivity.this,"复制成功,快去分享吧",Toast.LENGTH_SHORT).show();
                 break;

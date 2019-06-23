@@ -3,10 +3,12 @@ package com.mymusic.music.View.ChildFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mymusic.music.Callback.TagFlowListener;
 import com.mymusic.music.DataBean.SignTag;
@@ -18,6 +20,7 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.BindView;
 
@@ -34,6 +37,7 @@ public class ChoseFragment extends BaseFragment implements TagFlowListener{
     TagFlowListener listener;
     List<String> list;
     List<String> list2 = new ArrayList<>();
+    private boolean have = false;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.chose_fragmnet_layout,container,false);
@@ -65,14 +69,29 @@ public class ChoseFragment extends BaseFragment implements TagFlowListener{
                 return textView;
             }
         });
-
         flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int i, FlowLayout parent) {
                 TextView text = view.findViewById(R.id.flowText);
-                text.setBackgroundResource(R.drawable.flow_select);
-                text.setTextColor(ContextCompat.getColor(getContext(),R.color.navi_title_color));
-                listener.Click(list.get(i));
+                for (int p = 0; p<list2.size();p++){
+                    if(list.get(i).equals(list2.get(p))){
+                        Log.e("33",list.get(i)+list2.get(p));
+                        list2.remove(p);
+                        have = true;
+                        listener.AcClick(list.get(i));
+                        text.setBackgroundResource(R.drawable.tv_bc2);
+                        text.setTextColor(ContextCompat.getColor(getContext(),R.color.text_light_gray));
+                    }
+                }
+                if(!have){
+                    Log.e("33","shibai");
+                    text.setBackgroundResource(R.drawable.flow_select);
+                    text.setTextColor(ContextCompat.getColor(getContext(),R.color.navi_title_color));
+                    list2.add(list.get(i));
+                    listener.Click(list.get(i));
+                }else{
+                    have = false;
+                }
                 return false;
             }
         });
@@ -98,10 +117,6 @@ public class ChoseFragment extends BaseFragment implements TagFlowListener{
 
     @Override
     public void AcClick(String s) {
-        for (int i = 0;i<list2.size();i++){
-            if(list2.get(i).equals(s)){
-                list2.remove(i);
-            }
-        }
+
     }
 }
