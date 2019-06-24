@@ -82,6 +82,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     protected void convert(BaseViewHolder helper, HomeData.DataBean.ListBean item) {
         this.item = item;
         int type = helper.getItemViewType();
+        helper.addOnClickListener(R.id.icon_like);
         switch (type){
             case PICTURE:
                 initListener(helper,item);
@@ -130,7 +131,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     TextView likeNum;
     public void initListener(BaseViewHolder helper, HomeData.DataBean.ListBean item){
         like = helper.getView(R.id.icon_like);
-        like.setOnClickListener(this);
+
         likeNum = helper.getView(R.id.likeNum);
         ImageView comment = helper.getView(R.id.icon_comment);
         comment.setOnClickListener(this);
@@ -146,9 +147,6 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.icon_like:
-                initLike();
-                break;
             case R.id.icon_comment:
                 initComment();
                 break;
@@ -168,26 +166,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 break;
         }
     }
-    private void initLike() {
-        //点赞
-        HashMap<String, String> map = new HashMap<>();
-        map.put("type","1");
-        map.put("id",item.getId());
-        NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
-            @Override
-            public void requestSuccess(String result) throws Exception {
-                Toast.makeText(mContext,"点赞成功",Toast.LENGTH_SHORT).show();
-                like.setBackground(mContext.getResources().getDrawable(R.drawable.ic_launcher_background));
-                like.setClickable(false);
-                likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
-            }
 
-            @Override
-            public void requestFailure(Request request, IOException e) {
-                Toast.makeText(mContext,"点赞失败",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
     private void initComment() {
 
     }

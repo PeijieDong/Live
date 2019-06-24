@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.TextView;
 
 import com.mymusic.music.DataBean.Wallet;
 import com.mymusic.music.DiyTab.TabLayout;
@@ -11,6 +13,8 @@ import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.MoneyDetailActivity;
+import com.mymusic.music.View.Activity.WebActivity;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
 import com.mymusic.music.View.ChildFragment.WalletFragment;
 import com.mymusic.music.View.ChildFragment.WalletOnLineFragment;
@@ -22,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Request;
 
 public class MywalletActivity extends BaseActivity {
@@ -30,6 +35,9 @@ public class MywalletActivity extends BaseActivity {
     TabLayout tab;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
+    @BindView(R.id.money_detail)
+    TextView money_detail;
+
     @Override
     protected void initVariables(Intent intent) {
 
@@ -72,5 +80,19 @@ public class MywalletActivity extends BaseActivity {
 
             }
         });
+    }
+    @OnClick({R.id.money_detail,R.id.helper})
+    public void ClickEvent(View view){
+        switch (view.getId()){
+            case R.id.money_detail:
+                Intent intent = new Intent(this, MoneyDetailActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.helper:
+                Intent intent1 = new Intent(this, WebActivity.class);
+                intent1.putExtra("url","http://live.shuiqiao.net/users/share");
+                startActivity(intent1);
+                break;
+        }
     }
 }

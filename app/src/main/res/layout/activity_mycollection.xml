@@ -25,4 +25,8 @@
             android:textColor="#030303"
             android:text="@string/collection_title"/>
     </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Rc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

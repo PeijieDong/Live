@@ -17,6 +17,7 @@
             android:padding="5dp"
             android:src="@drawable/icon_back_white"/>
         <TextView
+            android:id="@+id/money_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -56,11 +57,15 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/wallet_balance"/>
                 <TextView
-                    android:layout_width="64dp"
-                    android:layout_height="22dp"
+                    android:id="@+id/helper"
+                    android:layout_width="70dp"
+                    android:layout_height="28dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/white"
+                    android:text="问题帮助"
+                    android:gravity="center"
+                    android:background="@drawable/helper"
                     app:layout_constraintLeft_toRightOf="@id/wallet_balance_num"
                     app:layout_constraintTop_toBottomOf="@id/wallet_balance"/>
             </android.support.constraint.ConstraintLayout>

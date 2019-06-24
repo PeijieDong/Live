@@ -37,6 +37,7 @@ import com.mymusic.music.View.Activity.MyChildActivity.My.MysettingActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyshareActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
+import com.mymusic.music.View.Activity.WebActivity;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
 import com.mymusic.music.base.UrlManager;
@@ -101,6 +102,7 @@ public class MyFragment extends BaseFragment {
             cl4.setVisibility(View.VISIBLE);
             user = Live.getInstance().get(getContext());
             Glide.with(this).load(user.getList().getAvatar()).into(head);
+            Log.e("33",Live.getInstance().getToken(getContext()));
             name.setText(user.getList().getUser_nicename());
 //            focusNum.setText(user.getList().get);
             level.setText("LV"+user.getList().getLevel()+"经验值 40 >");
@@ -214,7 +216,9 @@ public class MyFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.my_share:
-                goActivity(MyshareActivity.class);
+                Intent intent1 = new Intent(getContext(), WebActivity.class);
+                intent1.putExtra("url","http://live.shuiqiao.net/users/share");
+                startActivity(intent1);
                 break;
         }
     }

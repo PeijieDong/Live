@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
@@ -75,12 +78,21 @@ public class HomePagerFragment extends BaseFragment implements BaseQuickAdapter.
             }
         });
     }
-
+    ImageView like;
+    TextView likeNum;
     private void initRc(List<HomeData.DataBean.ListBean> list) {
         this.list = list;
         homePagerRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(list);
         adapter.setOnItemClickListener(this);
+//        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+//            @Override
+//            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+//                like = view.findViewById(R.id.icon_like);
+//                likeNum = view.findViewById(R.id.likeNum);
+//                initLike(list.get(position));
+//            }
+//        });
         homePagerRecyclerview.setAdapter(adapter);
     }
 
@@ -94,6 +106,26 @@ public class HomePagerFragment extends BaseFragment implements BaseQuickAdapter.
 
     }
 
+//    private void initLike(HomeData.DataBean.ListBean item) {
+//        //点赞
+//        HashMap<String, String> map = new HashMap<>();
+//        map.put("type","1");
+//        map.put("id",item.getId());
+//        NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
+//            @Override
+//            public void requestSuccess(String result) throws Exception {
+//                Toast.makeText(getContext(),"点赞成功",Toast.LENGTH_SHORT).show();
+//                like.setBackground(getContext().getResources().getDrawable(R.drawable.ic_launcher_background));
+//                like.setClickable(false);
+//                likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
+//            }
+//
+//            @Override
+//            public void requestFailure(Request request, IOException e) {
+//                Toast.makeText(getContext(),"点赞失败",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
