@@ -48,6 +48,7 @@ public class MyhistoryActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.History, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 History bean = GsonUtil.GsonToBean(result, History.class);
                 initView(bean);
             }

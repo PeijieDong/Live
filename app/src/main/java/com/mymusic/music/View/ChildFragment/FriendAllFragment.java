@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
@@ -119,6 +120,18 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
                 Intent intent = new Intent(getContext(), FriendDetailActivity.class);
                 intent.putExtra("id",list.get(position).getCid());
                 startActivity(intent);
+            }
+        });
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()) {
+                    case R.id.friend_all_bt:
+                        TextView focus = view.findViewById(R.id.friend_all_bt);
+                        focus.setBackgroundResource(R.drawable.isfocus);
+                        focus.setText("取消关注");
+                        break;
+                }
             }
         });
         adapter.notifyDataSetChanged();

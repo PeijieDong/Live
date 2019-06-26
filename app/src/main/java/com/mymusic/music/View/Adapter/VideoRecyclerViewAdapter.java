@@ -30,6 +30,7 @@ import com.mymusic.music.Util.Love;
 import com.mymusic.music.Util.MyVideoPlayer;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
+import com.mymusic.music.View.Activity.post.PutVideoActivity;
 import com.mymusic.music.base.BaseRecAdapter;
 import com.mymusic.music.base.BaseRecViewHolder;
 import com.mymusic.music.base.UrlManager;
@@ -71,6 +72,13 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
         layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
         holder.mp_video.setUp(bean.getFilepath(), JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
+        holder.putVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PutVideoActivity.class);
+                context.startActivity(intent);
+            }
+        });
         holder.video_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

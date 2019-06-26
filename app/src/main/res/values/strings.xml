@@ -147,4 +147,5 @@
     <string name="focus">+关注</string>
     <string name="comment_des">说点什么吧</string>
     <string name="money_detail">收支明细</string>
+    <string name="put_content_hint2">填写合适的标题，能让更多的人看到（4-50字））</string>
 </resources>

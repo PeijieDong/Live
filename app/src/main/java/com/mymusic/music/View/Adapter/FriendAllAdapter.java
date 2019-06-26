@@ -38,7 +38,8 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
                 .setText(R.id.friend_all_num3,item.getList().get(2).getCate()+"张")
                 .setText(R.id.friend_all_content1,item.getList().get(0).getContent())
                 .setText(R.id.friend_all_content2,item.getList().get(1).getContent())
-                .setText(R.id.friend_all_content3,item.getList().get(2).getContent());
+                .setText(R.id.friend_all_content3,item.getList().get(2).getContent())
+                .addOnClickListener(R.id.friend_all_bt);
         ImageView head = helper.getView(R.id.friend_item_head);
         ImageView image1 = helper.getView(R.id.friend_all_image1);
         ImageView image2 = helper.getView(R.id.friend_all_image2);

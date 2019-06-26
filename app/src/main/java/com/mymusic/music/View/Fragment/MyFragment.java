@@ -102,7 +102,6 @@ public class MyFragment extends BaseFragment {
             cl4.setVisibility(View.VISIBLE);
             user = Live.getInstance().get(getContext());
             Glide.with(this).load(user.getList().getAvatar()).into(head);
-            Log.e("33",Live.getInstance().getToken(getContext()));
             name.setText(user.getList().getUser_nicename());
 //            focusNum.setText(user.getList().get);
             level.setText("LV"+user.getList().getLevel()+"经验值 40 >");

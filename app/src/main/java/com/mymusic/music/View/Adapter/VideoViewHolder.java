@@ -24,6 +24,7 @@ public class VideoViewHolder extends BaseRecViewHolder {
     public ConstraintLayout container;
     public TextView title;
     public TextView des;
+    public ImageView putVideo;
 
 
 
@@ -38,6 +39,7 @@ public class VideoViewHolder extends BaseRecViewHolder {
         container = rootView.findViewById(R.id.video_container);
         title = rootView.findViewById(R.id.video_title);
         des = rootView.findViewById(R.id.video_des);
+        putVideo = rootView.findViewById(R.id.put_video);
     }
 
 }

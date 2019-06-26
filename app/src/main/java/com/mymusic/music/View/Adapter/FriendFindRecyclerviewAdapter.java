@@ -43,7 +43,8 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
                 .setText(R.id.image_type_3,item.getList().get(2).getType())
                 .setText(R.id.image_type_4,item.getList().get(3).getType())
                 .setText(R.id.image_type_5,item.getList().get(4).getType())
-                .setText(R.id.image_type_6,item.getList().get(5).getType());
+                .setText(R.id.image_type_6,item.getList().get(5).getType())
+                .addOnClickListener(R.id.find_item_focus);
         ImageView head = helper.getView(R.id.friend_find_head);
         ImageView one = helper.getView(R.id.friend_find_one);
         ImageView two = helper.getView(R.id.friend_find_two);

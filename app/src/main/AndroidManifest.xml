@@ -73,7 +73,8 @@
         <activity android:name=".View.Activity.Login.SetPasswordActivity" />
         <activity android:name=".View.Activity.post.SignActivity" />
         <activity android:name=".View.Activity.MoneyDetailActivity" />
-        <activity android:name=".View.Activity.WebActivity"></activity>
+        <activity android:name=".View.Activity.WebActivity" />
+        <activity android:name=".View.Activity.post.PutVideoActivity"></activity>
     </application>
 
 </manifest>

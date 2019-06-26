@@ -72,7 +72,9 @@
             <com.mymusic.music.DiyTab.TabLayout
                 android:id="@+id/tab"
                 android:layout_width="200dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                app:tabIndicatorColor="@color/navi_title_color"
+                app:tabIndicatorHeight="3dp"/>
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
@@ -92,6 +94,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/back_quest"
                 app:layout_constraintBottom_toTopOf="@id/wallet_question"/>
             <TextView
                 android:id="@+id/wallet_question"
@@ -112,7 +115,7 @@
             android:textSize="16sp"
             android:textColor="@color/white"
             android:gravity="center"
-            android:background="#D7D7D7"
+            android:background="@color/navi_title_color"
             android:text="@string/wallet_top_up"/>
     </LinearLayout>
 </LinearLayout>

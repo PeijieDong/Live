@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,6 +85,10 @@ public class DetailsActivity extends BaseActivity {
     TextView focus;
     @BindView(R.id.hot)
     TextView hot;
+    @BindView(R.id.iv_full)
+    ImageView full;
+    @BindView(R.id.rl_play)
+    RelativeLayout rlPlay;
     private String id;
     private DetailCommentRcAdapter adapter;
     private DetailData data;
@@ -117,8 +123,16 @@ public class DetailsActivity extends BaseActivity {
     private void initView(DetailData data) {
         if(data.getData().getList().getType().equals("视频")){
             VideoPlay.setVisibility(View.VISIBLE);
+            rlPlay.setVisibility(View.VISIBLE);
+            full.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FullScreen();
+                }
+            });
             VideoPlay.setUp(data.getData().getList().getContent(),
                     JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
+            VideoPlay.startVideo();
             Glide.with(this).load(data.getData().getList().getImage()).into(VideoPlay.thumbImageView);
         }else if(data.getData().getList().getType().equals("文字")){
             TextView view = (TextView) LayoutInflater.from(this).inflate(R.layout.detail_text_item, null);
@@ -142,6 +156,10 @@ public class DetailsActivity extends BaseActivity {
         likenum.setText(data.getData().getList().getZan());
         Glide.with(this).load(data.getData().getList().getAvatar()).into(detail_head);
         initComment("new","0");
+    }
+
+    private void FullScreen() {
+
     }
 
     private void initComment(String type,String somebody) {
@@ -217,7 +235,7 @@ public class DetailsActivity extends BaseActivity {
         }
     }
 
-    //点赞
+    //like_press
     private void initNet2() {
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
@@ -226,7 +244,7 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Toast.makeText(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT).show();
-                likeicon.setBackground(getResources().getDrawable(R.drawable.ic_launcher_background));
+                likeicon.setImageDrawable(getResources().getDrawable(R.drawable.like_press));
                 likeicon.setClickable(false);
                 likenum.setText(Integer.valueOf(likenum.getText().toString())+1+"");
             }
@@ -287,4 +305,11 @@ public class DetailsActivity extends BaseActivity {
         super.onPause();
         JZVideoPlayer.releaseAllVideos();
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //home back
+        JZVideoPlayer.goOnPlayOnResume();
+    }
+
 }

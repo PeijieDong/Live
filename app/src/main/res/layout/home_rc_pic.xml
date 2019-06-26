@@ -4,11 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"/>
+
+
     <com.mymusic.music.Util.MyGridView
         android:id="@+id/home_rc_grid"
         android:layout_width="match_parent"

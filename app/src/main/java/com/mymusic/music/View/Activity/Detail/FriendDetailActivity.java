@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -46,6 +47,10 @@ public class FriendDetailActivity extends BaseActivity {
     ViewPager viewPager;
     @BindView(R.id.friend_detail_focus)
     TextView focus;
+    @BindView(R.id.gonggao)
+    LinearLayout gonggao;
+    @BindView(R.id.zhiding)
+    LinearLayout zhiding;
     private String id;
     private FriendDetailTOP bean;
     private Boolean focuslogo = false;
@@ -72,12 +77,17 @@ public class FriendDetailActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.FRIEND_DETAILS, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Log.e("33",result);
                 bean = GsonUtil.GsonToBean(result, FriendDetailTOP.class);
                 Glide.with(FriendDetailActivity.this).load(bean.getData().getList().getIcon()).into(head);
                 title.setText(bean.getData().getList().getTitle());
                 fans.setText(bean.getData().getList().getGnum()+"粉丝");
                 art.setText(bean.getData().getList().getTiezi()+"帖子");
+                if(bean.getData().getList().getOfficial().equals("0")){
+                    gonggao.setVisibility(View.GONE);
+                }
+                if(bean.getData().getList().getZhiding().equals("0")){
+                    zhiding.setVisibility(View.GONE);
+                }
                 initView();
             }
 

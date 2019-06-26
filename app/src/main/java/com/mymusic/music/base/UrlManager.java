@@ -62,4 +62,6 @@ public class UrlManager {
 
     public static final String Collection = BaseUrl+"users/fav";
 
+    public static final String Put_Video = BaseUrl+"video/addmVideo";
+
 }

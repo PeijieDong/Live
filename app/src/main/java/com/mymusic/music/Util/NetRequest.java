@@ -1,5 +1,6 @@
 package com.mymusic.music.Util;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -125,8 +126,8 @@ public class NetRequest {
 
 
 
-    public static void postmoreRequest(String url, Map<String, Object> params, File file, DataCallBack callBack) {
-        getInstance().upLoadFile(url, params,file, callBack);
+    public static void postmoreRequest(String url,Context context, Map<String, String> params, File file, DataCallBack callBack) {
+        getInstance().upLoadFile(url,context, params,file, callBack);
     }
     //-------------对外提供的方法End--------------------------------
 
@@ -347,15 +348,15 @@ public class NetRequest {
         });
     }
 
-    private void upLoadFile(final String url, final Map<String, Object> map, File file, final DataCallBack callBack) {
+    private void upLoadFile(final String url, Context context, final Map<String, String> map, File file, final DataCallBack callBack) {
         OkHttpClient client = new OkHttpClient();
         // form 表单形式上传
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
         if (file != null) {
-            // MediaType.parse() 里面是上传的文件类型。
-            RequestBody body = RequestBody.create(MediaType.parse("image/jpeg; charset=utf-8"), file);
+            // MediaType.parse() 里面是上传的文件类型。video/mpeg4
+            RequestBody body = RequestBody.create(MediaType.parse("application/octet-stream"), file);
             // 参数分别为， 请求key ，文件名称 ， RequestBody
-            requestBody.addFormDataPart("headpic", file.getName(), body);
+            requestBody.addFormDataPart("file", file.getName(), body);
         }
         if (map != null) {
             // map 里面是请求中所需要的 key 和 value
@@ -363,7 +364,7 @@ public class NetRequest {
                 requestBody.addFormDataPart(valueOf(entry.getKey()), valueOf(entry.getValue()));
             }
         }
-        final Request request = new Request.Builder().url(url).post(requestBody.build()).build();
+        final Request request = new Request.Builder().url(url).addHeader("token",Live.getInstance().getToken(context)).post(requestBody.build()).build();
         // readTimeout("请求超时时间" , 时间单位);
         client.newBuilder().readTimeout(10000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
             @Override

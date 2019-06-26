@@ -107,7 +107,7 @@ public class HomePagerFragment extends BaseFragment implements BaseQuickAdapter.
     }
 
 //    private void initLike(HomeData.DataBean.ListBean item) {
-//        //点赞
+//        //like_press
 //        HashMap<String, String> map = new HashMap<>();
 //        map.put("type","1");
 //        map.put("id",item.getId());
@@ -119,7 +119,7 @@ public class HomePagerFragment extends BaseFragment implements BaseQuickAdapter.
 //                like.setClickable(false);
 //                likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
 //            }
-//
+//p
 //            @Override
 //            public void requestFailure(Request request, IOException e) {
 //                Toast.makeText(getContext(),"点赞失败",Toast.LENGTH_SHORT).show();

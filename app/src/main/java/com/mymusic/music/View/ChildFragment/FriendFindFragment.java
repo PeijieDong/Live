@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.FriendFindData;
@@ -85,12 +86,26 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
 
     private void initRc(FriendFindData data) {
         this.data = data;
+
         FriendFindRecyclerviewAdapter adapter =
-                new FriendFindRecyclerviewAdapter(R.layout.fragment_friend_find_item,data.getData().getList());
+                new FriendFindRecyclerviewAdapter(R.layout.fragment_friend_find_item, data.getData().getList());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setOnItemClickListener(this);
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()) {
+                    case R.id.find_item_focus:
+                        TextView focus = view.findViewById(R.id.find_item_focus);
+                        focus.setBackgroundResource(R.drawable.isfocus);
+                        focus.setText("取消关注");
+                        break;
+                }
+            }
+        });
         recyclerView.setAdapter(adapter);
         refreshLayout.finishRefresh();
+
     }
 
     @Override
