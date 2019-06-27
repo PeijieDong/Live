@@ -24,12 +24,14 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.google.gson.Gson;
 import com.mymusic.music.DataBean.CommentBean;
 import com.mymusic.music.DataBean.VideoData;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.Love;
 import com.mymusic.music.Util.MyVideoPlayer;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
+import com.mymusic.music.View.Activity.JubaoVideoActiviy;
 import com.mymusic.music.View.Activity.post.PutVideoActivity;
 import com.mymusic.music.base.BaseRecAdapter;
 import com.mymusic.music.base.BaseRecViewHolder;
@@ -87,6 +89,8 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                 View view = LayoutInflater.from(context).inflate(R.layout.dialog_video_layout, null);
                 TextView cencel = view.findViewById(R.id.cencel);
                 LinearLayout copy = view.findViewById(R.id.copy);
+                LinearLayout feedback = view.findViewById(R.id.feedback);
+                LinearLayout collection = view.findViewById(R.id.collection);
                 cencel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -97,6 +101,23 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                     @Override
                     public void onClick(View v) {
                         CopyText(list.get(position).getContent());
+                        Toast.makeText(context,"复制成功，快去分享吧！",Toast.LENGTH_SHORT).show();
+                        bottomSheet.dismiss();
+                    }
+                });
+                feedback.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, JubaoVideoActiviy.class);
+                        context.startActivity(intent);
+                        bottomSheet.dismiss();
+                    }
+                });
+                collection.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initCollection();
+                        bottomSheet.dismiss();
                     }
                 });
                 bottomSheet.setContentView(view);//设置对框框中的布局
@@ -151,12 +172,28 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.des.setText(bean.getUser_nicename());
     }
 
+    private void initCollection() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id",list.get(position).getId());
+        NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Toast.makeText(context,"收藏成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
+    }
+
 
     private void initLike() {
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
         map.put("id",list.get(position).getId());
-        NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
+        NetRequest.postFormRequest(UrlManager.Video_Zan, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();

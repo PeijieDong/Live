@@ -84,6 +84,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         int type = helper.getItemViewType();
         helper.addOnClickListener(R.id.themeBt);
         helper.addOnClickListener(R.id.icon_like);
+
         switch (type){
             case PICTURE:
                 initListener(helper,item);
@@ -93,6 +94,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .setText(R.id.username,item.getUsername())
                         .setText(R.id.home_rc_type,item.getCatename())
                         .setText(R.id.tv_content,item.getContent());
+                helper.addOnClickListener(R.id.icon_more);
                 Glide.with(mContext).load(item.getAvatar())
                         .into((CircleImageView) helper.getView(R.id.userHead));
                 HomeGridAdapter adapter = new HomeGridAdapter(mContext,item.getImages());
@@ -107,6 +109,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .setText(R.id.username,item.getUsername())
                         .setText(R.id.home_rc_type,item.getCatename())
                         .setText(R.id.tv_content,item.getContent());
+                helper.addOnClickListener(R.id.icon_more);
                 TextView text = helper.getView(R.id.tv_content_text);
                 TextView vis = helper.getView(R.id.tv_content_vis);
                 int count = text.getLineCount();
@@ -125,6 +128,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .setText(R.id.username,item.getUsername())
                         .setText(R.id.home_rc_type,item.getCatename())
                         .setText(R.id.tv_content,item.getContent());
+                helper.addOnClickListener(R.id.icon_more);
                 Glide.with(mContext).load(item.getAvatar())
                         .into((CircleImageView) helper.getView(R.id.userHead));
                 Glide.with(mContext).load(item.getImage()).into((ImageView) helper.getView(R.id.video_image));
@@ -145,8 +149,6 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         comment.setOnClickListener(this);
         ImageView share = helper.getView(R.id.icon_share);
         share.setOnClickListener(this);
-        ImageView more = helper.getView(R.id.icon_more);
-        more.setOnClickListener(this);
         LinearLayout userBt = helper.getView(R.id.userBt);
         userBt.setOnClickListener(this);
     };
@@ -158,9 +160,6 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 break;
             case R.id.icon_share:
                 initShare();
-                break;
-            case R.id.icon_more:
-                showBottomSheetDialog();
                 break;
             case R.id.userBt:
                 Intent intent1 = new Intent(mContext, UserDetailActivity.class);
@@ -177,20 +176,6 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         ClipData clipData = ClipData.newPlainText(null, item.getContent());
         clipboard.setPrimaryClip(clipData);
         Toast.makeText(mContext,"分享内容复制成功",Toast.LENGTH_SHORT).show();
-    }
-    void showBottomSheetDialog(){
-        BottomSheetDialog bottomSheet = new BottomSheetDialog(mContext);//实例化
-        bottomSheet.setCancelable(true);//设置点击外部是否可以取消
-        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_layout, null);
-        TextView cencel = view.findViewById(R.id.cencel);
-        cencel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomSheet.dismiss();
-            }
-        });
-        bottomSheet.setContentView(view);//设置对框框中的布局
-        bottomSheet.show();//显示弹窗
     }
 
 

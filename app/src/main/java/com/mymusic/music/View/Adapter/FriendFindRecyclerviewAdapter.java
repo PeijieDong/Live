@@ -56,10 +56,10 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
         CircleImageView ci2 = (CircleImageView)helper.getView(R.id.ci2);
         CircleImageView ci3 = (CircleImageView)helper.getView(R.id.ci3);
         CircleImageView ci4 = (CircleImageView)helper.getView(R.id.ci4);
-        Glide.with(mContext).load(item.getList().get(0).getImages().get(0)).into(ci1);
-//        Glide.with(mContext).load(item.getList().get(0).getImages().get(1)).into(ci2);
-//        Glide.with(mContext).load(item.getList().get(0).getImages().get(2)).into(ci3);
-//        Glide.with(mContext).load(item.getList().get(0).getImages().get(3)).into(ci4);
+        Glide.with(mContext).load(item.getUlist().getHead1()).into(ci1);
+        Glide.with(mContext).load(item.getUlist().getHead2()).into(ci2);
+        Glide.with(mContext).load(item.getUlist().getHead3()).into(ci3);
+        Glide.with(mContext).load(item.getUlist().getHead4()).into(ci4);
         Glide.with(mContext).load(item.getIcon()).into(head);
         Glide.with(mContext).load(item.getList().get(0).getImage()).into(one);
         Glide.with(mContext).load(item.getList().get(1).getImage()).into(two);

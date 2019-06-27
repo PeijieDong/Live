@@ -74,7 +74,9 @@
         <activity android:name=".View.Activity.post.SignActivity" />
         <activity android:name=".View.Activity.MoneyDetailActivity" />
         <activity android:name=".View.Activity.WebActivity" />
-        <activity android:name=".View.Activity.post.PutVideoActivity"></activity>
+        <activity android:name=".View.Activity.post.PutVideoActivity" />
+        <activity android:name=".View.Activity.JubaoActivity" />
+        <activity android:name=".View.Activity.JubaoVideoActiviy"></activity>
     </application>
 
 </manifest>

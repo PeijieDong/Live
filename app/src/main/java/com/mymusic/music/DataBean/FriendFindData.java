@@ -8,9 +8,8 @@ import java.util.List;
  **/
 public class FriendFindData {
 
-
     /**
-     * data : {"list":[{"cid":"2","title":"测试推荐","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"1","name":"美图","official":"0","list":[{"id":"18","uid":"1","cate":"2","type":"图片","content":"http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg,http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg,http://a.hiphotos.baidu.com/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg,http://g.hiphotos.baidu.com/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg","http://a.hiphotos.baidu.com/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg","http://g.hiphotos.baidu.com/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg"]},{"id":"17","uid":"1","cate":"2","type":"视频","content":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":""},{"id":"16","uid":"1","cate":"2","type":"文字","content":"dsfdsaf","share":"1","comment":"2","zan":"3","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net","click":"0","isgonggao":"0","title":"","tag":""}],"isguanzhu":0,"gnum":"2","tiezi":"9"}]}
+     * data : {"list":[{"cid":"1","title":"交友1s","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"1","name":"交友","official":"0","list":[{"id":"25","uid":"9999","cate":"1","type":"文字","content":"afsfewrwerweqr","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net","click":"0","isgonggao":"1","title":"","tag":"","images":null,"playtime":null,"videourl":"http://live.shuiqiao.net"},{"id":"24","uid":"9999","cate":"1","type":"视频","content":"sdfdsafsafasdf","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"1","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://live.shuiqiao.net"},{"id":"23","uid":"9999","cate":"1","type":"图片","content":"这里是文字","share":"0","comment":"0","zan":"0","createtime":"1561336113","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"agt","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg"],"playtime":null,"videourl":"http://live.shuiqiao.net"},{"id":"22","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335406","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4"},{"id":"21","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335217","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4"},{"id":"20","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561305159","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4"}],"isguanzhu":0,"ulist":{"head1":"","head2":"","head3":"","head4":""},"gnum":"0","tiezi":"16"},{"cid":"2","title":"测试推荐","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"1","name":"美图","official":"0","list":[{"id":"18","uid":"1","cate":"2","type":"图片","content":"这里是文字","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg"],"playtime":null,"videourl":"http://live.shuiqiao.net"},{"id":"17","uid":"1","cate":"2","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4"},{"id":"16","uid":"1","cate":"2","type":"文字","content":"dsfdsaf","share":"1","comment":"2","zan":"3","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://live.shuiqiao.net"},{"id":"15","uid":"1","cate":"2","type":"图片","content":"这里是文字","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg"],"playtime":null,"videourl":"http://live.shuiqiao.net"},{"id":"14","uid":"1","cate":"2","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4"},{"id":"13","uid":"1","cate":"2","type":"文字","content":"dsfdsaf","share":"1","comment":"2","zan":"3","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://live.shuiqiao.net"}],"isguanzhu":0,"ulist":{"head1":"http://live.shuiqiao.net/default_thumb.jpg","head2":"http://live.shuiqiao.net/default_thumb.jpg","head3":"http://live.shuiqiao.net/default_thumb.jpg","head4":"http://live.shuiqiao.net/default_thumb.jpg"},"gnum":"6","tiezi":"9"}]}
      * status : 1
      * referer :
      * state : 1
@@ -66,17 +65,18 @@ public class FriendFindData {
 
         public static class ListBeanX {
             /**
-             * cid : 2
-             * title : 测试推荐
+             * cid : 1
+             * title : 交友1s
              * icon : http://live.shuiqiao.net/default.jpg
              * description : 这里是描述
              * tui : 1
-             * name : 美图
+             * name : 交友
              * official : 0
-             * list : [{"id":"18","uid":"1","cate":"2","type":"图片","content":"http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg,http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg,http://a.hiphotos.baidu.com/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg,http://g.hiphotos.baidu.com/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg","http://a.hiphotos.baidu.com/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg","http://g.hiphotos.baidu.com/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg"]},{"id":"17","uid":"1","cate":"2","type":"视频","content":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":""},{"id":"16","uid":"1","cate":"2","type":"文字","content":"dsfdsaf","share":"1","comment":"2","zan":"3","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net","click":"0","isgonggao":"0","title":"","tag":""}]
+             * list : [{"id":"25","uid":"9999","cate":"1","type":"文字","content":"afsfewrwerweqr","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net","click":"0","isgonggao":"1","title":"","tag":"","images":null,"playtime":null,"videourl":"http://live.shuiqiao.net"},{"id":"24","uid":"9999","cate":"1","type":"视频","content":"sdfdsafsafasdf","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"1","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://live.shuiqiao.net"},{"id":"23","uid":"9999","cate":"1","type":"图片","content":"这里是文字","share":"0","comment":"0","zan":"0","createtime":"1561336113","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"agt","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg"],"playtime":null,"videourl":"http://live.shuiqiao.net"},{"id":"22","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335406","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4"},{"id":"21","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335217","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4"},{"id":"20","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561305159","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4"}]
              * isguanzhu : 0
-             * gnum : 2
-             * tiezi : 9
+             * ulist : {"head1":"","head2":"","head3":"","head4":""}
+             * gnum : 0
+             * tiezi : 16
              */
 
             private String cid;
@@ -87,6 +87,7 @@ public class FriendFindData {
             private String name;
             private String official;
             private int isguanzhu;
+            private UlistBean ulist;
             private String gnum;
             private String tiezi;
             private List<ListBean> list;
@@ -155,6 +156,14 @@ public class FriendFindData {
                 this.isguanzhu = isguanzhu;
             }
 
+            public UlistBean getUlist() {
+                return ulist;
+            }
+
+            public void setUlist(UlistBean ulist) {
+                this.ulist = ulist;
+            }
+
             public String getGnum() {
                 return gnum;
             }
@@ -179,13 +188,59 @@ public class FriendFindData {
                 this.list = list;
             }
 
+            public static class UlistBean {
+                /**
+                 * head1 :
+                 * head2 :
+                 * head3 :
+                 * head4 :
+                 */
+
+                private String head1;
+                private String head2;
+                private String head3;
+                private String head4;
+
+                public String getHead1() {
+                    return head1;
+                }
+
+                public void setHead1(String head1) {
+                    this.head1 = head1;
+                }
+
+                public String getHead2() {
+                    return head2;
+                }
+
+                public void setHead2(String head2) {
+                    this.head2 = head2;
+                }
+
+                public String getHead3() {
+                    return head3;
+                }
+
+                public void setHead3(String head3) {
+                    this.head3 = head3;
+                }
+
+                public String getHead4() {
+                    return head4;
+                }
+
+                public void setHead4(String head4) {
+                    this.head4 = head4;
+                }
+            }
+
             public static class ListBean {
                 /**
-                 * id : 18
-                 * uid : 1
-                 * cate : 2
-                 * type : 图片
-                 * content : http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg,http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg,http://a.hiphotos.baidu.com/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg,http://g.hiphotos.baidu.com/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg
+                 * id : 25
+                 * uid : 9999
+                 * cate : 1
+                 * type : 文字
+                 * content : afsfewrwerweqr
                  * share : 0
                  * comment : 0
                  * zan : 0
@@ -193,12 +248,14 @@ public class FriendFindData {
                  * status : 1
                  * zhiding : 0
                  * tui : 0
-                 * image : http://live.shuiqiao.net/default.jpg
+                 * image : http://live.shuiqiao.net
                  * click : 0
-                 * isgonggao : 0
+                 * isgonggao : 1
                  * title :
                  * tag :
-                 * images : ["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg","http://a.hiphotos.baidu.com/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg","http://g.hiphotos.baidu.com/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg"]
+                 * images : null
+                 * playtime : null
+                 * videourl : http://live.shuiqiao.net
                  */
 
                 private String id;
@@ -218,7 +275,9 @@ public class FriendFindData {
                 private String isgonggao;
                 private String title;
                 private String tag;
-                private List<String> images;
+                private Object images;
+                private Object playtime;
+                private String videourl;
 
                 public String getId() {
                     return id;
@@ -356,12 +415,28 @@ public class FriendFindData {
                     this.tag = tag;
                 }
 
-                public List<String> getImages() {
+                public Object getImages() {
                     return images;
                 }
 
-                public void setImages(List<String> images) {
+                public void setImages(Object images) {
                     this.images = images;
+                }
+
+                public Object getPlaytime() {
+                    return playtime;
+                }
+
+                public void setPlaytime(Object playtime) {
+                    this.playtime = playtime;
+                }
+
+                public String getVideourl() {
+                    return videourl;
+                }
+
+                public void setVideourl(String videourl) {
+                    this.videourl = videourl;
                 }
             }
         }

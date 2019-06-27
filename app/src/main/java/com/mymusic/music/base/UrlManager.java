@@ -64,4 +64,15 @@ public class UrlManager {
 
     public static final String Put_Video = BaseUrl+"video/addmVideo";
 
+    public static final String Friend_Focus = BaseUrl+"index/qz_attention";
+
+    public static final String Collection_Home = BaseUrl+"index/collect";
+
+    public static final String PingBI = BaseUrl+"index/pingbi";
+
+    public static final String JuBao = BaseUrl+"video/newsreport";
+
+    public static final String Video_Zan = BaseUrl+"video/zan";
+
+    public static final String Vide_Collection = BaseUrl+"video/collect";
 }
