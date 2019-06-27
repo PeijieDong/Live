@@ -48,14 +48,15 @@
         android:id="@+id/tv_content_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="3"
         android:padding="10dp"
         android:ellipsize="end" />
     <TextView
+        android:id="@+id/tv_content_vis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:textColor="#FF5252"
+        android:visibility="gone"
         android:text="全文"/>
     <LinearLayout
         android:id="@+id/userBt"

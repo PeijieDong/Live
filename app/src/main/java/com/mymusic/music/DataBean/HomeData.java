@@ -10,7 +10,7 @@ public class HomeData {
 
 
     /**
-     * data : {"list":[{"id":"1","uid":"1","cate":"1","type":"文字","content":"dsfdsaf","share":"1","comment":"2","zan":"3","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net","click":"0","catename":"出品","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg","http://a.hiphotos.baidu.com/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg","http://g.hiphotos.baidu.com/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg"]},{"id":"2","uid":"1","cate":"1","type":"视频","content":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","catename":"出品","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"},{"id":"3","uid":"1","cate":"1","type":"图片","content":"http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg,http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg,http://a.hiphotos.baidu.com/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg,http://g.hiphotos.baidu.com/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","catename":"出品","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg","http://a.hiphotos.baidu.com/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg","http://g.hiphotos.baidu.com/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg"]}]}
+     * data : {"list":[{"id":"15","uid":"1","cate":"2","type":"图片","content":"这里是文字","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg","http:"],"playtime":null,"videourl":"http://live.shuiqiao.net","catename":"交友1s","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"},{"id":"14","uid":"1","cate":"2","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","catename":"交友1s","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"},{"id":"13","uid":"1","cate":"2","type":"文字","content":"dsfdsaf","share":"1","comment":"2","zan":"3","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://live.shuiqiao.net","catename":"交友1s","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"},{"id":"9","uid":"1","cate":"1","type":"图片","content":"这里是文字","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg","http:"],"playtime":null,"videourl":"http://live.shuiqiao.net","catename":"交友1s","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"},{"id":"8","uid":"1","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","catename":"交友1s","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"},{"id":"7","uid":"1","cate":"1","type":"文字","content":"dsfdsaf","share":"1","comment":"2","zan":"3","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://live.shuiqiao.net","catename":"交友1s","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"},{"id":"3","uid":"1","cate":"1","type":"图片","content":"这里是文字","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg","http:"],"playtime":null,"videourl":"http://live.shuiqiao.net","catename":"交友1s","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"},{"id":"2","uid":"1","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","catename":"交友1s","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"}]}
      * status : 1
      * referer :
      * state : 1
@@ -66,24 +66,29 @@ public class HomeData {
 
         public static class ListBean {
             /**
-             * id : 1
+             * id : 15
              * uid : 1
-             * cate : 1
-             * type : 文字
-             * content : dsfdsaf
-             * share : 1
-             * comment : 2
-             * zan : 3
+             * cate : 2
+             * type : 图片
+             * content : 这里是文字
+             * share : 0
+             * comment : 0
+             * zan : 0
              * createtime : 0
              * status : 1
              * zhiding : 0
              * tui : 1
-             * image : http://live.shuiqiao.net
+             * image : http://live.shuiqiao.net/default.jpg
              * click : 0
-             * catename : 出品
+             * isgonggao : 0
+             * title :
+             * tag :
+             * images : ["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg","http:"]
+             * playtime : null
+             * videourl : http://live.shuiqiao.net
+             * catename : 交友1s
              * username : admin
              * avatar : http://live.shuiqiao.net/default_thumb.jpg
-             * images : ["http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg","http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg","http://a.hiphotos.baidu.com/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg","http://g.hiphotos.baidu.com/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg"]
              */
 
             private String id;
@@ -100,6 +105,11 @@ public class HomeData {
             private String tui;
             private String image;
             private String click;
+            private String isgonggao;
+            private String title;
+            private String tag;
+            private Object playtime;
+            private String videourl;
             private String catename;
             private String username;
             private String avatar;
@@ -215,6 +225,46 @@ public class HomeData {
 
             public void setClick(String click) {
                 this.click = click;
+            }
+
+            public String getIsgonggao() {
+                return isgonggao;
+            }
+
+            public void setIsgonggao(String isgonggao) {
+                this.isgonggao = isgonggao;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getTag() {
+                return tag;
+            }
+
+            public void setTag(String tag) {
+                this.tag = tag;
+            }
+
+            public Object getPlaytime() {
+                return playtime;
+            }
+
+            public void setPlaytime(Object playtime) {
+                this.playtime = playtime;
+            }
+
+            public String getVideourl() {
+                return videourl;
+            }
+
+            public void setVideourl(String videourl) {
+                this.videourl = videourl;
             }
 
             public String getCatename() {

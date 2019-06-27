@@ -82,6 +82,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     protected void convert(BaseViewHolder helper, HomeData.DataBean.ListBean item) {
         this.item = item;
         int type = helper.getItemViewType();
+        helper.addOnClickListener(R.id.themeBt);
         helper.addOnClickListener(R.id.icon_like);
         switch (type){
             case PICTURE:
@@ -106,6 +107,13 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .setText(R.id.username,item.getUsername())
                         .setText(R.id.home_rc_type,item.getCatename())
                         .setText(R.id.tv_content,item.getContent());
+                TextView text = helper.getView(R.id.tv_content_text);
+                TextView vis = helper.getView(R.id.tv_content_vis);
+                int count = text.getLineCount();
+                if(count == 3){
+                    text.setMaxLines(3);
+                    vis.setVisibility(View.VISIBLE);
+                }
                 Glide.with(mContext).load(item.getAvatar())
                         .into((CircleImageView) helper.getView(R.id.userHead));
                 break;
@@ -137,8 +145,6 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         comment.setOnClickListener(this);
         ImageView share = helper.getView(R.id.icon_share);
         share.setOnClickListener(this);
-        RelativeLayout themeBt = helper.getView(R.id.themeBt);
-        themeBt.setOnClickListener(this);
         ImageView more = helper.getView(R.id.icon_more);
         more.setOnClickListener(this);
         LinearLayout userBt = helper.getView(R.id.userBt);
@@ -152,10 +158,6 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 break;
             case R.id.icon_share:
                 initShare();
-                break;
-            case R.id.themeBt:
-                Intent intent = new Intent(mContext, FriendDetailActivity.class);
-                mContext.startActivity(intent);
                 break;
             case R.id.icon_more:
                 showBottomSheetDialog();

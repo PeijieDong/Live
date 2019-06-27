@@ -20,6 +20,7 @@ import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
+import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
@@ -85,6 +86,14 @@ public class HomePagerFragment extends BaseFragment implements BaseQuickAdapter.
         homePagerRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(list);
         adapter.setOnItemClickListener(this);
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getActivity(), FriendDetailActivity.class);
+                intent.putExtra("id",list.get(position).getUid());
+                getContext().startActivity(intent);
+            }
+        });
 //        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
 //            @Override
 //            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {

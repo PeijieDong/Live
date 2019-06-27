@@ -25,9 +25,11 @@
                 android:id="@+id/home_find"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="50dp"
-                android:padding="15dp"
-                android:background="@null"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/back_home_find"
                 android:textSize="14sp"
                 android:hint="请输入关键字搜索"/>
             <ImageView
