@@ -25,6 +25,9 @@ public class VideoViewHolder extends BaseRecViewHolder {
     public TextView title;
     public TextView des;
     public ImageView putVideo;
+    public TextView likeNum;
+    public TextView shareNum;
+    public TextView commentNum;
 
 
 
@@ -40,6 +43,9 @@ public class VideoViewHolder extends BaseRecViewHolder {
         title = rootView.findViewById(R.id.video_title);
         des = rootView.findViewById(R.id.video_des);
         putVideo = rootView.findViewById(R.id.put_video);
+        likeNum = rootView.findViewById(R.id.likeNum);
+        shareNum = rootView.findViewById(R.id.shareNum);
+        commentNum = rootView.findViewById(R.id.commentNum);
     }
 
 }

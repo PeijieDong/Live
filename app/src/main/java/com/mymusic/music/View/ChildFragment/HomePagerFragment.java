@@ -110,7 +110,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                         bottomSheet.setCancelable(true);//设置点击外部是否可以取消
                         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_layout, null);
                         TextView cencel = view1.findViewById(R.id.cencel);
-                        View focus = view1.findViewById(R.id.bt_focus);
+                        TextView focus = view1.findViewById(R.id.bt_focus);
                         focus.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -120,7 +120,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                                 bottomSheet.dismiss();
                             }
                         });
-                        View collection = view1.findViewById(R.id.bt_collection);
+                        TextView collection = view1.findViewById(R.id.bt_collection);
                         collection.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -130,7 +130,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                                 bottomSheet.dismiss();
                             }
                         });
-                        View pingbi = view1.findViewById(R.id.bt_pingbi);
+                        TextView pingbi = view1.findViewById(R.id.bt_pingbi);
                         pingbi.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -141,7 +141,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                                 adapter.notifyDataSetChanged();
                             }
                         });
-                        View jubao = view1.findViewById(R.id.bt_jubao);
+                        TextView jubao = view1.findViewById(R.id.bt_jubao);
                         jubao.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -167,6 +167,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
     }
 
     private void initBt(String url,int position,HashMap<String,String> map) {
+        Log.e("33",Live.getInstance().getToken(getContext()));
         NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

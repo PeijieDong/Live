@@ -37,6 +37,8 @@ public class MywalletActivity extends BaseActivity {
     ViewPager viewPager;
     @BindView(R.id.money_detail)
     TextView money_detail;
+    @BindView(R.id.wallet_balance_num)
+    TextView money_balance;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -59,6 +61,7 @@ public class MywalletActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Wallet bean = GsonUtil.GsonToBean(result, Wallet.class);
+                money_balance.setText(bean.getMoney());
                 List<String> title = new ArrayList<>();
                 title.add("代理充值");
                 title.add("在线充值");

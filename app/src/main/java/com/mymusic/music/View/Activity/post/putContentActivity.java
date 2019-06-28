@@ -1,13 +1,22 @@
 package com.mymusic.music.View.Activity.post;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.media.MediaMetadataRetriever;
+import android.media.MediaPlayer;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -34,6 +43,7 @@ import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,13 +68,15 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     TextView haveChose;
     @BindView(R.id.home_rc_type)
     TextView typeTitle;
+    @BindView(R.id.title)
+    TextView title;
     private boolean isVideo = true;
     private List<Uri> image = new ArrayList<>();
     private int REQUEST_CODE_CHOOSE = 2;
     private String cid = "";
     CommunityRcAdapter adapter;
     private String type ;
-    private StringBuilder tag;
+    private StringBuilder tag = new StringBuilder();
     private List<String> list = new ArrayList<>();
     @Override
     protected void initVariables(Intent intent) {
@@ -72,7 +84,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    protected void initViews(Bundle savedInstanceState) {
+    protected void initViews(Bundle savedInstapostnceState) {
         setContentView(R.layout.activity_put_content);
     }
 
@@ -146,29 +158,37 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initNet() {
-        String url = "";
-        if(navigation.getPosition() == 0){
-            url = UrlManager.Post_Video;
-        }else{
-            url = UrlManager.Post_Art;
-        }
+        verifyStoragePermissions(this);
+        String url = UrlManager.Post_Video;
+        File file = null;
         HashMap<String, String> map = new HashMap<>();
-        map.put("cate",cid);
-        map.put("type",type);
-        map.put("file","Dsds");
-        map.put("tag",tag.toString());
-        NetRequest.postFormHeadRequest(UrlManager.Post_Video, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+        map.put("cate", cid);
+        map.put("type", type);
+        map.put("tag", tag.toString());
+        map.put("content", title.getText().toString());
+        if (navigation.getPosition() == 0) {
+            file = new File(image.get(0).getPath());
+            map.put("playtime", "0");
+            map.put("images", "0");
+        } else if (navigation.getPosition() == 1) {
+            file = new File(image.get(0).getPath());
+            map.put("playtime", "0");
+            map.put("images", "0");
+        }
+        NetRequest.postmoreRequest(url, this, map, file, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-
+                Log.e("33", result);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-
+                Log.e("33",e.getMessage());
             }
+
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -233,5 +253,37 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     .forResult(REQUEST_CODE_CHOOSE); // 设置作为标记的请求码
         }
     }
+    public static int getLocalVideoDuration(String videoPath) {
+        int duration;
+        try {
+            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+            mmr.setDataSource(videoPath);
+            duration = Integer.parseInt(mmr.extractMetadata
+                    (MediaMetadataRetriever.METADATA_KEY_DURATION));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return duration;
+    }
+
+    // Storage Permissions
+      private static final int REQUEST_EXTERNAL_STORAGE = 1;
+      private static String[] PERMISSIONS_STORAGE = {
+                         Manifest.permission.READ_EXTERNAL_STORAGE,
+                         Manifest.permission.WRITE_EXTERNAL_STORAGE };
+
+
+        public static void verifyStoragePermissions(Activity activity) {
+            // Check if we have write permission
+            int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // We don't have permission so prompt the user
+                ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,
+                REQUEST_EXTERNAL_STORAGE);
+            }
+        }
 
 }

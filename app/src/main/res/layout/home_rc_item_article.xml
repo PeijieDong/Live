@@ -38,12 +38,37 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/icon_godown"/>
     </RelativeLayout>
-    <TextView
-        android:id="@+id/tv_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="你听过七月的风八月的雨吗？"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/isTop"
+            android:layout_width="48dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="13dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:background="#EBF6FF">
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="11dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_top"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="置顶"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="你听过七月的风八月的雨吗？"/>
+    </LinearLayout>
     <TextView
         android:id="@+id/tv_content_text"
         android:layout_width="match_parent"

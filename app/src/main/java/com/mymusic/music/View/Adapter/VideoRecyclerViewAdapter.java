@@ -4,14 +4,11 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.CountDownTimer;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -19,30 +16,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.google.gson.Gson;
 import com.mymusic.music.DataBean.CommentBean;
 import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
-import com.mymusic.music.Util.Love;
-import com.mymusic.music.Util.MyVideoPlayer;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.JubaoVideoActiviy;
 import com.mymusic.music.View.Activity.post.PutVideoActivity;
 import com.mymusic.music.base.BaseRecAdapter;
-import com.mymusic.music.base.BaseRecViewHolder;
 import com.mymusic.music.base.UrlManager;
-
-import org.w3c.dom.Comment;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Timer;
 
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
@@ -109,6 +97,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(context, JubaoVideoActiviy.class);
+                        intent.putExtra("id",list.get(position).getId());
                         context.startActivity(intent);
                         bottomSheet.dismiss();
                     }
@@ -133,7 +122,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.video_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBottomSheetDialog();
+                initNet();
             }
         });
         holder.video_head.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +159,9 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         Glide.with(context).load(bean.getAvatar_thumb()).into(holder.video_head);
         holder.title.setText(bean.getSharecontent());
         holder.des.setText(bean.getUser_nicename());
+        holder.likeNum.setText(bean.getZan());
+        holder.commentNum.setText(bean.getComment());
+        holder.shareNum.setText(bean.getShare());
     }
 
     private void initCollection() {
@@ -193,7 +185,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
         map.put("id",list.get(position).getId());
-        NetRequest.postFormRequest(UrlManager.Video_Zan, map, new NetRequest.DataCallBack() {
+        NetRequest.postFormRequest(UrlManager.Video_Comment, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();
@@ -216,14 +208,17 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         context.startActivity(intent);
     }
 
-    void showBottomSheetDialog(){
+    void showBottomSheetDialog(List<CommentBean.DataBean.ListBean> list){
         BottomSheetDialog bottomSheet = new BottomSheetDialog(context);//实例化
         bottomSheet.setCancelable(true);//设置点击外部是否可以取消
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_comment_layout, null);
         Rc = view.findViewById(R.id.Rc);
+        Rc.setLayoutManager(new LinearLayoutManager(context));
+        VideoFragmentRcAdapter adapter = new VideoFragmentRcAdapter(R.layout.detail_item_layout, list);
+        Rc.setAdapter(adapter);
         bottomSheet.setContentView(view);//设置对框框中的布局
         bottomSheet.show();//显示弹窗
-        initNet();
+
     }
     //评论
     private void initNet() {
@@ -237,7 +232,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                 Log.e("33",result);
                 CommentBean bean = GsonUtil.GsonToBean(result, CommentBean.class);
                 List<CommentBean.DataBean.ListBean> list = bean.getData().getList();
-                initRc(list);
+                showBottomSheetDialog(list);
             }
 
             @Override
@@ -245,12 +240,6 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
 
             }
         });
-    }
-
-    private void initRc(List<CommentBean.DataBean.ListBean> list) {
-        Rc.setLayoutManager(new LinearLayoutManager(context));
-        VideoFragmentRcAdapter adapter = new VideoFragmentRcAdapter(R.layout.detail_item_layout,list);
-        Rc.setAdapter(adapter);
     }
 
     private void CopyText(String text) {

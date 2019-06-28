@@ -75,4 +75,10 @@ public class UrlManager {
     public static final String Video_Zan = BaseUrl+"video/zan";
 
     public static final String Vide_Collection = BaseUrl+"video/collect";
+
+    public static final String GetUserInfo = BaseUrl+"users/getLoginUserInfo";
+
+    public static final String Video_Comment = BaseUrl+"index/getComment";
+
+    public static final String Jubao_Video = BaseUrl+"video/videoreport";
 }

@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mymusic.music.DataBean.User;
+import com.mymusic.music.DataBean.UserBean;
 import com.mymusic.music.Live;
+import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
@@ -65,6 +67,12 @@ public class MyFragment extends BaseFragment {
     TextView name;
     @BindView(R.id.focus_num)
     TextView focusNum;
+    @BindView(R.id.fansNum)
+    TextView fansNum;
+    @BindView(R.id.fabuNum)
+    TextView fabuNum;
+    @BindView(R.id.collectionNum)
+    TextView collectionNum;
     @BindView(R.id.my_level)
     TextView level;
     @BindView(R.id.cl1)
@@ -75,6 +83,10 @@ public class MyFragment extends BaseFragment {
     ConstraintLayout cl4;
     @BindView(R.id.go_login)
     Button goLogin;
+    @BindView(R.id.my_totalNumber)
+    TextView totalNumber;
+    @BindView(R.id.my_number)
+    TextView number;
     private User user;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
@@ -98,13 +110,12 @@ public class MyFragment extends BaseFragment {
 
     private void initLogin() {
         if(Live.getInstance().get(getContext()) != null){
+            initUserInfo();
             cl3.setVisibility(View.GONE);
             cl4.setVisibility(View.VISIBLE);
             user = Live.getInstance().get(getContext());
             Glide.with(this).load(user.getList().getAvatar()).into(head);
             name.setText(user.getList().getUser_nicename());
-//            focusNum.setText(user.getList().get);
-            level.setText("LV"+user.getList().getLevel()+"经验值 40 >");
         }else{
             cl3.setVisibility(View.VISIBLE);
             cl4.setVisibility(View.GONE);
@@ -116,6 +127,26 @@ public class MyFragment extends BaseFragment {
                 }
             });
         }
+    }
+
+    private void initUserInfo() {
+        NetRequest.postFormHeadRequest(UrlManager.GetUserInfo, null, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                UserBean bean = GsonUtil.GsonToBean(result, UserBean.class);
+                focusNum.setText(bean.getData().getFollows());
+                fansNum.setText(bean.getData().getFans());
+                fabuNum.setText(bean.getData().getFabu());
+                collectionNum.setText(bean.getData().getShoucang());
+                level.setText("LV"+bean.getData().getLevel()+"经验值"+bean.getData().getLevel_anchor()+" >");
+                name.setText(bean.getData().getUser_nicename());
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
     }
 
     @OnClick({R.id.my_setting,R.id.my_level,R.id.my_user_head,

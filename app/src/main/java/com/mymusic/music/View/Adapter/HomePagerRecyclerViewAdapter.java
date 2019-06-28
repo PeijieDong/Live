@@ -84,10 +84,12 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         int type = helper.getItemViewType();
         helper.addOnClickListener(R.id.themeBt);
         helper.addOnClickListener(R.id.icon_like);
-
         switch (type){
             case PICTURE:
                 initListener(helper,item);
+                if(item.getZhiding().equals("1")){
+                    helper.setVisible(R.id.isTop,true);
+                }
                 helper.setText(R.id.likeNum,item.getZan())
                         .setText(R.id.commentNum,item.getComment())
                         .setText(R.id.shareNum,item.getShare())
@@ -102,13 +104,17 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 grid.setAdapter(adapter);
                 break;
             case ARTICLE:
+                if(item.getZhiding().equals("1")){
+                    helper.setVisible(R.id.isTop,true);
+                }
                 initListener(helper, item);
                 helper.setText(R.id.likeNum,item.getZan())
                         .setText(R.id.commentNum,item.getComment())
                         .setText(R.id.shareNum,item.getShare())
                         .setText(R.id.username,item.getUsername())
                         .setText(R.id.home_rc_type,item.getCatename())
-                        .setText(R.id.tv_content,item.getContent());
+                        .setText(R.id.tv_content_text,item.getContent())
+                        .setText(R.id.tv_content,item.getTitle());
                 helper.addOnClickListener(R.id.icon_more);
                 TextView text = helper.getView(R.id.tv_content_text);
                 TextView vis = helper.getView(R.id.tv_content_vis);
@@ -121,6 +127,9 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .into((CircleImageView) helper.getView(R.id.userHead));
                 break;
             case VIDEO:
+                if(item.getZhiding().equals("1")){
+                    helper.setVisible(R.id.isTop,true);
+                }
                 initListener(helper, item);
                 helper.setText(R.id.likeNum,item.getZan())
                         .setText(R.id.commentNum,item.getComment())

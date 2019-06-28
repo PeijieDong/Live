@@ -170,10 +170,15 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.Detail_Comment, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                list.clear();
+                Log.e("33",result);
                 CommentData bean = GsonUtil.GsonToBean(result, CommentData.class);
-                list = bean.getData().getList();
-                initCommentList(bean.getData().getList());
+                if(bean.getData().getList() == null){
+                    list = new ArrayList<>();
+                    initCommentList(list);
+                }else {
+                    list = bean.getData().getList();
+                    initCommentList(list);
+                }
             }
 
             @Override
@@ -186,7 +191,7 @@ public class DetailsActivity extends BaseActivity {
     private void initCommentList(List<CommentData.DataBean.ListBean> list) {
         detailRc.setLayoutManager(new LinearLayoutManager(this));
         adapter = new DetailCommentRcAdapter(R.layout.detail_item_layout,list);
-        adapter.notifyDataSetChanged();
+        adapter.notifyAll();
         detailRc.setAdapter(adapter);
     }
 
