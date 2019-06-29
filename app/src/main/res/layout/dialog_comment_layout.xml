@@ -22,6 +22,7 @@
             android:orientation="horizontal"
             android:background="#FFF">
             <EditText
+                android:id="@+id/comment_et"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"

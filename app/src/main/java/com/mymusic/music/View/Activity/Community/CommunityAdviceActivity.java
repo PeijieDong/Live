@@ -63,12 +63,14 @@ public class CommunityAdviceActivity extends BaseActivity implements View.OnClic
         Rc.setAdapter(adapter);
     }
 
-    @OnClick({R.id.community_camera})
+    @OnClick({R.id.community_camera,R.id.post})
     public void OnclickEvent(View view){
         switch (view.getId()){
             case R.id.community_camera:
                 initCamera();
 
+                break;
+            case R.id.post:
                 break;
         }
     }

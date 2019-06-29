@@ -11,12 +11,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mymusic.music.DataBean.CommentBean;
+import com.mymusic.music.DataBean.UserDetail;
 import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
@@ -49,6 +51,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
     private long pressedTime = 0;
     private int position;
     private RecyclerView Rc;
+    private VideoViewHolder holder;
     public VideoRecyclerViewAdapter(Context context, List<VideoData.DataBean.ListBean> list) {
         super(list);
         this.context = context;
@@ -58,6 +61,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
     @Override
     public void onHolder(VideoViewHolder holder, VideoData.DataBean.ListBean bean, int position) {
         //设置视频大小
+        this.holder = holder;
         this.position = position;
         ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
         layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -116,7 +120,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.video_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initLike();
+                initLike(holder);
             }
         });
         holder.video_comment.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +132,9 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.video_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goActivity(UserDetailActivity.class);
+                Intent intent = new Intent(context, UserDetailActivity.class);
+                intent.putExtra("UserId",list.get(position).getUid());
+                context.startActivity(intent);
             }
         });
         holder.container.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +187,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
     }
 
 
-    private void initLike() {
+    private void initLike(VideoViewHolder holder) {
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
         map.put("id",list.get(position).getId());
@@ -189,6 +195,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
             @Override
             public void requestSuccess(String result) throws Exception {
                 Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();
+                holder.likeNum.setText(Integer.parseInt(holder.likeNum.getText().toString())+1+"");
             }
 
             @Override
@@ -208,13 +215,42 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         context.startActivity(intent);
     }
 
-    void showBottomSheetDialog(List<CommentBean.DataBean.ListBean> list){
+    void showBottomSheetDialog(List<CommentBean.DataBean.ListBean> listbean){
         BottomSheetDialog bottomSheet = new BottomSheetDialog(context);//实例化
         bottomSheet.setCancelable(true);//设置点击外部是否可以取消
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_comment_layout, null);
+        TextView post = view.findViewById(R.id.detail_post);
+        EditText commentEt = view.findViewById(R.id.comment_et);
+        post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(commentEt.getText().toString().equals("")){
+                    Toast.makeText(context,"不能为空哦",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                HashMap<String, String> map = new HashMap<>();
+                map.put("vid",list.get(position).getVid());
+                map.put("pid","0");
+                map.put("content",commentEt.getText().toString());
+                NetRequest.postFormHeadRequest(UrlManager.Comment_Video, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
+                    @Override
+                    public void requestSuccess(String result) throws Exception {
+                        Log.e("33",result);
+                        Toast.makeText(context,"提交成功",Toast.LENGTH_SHORT).show();
+                        commentEt.setText("");
+                        holder.commentNum.setText(Integer.parseInt(holder.commentNum.getText().toString())+1+"");
+                    }
+
+                    @Override
+                    public void requestFailure(Request request, IOException e) {
+
+                    }
+                });
+            }
+        });
         Rc = view.findViewById(R.id.Rc);
         Rc.setLayoutManager(new LinearLayoutManager(context));
-        VideoFragmentRcAdapter adapter = new VideoFragmentRcAdapter(R.layout.detail_item_layout, list);
+        VideoFragmentRcAdapter adapter = new VideoFragmentRcAdapter(R.layout.detail_item_layout, listbean);
         Rc.setAdapter(adapter);
         bottomSheet.setContentView(view);//设置对框框中的布局
         bottomSheet.show();//显示弹窗
@@ -246,6 +282,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clipData = ClipData.newPlainText(null, text);
         clipboard.setPrimaryClip(clipData);
+        holder.shareNum.setText(Integer.parseInt(holder.shareNum.getText().toString())+1+"");
     }
 }
 

@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.DataBean.Like;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -46,9 +49,10 @@ public class MylikeActivity extends BaseActivity {
         HashMap<String, String> map = new HashMap<>();
         map.put("token",Live.getInstance().getToken(this));
         map.put("page","1");
-        NetRequest.postFormRequest(UrlManager.MyLike, map, new NetRequest.DataCallBack() {
+        NetRequest.postFormHeadRequest(UrlManager.MyLike, map,Live.getInstance().getToken(this) ,new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 HomeData bean = GsonUtil.GsonToBean(result, HomeData.class);
                 initView(bean);
             }
@@ -63,6 +67,14 @@ public class MylikeActivity extends BaseActivity {
     private void initView(HomeData bean) {
         rc.setLayoutManager(new LinearLayoutManager(this));
         HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(bean.getData().getList());
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(MylikeActivity.this, DetailsActivity.class);
+                intent.putExtra("id",bean.getData().getList().get(position).getId());
+                startActivity(intent);
+            }
+        });
         rc.setAdapter(adapter);
     }
 }

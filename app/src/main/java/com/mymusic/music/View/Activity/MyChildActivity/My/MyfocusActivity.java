@@ -5,18 +5,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
 import com.mymusic.music.View.ChildFragment.FocusFragment;
 import com.mymusic.music.base.BaseActivity;
+import com.mymusic.music.base.UrlManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindInt;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MyfocusActivity extends BaseActivity {
 
@@ -41,9 +44,22 @@ public class MyfocusActivity extends BaseActivity {
         title.add(getResources().getString(R.string.focus_tab1));
         title.add(getResources().getString(R.string.focus_tab2));
         List<Fragment> list = new ArrayList<>();
-        list.add(new FocusFragment());
-        list.add(new FocusFragment());
+        FocusFragment fragment = new FocusFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("url",UrlManager.Focus_Person);
+        fragment.setArguments(bundle);
+        FocusFragment fragment2 = new FocusFragment();
+        Bundle bundle2 = new Bundle();
+        bundle2.putString("url",UrlManager.Focus_List);
+        fragment2.setArguments(bundle2);
+        list.add(fragment);
+        list.add(fragment2);
         viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager(),title,list));
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @OnClick({R.id.back})
+    public void ClickBack(View view){
+        finish();
     }
 }

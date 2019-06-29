@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.FriendFindData;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
@@ -26,6 +28,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -86,7 +89,6 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
 
     private void initRc(FriendFindData data) {
         this.data = data;
-
         FriendFindRecyclerviewAdapter adapter =
                 new FriendFindRecyclerviewAdapter(R.layout.fragment_friend_find_item, data.getData().getList());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -99,6 +101,7 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
                         TextView focus = view.findViewById(R.id.find_item_focus);
                         focus.setBackgroundResource(R.drawable.isfocus);
                         focus.setText("取消关注");
+                        initFocusFriend(true,position);
                         break;
                 }
             }
@@ -114,5 +117,28 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
         String cid = data.getData().getList().get(position).getCid();
         intent.putExtra("id",cid);
         startActivity(intent);
+    }
+
+    private void initFocusFriend(boolean isFocus, int i) {
+        String url = "";
+        if(isFocus){
+            url = UrlManager.Focus_Friend;
+        }else{
+            url = UrlManager.NoFocus_Friend;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("touid",data.getData().getList().get(i).getCid());
+        NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                Toast.makeText(getContext(),"操作成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(getContext(),"操作失败",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

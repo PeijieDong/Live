@@ -54,12 +54,15 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 switch (s.getType()){
                     //多图片
                     case "图片":
+                    case "4":
                         return PICTURE;
                     //文章
                     case "文字":
+                    case "3":
                         return ARTICLE;
                     //视频
                     case "视频":
+                    case "5":
                         return VIDEO;
                     //推荐
                     case "推荐":
@@ -87,8 +90,10 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         switch (type){
             case PICTURE:
                 initListener(helper,item);
-                if(item.getZhiding().equals("1")){
-                    helper.setVisible(R.id.isTop,true);
+                if(item.getZhiding() != null) {
+                    if (item.getZhiding().equals("1")) {
+                        helper.setVisible(R.id.isTop, true);
+                    }
                 }
                 helper.setText(R.id.likeNum,item.getZan())
                         .setText(R.id.commentNum,item.getComment())
@@ -104,8 +109,10 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 grid.setAdapter(adapter);
                 break;
             case ARTICLE:
-                if(item.getZhiding().equals("1")){
-                    helper.setVisible(R.id.isTop,true);
+                if(item.getZhiding() != null){
+                    if(item.getZhiding().equals("1")){
+                        helper.setVisible(R.id.isTop,true);
+                    }
                 }
                 initListener(helper, item);
                 helper.setText(R.id.likeNum,item.getZan())
@@ -127,8 +134,10 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .into((CircleImageView) helper.getView(R.id.userHead));
                 break;
             case VIDEO:
-                if(item.getZhiding().equals("1")){
-                    helper.setVisible(R.id.isTop,true);
+                if(item.getZhiding() != null) {
+                    if (item.getZhiding().equals("1")) {
+                        helper.setVisible(R.id.isTop, true);
+                    }
                 }
                 initListener(helper, item);
                 helper.setText(R.id.likeNum,item.getZan())

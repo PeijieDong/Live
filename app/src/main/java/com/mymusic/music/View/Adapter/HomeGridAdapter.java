@@ -40,17 +40,17 @@ public class HomeGridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return data.size();
+        return data != null ? data.size() : 0;
     }
 
     @Override
     public Object getItem(int i) {
-        return data.get(i);
+        return data != null ? data.get(i) : null;
     }
 
     @Override
     public long getItemId(int i) {
-        return i;
+        return data != null ? i : 0;
     }
 
     @Override

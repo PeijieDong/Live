@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.mymusic.music.DataBean.User;
+import com.mymusic.music.DataBean.UserBean;
+import com.mymusic.music.DataBean.UserInfo;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.MyFileNameGenerator;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
@@ -85,5 +87,18 @@ public class Live extends Application {
                 .maxCacheSize(1024 * 1024 * 1024)       // 1 Gb for cache
                 .fileNameGenerator(new MyFileNameGenerator())
                 .build();
+    }
+
+    public void putUser(Context context, String result) {
+        SharedPrefrenceUtils.saveString(context,"userinfo",result);
+    }
+    public UserBean getUser(Context context){
+        if(SharedPrefrenceUtils.getString(context, "userinfo", null) == null){
+            return null;
+        }else{
+            String user = SharedPrefrenceUtils.getString(context, "userinfo", null);
+            UserBean bean = GsonUtil.GsonToBean(user, UserBean.class);
+            return bean;
+        }
     }
 }

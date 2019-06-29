@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.Fans;
@@ -18,8 +20,7 @@ import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import okhttp3.Request;
@@ -30,6 +31,8 @@ public class MyfansActivity extends BaseActivity {
     RecyclerView rc;
     @BindView(R.id.fans_num)
     TextView num;
+    private String id;
+    private Fans fans;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -50,7 +53,7 @@ public class MyfansActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.GetFans, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Fans fans = GsonUtil.GsonToBean(result, Fans.class);
+                fans = GsonUtil.GsonToBean(result, Fans.class);
                 num.setText("您总共有"+fans.getData().getTotal()+"个粉丝");
                 initView(fans);
             }
@@ -72,13 +75,38 @@ public class MyfansActivity extends BaseActivity {
                 if(focus.getText().toString().equals("+关注")){
                     focus.setText("取消关注");
                     focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
+                    initFocus(true,i);
                 }else{
                     focus.setText("+关注");
                     focus.setBackgroundResource(R.drawable.back_friend_detail_focus);
+                    initFocus(false,i);
                 }
 
             }
         });
         rc.setAdapter(adapter);
+    }
+
+    private void initFocus(boolean isFocus, int i) {
+        String url = "";
+        if(isFocus){
+            url = UrlManager.Focus_User;
+        }else{
+            url = UrlManager.NoFocus_User;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("touid",fans.getData().getList().get(i).getUid());
+        NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                Toast.makeText(MyfansActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(MyfansActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

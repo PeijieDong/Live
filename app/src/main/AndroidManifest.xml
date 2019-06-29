@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
         android:name=".Live"
         android:allowBackup="true"
@@ -77,7 +76,8 @@
         <activity android:name=".View.Activity.WebActivity" />
         <activity android:name=".View.Activity.post.PutVideoActivity" />
         <activity android:name=".View.Activity.JubaoActivity" />
-        <activity android:name=".View.Activity.JubaoVideoActiviy"></activity>
+        <activity android:name=".View.Activity.JubaoVideoActiviy" />
+        <activity android:name=".View.Activity.WalletFeedback"></activity>
     </application>
 
 </manifest>

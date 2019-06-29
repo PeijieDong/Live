@@ -9,11 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.mymusic.music.DataBean.FriendAllData;
 import com.mymusic.music.DataBean.FriendAllTitle;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
@@ -42,7 +44,7 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
     @BindView(R.id.friend_all_rc)
     RecyclerView rc;
     private List<String> title;
-
+    private FriendAllData data;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_friend_all_layout,container,false);
@@ -77,6 +79,7 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
         NetRequest.getFormRequest(UrlManager.FRIEND_ALL, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+
                 FriendAllTitle title = GsonUtil.GsonToBean(result, FriendAllTitle.class);
                 initTab(title.getData().getList());
             }
@@ -100,7 +103,7 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
         NetRequest.postFormRequest(UrlManager.FRIEND_ALL, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                FriendAllData data = GsonUtil.GsonToBean(result, FriendAllData.class);
+                data = GsonUtil.GsonToBean(result, FriendAllData.class);
                 initRc(data.getData().getList());
             }
 
@@ -130,11 +133,35 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
                         TextView focus = view.findViewById(R.id.friend_all_bt);
                         focus.setBackgroundResource(R.drawable.isfocus);
                         focus.setText("取消关注");
+                        initFocusFriend(true,position);
                         break;
                 }
             }
         });
         adapter.notifyDataSetChanged();
         rc.setAdapter(adapter);
+    }
+
+    private void initFocusFriend(boolean isFocus, int i) {
+        String url = "";
+        if(isFocus){
+            url = UrlManager.Focus_Friend;
+        }else{
+            url = UrlManager.NoFocus_Friend;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("touid",data.getData().getList().get(i).getCid());
+        NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                Toast.makeText(getContext(),"操作成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(getContext(),"操作失败",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

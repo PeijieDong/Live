@@ -88,6 +88,7 @@ public class MyFragment extends BaseFragment {
     @BindView(R.id.my_number)
     TextView number;
     private User user;
+    private UserBean bean;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_my,container,false);
@@ -114,8 +115,6 @@ public class MyFragment extends BaseFragment {
             cl3.setVisibility(View.GONE);
             cl4.setVisibility(View.VISIBLE);
             user = Live.getInstance().get(getContext());
-            Glide.with(this).load(user.getList().getAvatar()).into(head);
-            name.setText(user.getList().getUser_nicename());
         }else{
             cl3.setVisibility(View.VISIBLE);
             cl4.setVisibility(View.GONE);
@@ -133,13 +132,15 @@ public class MyFragment extends BaseFragment {
         NetRequest.postFormHeadRequest(UrlManager.GetUserInfo, null, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                UserBean bean = GsonUtil.GsonToBean(result, UserBean.class);
+                bean = GsonUtil.GsonToBean(result, UserBean.class);
+                Live.getInstance().putUser(getContext(),result);
                 focusNum.setText(bean.getData().getFollows());
                 fansNum.setText(bean.getData().getFans());
                 fabuNum.setText(bean.getData().getFabu());
                 collectionNum.setText(bean.getData().getShoucang());
                 level.setText("LV"+bean.getData().getLevel()+"经验值"+bean.getData().getLevel_anchor()+" >");
                 name.setText(bean.getData().getUser_nicename());
+                Glide.with(getContext()).load(bean.getData().getAvatar()).into(head);
             }
 
             @Override
@@ -167,7 +168,9 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.my_user_head:
                 if(Live.getInstance().get(getContext()) != null){
-                    goActivity(UserDetailActivity.class);
+                    Intent intent = new Intent(getContext(), UserDetailActivity.class);
+                    intent.putExtra("UserId",bean.getData().getId());
+                    startActivity(intent);
                 }
                 break;
             case R.id.my_foucus:

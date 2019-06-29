@@ -14,6 +14,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.MoneyDetailActivity;
+import com.mymusic.music.View.Activity.WalletFeedback;
 import com.mymusic.music.View.Activity.WebActivity;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
 import com.mymusic.music.View.ChildFragment.WalletFragment;
@@ -84,7 +85,7 @@ public class MywalletActivity extends BaseActivity {
             }
         });
     }
-    @OnClick({R.id.money_detail,R.id.helper})
+    @OnClick({R.id.money_detail,R.id.helper,R.id.fankui})
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.money_detail:
@@ -95,6 +96,10 @@ public class MywalletActivity extends BaseActivity {
                 Intent intent1 = new Intent(this, WebActivity.class);
                 intent1.putExtra("url","http://live.shuiqiao.net/users/share");
                 startActivity(intent1);
+                break;
+            case R.id.fankui:
+                Intent intent2 = new Intent(this, WalletFeedback.class);
+                startActivity(intent2);
                 break;
         }
     }

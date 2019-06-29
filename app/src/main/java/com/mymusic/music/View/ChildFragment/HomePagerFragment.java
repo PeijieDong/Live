@@ -138,7 +138,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                                 map.put("touid",list.get(position).getUid());
                                 initBt(UrlManager.PingBI,position,map);
                                 bottomSheet.dismiss();
-                                adapter.notifyDataSetChanged();
+
                             }
                         });
                         TextView jubao = view1.findViewById(R.id.bt_jubao);
@@ -146,6 +146,8 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                             @Override
                             public void onClick(View v) {
                                 Intent intent1 = new Intent(getContext(), JubaoActivity.class);
+                                intent1.putExtra("uid",list.get(position).getId());
+                                intent1.putExtra("touid",list.get(position).getUid());
                                 startActivity(intent1);
                                 bottomSheet.dismiss();
                             }
@@ -173,6 +175,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
                 Toast.makeText(getContext(),"操作成功",Toast.LENGTH_SHORT).show();
+                initNet();
             }
 
             @Override

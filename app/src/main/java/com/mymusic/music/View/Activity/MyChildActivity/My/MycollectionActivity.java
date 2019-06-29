@@ -5,12 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -47,6 +51,7 @@ public class MycollectionActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.Collection, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 HomeData data = GsonUtil.GsonToBean(result, HomeData.class);
                 initRc(data.getData().getList());
             }
@@ -61,6 +66,14 @@ public class MycollectionActivity extends BaseActivity {
     private void initRc(List<HomeData.DataBean.ListBean> list) {
         rc.setLayoutManager(new LinearLayoutManager(this));
         HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(list);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(MycollectionActivity.this, DetailsActivity.class);
+                intent.putExtra("id",list.get(position).getId());
+                startActivity(intent);
+            }
+        });
         rc.setAdapter(adapter);
     }
 }

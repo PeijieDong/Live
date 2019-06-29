@@ -26,7 +26,7 @@ public class UrlManager {
     public static final String Detail_Comment = BaseUrl+"index/getComment";
     public static final String Detail_Comment_Put = BaseUrl+"index/putComment";
     //详情页评论获取
-    public static final String Focus_List = BaseUrl+"index/userlist/id/2";
+    public static final String Focus_List = BaseUrl+"users/qzfollow";
     //视频列表
     public static final String Video_List = BaseUrl+"video/index";
     //活跃用户列表
@@ -81,4 +81,30 @@ public class UrlManager {
     public static final String Video_Comment = BaseUrl+"index/getComment";
 
     public static final String Jubao_Video = BaseUrl+"video/videoreport";
+
+    public static final String User_Detail = BaseUrl+"index/getUserinfo";
+
+    public static final String User_Activity = BaseUrl+"index/getUsernews";
+
+    public static final String User_Video = BaseUrl+"index/getvideo";
+
+    public static final String User_Info = BaseUrl+"index/getUserinfo";
+
+    public static final String Focus_Person =BaseUrl+"users/follow" ;
+
+    public static final String Focus_User = BaseUrl+"index/follow_add";
+
+    public static final String NoFocus_User =BaseUrl+"index/follow_cancel" ;
+
+    public static final String Focus_Friend =BaseUrl + "index/qz_attention";
+
+    public static final String NoFocus_Friend =BaseUrl + "index/qz_attention_qx";
+
+    public static final String Change_Info =BaseUrl + "users/upUserinfo";
+
+    public static final String Comment_Video =BaseUrl + "video/putComment";
+
+    public static final String Clear_History =BaseUrl + "users/cleanhistory";
+
+    public static final String Feedback_wallet =BaseUrl + "users/feedback";
 }

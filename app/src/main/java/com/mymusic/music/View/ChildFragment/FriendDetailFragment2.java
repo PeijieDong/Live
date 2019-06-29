@@ -1,5 +1,6 @@
 package com.mymusic.music.View.ChildFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.FriendDetail;
 import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Adapter.FriendDetailAdapter;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseFragment;
@@ -58,6 +61,14 @@ public class FriendDetailFragment2 extends BaseFragment {
                 rc.setLayoutManager(new GridLayoutManager(getContext(),3));
                 FriendDetailAdapter adapter =
                         new FriendDetailAdapter(R.layout.friend_detail_fragment2_item,data.getData().getList());
+                adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        Intent intent = new Intent(getContext(), DetailsActivity.class);
+                        intent.putExtra("id",data.getData().getList().get(position).getId());
+                        startActivity(intent);
+                    }
+                });
                 rc.setAdapter(adapter);
             }
 

@@ -36,39 +36,40 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="58dp"-->
+                <!--android:layout_marginLeft="15dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:textColor="#333333"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="@string/touxiang"/>-->
+                <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                    <!--android:id="@+id/head"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_toLeftOf="@id/next2"/>-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/next2"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:src="@drawable/icon_next"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginRight="5dp"/>-->
+            <!--</RelativeLayout>-->
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="#F5F5F5"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginRight="15dp"/>-->
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginLeft="15dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:text="@string/touxiang"/>
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/head"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/next2"/>
-                <ImageView
-                    android:id="@+id/next2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/icon_next"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"/>
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F5F5F5"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
-            <RelativeLayout
+                android:id="@+id/change_name"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
                 android:layout_marginLeft="15dp">
@@ -101,6 +102,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"/>
             <RelativeLayout
+                android:id="@+id/change_sign"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
                 android:layout_marginLeft="15dp">
@@ -131,6 +133,7 @@
                 android:layout_height="5dp"
                 android:background="#F5F5F5" />
             <RelativeLayout
+                android:id="@+id/change_sex"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
                 android:layout_marginLeft="15dp">
@@ -163,6 +166,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"/>
             <RelativeLayout
+                android:id="@+id/change_birthday"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
                 android:layout_marginLeft="15dp">
@@ -194,131 +198,131 @@
                 android:background="#F5F5F5"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginLeft="15dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:text="@string/diqu"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/next7"/>
-                <ImageView
-                    android:id="@+id/next7"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/icon_next"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"/>
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F5F5F5"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginLeft="15dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:text="@string/xingquxiang"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/next8"/>
-                <ImageView
-                    android:id="@+id/next8"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/icon_next"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"/>
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F5F5F5"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginLeft="15dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:text="@string/hunlian"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/next9"/>
-                <ImageView
-                    android:id="@+id/next9"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/icon_next"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"/>
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F5F5F5"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginLeft="15dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:text="@string/jiaoyouyixiang"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/next"/>
-                <ImageView
-                    android:id="@+id/next"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/icon_next"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"/>
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F5F5F5"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="100dp"/>
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="58dp"-->
+                <!--android:layout_marginLeft="15dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:textColor="#333333"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="@string/diqu"/>-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_toLeftOf="@id/next7"/>-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/next7"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:src="@drawable/icon_next"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginRight="5dp"/>-->
+            <!--</RelativeLayout>-->
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="#F5F5F5"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginRight="15dp"/>-->
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="58dp"-->
+                <!--android:layout_marginLeft="15dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:textColor="#333333"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="@string/xingquxiang"/>-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_toLeftOf="@id/next8"/>-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/next8"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:src="@drawable/icon_next"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginRight="5dp"/>-->
+            <!--</RelativeLayout>-->
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="#F5F5F5"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginRight="15dp"/>-->
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="58dp"-->
+                <!--android:layout_marginLeft="15dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:textColor="#333333"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="@string/hunlian"/>-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_toLeftOf="@id/next9"/>-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/next9"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:src="@drawable/icon_next"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginRight="5dp"/>-->
+            <!--</RelativeLayout>-->
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="#F5F5F5"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginRight="15dp"/>-->
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="58dp"-->
+                <!--android:layout_marginLeft="15dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:textColor="#333333"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="@string/jiaoyouyixiang"/>-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_toLeftOf="@id/next"/>-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/next"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:src="@drawable/icon_next"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginRight="5dp"/>-->
+            <!--</RelativeLayout>-->
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="#F5F5F5"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginRight="15dp"-->
+                <!--android:layout_marginBottom="100dp"/>-->
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

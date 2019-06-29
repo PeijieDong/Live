@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mymusic.music.DataBean.FriendDetailTOP;
 import com.mymusic.music.DiyTab.TabLayout;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
@@ -140,10 +142,34 @@ public class FriendDetailActivity extends BaseActivity {
             focus.setText("取消关注");
             focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
             focuslogo = false;
+            initFocusFriend(true);
         }else{
             focus.setText("+关注");
             focus.setBackgroundResource(R.drawable.back_friend_detail_focus);
             focuslogo = true;
+            initFocusFriend(false);
         }
+    }
+    private void initFocusFriend(boolean isFocus) {
+        String url = "";
+        if(isFocus){
+            url = UrlManager.Focus_Friend;
+        }else{
+            url = UrlManager.NoFocus_Friend;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("touid",bean.getData().getList().getCid());
+        NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                Toast.makeText(FriendDetailActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(FriendDetailActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

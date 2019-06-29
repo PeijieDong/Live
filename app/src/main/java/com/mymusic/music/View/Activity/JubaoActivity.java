@@ -50,10 +50,12 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
     private int REQUEST_CODE_CHOOSE = 2;
     JubaoAdapter adapter;
     private List<Uri> imageList = new ArrayList<>();
-    String id;
+    String uid;
+    String touid;
     @Override
     protected void initVariables(Intent intent) {
-        id = intent.getStringExtra("id");
+        uid = intent.getStringExtra("uid");
+        touid = intent.getStringExtra("touid");
     }
 
     @Override
@@ -67,11 +69,11 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initRc() {
-        rc.setLayoutManager(new GridLayoutManager(this,4));
+        rc.setLayoutManager(new GridLayoutManager(this,2));
         adapter = new JubaoAdapter(R.layout.jubao_item_layout, imageList);
         view = LayoutInflater.from(this).inflate(R.layout.jubao_foot_layout,null);
         view.setOnClickListener(this);
-        adapter.addHeaderView(view);
+        adapter.addFooterView(view);
         rc.setAdapter(adapter);
     }
 
@@ -88,11 +90,15 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initNet() {
+        if(imageList.size() == 0){
+            Toast.makeText(JubaoActivity.this,"请上传图片",Toast.LENGTH_SHORT).show();
+            return;
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("type",group.getCheckedRadioButtonId()+"");
         map.put("content",des.getText().toString());
-        map.put("nid",id);
-        map.put("touid","1");
+        map.put("nid",uid);
+        map.put("touid",touid);
         map.put("file",PicToBase64.imageToBase64(imageList.get(0).getPath()));
         NetRequest.postFormHeadRequest(UrlManager.JuBao, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
@@ -118,7 +124,7 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
                 .maxSelectable(1) // 图片选择的最多数量
                 .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                 .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                .thumbnailScale(0.85f) // 缩略图的比例
+                .thumbnailScale(0.8f) // 缩略图的比例
                 .imageEngine(new com.mymusic.music.Util.GlideEngine()) // 使用的图片加载引擎
                 .forResult(REQUEST_CODE_CHOOSE); // 设置作为标记的请求码
     }

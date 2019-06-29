@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -45,6 +45,9 @@
         <item name="android:windowEnterAnimation">@anim/scale_in</item>
         <item name="android:windowExitAnimation">@anim/scale_out</item>
     </style>
-
+    <!--用于日历标签主题背景色-->
+    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog" tools:ignore="NewApi">
+        <item name="android:colorAccent">@color/color_bg_selected</item>
+    </style>
 
 </resources>

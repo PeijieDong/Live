@@ -15,6 +15,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.LocaleUtils;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
+import com.mymusic.music.Util.cacheManager;
 import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.AccountActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.BacklistActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.LockScreenActivity;
@@ -36,6 +37,8 @@ public class MysettingActivity extends BaseActivity {
     SwitchButton lockBt;
     @BindView(R.id.setting_user_head)
     CircleImageView head;
+    @BindView(R.id.cache_num)
+    TextView cacheNum;
     User user;
 
 
@@ -47,6 +50,11 @@ public class MysettingActivity extends BaseActivity {
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.activity_mysetting);
+        try {
+            cacheNum.setText(cacheManager.getTotalCacheSize(this));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initView();
     }
 
@@ -108,7 +116,8 @@ public class MysettingActivity extends BaseActivity {
                 initDialog();
                 break;
             case R.id.setting_clearCache:
-
+                cacheManager.cleanInternalCache(this);
+                cacheNum.setText("0KB");
                 break;
             case R.id.setting_version:
 

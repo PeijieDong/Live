@@ -13,4 +13,5 @@
     <color name="login_normal">#CECECE</color>
     <color name="text_light_gray">#666666</color>
     <color name="light_gray">#F5F5F6</color>
+    <color name="color_bg_selected">#FFF</color>
 </resources>

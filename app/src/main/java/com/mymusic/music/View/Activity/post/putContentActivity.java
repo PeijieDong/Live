@@ -2,13 +2,17 @@ package com.mymusic.music.View.Activity.post;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -30,6 +34,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.BottomNavigation;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.PicToBase64;
 import com.mymusic.music.Util.PutBottomNavigation;
 import com.mymusic.music.View.Activity.Community.CommunityAdviceActivity;
 import com.mymusic.music.View.Activity.FriendFoundActivity;
@@ -167,18 +172,19 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         map.put("tag", tag.toString());
         map.put("content", title.getText().toString());
         if (navigation.getPosition() == 0) {
-            file = new File(image.get(0).getPath());
-            map.put("playtime", "0");
-            map.put("images", "0");
+            file = getFileByUri(image.get(0), this);
+            map.put("playtime", getLocalVideoDuration(image.get(0).getPath())+"");
+            map.put("images", getVideoImage(image.get(0).getPath()+""));
         } else if (navigation.getPosition() == 1) {
-            file = new File(image.get(0).getPath());
-            map.put("playtime", "0");
-            map.put("images", "0");
+            file = getFileByUri(image.get(0), this);
+            map.put("images",PicToBase64.imageToBase64(image.get(0).getPath()+""));
         }
         NetRequest.postmoreRequest(url, this, map, file, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33", result);
+                Toast.makeText(putContentActivity.this,"提交成功，等待管理员审核",Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
@@ -285,5 +291,55 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 REQUEST_EXTERNAL_STORAGE);
             }
         }
+    public static File getFileByUri(Uri uri,Context context) {
+        String path = null;
+        if ("file".equals(uri.getScheme())) {
+            path = uri.getEncodedPath();
+            if (path != null) {
+                path = Uri.decode(path);
+                ContentResolver cr = context.getContentResolver();
+                StringBuffer buff = new StringBuffer();
+                buff.append("(").append(MediaStore.Images.ImageColumns.DATA).append("=").append("'" + path + "'").append(")");
+                Cursor cur = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[] { MediaStore.Images.ImageColumns._ID, MediaStore.Images.ImageColumns.DATA }, buff.toString(), null, null);
+                int index = 0;
+                int dataIdx = 0;
+                for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
+                    index = cur.getColumnIndex(MediaStore.Images.ImageColumns._ID);
+                    index = cur.getInt(index);
+                    dataIdx = cur.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    path = cur.getString(dataIdx);
+                }
+                cur.close();
+                if (index == 0) {
+                } else {
+                    Uri u = Uri.parse("content://media/external/images/media/" + index);
+                    System.out.println("temp uri is :" + u);
+                }
+            }
+            if (path != null) {
+                return new File(path);
+            }
+        } else if ("content".equals(uri.getScheme())) {
+            // 4.2.2以后
+            String[] proj = { MediaStore.Images.Media.DATA };
+            Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                path = cursor.getString(columnIndex);
+            }
+            cursor.close();
 
+            return new File(path);
+        } else {
+            //Log.i(TAG, "Uri Scheme:" + uri.getScheme());
+        }
+        return null;
+    }
+    public String getVideoImage(String videoPath){
+        MediaMetadataRetriever media = new MediaMetadataRetriever();
+        media.setDataSource(videoPath+"/123.rmvb");
+        Bitmap bitmap = media.getFrameAtTime();
+        String base64 = PicToBase64.bitmapToBase64(bitmap);
+        return base64;
+    }
 }
