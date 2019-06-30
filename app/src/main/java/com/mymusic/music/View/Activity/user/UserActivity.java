@@ -18,6 +18,7 @@ import com.mymusic.music.DataBean.UserBean;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
@@ -165,6 +166,11 @@ public class UserActivity extends BaseActivity {
     }
 
     private void initNet(String name, String sign, String sex, String birthday) {
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("nickname",name);
         map.put("signature",sign);

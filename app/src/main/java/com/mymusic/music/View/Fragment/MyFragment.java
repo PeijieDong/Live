@@ -18,6 +18,7 @@ import com.mymusic.music.DataBean.UserBean;
 import com.mymusic.music.Live;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
@@ -129,7 +130,7 @@ public class MyFragment extends BaseFragment {
     }
 
     private void initUserInfo() {
-        NetRequest.postFormHeadRequest(UrlManager.GetUserInfo, null, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
+        NetRequest.postFormHeadRequest(UrlManager.GetUserInfo, null,Live.getInstance().get(getContext()).getList().getToken(), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 bean = GsonUtil.GsonToBean(result, UserBean.class);

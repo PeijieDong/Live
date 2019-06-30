@@ -13,6 +13,7 @@ import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MoneyDetailActivity;
 import com.mymusic.music.View.Activity.WalletFeedback;
 import com.mymusic.music.View.Activity.WebActivity;
@@ -58,6 +59,11 @@ public class MywalletActivity extends BaseActivity {
     }
 
     private void initNet() {
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         NetRequest.postFormHeadRequest(UrlManager.Get_Wallet, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

@@ -21,6 +21,7 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.TopNavigation;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.FriendAllAdapter;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
@@ -151,6 +152,11 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
         }
         HashMap<String, String> map = new HashMap<>();
         map.put("touid",data.getData().getList().get(i).getCid());
+        if(Live.getInstance().getToken(getContext()) == null){
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

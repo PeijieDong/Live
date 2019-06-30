@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView
+        android:id="@+id/LoadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/navi_title_color"
+        app:blockColor="#ffffff"
+        app:lineNumber="3"
+        app:fixBlock_Angle="5"
+        app:moveBlock_Angle="20"
+        app:blockInterval="8dp"
+        app:half_BlockWidth="15dp"
+        app:initPosition="0"
+        app:isClock_Wise="false"
+        app:moveSpeed="500"
+        app:move_Interpolator="@android:anim/bounce_interpolator"/>
+</android.support.constraint.ConstraintLayout>

@@ -23,6 +23,7 @@ import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.PicToBase64;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 import com.zhihu.matisse.Matisse;
@@ -92,6 +93,11 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
     private void initNet() {
         if(imageList.size() == 0){
             Toast.makeText(JubaoActivity.this,"请上传图片",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
             return;
         }
         HashMap<String, String> map = new HashMap<>();

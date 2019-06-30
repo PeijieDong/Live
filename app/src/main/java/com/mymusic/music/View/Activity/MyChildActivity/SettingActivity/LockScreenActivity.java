@@ -11,6 +11,7 @@ import android.widget.Toolbar;
 import com.andrognito.patternlockview.PatternLockView;
 import com.andrognito.patternlockview.listener.PatternLockViewListener;
 import com.andrognito.patternlockview.utils.PatternLockUtils;
+import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.base.BaseActivity;
@@ -66,6 +67,8 @@ public class LockScreenActivity extends BaseActivity {
 
                 if(SharedPrefrenceUtils.getString(LockScreenActivity.this,"Password")
                         .equals(PatternLockUtils.patternToString(mPatternLockView, pattern))){
+                    Intent intent = new Intent(LockScreenActivity.this, MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }else{
                     lockToast.setText(getResources().getString(R.string.lock_error));

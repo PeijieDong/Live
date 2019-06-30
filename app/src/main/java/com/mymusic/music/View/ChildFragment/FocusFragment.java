@@ -20,6 +20,7 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyfansActivity;
 import com.mymusic.music.View.Adapter.FocusRcAdaper;
 import com.mymusic.music.View.Adapter.FocusrcAdaper2;
@@ -70,6 +71,11 @@ public class FocusFragment extends BaseFragment {
 
     private void initNet() {
         if (url.equals(UrlManager.Focus_Person)) {
+            if(Live.getInstance().getToken(getContext()) == null){
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                return;
+            }
             NetRequest.postFormHeadRequest(url, null, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
                 @Override
                 public void requestSuccess(String result) throws Exception {
@@ -111,6 +117,11 @@ public class FocusFragment extends BaseFragment {
         } else {
             HashMap<String, String> map = new HashMap<>();
             map.put("page", "1");
+            if(Live.getInstance().getToken(getContext()) == null){
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                return;
+            }
             NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
                 @Override
                 public void requestSuccess(String result) throws Exception {
@@ -164,6 +175,11 @@ public class FocusFragment extends BaseFragment {
         }
         HashMap<String, String> map = new HashMap<>();
         map.put("touid",bean.getData().getList().get(i).getUid());
+        if(Live.getInstance().getToken(getContext()) == null){
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -187,6 +203,11 @@ public class FocusFragment extends BaseFragment {
         }
         HashMap<String, String> map = new HashMap<>();
         map.put("touid",data.getData().getList().get(i).getUid());
+        if(Live.getInstance().getToken(getContext()) == null){
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

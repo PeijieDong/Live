@@ -16,6 +16,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -46,6 +47,11 @@ public class MylikeActivity extends BaseActivity {
     }
 
     private void initNet() {
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("token",Live.getInstance().getToken(this));
         map.put("page","1");

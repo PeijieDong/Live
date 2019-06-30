@@ -15,6 +15,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -48,6 +49,11 @@ public class MycollectionActivity extends BaseActivity {
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
         map.put("page","1");
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         NetRequest.postFormHeadRequest(UrlManager.Collection, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

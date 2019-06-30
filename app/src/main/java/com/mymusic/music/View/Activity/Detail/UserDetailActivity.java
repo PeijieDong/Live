@@ -21,6 +21,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.AppBarStateChangeListener;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.user.UserActivity;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
 import com.mymusic.music.base.BaseActivity;
@@ -60,7 +61,7 @@ public class UserDetailActivity extends BaseActivity {
     @BindView(R.id.level)
     TextView level;
     @BindView(R.id.edit_tv)
-    EditText editTv;
+    TextView editTv;
     private String id;
 
     @Override
@@ -83,6 +84,11 @@ public class UserDetailActivity extends BaseActivity {
     }
 
     private void initNet() {
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("uid",id);
         Log.e("33",id);

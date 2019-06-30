@@ -17,6 +17,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.HistoryRcAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -50,6 +51,11 @@ public class MyhistoryActivity extends BaseActivity {
     }
 
     private void initNet() {
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         NetRequest.postFormHeadRequest(UrlManager.History, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -90,6 +96,11 @@ public class MyhistoryActivity extends BaseActivity {
     }
 
     private void initClear() {
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         NetRequest.postFormHeadRequest(UrlManager.Clear_History, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

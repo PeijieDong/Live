@@ -82,6 +82,7 @@
         android:id="@+id/ll_back"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:visibility="gone"
         android:gravity="center_vertical">
         <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"

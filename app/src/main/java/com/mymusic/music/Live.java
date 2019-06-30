@@ -2,6 +2,7 @@ package com.mymusic.music;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.mymusic.music.DataBean.User;
@@ -10,6 +11,7 @@ import com.mymusic.music.DataBean.UserInfo;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.MyFileNameGenerator;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 
 import org.litepal.LitePal;
 
@@ -39,10 +41,12 @@ public class Live extends Application {
     }
 
     public String getToken(Context context){
-        String user = SharedPrefrenceUtils.getString(context, "user", null);
-        User bean = GsonUtil.GsonToBean(user, User.class);
-
-        return bean.getList().getToken();
+        if(getUser(context) != null){
+            UserBean user = getUser(context);
+            return user.getData().getToken();
+        }else{
+            return null;
+        }
     }
 
     public void put(Context context,String s){
@@ -51,6 +55,7 @@ public class Live extends Application {
 
     public void clear(Context context){
         SharedPrefrenceUtils.clearn(context,"user");
+        SharedPrefrenceUtils.clearn(context,"userinfo");
     }
 
     @Override

@@ -26,6 +26,7 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.JubaoVideoActiviy;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.post.PutVideoActivity;
 import com.mymusic.music.base.BaseRecAdapter;
 import com.mymusic.music.base.UrlManager;
@@ -132,6 +133,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.video_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Live.getInstance().getUser(context) == null){
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent);
+                    return ;
+                }
                 Intent intent = new Intent(context, UserDetailActivity.class);
                 intent.putExtra("UserId",list.get(position).getUid());
                 context.startActivity(intent);
@@ -171,6 +177,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
     }
 
     private void initCollection() {
+        if(Live.getInstance().getToken(context) == null){
+            Intent intent = new Intent(context, LoginActivity.class);
+            context.startActivity(intent);
+            return;
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("id",list.get(position).getId());
         NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
@@ -226,6 +237,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
             public void onClick(View v) {
                 if(commentEt.getText().toString().equals("")){
                     Toast.makeText(context,"不能为空哦",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(Live.getInstance().getToken(context) == null){
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent);
                     return;
                 }
                 HashMap<String, String> map = new HashMap<>();

@@ -24,6 +24,7 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.JubaoActivity;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
@@ -170,6 +171,11 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
 
     private void initBt(String url,int position,HashMap<String,String> map) {
         Log.e("33",Live.getInstance().getToken(getContext()));
+        if(Live.getInstance().getToken(getContext()) == null){
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

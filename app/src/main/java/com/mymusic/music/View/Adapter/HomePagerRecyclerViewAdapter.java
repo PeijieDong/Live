@@ -19,11 +19,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.mymusic.music.DataBean.HomeData;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.MyGridView;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
@@ -180,8 +182,15 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 initShare();
                 break;
             case R.id.userBt:
-                Intent intent1 = new Intent(mContext, UserDetailActivity.class);
-                mContext.startActivity(intent1);
+                if(Live.getInstance().getUser(mContext) == null){
+                    Intent intent = new Intent(mContext, LoginActivity.class);
+                    mContext.startActivity(intent);
+                    return ;
+                }else {
+                    Intent intent1 = new Intent(mContext, UserDetailActivity.class);
+                    intent1.putExtra("UserId", item.getUid());
+                    mContext.startActivity(intent1);
+                }
                 break;
         }
     }

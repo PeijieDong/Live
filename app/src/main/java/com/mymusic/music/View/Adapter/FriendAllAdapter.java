@@ -69,11 +69,19 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
                 }
                 break;
             case R.id.friend_all_image1:
-            case R.id.friend_all_image2:
-            case R.id.friend_all_image3:
                 Intent intent = new Intent(mContext, DetailsActivity.class);
                 intent.putExtra("id",item.getList().get(0).getId());
                 mContext.startActivity(intent);
+                break;
+            case R.id.friend_all_image2:
+                Intent intent1 = new Intent(mContext, DetailsActivity.class);
+                intent1.putExtra("id",item.getList().get(1).getId());
+                mContext.startActivity(intent1);
+                break;
+            case R.id.friend_all_image3:
+                Intent intent2 = new Intent(mContext, DetailsActivity.class);
+                intent2.putExtra("id",item.getList().get(2).getId());
+                mContext.startActivity(intent2);
                 break;
         }
     }

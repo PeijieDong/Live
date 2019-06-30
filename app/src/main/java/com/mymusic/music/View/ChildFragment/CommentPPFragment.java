@@ -1,5 +1,6 @@
 package com.mymusic.music.View.ChildFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.ArRcAdpater;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
@@ -55,6 +57,11 @@ public class CommentPPFragment extends BaseFragment {
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
         map.put("type","2");
+        if(Live.getInstance().getToken(getContext()) == null){
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         NetRequest.postFormHeadRequest(UrlManager.My_Comment, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

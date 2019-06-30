@@ -18,6 +18,7 @@ import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
 import com.mymusic.music.View.ChildFragment.FriendDetailFragment1;
 import com.mymusic.music.View.ChildFragment.FriendDetailFragment2;
@@ -101,7 +102,6 @@ public class FriendDetailActivity extends BaseActivity {
     }
 
     private void initView() {
-        focus(focuslogo);
         List<String> title = new ArrayList<>();
         List<Fragment> list = new ArrayList<>();
         title.add(getResources().getString(R.string.dynamic));

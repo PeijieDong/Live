@@ -33,6 +33,7 @@ import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.MyGridView;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.DetailCommentRcAdapter;
 import com.mymusic.music.View.Adapter.HomeGridAdapter;
 import com.mymusic.music.base.BaseActivity;
@@ -258,6 +259,11 @@ public class DetailsActivity extends BaseActivity {
     }
 
     private void initNet() {
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         if(detailEt.getText().toString().trim().equals("")){
             Toast.makeText(this,"内容不能为空",Toast.LENGTH_SHORT).show();
         }else{
