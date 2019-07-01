@@ -1,12 +1,13 @@
 package com.mymusic.music.DataBean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Create By mr.mao in 2019/6/17 0:53
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class CommentData {
+public class CommentData implements Serializable {
 
     /**
      * data : {"list":[{"cid":"4","vid":"2","uid":"20190","content":"2132dsfad","num":"0","createtime":"1970-01-01","pid":"0","son":[],"avatar":"http://live.shuiqiao.net/default.jpg","user_nicename":"手机用户9746"},{"cid":"3","vid":"2","uid":"20189","content":"dsfasadfsd","num":"0","createtime":"1970-01-01","pid":"0","son":[],"avatar":"http://live.shuiqiao.net/default.jpg","user_nicename":"手机用户0467"},{"cid":"2","vid":"2","uid":"20186","content":"sdafasdf","num":"0","createtime":"1970-01-01","pid":"0","son":[],"avatar":"http://live.shuiqiao.net/default.jpg","user_nicename":"手机用户0216"},{"cid":"1","vid":"2","uid":"20187","content":"sdafsdf","num":"0","createtime":"1970-01-01","pid":"0","son":[],"avatar":"http://live.shuiqiao.net/default.jpg","user_nicename":"手机用户9867"}],"status":1}
@@ -42,7 +43,7 @@ public class CommentData {
         this.state = state;
     }
 
-    public static class DataBean {
+    public static class DataBean  implements Serializable{
         /**
          * list : [{"cid":"4","vid":"2","uid":"20190","content":"2132dsfad","num":"0","createtime":"1970-01-01","pid":"0","son":[],"avatar":"http://live.shuiqiao.net/default.jpg","user_nicename":"手机用户9746"},{"cid":"3","vid":"2","uid":"20189","content":"dsfasadfsd","num":"0","createtime":"1970-01-01","pid":"0","son":[],"avatar":"http://live.shuiqiao.net/default.jpg","user_nicename":"手机用户0467"},{"cid":"2","vid":"2","uid":"20186","content":"sdafasdf","num":"0","createtime":"1970-01-01","pid":"0","son":[],"avatar":"http://live.shuiqiao.net/default.jpg","user_nicename":"手机用户0216"},{"cid":"1","vid":"2","uid":"20187","content":"sdafsdf","num":"0","createtime":"1970-01-01","pid":"0","son":[],"avatar":"http://live.shuiqiao.net/default.jpg","user_nicename":"手机用户9867"}]
          * status : 1
@@ -67,7 +68,7 @@ public class CommentData {
             this.list = list;
         }
 
-        public static class ListBean {
+        public static class ListBean  implements Serializable{
             /**
              * cid : 4
              * vid : 2

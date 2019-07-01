@@ -1,5 +1,7 @@
 package com.mymusic.music.DataBean;
 
+import java.util.List;
+
 /**
  * Create By mr.mao in 2019/6/8 16:13
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
@@ -7,7 +9,7 @@ package com.mymusic.music.DataBean;
 public class DetailData {
 
     /**
-     * data : {"list":{"id":"2","uid":"1","cate":"1","type":"视频","content":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"}}
+     * data : {"list":{"id":"15","uid":"1","cate":"2","type":"图片","content":"这里是文字","share":"0","comment":"3","zan":"8","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"6","isgonggao":"0","title":"这里是标题","tag":"","images":[],"playtime":null,"videourl":"http://live.shuiqiao.net","collect":"0","username":"admin","catename":"测试推荐","avatar":"http://live.shuiqiao.net/default_thumb.jpg","sex":"0"}}
      * status : 1
      * referer :
      * state : 1
@@ -52,7 +54,7 @@ public class DetailData {
 
     public static class DataBean {
         /**
-         * list : {"id":"2","uid":"1","cate":"1","type":"视频","content":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg"}
+         * list : {"id":"15","uid":"1","cate":"2","type":"图片","content":"这里是文字","share":"0","comment":"3","zan":"8","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"6","isgonggao":"0","title":"这里是标题","tag":"","images":[],"playtime":null,"videourl":"http://live.shuiqiao.net","collect":"0","username":"admin","catename":"测试推荐","avatar":"http://live.shuiqiao.net/default_thumb.jpg","sex":"0"}
          */
 
         private ListBean list;
@@ -67,22 +69,31 @@ public class DetailData {
 
         public static class ListBean {
             /**
-             * id : 2
+             * id : 15
              * uid : 1
-             * cate : 1
-             * type : 视频
-             * content : http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4
+             * cate : 2
+             * type : 图片
+             * content : 这里是文字
              * share : 0
-             * comment : 0
-             * zan : 0
+             * comment : 3
+             * zan : 8
              * createtime : 0
              * status : 1
              * zhiding : 0
              * tui : 1
              * image : http://live.shuiqiao.net/default.jpg
-             * click : 0
+             * click : 6
+             * isgonggao : 0
+             * title : 这里是标题
+             * tag :
+             * images : []
+             * playtime : null
+             * videourl : http://live.shuiqiao.net
+             * collect : 0
              * username : admin
+             * catename : 测试推荐
              * avatar : http://live.shuiqiao.net/default_thumb.jpg
+             * sex : 0
              */
 
             private String id;
@@ -99,8 +110,17 @@ public class DetailData {
             private String tui;
             private String image;
             private String click;
+            private String isgonggao;
+            private String title;
+            private String tag;
+            private Object playtime;
+            private String videourl;
+            private String collect;
             private String username;
+            private String catename;
             private String avatar;
+            private String sex;
+            private List<?> images;
 
             public String getId() {
                 return id;
@@ -214,6 +234,54 @@ public class DetailData {
                 this.click = click;
             }
 
+            public String getIsgonggao() {
+                return isgonggao;
+            }
+
+            public void setIsgonggao(String isgonggao) {
+                this.isgonggao = isgonggao;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getTag() {
+                return tag;
+            }
+
+            public void setTag(String tag) {
+                this.tag = tag;
+            }
+
+            public Object getPlaytime() {
+                return playtime;
+            }
+
+            public void setPlaytime(Object playtime) {
+                this.playtime = playtime;
+            }
+
+            public String getVideourl() {
+                return videourl;
+            }
+
+            public void setVideourl(String videourl) {
+                this.videourl = videourl;
+            }
+
+            public String getCollect() {
+                return collect;
+            }
+
+            public void setCollect(String collect) {
+                this.collect = collect;
+            }
+
             public String getUsername() {
                 return username;
             }
@@ -222,12 +290,36 @@ public class DetailData {
                 this.username = username;
             }
 
+            public String getCatename() {
+                return catename;
+            }
+
+            public void setCatename(String catename) {
+                this.catename = catename;
+            }
+
             public String getAvatar() {
                 return avatar;
             }
 
             public void setAvatar(String avatar) {
                 this.avatar = avatar;
+            }
+
+            public String getSex() {
+                return sex;
+            }
+
+            public void setSex(String sex) {
+                this.sex = sex;
+            }
+
+            public List<?> getImages() {
+                return images;
+            }
+
+            public void setImages(List<?> images) {
+                this.images = images;
             }
         }
     }

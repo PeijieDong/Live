@@ -336,8 +336,9 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         return null;
     }
     public String getVideoImage(String videoPath){
+            Log.e("33",videoPath);
         MediaMetadataRetriever media = new MediaMetadataRetriever();
-        media.setDataSource(videoPath+"/123.rmvb");
+        media.setDataSource(videoPath+".mp4");
         Bitmap bitmap = media.getFrameAtTime();
         String base64 = PicToBase64.bitmapToBase64(bitmap);
         return base64;

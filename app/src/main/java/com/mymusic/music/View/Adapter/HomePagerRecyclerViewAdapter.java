@@ -88,7 +88,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         this.item = item;
         int type = helper.getItemViewType();
         helper.addOnClickListener(R.id.themeBt);
-        helper.addOnClickListener(R.id.icon_like);
+        helper.addOnClickListener(R.id.ll_home_like);
         switch (type){
             case PICTURE:
                 initListener(helper,item);

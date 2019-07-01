@@ -83,8 +83,8 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             }
         });
     }
-    ImageView like;
     TextView likeNum;
+    ImageView likeIcon;
     private void initRc(List<HomeData.DataBean.ListBean> list) {
         this.list = list;
         homePagerRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -162,6 +162,11 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                         bottomSheet.setContentView(view1);//设置对框框中的布局
                         bottomSheet.show();//显示弹窗
                         break;
+                    case R.id.ll_home_like:
+                        likeNum = view.findViewById(R.id.likeNum);
+                        likeIcon = view.findViewById(R.id.icon_like);
+                        initLike(list,position);
+                        break;
                 }
 
             }
@@ -170,7 +175,6 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
     }
 
     private void initBt(String url,int position,HashMap<String,String> map) {
-        Log.e("33",Live.getInstance().getToken(getContext()));
         if(Live.getInstance().getToken(getContext()) == null){
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);
@@ -201,26 +205,25 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
 
     }
 
-//    private void initLike(HomeData.DataBean.ListBean item) {
-//        //like_press
-//        HashMap<String, String> map = new HashMap<>();
-//        map.put("type","1");
-//        map.put("id",item.getId());
-//        NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
-//            @Override
-//            public void requestSuccess(String result) throws Exception {
-//                Toast.makeText(getContext(),"点赞成功",Toast.LENGTH_SHORT).show();
-//                like.setBackground(getContext().getResources().getDrawable(R.drawable.ic_launcher_background));
-//                like.setClickable(false);
-//                likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
-//            }
-//p
-//            @Override
-//            public void requestFailure(Request request, IOException e) {
-//                Toast.makeText(getContext(),"点赞失败",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+    private void initLike(List<HomeData.DataBean.ListBean> item, int position) {
+        //like_press
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type","1");
+        map.put("id",item.get(position).getId());
+        NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Toast.makeText(getContext(),"点赞成功",Toast.LENGTH_SHORT).show();
+                likeIcon.setBackground(getContext().getResources().getDrawable(R.drawable.ic_launcher_background));
+                likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(getContext(),"点赞失败",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 

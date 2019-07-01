@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.mymusic.music.DataBean.CommentData;
 import com.mymusic.music.DataBean.DetailData;
@@ -33,6 +35,7 @@ import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.MyGridView;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.DetailCommentRcAdapter;
 import com.mymusic.music.View.Adapter.HomeGridAdapter;
@@ -43,6 +46,7 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -90,6 +94,10 @@ public class DetailsActivity extends BaseActivity {
     ImageView full;
     @BindView(R.id.rl_play)
     RelativeLayout rlPlay;
+    @BindView(R.id.detail_sex)
+    ImageView detail_sex;
+    @BindView(R.id.detail_title)
+    TextView title;
     private String id;
     private DetailCommentRcAdapter adapter;
     private DetailData data;
@@ -125,6 +133,7 @@ public class DetailsActivity extends BaseActivity {
         if(data.getData().getList().getType().equals("视频")){
             VideoPlay.setVisibility(View.VISIBLE);
             rlPlay.setVisibility(View.VISIBLE);
+            title.setText("视频详情");
             full.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -136,10 +145,12 @@ public class DetailsActivity extends BaseActivity {
             VideoPlay.startVideo();
             Glide.with(this).load(data.getData().getList().getImage()).into(VideoPlay.thumbImageView);
         }else if(data.getData().getList().getType().equals("文字")){
+            title.setText("短文详情");
             TextView view = (TextView) LayoutInflater.from(this).inflate(R.layout.detail_text_item, null);
             view.setText(data.getData().getList().getContent());
             detail_ll.addView(view);
         }else if(data.getData().getList().getType().equals("图片")){
+            title.setText("图片详情");
             View view = LayoutInflater.from(this).inflate(R.layout.home_rc_pic, null);
             TextView content = view.findViewById(R.id.tv_content);
             MyGridView grid = view.findViewById(R.id.home_rc_grid);
@@ -150,8 +161,21 @@ public class DetailsActivity extends BaseActivity {
             grid.setAdapter(adapter);
             detail_ll.addView(view);
         }
-        detail_time.setText(data.getData().getList().getCreatetime());
-        home_rc_type.setText(data.getData().getList().getType());
+        switch (data.getData().getList().getSex()){
+            case "0":
+                detail_sex.setImageResource(R.drawable.ic_arrow_drop_down_white_24dp);
+                break;
+            case "1":
+                //男
+                detail_sex.setImageResource(R.drawable.back_close);
+                break;
+            case "2":
+                detail_sex.setImageResource(R.drawable.ic_launcher_background);
+                break;
+        }
+        detail_name.setText(data.getData().getList().getUsername());
+        detail_time.setText(data.getData().getList().getCreatetime()+"\n"+data.getData().getList().getClick()+"次浏览");
+        home_rc_type.setText(data.getData().getList().getCatename());
         shareNum.setText(data.getData().getList().getShare());
         commentNum.setText(data.getData().getList().getComment());
         likenum.setText(data.getData().getList().getZan());
@@ -171,7 +195,6 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.Detail_Comment, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Log.e("33",result);
                 CommentData bean = GsonUtil.GsonToBean(result, CommentData.class);
 
                 list = bean.getData().getList();
@@ -189,10 +212,66 @@ public class DetailsActivity extends BaseActivity {
     private void initCommentList(List<CommentData.DataBean.ListBean> list) {
         detailRc.setLayoutManager(new LinearLayoutManager(this));
         adapter = new DetailCommentRcAdapter(R.layout.detail_item_layout,list);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                Intent intent = new Intent(DetailsActivity.this, CommentDetailActivity.class);
+                intent.putExtra("commentList",list.get(i));
+                startActivity(intent);
+            }
+        });
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                TextView likeNum = (TextView) adapter.getViewByPosition(detailRc,i, R.id.detail_like_num);
+                switch(view.getId()){
+                    case R.id.detail_is_like:
+                        initLike();
+                        likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
+                        break;
+                    case R.id.detail_no_like:
+                        initHate();
+                        likeNum.setText(Integer.valueOf(likeNum.getText().toString())-1+"");
+                        break;
+                    case R.id.detail_more:
+                        BottomSheetDialog dialog = new BottomSheetDialog(DetailsActivity.this);
+                        View view1 = LayoutInflater.from(DetailsActivity.this).inflate(R.layout.dialog_bottom_item, null);
+                        View jubao = view1.findViewById(R.id.jubao);
+                        View cencel = view1.findViewById(R.id.cencel);
+                        jubao.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(DetailsActivity.this, JubaoActivity.class);
+                                intent.putExtra("uid",list.get(i).getUid());
+                                intent.putExtra("touid",list.get(i));
+                                startActivity(intent);
+                                dialog.dismiss();
+                            }
+                        });
+                        cencel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.setContentView(view1);
+                        dialog.show();
+                        break;
+                }
+            }
+        });
         detailRc.setAdapter(adapter);
     }
 
-    @OnClick({R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.back})
+    private void initHate() {
+
+    }
+
+    private void initLike() {
+
+    }
+
+    @OnClick({R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.back,R.id.icon_comment})
     public void Click(View view){
         switch (view.getId()){
             case R.id.detail_post:
@@ -222,7 +301,27 @@ public class DetailsActivity extends BaseActivity {
             case R.id.back:
                 finish();
                 break;
+            case R.id.icon_comment:
+                initCollection();
+                break;
         }
+    }
+    //收藏
+    private void initCollection() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id",id);
+        NetRequest.postFormHeadRequest(UrlManager.Collection_Home, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Toast.makeText(DetailsActivity.this,"收藏成功",Toast.LENGTH_SHORT).show();
+                commentNum.setText(Integer.valueOf(commentNum.getText().toString())+1+"");
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(DetailsActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initFocus() {

@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".View.Activity.Detail.CommentDetailActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask" />
@@ -86,7 +87,7 @@
         <activity android:name=".View.Activity.message.ViolationActivity" />
         <activity android:name=".View.Activity.message.FeedbackActivity" />
         <activity android:name=".View.Activity.message.CommendActivity" />
-        <activity android:name=".View.Activity.message.NoticeActivity"></activity>
+        <activity android:name=".View.Activity.message.NoticeActivity" />
     </application>
 
 </manifest>

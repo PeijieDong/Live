@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".View.Activity.Detail.DetailsActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,6 +53,7 @@
                         android:padding="5dp"
                         android:src="@drawable/icon_back"/>
                     <TextView
+                        android:id="@+id/detail_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"/>
@@ -73,6 +76,14 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/detail_head"
                         android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"/>
+                    <ImageView
+                        android:id="@+id/detail_sex"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/detail_name"
+                        android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"/>
                     <TextView
                         android:id="@+id/detail_time"
@@ -126,6 +137,10 @@
                     android:padding="15dp">
 
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#F5F5F6"/>
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -192,6 +207,10 @@
                         app:layout_constraintRight_toRightOf="parent"
                         android:text=""/>
                 </android.support.constraint.ConstraintLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#F5F5F6"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="55dp"

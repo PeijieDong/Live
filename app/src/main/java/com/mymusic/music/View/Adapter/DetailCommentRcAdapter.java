@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -32,7 +33,10 @@ public class DetailCommentRcAdapter extends BaseQuickAdapter <CommentData.DataBe
         helper.setText(R.id.detail_name,item.getUser_nicename())
                 .setText(R.id.detail_time,item.getCreatetime())
                 .setText(R.id.detail_content,item.getContent())
-                .setText(R.id.detail_like_num,item.getNum());
+                .setText(R.id.detail_like_num,item.getNum())
+                .addOnClickListener(R.id.detail_is_like)
+                .addOnClickListener(R.id.detail_no_like)
+                .addOnClickListener(R.id.detail_more);
         CircleImageView head = helper.getView(R.id.detail_head_cir);
         Glide.with(mContext).load(item.getAvatar()).into(head);
         head.setOnClickListener(this);
