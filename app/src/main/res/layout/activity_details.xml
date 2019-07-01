@@ -56,6 +56,8 @@
                         android:id="@+id/detail_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:textSize="14sp"
                         android:layout_centerInParent="true"/>
                 </RelativeLayout>
                 <android.support.constraint.ConstraintLayout
@@ -74,6 +76,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="#000"
+                        android:textStyle="bold"
                         app:layout_constraintLeft_toRightOf="@id/detail_head"
                         android:layout_marginTop="8dp"
                         android:layout_marginLeft="10dp"/>
@@ -89,6 +93,7 @@
                         android:id="@+id/detail_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="14sp"
                         app:layout_constraintTop_toBottomOf="@id/detail_name"
                         app:layout_constraintLeft_toRightOf="@id/detail_head"
                         android:layout_marginLeft="10dp"

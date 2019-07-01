@@ -75,6 +75,10 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     TextView typeTitle;
     @BindView(R.id.title)
     TextView title;
+    @BindView(R.id.icon_more)
+    TextView icon_more;
+    @BindView(R.id.chose_flow)
+    TagFlowLayout choseFlow;
     private boolean isVideo = true;
     private List<Uri> image = new ArrayList<>();
     private int REQUEST_CODE_CHOOSE = 2;
@@ -158,6 +162,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     tag.append(",");
                 }
                 initNet();
+                showLoading();
                 break;
         }
     }
@@ -174,7 +179,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         if (navigation.getPosition() == 0) {
             file = getFileByUri(image.get(0), this);
             map.put("playtime", getLocalVideoDuration(image.get(0).getPath())+"");
-            map.put("images", getVideoImage(image.get(0).getPath()+""));
+            map.put("images", getVideoImage(getRealPathFromURI(putContentActivity.this,image.get(0))));
         } else if (navigation.getPosition() == 1) {
             file = getFileByUri(image.get(0), this);
             map.put("images",PicToBase64.imageToBase64(image.get(0).getPath()+""));
@@ -183,6 +188,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33", result);
+                closeLoading();
                 Toast.makeText(putContentActivity.this,"提交成功，等待管理员审核",Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -205,18 +211,30 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             if(i == 0){
 
             }else{
+                initFlow();
                 haveChose.setText("已选"+i+"个标签");
             }
         }
         if(requestCode == 100 && resultCode == 300){
             cid = data.getStringExtra("cid");
             String title = data.getStringExtra("title");
-            typeTitle.setText(title);
+            icon_more.setText(title+" >");
         }
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             image = Matisse.obtainResult(data);
             initRc();
         }
+    }
+
+    public void initFlow(){
+        choseFlow.setAdapter(new TagAdapter<String>(list) {
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView textView = (TextView) LayoutInflater.from(putContentActivity.this).inflate(R.layout.search_page_flowlayout_tv3,null);
+                textView.setText(s);
+                return textView;
+            }
+        });
     }
 
     private void initRc() {
@@ -338,9 +356,24 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     public String getVideoImage(String videoPath){
             Log.e("33",videoPath);
         MediaMetadataRetriever media = new MediaMetadataRetriever();
-        media.setDataSource(videoPath+".mp4");
+        media.setDataSource(videoPath);
         Bitmap bitmap = media.getFrameAtTime();
         String base64 = PicToBase64.bitmapToBase64(bitmap);
         return base64;
+    }
+
+    public static String getRealPathFromURI(Context context, Uri contentURI) {
+        String result;
+        Cursor cursor = context.getContentResolver().query(contentURI,
+                new String[]{MediaStore.Video.VideoColumns.DATA},//
+                null, null, null);
+        if (cursor == null) result = contentURI.getPath();
+        else {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndex(MediaStore.Video.VideoColumns.DATA);
+            result = cursor.getString(index);
+            cursor.close();
+        }
+        return result;
     }
 }

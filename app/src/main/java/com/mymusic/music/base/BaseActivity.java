@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.mymusic.music.R;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
@@ -24,7 +25,7 @@ import scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Kawaii_LoadingView loading;
-    private AlertDialog dialog;
+    private AlertDialog builder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,18 +77,24 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void showLoading(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder = new AlertDialog.Builder(this).create();
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_loading_layout, null);
         loading = view.findViewById(R.id.LoadingView);
         loading.startMoving();
         builder.setView(view);
-        dialog = builder.create();
+        builder.setCancelable(false);
         builder.show();
+        WindowManager.LayoutParams  lp= builder.getWindow().getAttributes();
+        lp.width=650;//定义宽度
+        lp.height=450;//定义高度
+        lp.alpha=0.5f;
+        builder.getWindow().setAttributes(lp);
+
     }
 
     public void closeLoading(){
         loading.stopMoving();
-        dialog.dismiss();
+        builder.dismiss();
     }
     @Override
     protected void onDestroy() {

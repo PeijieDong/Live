@@ -2,6 +2,7 @@ package com.mymusic.music.View.Activity.Detail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
+import com.mymusic.music.View.Activity.post.PutVideoActivity;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
 import com.mymusic.music.View.ChildFragment.FriendDetailFragment1;
 import com.mymusic.music.View.ChildFragment.FriendDetailFragment2;
@@ -54,6 +56,12 @@ public class FriendDetailActivity extends BaseActivity {
     LinearLayout gonggao;
     @BindView(R.id.zhiding)
     LinearLayout zhiding;
+    @BindView(R.id.zhiding_content)
+    TextView zhiding_content;
+    @BindView(R.id.gonggao_content)
+    TextView gonggao_content;
+    @BindView(R.id.floatBt)
+    FloatingActionButton floatingActionButton;
     private String id;
     private FriendDetailTOP bean;
     private Boolean focuslogo = false;
@@ -85,11 +93,13 @@ public class FriendDetailActivity extends BaseActivity {
                 title.setText(bean.getData().getList().getTitle());
                 fans.setText(bean.getData().getList().getGnum()+"粉丝");
                 art.setText(bean.getData().getList().getTiezi()+"帖子");
-                if(bean.getData().getList().getOfficial().equals("0")){
-                    gonggao.setVisibility(View.GONE);
+                if(bean.getData().getList().getGonggao()!= null){
+                    gonggao.setVisibility(View.VISIBLE);
+                    gonggao_content.setText(bean.getData().getList().getGonggao().getTitle());
                 }
-                if(bean.getData().getList().getZhiding().equals("0")){
-                    zhiding.setVisibility(View.GONE);
+                if(bean.getData().getList().getZhiding() != null){
+                    zhiding.setVisibility(View.VISIBLE);
+                    zhiding_content.setText(bean.getData().getList().getZhiding().getTitle());
                 }
                 initView();
             }
@@ -116,10 +126,17 @@ public class FriendDetailActivity extends BaseActivity {
         list.add(fragment2);
         tab.setupWithViewPager(viewPager);
         viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager(),title,list));
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FriendDetailActivity.this, PutVideoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
-    @OnClick({R.id.friend_detail_go,R.id.back,R.id.friend_detail_focus})
+    @OnClick({R.id.friend_detail_go,R.id.back,R.id.friend_detail_focus,R.id.zhiding,R.id.gonggao})
     public void ClickEvent(View v){
         switch (v.getId()){
             case R.id.back:
@@ -128,10 +145,18 @@ public class FriendDetailActivity extends BaseActivity {
             case R.id.friend_detail_go:
                 Intent intent = new Intent(this,FriendDetailTwoActivity.class);
                 intent.putExtra("frienddetail",bean);
+                intent.putExtra("id",id);
                 startActivity(intent);
                 break;
             case R.id.friend_detail_focus:
                 focus(focuslogo);
+                break;
+            case R.id.zhiding:
+                Intent intent1 = new Intent(this, DetailsActivity.class);
+                intent1.putExtra("id",bean.getData().getList().getZhiding().getId());
+                startActivity(intent1);
+                break;
+            case R.id.gonggao:
                 break;
         }
     }

@@ -9,7 +9,7 @@ import java.util.List;
 public class FriendDetail {
 
     /**
-     * data : {"list":[{"id":"17","uid":"1","cate":"2","type":"5","content":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0"},{"id":"14","uid":"1","cate":"2","type":"5","content":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0"},{"id":"5","uid":"1","cate":"2","type":"5","content":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0"}]}
+     * data : {"list":[{"id":"24","uid":"9999","cate":"1","type":"5","content":"sdfdsafsafasdf","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"1","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"2","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"22","uid":"9999","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335406","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"1","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"21","uid":"9999","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335217","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"20","uid":"9999","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561305159","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"19","uid":"100000","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561277403","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"1，1","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"11","uid":"1","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"8","uid":"1","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"2","uid":"1","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"}]}
      * status : 1
      * referer :
      * state : 1
@@ -65,20 +65,27 @@ public class FriendDetail {
 
         public static class ListBean {
             /**
-             * id : 17
-             * uid : 1
-             * cate : 2
+             * id : 24
+             * uid : 9999
+             * cate : 1
              * type : 5
-             * content : http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4
+             * content : sdfdsafsafasdf
              * share : 0
              * comment : 0
              * zan : 0
              * createtime : 0
              * status : 1
-             * zhiding : 0
+             * zhiding : 1
              * tui : 0
              * image : http://live.shuiqiao.net/default.jpg
-             * click : 0
+             * click : 2
+             * isgonggao : 0
+             * title : 这里是标题
+             * tag :
+             * images : null
+             * playtime : null
+             * videourl : http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4
+             * collect : 0
              */
 
             private String id;
@@ -95,6 +102,13 @@ public class FriendDetail {
             private String tui;
             private String image;
             private String click;
+            private String isgonggao;
+            private String title;
+            private String tag;
+            private Object images;
+            private String playtime;
+            private String videourl;
+            private String collect;
 
             public String getId() {
                 return id;
@@ -206,6 +220,62 @@ public class FriendDetail {
 
             public void setClick(String click) {
                 this.click = click;
+            }
+
+            public String getIsgonggao() {
+                return isgonggao;
+            }
+
+            public void setIsgonggao(String isgonggao) {
+                this.isgonggao = isgonggao;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getTag() {
+                return tag;
+            }
+
+            public void setTag(String tag) {
+                this.tag = tag;
+            }
+
+            public Object getImages() {
+                return images;
+            }
+
+            public void setImages(Object images) {
+                this.images = images;
+            }
+
+            public String getPlaytime() {
+                return playtime;
+            }
+
+            public void setPlaytime(String playtime) {
+                this.playtime = playtime;
+            }
+
+            public String getVideourl() {
+                return videourl;
+            }
+
+            public void setVideourl(String videourl) {
+                this.videourl = videourl;
+            }
+
+            public String getCollect() {
+                return collect;
+            }
+
+            public void setCollect(String collect) {
+                this.collect = collect;
             }
         }
     }

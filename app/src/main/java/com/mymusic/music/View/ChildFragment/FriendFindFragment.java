@@ -20,6 +20,7 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
+import com.mymusic.music.View.Activity.user.ListUserActivity;
 import com.mymusic.music.View.Adapter.FriendFindRecyclerviewAdapter;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
@@ -103,6 +104,11 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
                         focus.setBackgroundResource(R.drawable.isfocus);
                         focus.setText("取消关注");
                         initFocusFriend(true,position);
+                        break;
+                    case R.id.four_head:
+                        Intent intent = new Intent(getContext(), ListUserActivity.class);
+                        intent.putExtra("FriendId",data.getData().getList().get(position).getCid());
+                        getContext().startActivity(intent);
                         break;
                 }
             }

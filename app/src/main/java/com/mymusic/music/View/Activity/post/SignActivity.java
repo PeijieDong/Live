@@ -96,6 +96,7 @@ public class SignActivity extends BaseActivity implements TagFlowListener {
     public void Click(String list2) {
         if(list.size()>=6){
             Toast.makeText(this,"最多选择6个标签",Toast.LENGTH_SHORT).show();
+            return;
         }else {
             list.add(list2);
         }

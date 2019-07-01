@@ -107,4 +107,6 @@ public class UrlManager {
     public static final String Clear_History =BaseUrl + "users/cleanhistory";
 
     public static final String Feedback_wallet =BaseUrl + "users/feedback";
+
+    public static final String Friend_User =BaseUrl + "index/userlist";
 }

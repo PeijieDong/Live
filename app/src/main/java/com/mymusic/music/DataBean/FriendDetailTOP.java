@@ -8,9 +8,8 @@ import java.io.Serializable;
  **/
 public class FriendDetailTOP implements Serializable {
 
-
     /**
-     * data : {"list":{"cid":"1","title":"出品","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"0","name":"交友","official":"0","gnum":"0","tiezi":"9","zhiding":null,"gonggao":null,"ulist":{"head1":"","head2":"","head3":"","head4":""}}}
+     * data : {"list":{"cid":"1","title":"交友1s","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"1","name":"交友","official":"0","gnum":"2","tiezi":"16","zhiding":{"id":"24","title":"这里是标题","content":"sdfdsafsafasdf"},"gonggao":{"id":"25","title":"这里是标题","content":"afsfewrwerweqr"},"ulist":{"head1":"","head2":"","head3":"","head4":""}}}
      * status : 1
      * referer :
      * state : 1
@@ -55,7 +54,7 @@ public class FriendDetailTOP implements Serializable {
 
     public static class DataBean implements Serializable{
         /**
-         * list : {"cid":"1","title":"出品","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"0","name":"交友","official":"0","gnum":"0","tiezi":"9","zhiding":null,"gonggao":null,"ulist":{"head1":"","head2":"","head3":"","head4":""}}
+         * list : {"cid":"1","title":"交友1s","icon":"http://live.shuiqiao.net/default.jpg","description":"这里是描述","tui":"1","name":"交友","official":"0","gnum":"2","tiezi":"16","zhiding":{"id":"24","title":"这里是标题","content":"sdfdsafsafasdf"},"gonggao":{"id":"25","title":"这里是标题","content":"afsfewrwerweqr"},"ulist":{"head1":"","head2":"","head3":"","head4":""}}
          */
 
         private ListBean list;
@@ -71,16 +70,16 @@ public class FriendDetailTOP implements Serializable {
         public static class ListBean implements Serializable{
             /**
              * cid : 1
-             * title : 出品
+             * title : 交友1s
              * icon : http://live.shuiqiao.net/default.jpg
              * description : 这里是描述
-             * tui : 0
+             * tui : 1
              * name : 交友
              * official : 0
-             * gnum : 0
-             * tiezi : 9
-             * zhiding : null
-             * gonggao : null
+             * gnum : 2
+             * tiezi : 16
+             * zhiding : {"id":"24","title":"这里是标题","content":"sdfdsafsafasdf"}
+             * gonggao : {"id":"25","title":"这里是标题","content":"afsfewrwerweqr"}
              * ulist : {"head1":"","head2":"","head3":"","head4":""}
              */
 
@@ -93,8 +92,8 @@ public class FriendDetailTOP implements Serializable {
             private String official;
             private String gnum;
             private String tiezi;
-            private Object zhiding;
-            private Object gonggao;
+            private ZhidingBean zhiding;
+            private GonggaoBean gonggao;
             private UlistBean ulist;
 
             public String getCid() {
@@ -169,19 +168,19 @@ public class FriendDetailTOP implements Serializable {
                 this.tiezi = tiezi;
             }
 
-            public Object getZhiding() {
+            public ZhidingBean getZhiding() {
                 return zhiding;
             }
 
-            public void setZhiding(Object zhiding) {
+            public void setZhiding(ZhidingBean zhiding) {
                 this.zhiding = zhiding;
             }
 
-            public Object getGonggao() {
+            public GonggaoBean getGonggao() {
                 return gonggao;
             }
 
-            public void setGonggao(Object gonggao) {
+            public void setGonggao(GonggaoBean gonggao) {
                 this.gonggao = gonggao;
             }
 
@@ -191,6 +190,78 @@ public class FriendDetailTOP implements Serializable {
 
             public void setUlist(UlistBean ulist) {
                 this.ulist = ulist;
+            }
+
+            public static class ZhidingBean implements Serializable{
+                /**
+                 * id : 24
+                 * title : 这里是标题
+                 * content : sdfdsafsafasdf
+                 */
+
+                private String id;
+                private String title;
+                private String content;
+
+                public String getId() {
+                    return id;
+                }
+
+                public void setId(String id) {
+                    this.id = id;
+                }
+
+                public String getTitle() {
+                    return title;
+                }
+
+                public void setTitle(String title) {
+                    this.title = title;
+                }
+
+                public String getContent() {
+                    return content;
+                }
+
+                public void setContent(String content) {
+                    this.content = content;
+                }
+            }
+
+            public static class GonggaoBean implements Serializable{
+                /**
+                 * id : 25
+                 * title : 这里是标题
+                 * content : afsfewrwerweqr
+                 */
+
+                private String id;
+                private String title;
+                private String content;
+
+                public String getId() {
+                    return id;
+                }
+
+                public void setId(String id) {
+                    this.id = id;
+                }
+
+                public String getTitle() {
+                    return title;
+                }
+
+                public void setTitle(String title) {
+                    this.title = title;
+                }
+
+                public String getContent() {
+                    return content;
+                }
+
+                public void setContent(String content) {
+                    this.content = content;
+                }
             }
 
             public static class UlistBean implements Serializable{

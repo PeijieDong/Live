@@ -174,7 +174,7 @@ public class DetailsActivity extends BaseActivity {
                 break;
         }
         detail_name.setText(data.getData().getList().getUsername());
-        detail_time.setText(data.getData().getList().getCreatetime()+"\n"+data.getData().getList().getClick()+"次浏览");
+        detail_time.setText(data.getData().getList().getCreatetime()+"  "+data.getData().getList().getClick()+"次浏览");
         home_rc_type.setText(data.getData().getList().getCatename());
         shareNum.setText(data.getData().getList().getShare());
         commentNum.setText(data.getData().getList().getComment());
@@ -308,6 +308,11 @@ public class DetailsActivity extends BaseActivity {
     }
     //收藏
     private void initCollection() {
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("id",id);
         NetRequest.postFormHeadRequest(UrlManager.Collection_Home, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {

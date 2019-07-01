@@ -97,13 +97,17 @@ public class PutVideoActivity extends BaseActivity {
             case R.id.post:
                 if(content.getText().toString().length()<4){
                     Toast.makeText(this,"标题不可以少于4个字符",Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 if(image.size() != 1){
                     Toast.makeText(this,"请点击选择您要上传的短视频",Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 if(list == null || list.size() == 0){
                     Toast.makeText(this,"请选择对应的标签",Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                showLoading();
                 StringBuilder tag = new StringBuilder();
                 for(int i = 0;i<list.size();i++){
                     tag.append(list.get(i)+",");
@@ -121,6 +125,7 @@ public class PutVideoActivity extends BaseActivity {
                 NetRequest.postmoreRequest(UrlManager.Put_Video,this, map, file, new NetRequest.DataCallBack() {
                     @Override
                     public void requestSuccess(String result) throws Exception {
+                        closeLoading();
                         Toast.makeText(PutVideoActivity.this,"提交成功，请等待管理员审核",Toast.LENGTH_SHORT).show();
                         finish();
                     }

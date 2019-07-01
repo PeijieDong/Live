@@ -108,7 +108,12 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/image_icon"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/chose_flow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image_icon"/>
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/chose_sign"

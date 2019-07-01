@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<android.support.v7.widget.CardView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:cardElevation="0dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView
         android:id="@+id/LoadingView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/navi_title_color"
+        android:background="#80000000"
         app:blockColor="#ffffff"
         app:lineNumber="3"
         app:fixBlock_Angle="5"
@@ -18,4 +19,4 @@
         app:isClock_Wise="false"
         app:moveSpeed="500"
         app:move_Interpolator="@android:anim/bounce_interpolator"/>
-</android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

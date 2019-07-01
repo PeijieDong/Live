@@ -44,7 +44,8 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
                 .setText(R.id.image_type_4,item.getList().get(3).getType())
                 .setText(R.id.image_type_5,item.getList().get(4).getType())
                 .setText(R.id.image_type_6,item.getList().get(5).getType())
-                .addOnClickListener(R.id.find_item_focus);
+                .addOnClickListener(R.id.find_item_focus)
+                .addOnClickListener(R.id.four_head);
         ImageView head = helper.getView(R.id.friend_find_head);
         ImageView one = helper.getView(R.id.friend_find_one);
         ImageView two = helper.getView(R.id.friend_find_two);
@@ -67,8 +68,6 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
         Glide.with(mContext).load(item.getList().get(3).getImage()).into(four);
         Glide.with(mContext).load(item.getList().get(4).getImage()).into(five);
         Glide.with(mContext).load(item.getList().get(5).getImage()).into(six);
-        ConstraintLayout fourHead = helper.getView(R.id.four_head);
-        fourHead.setOnClickListener(this);
         ConstraintLayout container6 = helper.getView(R.id.image_Container6);
         ConstraintLayout container5 = helper.getView(R.id.image_Container5);
         ConstraintLayout container4 = helper.getView(R.id.image_Container4);
@@ -86,9 +85,6 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.four_head:
-                mContext.startActivity(new Intent(mContext,ListUserActivity.class));
-                break;
             case  R.id.image_Container1:
                 goActivity(item.getList().get(0).getId());
                 break;

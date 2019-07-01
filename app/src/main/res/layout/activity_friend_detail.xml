@@ -103,20 +103,35 @@
                         android:paddingLeft="5dp"/>
                 </android.support.constraint.ConstraintLayout>
                 <LinearLayout
-                    android:id="@+id/zhiding"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp">
                     <LinearLayout
+                        android:id="@+id/zhiding"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        <ImageView
+                        <LinearLayout
                             android:layout_width="60dp"
                             android:layout_height="20dp"
                             android:layout_marginLeft="15dp"
-                            android:src="@drawable/ic_launcher_background"/>
+                            android:orientation="horizontal"
+                            android:background="#EBF6FF">
+                            <ImageView
+                                android:layout_width="13dp"
+                                android:layout_height="13dp"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/icon_top"
+                                android:layout_gravity="center_vertical"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="置顶"
+                                android:textSize="12sp"
+                                android:layout_gravity="center_vertical"
+                                android:textColor="#3F95F7"/>
+                        </LinearLayout>
                         <TextView
                             android:id="@+id/zhiding_content"
                             android:layout_width="wrap_content"
@@ -176,4 +191,10 @@
                 android:layout_height="match_parent"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatBt"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="bottom|right"/>
 </android.support.design.widget.CoordinatorLayout>

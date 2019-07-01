@@ -75,7 +75,6 @@ public class ChoseFragment extends BaseFragment implements TagFlowListener{
                 TextView text = view.findViewById(R.id.flowText);
                 for (int p = 0; p<list2.size();p++){
                     if(list.get(i).equals(list2.get(p))){
-                        Log.e("33",list.get(i)+list2.get(p));
                         list2.remove(p);
                         have = true;
                         listener.AcClick(list.get(i));
@@ -84,9 +83,8 @@ public class ChoseFragment extends BaseFragment implements TagFlowListener{
                     }
                 }
                 if(!have){
-                    Log.e("33","shibai");
                     text.setBackgroundResource(R.drawable.flow_select);
-                    text.setTextColor(ContextCompat.getColor(getContext(),R.color.navi_title_color));
+                    text.setTextColor(ContextCompat.getColor(getContext(), R.color.navi_title_color));
                     list2.add(list.get(i));
                     listener.Click(list.get(i));
                 }else{

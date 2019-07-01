@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.FriendDetail;
@@ -17,6 +18,8 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
+import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
+import com.mymusic.music.View.Activity.post.PutVideoActivity;
 import com.mymusic.music.View.Adapter.FriendDetailAdapter;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseFragment;
@@ -26,6 +29,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Request;
 
 /**
@@ -64,9 +68,8 @@ public class FriendDetailFragment2 extends BaseFragment {
                 adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        Intent intent = new Intent(getContext(), DetailsActivity.class);
-                        intent.putExtra("id",data.getData().getList().get(position).getId());
-                        startActivity(intent);
+                        Intent intent1 = new Intent(getContext(), VideoPlayActivity.class);
+                        startActivity(intent1);
                     }
                 });
                 rc.setAdapter(adapter);
@@ -88,4 +91,5 @@ public class FriendDetailFragment2 extends BaseFragment {
     protected void LoadData() {
 
     }
+
 }
