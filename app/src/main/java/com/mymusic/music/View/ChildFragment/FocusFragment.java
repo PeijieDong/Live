@@ -107,6 +107,7 @@ public class FocusFragment extends BaseFragment {
                         }
                     });
                     focusRc.setAdapter(adaper);
+                    focusTv.setText("已关注"+bean.getData().getTotal()+"人");
                 }
 
                 @Override
@@ -134,6 +135,7 @@ public class FocusFragment extends BaseFragment {
                         @Override
                         public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                             TextView focus = view.findViewById(R.id.focus_rc_focusbt);
+                            focusTv.setText("已关注"+bean.getData().getTotal()+"个");
                             if (focus.getText().toString().equals("+关注")) {
                                 focus.setText("取消关注");
                                 focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);

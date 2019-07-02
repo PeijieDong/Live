@@ -133,6 +133,7 @@ public class MyFragment extends BaseFragment {
         NetRequest.postFormHeadRequest(UrlManager.GetUserInfo, null,Live.getInstance().get(getContext()).getList().getToken(), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 bean = GsonUtil.GsonToBean(result, UserBean.class);
                 Live.getInstance().putUser(getContext(),result);
                 focusNum.setText(bean.getData().getFollows());

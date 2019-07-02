@@ -51,6 +51,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
@@ -98,6 +99,8 @@ public class DetailsActivity extends BaseActivity {
     ImageView detail_sex;
     @BindView(R.id.detail_title)
     TextView title;
+    @BindView(R.id.icon_comment)
+    ImageView collectionBt;
     private String id;
     private DetailCommentRcAdapter adapter;
     private DetailData data;
@@ -212,6 +215,10 @@ public class DetailsActivity extends BaseActivity {
     private void initCommentList(List<CommentData.DataBean.ListBean> list) {
         detailRc.setLayoutManager(new LinearLayoutManager(this));
         adapter = new DetailCommentRcAdapter(R.layout.detail_item_layout,list);
+        View view = LayoutInflater.from(this).inflate(R.layout.null_comment, null);
+        if(list == null || list.size() == 0){
+            adapter.addFooterView(view);
+        }
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
@@ -271,9 +278,14 @@ public class DetailsActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.back,R.id.icon_comment})
+    @OnClick({R.id.detail_head,R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.back,R.id.icon_comment})
     public void Click(View view){
         switch (view.getId()){
+            case R.id.detail_head:
+                Intent intent = new Intent(this, UserDetailActivity.class);
+                intent.putExtra("UserId",data.getData().getList().getUid());
+                startActivity(intent);
+                break;
             case R.id.detail_post:
                 initNet();
                 break;
@@ -308,7 +320,7 @@ public class DetailsActivity extends BaseActivity {
     }
     //收藏
     private void initCollection() {
-        if(Live.getInstance().getToken(this) == null){
+        if(null == Live.getInstance().getUser(this)){
             Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
             startActivity(intent);
             return;
@@ -320,6 +332,7 @@ public class DetailsActivity extends BaseActivity {
             public void requestSuccess(String result) throws Exception {
                 Toast.makeText(DetailsActivity.this,"收藏成功",Toast.LENGTH_SHORT).show();
                 commentNum.setText(Integer.valueOf(commentNum.getText().toString())+1+"");
+                collectionBt.setClickable(false);
             }
 
             @Override

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.CommentBean;
 import com.mymusic.music.DataBean.UserDetail;
 import com.mymusic.music.DataBean.VideoData;
@@ -37,6 +38,7 @@ import java.util.List;
 
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Request;
 
 /**
@@ -53,6 +55,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
     private int position;
     private RecyclerView Rc;
     private VideoViewHolder holder;
+    private VideoFragmentRcAdapter adapter;
     public VideoRecyclerViewAdapter(Context context, List<VideoData.DataBean.ListBean> list) {
         super(list);
         this.context = context;
@@ -253,6 +256,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                     public void requestSuccess(String result) throws Exception {
                         Log.e("33",result);
                         Toast.makeText(context,"提交成功",Toast.LENGTH_SHORT).show();
+                        adapter.notifyDataSetChanged();
                         commentEt.setText("");
                         holder.commentNum.setText(Integer.parseInt(holder.commentNum.getText().toString())+1+"");
                     }
@@ -266,7 +270,22 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         });
         Rc = view.findViewById(R.id.Rc);
         Rc.setLayoutManager(new LinearLayoutManager(context));
-        VideoFragmentRcAdapter adapter = new VideoFragmentRcAdapter(R.layout.detail_item_layout, listbean);
+        adapter = new VideoFragmentRcAdapter(R.layout.video_comment_layout, listbean);
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                TextView likeNum = (TextView) adapter.getViewByPosition(Rc, position, R.id.comment_likeNum);
+                CircleImageView head = (CircleImageView) adapter.getViewByPosition(Rc, position, R.id.detail_head_cir);
+                head.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, UserDetailActivity.class);
+                        intent.putExtra("UserId",listbean.get(position).getUid());
+                        context.startActivity(intent);
+                    }
+                });
+            }
+        });
         Rc.setAdapter(adapter);
         bottomSheet.setContentView(view);//设置对框框中的布局
         bottomSheet.show();//显示弹窗
@@ -275,7 +294,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
     //评论
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
-        map.put("id",list.get(position).getId());
+        map.put("id",list.get(position).getVid());
         map.put("sortby","new");
         map.put("uid","0");
         NetRequest.postFormRequest(UrlManager.Detail_Comment, map, new NetRequest.DataCallBack() {

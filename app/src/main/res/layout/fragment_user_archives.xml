@@ -29,7 +29,11 @@
             android:paddingLeft="15dp"
             android:gravity="center_vertical"
             android:text="身份：普通用户"/>
-
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#F5F5F5"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -59,7 +63,11 @@
             android:paddingLeft="15dp"
             android:gravity="center_vertical"
             android:text="身份：普通用户"/>
-
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#F5F5F5"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -96,7 +104,11 @@
             android:paddingLeft="15dp"
             android:gravity="center_vertical"
             android:text="身份：普通用户"/>
-
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#F5F5F5"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -112,7 +124,11 @@
             android:paddingLeft="15dp"
             android:gravity="center_vertical"
             android:text="身份：普通用户"/>
-
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#F5F5F5"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"

@@ -10,6 +10,7 @@ import android.widget.GridView;
 import com.mymusic.music.DataBean.Wallet;
 import com.mymusic.music.R;
 import com.mymusic.music.View.Adapter.WalletAdapter;
+import com.mymusic.music.View.Adapter.WalletOnLineAdapter;
 import com.mymusic.music.base.BaseFragment;
 
 import butterknife.BindView;
@@ -41,7 +42,7 @@ public class WalletOnLineFragment extends BaseFragment {
 
     @Override
     protected void LoadData() {
-        WalletAdapter adapter = new WalletAdapter(getContext(),bean);
+        WalletOnLineAdapter adapter = new WalletOnLineAdapter(getContext(),bean);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

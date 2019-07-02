@@ -145,12 +145,15 @@ public class UserDetailActivity extends BaseActivity {
         viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager(),list,data));
     }
 
-    @OnClick({R.id.edit_tv})
+    @OnClick({R.id.edit_tv,R.id.back})
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.edit_tv:
                 Intent intent = new Intent(UserDetailActivity.this, UserActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.back:
+                finish();
                 break;
         }
     }

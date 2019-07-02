@@ -7,7 +7,8 @@
         android:id="@+id/focus_tv"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
         android:background="@color/white"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/focus_Rc"
