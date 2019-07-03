@@ -88,7 +88,8 @@
         <activity android:name=".View.Activity.message.FeedbackActivity" />
         <activity android:name=".View.Activity.message.CommendActivity" />
         <activity android:name=".View.Activity.message.NoticeActivity" />
-        <activity android:name=".View.Activity.Detail.VideoPlayActivity"></activity>
+        <activity android:name=".View.Activity.Detail.VideoPlayActivity" />
+        <activity android:name=".View.Activity.FriendListActivity"></activity>
     </application>
 
 </manifest>

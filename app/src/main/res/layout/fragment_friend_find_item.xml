@@ -55,6 +55,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/friend_list"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"

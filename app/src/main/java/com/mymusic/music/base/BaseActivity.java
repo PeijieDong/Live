@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
@@ -102,6 +103,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         ActivityCollector.removeActivity(this);
     }
 
+    public void checkLogin(){
+        if(Live.getInstance().getToken(this) == null){
+            startActivity(new Intent(this,LoginActivity.class));
+            return;
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();

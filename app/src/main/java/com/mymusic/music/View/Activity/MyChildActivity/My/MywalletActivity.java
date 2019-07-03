@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -67,6 +68,7 @@ public class MywalletActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.Get_Wallet, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 Wallet bean = GsonUtil.GsonToBean(result, Wallet.class);
                 money_balance.setText(bean.getMoney());
                 List<String> title = new ArrayList<>();

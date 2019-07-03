@@ -19,6 +19,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
+import com.mymusic.music.View.Activity.FriendListActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.user.ListUserActivity;
 import com.mymusic.music.View.Adapter.FriendFindRecyclerviewAdapter;
@@ -109,6 +110,11 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
                         Intent intent = new Intent(getContext(), ListUserActivity.class);
                         intent.putExtra("FriendId",data.getData().getList().get(position).getCid());
                         getContext().startActivity(intent);
+                        break;
+                    case R.id.friend_list:
+                        Intent intent1 = new Intent(getContext(), FriendListActivity.class);
+                        intent1.putExtra("name",data.getData().getList().get(position).getName());
+                        getContext().startActivity(intent1);
                         break;
                 }
             }

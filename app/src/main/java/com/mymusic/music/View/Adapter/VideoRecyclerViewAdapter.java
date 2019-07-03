@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.CommentBean;
-import com.mymusic.music.DataBean.UserDetail;
 import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
@@ -36,7 +35,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Request;
@@ -56,6 +54,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
     private RecyclerView Rc;
     private VideoViewHolder holder;
     private VideoFragmentRcAdapter adapter;
+    private VideoListener listener;
     public VideoRecyclerViewAdapter(Context context, List<VideoData.DataBean.ListBean> list) {
         super(list);
         this.context = context;
@@ -149,22 +148,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                long normalTime = System.currentTimeMillis();
-//                if(normalTime - pressedTime < 500){
-//                    Toast.makeText(context,"爱心",Toast.LENGTH_SHORT).show();
-//                    return;
-//                }else{
-//                    pressedTime = normalTime;
-//                }
-                if(holder.mp_video.isPlay()){
-                    holder.mp_video.goOnPlayOnPause();
-                } else {//暂停
-                    if (holder.mp_video.currentState == JZVideoPlayer.CURRENT_STATE_PAUSE) {
-                        holder.mp_video.goOnPlayOnResume();
-                    } else {
-                        holder.mp_video.startVideo();
-                    }
-                }
+                listener.click(v,position);
             }
         });
         if (position == 0) {
@@ -318,6 +302,14 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         ClipData clipData = ClipData.newPlainText(null, text);
         clipboard.setPrimaryClip(clipData);
         holder.shareNum.setText(Integer.parseInt(holder.shareNum.getText().toString())+1+"");
+    }
+
+    public interface VideoListener{
+        void click(View v, int position);
+    }
+
+    public void setListener(VideoListener listener){
+        this.listener = listener;
     }
 }
 

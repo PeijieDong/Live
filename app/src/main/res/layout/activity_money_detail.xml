@@ -43,7 +43,8 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/put_money"
             android:layout_marginRight="10dp"
-            android:background="@drawable/money_detail"
+            android:textColor="@color/white"
+            android:background="@drawable/focus"
             android:text="全部" />
         <TextView
             android:id="@+id/put_money"
@@ -51,6 +52,7 @@
             android:layout_height="25dp"
             android:textSize="14sp"
             android:gravity="center"
+            android:textColor="@color/blank"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/get_money"
             android:layout_marginRight="10dp"
@@ -62,6 +64,7 @@
             android:layout_height="25dp"
             android:textSize="14sp"
             android:gravity="center"
+            android:textColor="@color/blank"
             android:layout_marginRight="15dp"
             android:background="@drawable/money_detail"
             android:layout_alignParentRight="true"

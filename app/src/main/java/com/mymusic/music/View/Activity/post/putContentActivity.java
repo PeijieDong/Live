@@ -176,13 +176,27 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         map.put("type", type);
         map.put("tag", tag.toString());
         map.put("content", title.getText().toString());
+        if (navigation.getPosition() == 1) {
+            map.put("images",PicToBase64.imageToBase64(image.get(0).getPath()+""));
+            NetRequest.postmorePicRequest(url, this, map, image, new NetRequest.DataCallBack() {
+                @Override
+                public void requestSuccess(String result) throws Exception {
+                    Toast.makeText(putContentActivity.this,"提交成功，等待管理员审核",Toast.LENGTH_SHORT).show();
+                    finish();
+                    closeLoading();
+                }
+
+                @Override
+                public void requestFailure(Request request, IOException e) {
+                    closeLoading();
+                }
+            });
+            return;
+        }
         if (navigation.getPosition() == 0) {
             file = getFileByUri(image.get(0), this);
             map.put("playtime", getLocalVideoDuration(image.get(0).getPath())+"");
             map.put("images", getVideoImage(getRealPathFromURI(putContentActivity.this,image.get(0))));
-        } else if (navigation.getPosition() == 1) {
-            file = getFileByUri(image.get(0), this);
-            map.put("images",PicToBase64.imageToBase64(image.get(0).getPath()+""));
         }
         NetRequest.postmoreRequest(url, this, map, file, new NetRequest.DataCallBack() {
             @Override
@@ -196,6 +210,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             @Override
             public void requestFailure(Request request, IOException e) {
                 Log.e("33",e.getMessage());
+                closeLoading();
             }
 
         });

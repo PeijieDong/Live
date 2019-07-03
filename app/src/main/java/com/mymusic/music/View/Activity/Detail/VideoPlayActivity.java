@@ -9,17 +9,21 @@ import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.mymusic.music.DataBean.FriendDetail;
 import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Adapter.VideoRc2Adapter;
 import com.mymusic.music.View.Adapter.VideoRcAdapter;
 import com.mymusic.music.View.Adapter.VideoRecyclerViewAdapter;
 import com.mymusic.music.View.Adapter.VideoViewHolder;
+import com.mymusic.music.View.Adapter.VideoViewHolder2;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import butterknife.BindView;
 import cn.jzvd.JZVideoPlayer;
@@ -33,10 +37,13 @@ public class VideoPlayActivity extends BaseActivity {
     private PagerSnapHelper helper;
     private LinearLayoutManager layoutManager;
     private RecyclerView.ViewHolder viewHolder;
+    private FriendDetail data;
+    private int position;
 
     @Override
     protected void initVariables(Intent intent) {
-
+        data = (FriendDetail) intent.getSerializableExtra("video");
+        position = intent.getIntExtra("position", 0);
     }
 
     @Override
@@ -46,31 +53,19 @@ public class VideoPlayActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
-        initNet();
+        initView();
     }
 
-    private void initNet() {
-        NetRequest.postFormRequest(UrlManager.Video_List, null, new NetRequest.DataCallBack() {
-            @Override
-            public void requestSuccess(String result) throws Exception {
-                VideoData bean = GsonUtil.GsonToBean(result, VideoData.class);
-                initView(bean);
-            }
 
-            @Override
-            public void requestFailure(Request request, IOException e) {
-
-            }
-        });
-    }
-
-    private void initView(VideoData bean) {
+    private void initView() {
         //Recycleview页面滑动
         helper = new PagerSnapHelper();
         helper.attachToRecyclerView(videoRc);
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(this);
         videoRc.setLayoutManager(layoutManager);
-        videoRc.setAdapter(new VideoRcAdapter(this,bean.getData().getList()));
+        VideoRc2Adapter adapter = new VideoRc2Adapter(this, data.getData().getList());
+        videoRc.setAdapter(adapter);
+        videoRc.scrollToPosition(position);
         videoRc.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -81,8 +76,7 @@ public class VideoPlayActivity extends BaseActivity {
                         JZVideoPlayer.releaseAllVideos();
                         viewHolder = recyclerView.getChildViewHolder(view);
                         //播放视频
-                        ((VideoViewHolder) viewHolder).mp_video.startVideo();
-
+                        ((VideoViewHolder2) viewHolder).mp_video.startVideo();
                     case RecyclerView.SCROLL_STATE_DRAGGING://拖动
                         break;
                     case RecyclerView.SCROLL_STATE_SETTLING://惯性滑动
@@ -95,6 +89,12 @@ public class VideoPlayActivity extends BaseActivity {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+        adapter.setListener(new VideoRc2Adapter.ViewHolderListener() {
+            @Override
+            public void backViewHolder(VideoViewHolder2 holder) {
+                holder.mp_video.startVideo();
             }
         });
     }

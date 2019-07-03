@@ -45,7 +45,8 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
                 .setText(R.id.image_type_5,item.getList().get(4).getType())
                 .setText(R.id.image_type_6,item.getList().get(5).getType())
                 .addOnClickListener(R.id.find_item_focus)
-                .addOnClickListener(R.id.four_head);
+                .addOnClickListener(R.id.four_head)
+                .addOnClickListener(R.id.friend_list);
         ImageView head = helper.getView(R.id.friend_find_head);
         ImageView one = helper.getView(R.id.friend_find_one);
         ImageView two = helper.getView(R.id.friend_find_two);
@@ -53,6 +54,10 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
         ImageView four = helper.getView(R.id.friend_find_four);
         ImageView five = helper.getView(R.id.friend_find_five);
         ImageView six = helper.getView(R.id.friend_find_six);
+        ImageView next = helper.getView(R.id.next);
+        if(item.getUlist().getHead1().equals("")){
+            next.setVisibility(View.GONE);
+        }
         CircleImageView ci1 = (CircleImageView)helper.getView(R.id.ci1);
         CircleImageView ci2 = (CircleImageView)helper.getView(R.id.ci2);
         CircleImageView ci3 = (CircleImageView)helper.getView(R.id.ci3);

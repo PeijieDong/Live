@@ -16,17 +16,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#00000000">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/head"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintBottom_toTopOf="@id/video_des"
+            android:layout_marginBottom="8dp" />
         <TextView
             android:id="@+id/video_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/head"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="15dp"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/video_des"
             android:text="这是标题"/>
+        <TextView
+            android:id="@+id/focus"
+            android:layout_width="58dp"
+            android:layout_height="20dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@id/video_title"
+            app:layout_constraintBottom_toTopOf="@id/video_des"
+            android:layout_marginBottom="11dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/focus" />
         <TextView
             android:id="@+id/video_des"
             android:layout_width="wrap_content"
@@ -37,5 +57,13 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="20dp"
             android:text="我去这个屌"/>
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_launcher_background"/>
     </android.support.constraint.ConstraintLayout>
 </RelativeLayout>

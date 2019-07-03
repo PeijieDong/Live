@@ -69,6 +69,8 @@ public class FriendDetailFragment2 extends BaseFragment {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                         Intent intent1 = new Intent(getContext(), VideoPlayActivity.class);
+                        intent1.putExtra("video",data);
+                        intent1.putExtra("position",position);
                         startActivity(intent1);
                     }
                 });

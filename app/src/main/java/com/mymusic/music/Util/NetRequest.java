@@ -1,9 +1,14 @@
 package com.mymusic.music.Util;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.mymusic.music.Live;
@@ -11,6 +16,7 @@ import com.mymusic.music.Live;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -129,6 +135,10 @@ public class NetRequest {
 
     public static void postmoreRequest(String url,Context context, Map<String, String> params, File file, DataCallBack callBack) {
         getInstance().upLoadFile(url,context, params,file, callBack);
+    }
+
+    public static void postmorePicRequest(String url, Context context, Map<String,String> params, List<Uri> fileList,DataCallBack callBack){
+        getInstance().upLoadPicFile(url,context,params,fileList,callBack);
     }
     //-------------对外提供的方法End--------------------------------
 
@@ -389,6 +399,50 @@ public class NetRequest {
 
     }
 
+
+    private void upLoadPicFile(final String url, Context context, final Map<String, String> map, List<Uri> fileList, final DataCallBack callBack) {
+
+        if (fileList != null && fileList.size() > 0) {
+            for (int i = 0; i < fileList.size(); i++) {
+                OkHttpClient client = new OkHttpClient();
+                // form 表单形式上传
+                MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                File file = getFileByUri(fileList.get(i), context);
+                if (file != null) {
+                    requestBody.addFormDataPart("file", file.getName());
+                    RequestBody.create(MediaType.parse("png"), file);
+                }
+                if (map != null) {
+                    // map 里面是请求中所需要的 key 和 value
+                    for (Map.Entry entry : map.entrySet()) {
+                        requestBody.addFormDataPart(valueOf(entry.getKey()), valueOf(entry.getValue()));
+                    }
+                }
+                final Request request = new Request.Builder().url(url).addHeader("token", Live.getInstance().getToken(context)).post(requestBody.build()).build();
+                // readTimeout("请求超时时间" , 时间单位);
+                client.newBuilder().readTimeout(10000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        deliverDataFailure(request, e, callBack);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            if (response.isSuccessful()) { // 请求成功
+                                //执行请求成功的操作
+                                String result = response.body().string();
+                                deliverDataSuccess(result, callBack);
+                            } else {
+                                throw new IOException(response + "");
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    }
+
     /**
      * post请求传json
      *
@@ -557,6 +611,52 @@ public class NetRequest {
             endUrl.append(entry.getValue());
         }
         return endUrl.toString();
+    }
+
+    //uri转化file
+    public static File getFileByUri(Uri uri,Context context) {
+        String path = null;
+        if ("file".equals(uri.getScheme())) {
+            path = uri.getEncodedPath();
+            if (path != null) {
+                path = Uri.decode(path);
+                ContentResolver cr = context.getContentResolver();
+                StringBuffer buff = new StringBuffer();
+                buff.append("(").append(MediaStore.Images.ImageColumns.DATA).append("=").append("'" + path + "'").append(")");
+                Cursor cur = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[] { MediaStore.Images.ImageColumns._ID, MediaStore.Images.ImageColumns.DATA }, buff.toString(), null, null);
+                int index = 0;
+                int dataIdx = 0;
+                for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
+                    index = cur.getColumnIndex(MediaStore.Images.ImageColumns._ID);
+                    index = cur.getInt(index);
+                    dataIdx = cur.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    path = cur.getString(dataIdx);
+                }
+                cur.close();
+                if (index == 0) {
+                } else {
+                    Uri u = Uri.parse("content://media/external/images/media/" + index);
+                    System.out.println("temp uri is :" + u);
+                }
+            }
+            if (path != null) {
+                return new File(path);
+            }
+        } else if ("content".equals(uri.getScheme())) {
+            // 4.2.2以后
+            String[] proj = { MediaStore.Images.Media.DATA };
+            Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                path = cursor.getString(columnIndex);
+            }
+            cursor.close();
+
+            return new File(path);
+        } else {
+            //Log.i(TAG, "Uri Scheme:" + uri.getScheme());
+        }
+        return null;
     }
 }
 

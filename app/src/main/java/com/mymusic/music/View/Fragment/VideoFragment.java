@@ -1,6 +1,9 @@
 package com.mymusic.music.View.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
@@ -9,12 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.mymusic.music.DataBean.VideoData;
+import com.mymusic.music.Live;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
-import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.VideoRecyclerViewAdapter;
 import com.mymusic.music.View.Adapter.VideoViewHolder;
 import com.mymusic.music.base.BaseFragment;
@@ -22,8 +26,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import cn.jzvd.JZVideoPlayer;
@@ -40,6 +43,36 @@ public class VideoFragment extends BaseFragment {
     private PagerSnapHelper helper;
     private LinearLayoutManager layoutManager;
     private RecyclerView.ViewHolder viewHolder;
+    private VideoRecyclerViewAdapter adapter;
+    private VideoData bean;
+    private int select = 0;
+    long mLastTime=0;
+    long mCurTime=0;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    if(((VideoViewHolder) viewHolder).mp_video.isPlay()){
+                        ((VideoViewHolder) viewHolder).mp_video.goOnPlayOnPause();
+                    } else {//暂停
+                        if (((VideoViewHolder) viewHolder).mp_video.currentState == JZVideoPlayer.CURRENT_STATE_PAUSE) {
+                            ((VideoViewHolder) viewHolder).mp_video.goOnPlayOnResume();
+                        } else {
+                            ((VideoViewHolder) viewHolder).mp_video.startVideo();
+                        }
+                    }
+
+                    break;
+                case 2:
+                    initCollection();
+                    break;
+            }
+        }
+    };
+
 
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
@@ -65,7 +98,7 @@ public class VideoFragment extends BaseFragment {
         NetRequest.postFormRequest(UrlManager.Video_List, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                VideoData bean = GsonUtil.GsonToBean(result, VideoData.class);
+                bean = GsonUtil.GsonToBean(result, VideoData.class);
                 initView(bean);
             }
 
@@ -82,7 +115,24 @@ public class VideoFragment extends BaseFragment {
         helper.attachToRecyclerView(videoRc);
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         videoRc.setLayoutManager(layoutManager);
-        videoRc.setAdapter(new VideoRecyclerViewAdapter(getContext(),bean.getData().getList()));
+        adapter = new VideoRecyclerViewAdapter(getContext(), bean.getData().getList());
+        adapter.setListener(new VideoRecyclerViewAdapter.VideoListener() {
+            @Override
+            public void click(View v, int position) {
+                select = position;
+                mLastTime=mCurTime;
+                mCurTime= System.currentTimeMillis();
+                if(mCurTime-mLastTime<300){//双击事件
+                    mCurTime =0;
+                    mLastTime = 0;
+                    handler.removeMessages(1);
+                    handler.sendEmptyMessage(2);
+                }else{//单击事件
+                    handler.sendEmptyMessageDelayed(1, 310);
+                }
+            }
+        });
+        videoRc.setAdapter(adapter);
         videoRc.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -107,6 +157,30 @@ public class VideoFragment extends BaseFragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+        View view = helper.findSnapView(layoutManager);
+        viewHolder = videoRc.getChildViewHolder(view);
+    }
+
+    private void initCollection() {
+        if(Live.getInstance().getToken(getContext()) == null){
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            getContext().startActivity(intent);
+            return;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id",bean.getData().getList().get(select).getId());
+        NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                Toast.makeText(getContext(),"收藏成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
             }
         });
     }

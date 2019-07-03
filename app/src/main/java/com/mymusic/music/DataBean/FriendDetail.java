@@ -1,15 +1,16 @@
 package com.mymusic.music.DataBean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Create By mr.mao in 2019/6/9 21:58
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class FriendDetail {
+public class FriendDetail implements Serializable {
 
     /**
-     * data : {"list":[{"id":"24","uid":"9999","cate":"1","type":"5","content":"sdfdsafsafasdf","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"1","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"2","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"22","uid":"9999","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335406","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"1","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"21","uid":"9999","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335217","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"20","uid":"9999","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561305159","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"19","uid":"100000","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561277403","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"1，1","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"11","uid":"1","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"8","uid":"1","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"},{"id":"2","uid":"1","cate":"1","type":"5","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0"}]}
+     * data : {"list":[{"id":"24","uid":"9999","cate":"1","type":"视频","content":"sdfdsafsafasdf","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"1","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"14","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"不独特TOTO","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"22","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335406","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"2","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"不独特TOTO","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"21","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335217","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"1","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"不独特TOTO","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"20","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561305159","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"1","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"不独特TOTO","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"19","uid":"100000","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561277403","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"1，1","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"手机用户2610","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"11","uid":"1","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"8","uid":"1","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"2","uid":"1","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"}],"total":"8"}
      * status : 1
      * referer :
      * state : 1
@@ -52,8 +53,22 @@ public class FriendDetail {
         this.state = state;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
+        /**
+         * list : [{"id":"24","uid":"9999","cate":"1","type":"视频","content":"sdfdsafsafasdf","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"1","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"14","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"不独特TOTO","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"22","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335406","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"2","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"不独特TOTO","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"21","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561335217","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"1","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"不独特TOTO","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"20","uid":"9999","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561305159","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"1","isgonggao":"0","title":"这里是标题","tag":"agt","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"不独特TOTO","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"19","uid":"100000","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"1561277403","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"1，1","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"手机用户2610","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"11","uid":"1","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"0","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"8","uid":"1","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"},{"id":"2","uid":"1","cate":"1","type":"视频","content":"这里是内容","share":"0","comment":"0","zan":"0","createtime":"0","status":"1","zhiding":"0","tui":"1","image":"http://live.shuiqiao.net/default.jpg","click":"0","isgonggao":"0","title":"这里是标题","tag":"","images":null,"playtime":null,"videourl":"http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4","collect":"0","username":"admin","avatar":"http://live.shuiqiao.net/default_thumb.jpg","catename":"交友1s"}]
+         * total : 8
+         */
+
+        private String total;
         private List<ListBean> list;
+
+        public String getTotal() {
+            return total;
+        }
+
+        public void setTotal(String total) {
+            this.total = total;
+        }
 
         public List<ListBean> getList() {
             return list;
@@ -63,12 +78,12 @@ public class FriendDetail {
             this.list = list;
         }
 
-        public static class ListBean {
+        public static class ListBean implements Serializable{
             /**
              * id : 24
              * uid : 9999
              * cate : 1
-             * type : 5
+             * type : 视频
              * content : sdfdsafsafasdf
              * share : 0
              * comment : 0
@@ -78,7 +93,7 @@ public class FriendDetail {
              * zhiding : 1
              * tui : 0
              * image : http://live.shuiqiao.net/default.jpg
-             * click : 2
+             * click : 14
              * isgonggao : 0
              * title : 这里是标题
              * tag :
@@ -86,6 +101,9 @@ public class FriendDetail {
              * playtime : null
              * videourl : http://v6.starapp.cc/uploads/video/20181111/4c4592068038796518887b2070124b93.mp4
              * collect : 0
+             * username : 不独特TOTO
+             * avatar : http://live.shuiqiao.net/default_thumb.jpg
+             * catename : 交友1s
              */
 
             private String id;
@@ -106,9 +124,12 @@ public class FriendDetail {
             private String title;
             private String tag;
             private Object images;
-            private String playtime;
+            private Object playtime;
             private String videourl;
             private String collect;
+            private String username;
+            private String avatar;
+            private String catename;
 
             public String getId() {
                 return id;
@@ -254,11 +275,11 @@ public class FriendDetail {
                 this.images = images;
             }
 
-            public String getPlaytime() {
+            public Object getPlaytime() {
                 return playtime;
             }
 
-            public void setPlaytime(String playtime) {
+            public void setPlaytime(Object playtime) {
                 this.playtime = playtime;
             }
 
@@ -276,6 +297,30 @@ public class FriendDetail {
 
             public void setCollect(String collect) {
                 this.collect = collect;
+            }
+
+            public String getUsername() {
+                return username;
+            }
+
+            public void setUsername(String username) {
+                this.username = username;
+            }
+
+            public String getAvatar() {
+                return avatar;
+            }
+
+            public void setAvatar(String avatar) {
+                this.avatar = avatar;
+            }
+
+            public String getCatename() {
+                return catename;
+            }
+
+            public void setCatename(String catename) {
+                this.catename = catename;
             }
         }
     }

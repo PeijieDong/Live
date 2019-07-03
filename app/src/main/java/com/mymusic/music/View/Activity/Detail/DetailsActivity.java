@@ -344,14 +344,62 @@ public class DetailsActivity extends BaseActivity {
 
     private void initFocus() {
         if(isFocus){
+            checkLogin();
             isFocus = false;
             focus.setBackgroundResource(R.drawable.focus);
             focus.setText("+关注");
+            initFocusCencel();
         }else{
+            checkLogin();
             isFocus = true;
             focus.setBackgroundResource(R.drawable.isfocus);
             focus.setText("已关注");
+            initFocusNet();
         }
+    }
+
+    private void initFocusCencel() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("touid",data.getData().getList().getUid());
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
+        NetRequest.postFormHeadRequest(UrlManager.Focus_Cencel, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                Toast.makeText(DetailsActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(DetailsActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void initFocusNet() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("touid",data.getData().getList().getUid());
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
+        NetRequest.postFormHeadRequest(UrlManager.Focus_Friend, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                Toast.makeText(DetailsActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(DetailsActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //like_press
