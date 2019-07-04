@@ -71,8 +71,13 @@ public class CommunityAdviceActivity extends BaseActivity implements View.OnClic
 
                 break;
             case R.id.post:
+                initNet();
                 break;
         }
+    }
+
+    private void initNet() {
+
     }
 
     private void initCamera() {

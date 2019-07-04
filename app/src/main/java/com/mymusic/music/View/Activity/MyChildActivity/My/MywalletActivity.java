@@ -26,6 +26,7 @@ import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -70,7 +71,7 @@ public class MywalletActivity extends BaseActivity {
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
                 Wallet bean = GsonUtil.GsonToBean(result, Wallet.class);
-                money_balance.setText(bean.getMoney());
+                money_balance.setText(bean.getData().getList().getMoney());
                 List<String> title = new ArrayList<>();
                 title.add("代理充值");
                 title.add("在线充值");
@@ -111,4 +112,6 @@ public class MywalletActivity extends BaseActivity {
                 break;
         }
     }
+
+
 }

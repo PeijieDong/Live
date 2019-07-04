@@ -4,15 +4,19 @@ import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.mymusic.music.DataBean.MoneyDetail;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
+import com.mymusic.music.View.Adapter.MoneyDetailAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
@@ -36,6 +40,7 @@ public class MoneyDetailActivity extends BaseActivity {
     TextView getMoney;
     @BindView(R.id.Rc)
     RecyclerView rc;
+    MoneyDetail bean;
     @Override
     protected void initVariables(Intent intent) {
 
@@ -67,6 +72,8 @@ public class MoneyDetailActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
+                bean = GsonUtil.GsonToBean(result, MoneyDetail.class);
+                initRc();
             }
 
             @Override
@@ -74,6 +81,12 @@ public class MoneyDetailActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void initRc() {
+        rc.setLayoutManager(new LinearLayoutManager(this));
+        MoneyDetailAdapter adapter = new MoneyDetailAdapter(R.layout.moner_detail_layout,bean.getData().getList());
+        rc.setAdapter(adapter);
     }
 
     @OnClick({R.id.all_money,R.id.put_money,R.id.get_money})

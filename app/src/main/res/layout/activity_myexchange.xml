@@ -50,6 +50,7 @@
         android:layout_height="100dp"
         android:background="@color/white">
         <EditText
+            android:id="@+id/exchange_Code"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="40dp"
@@ -60,6 +61,7 @@
             android:background="@drawable/exchange_code"
             android:hint="@string/exchange_put"/>
         <Button
+            android:id="@+id/exchange"
             android:layout_width="110dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"

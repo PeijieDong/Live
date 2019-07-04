@@ -23,7 +23,7 @@
             android:layout_centerInParent="true"
             android:textSize="18sp"
             android:textColor="#030303"
-            android:text="@string/jubao"/>
+            android:text="圈子列表"/>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

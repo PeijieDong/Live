@@ -55,7 +55,9 @@ public class VideoFragment extends BaseFragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    if(((VideoViewHolder) viewHolder).mp_video.isPlay()){
+                    View view = helper.findSnapView(layoutManager);
+                    viewHolder = videoRc.getChildViewHolder(view);
+                    if(((VideoViewHolder) viewHolder)!=null && ((VideoViewHolder) viewHolder).mp_video.isPlay()){
                         ((VideoViewHolder) viewHolder).mp_video.goOnPlayOnPause();
                     } else {//暂停
                         if (((VideoViewHolder) viewHolder).mp_video.currentState == JZVideoPlayer.CURRENT_STATE_PAUSE) {
@@ -159,8 +161,6 @@ public class VideoFragment extends BaseFragment {
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
-        View view = helper.findSnapView(layoutManager);
-        viewHolder = videoRc.getChildViewHolder(view);
     }
 
     private void initCollection() {

@@ -28,12 +28,12 @@ public class WalletAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return bean.getAgent().size();
+        return bean.getData().getList().getAgent().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return bean.getAgent().get(position);
+        return bean.getData().getList().getAgent().get(position);
     }
 
     @Override
@@ -54,8 +54,8 @@ public class WalletAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.money.setText("￥"+bean.getAgent().get(position).getMoney());
-        holder.num.setText(bean.getAgent().get(position).getCoin());
+        holder.money.setText("￥"+bean.getData().getList().getAgent().get(position).getMoney());
+        holder.num.setText(bean.getData().getList().getAgent().get(position).getCoin());
         if(i == position){
             holder.back.setBackgroundResource(R.drawable.wallet_back_press);
         }else{

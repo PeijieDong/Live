@@ -111,4 +111,15 @@ public class UrlManager {
     public static final String Focus_Cencel = BaseUrl+"index/follow_cancel";
 
     public static final String Comment_List = BaseUrl+"index/plinfo";
+
+    public static final String Exchange = BaseUrl+"users/duihuan";
+
+    public static final String TopUp = BaseUrl+"users/wallet";
+
+    public static final String Publish = BaseUrl+"users/mypublish";
+
+    public static final String Friend_Find = BaseUrl+"index/qzsearch";
+
+    public static final String Home_Find = BaseUrl+"index/search";
+
 }

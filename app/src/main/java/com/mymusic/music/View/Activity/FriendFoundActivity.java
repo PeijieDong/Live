@@ -6,11 +6,17 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.FriendAllData;
 import com.mymusic.music.DataBean.FriendAllTitle;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LeftNavigation;
@@ -33,6 +39,10 @@ public class FriendFoundActivity extends BaseActivity {
     LeftNavigation navigation;
     @BindView(R.id.friend_found_rc)
     RecyclerView rc;
+    @BindView(R.id.userFind)
+    EditText userFind;
+    @BindView(R.id.rc)
+    RecyclerView Rc;
     FriendAllTitle title;
     boolean chose;
     @Override
@@ -48,6 +58,67 @@ public class FriendFoundActivity extends BaseActivity {
     @Override
     protected void LoadData() {
         initTitle();
+        initEdit();
+    }
+
+    private void initEdit() {
+        userFind.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                    rc.setVisibility(View.GONE);
+                    navigation.setVisibility(View.GONE);
+                    Rc.setVisibility(View.VISIBLE);
+                    initFind();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void initFind() {
+        checkLogin();
+        if(userFind.getText().toString().equals("")){
+            Toast.makeText(this,"不能为空",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("keywords",userFind.getText().toString());
+        NetRequest.postFormHeadRequest(UrlManager.Friend_Find, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                FriendAllData data = GsonUtil.GsonToBean(result, FriendAllData.class);
+                initFindRc(data.getData().getList());
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
+    }
+
+    private void initFindRc(List<FriendAllData.DataBean.ListBeanX> list) {
+        Rc.setLayoutManager(new LinearLayoutManager(this));
+        FriendFoundRcAdapter adapter = new FriendFoundRcAdapter(R.layout.friend_found_item,list);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                if(chose){
+                    Intent intent = new Intent();
+                    intent.putExtra("cid",list.get(i).getCid());
+                    intent.putExtra("title",list.get(i).getTitle());
+                    setResult(300,intent);
+                    finish();
+                }else {
+                    Intent intent = new Intent(FriendFoundActivity.this, FriendDetailActivity.class);
+                    intent.putExtra("id",list.get(i).getCid());
+                    startActivity(intent);
+                }
+            }
+        });
+        Rc.setAdapter(adapter);
     }
 
     private void initTitle() {

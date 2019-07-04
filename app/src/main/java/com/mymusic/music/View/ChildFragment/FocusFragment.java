@@ -88,7 +88,7 @@ public class FocusFragment extends BaseFragment {
                         public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                             TextView focus = view.findViewById(R.id.focus_rc_focusbt);
                             if (focus.getText().toString().equals("+关注")) {
-                                focus.setText("取消关注");
+                                focus.setText("已关注");
                                 initFocus(true,i);
                                 focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
                             } else {
@@ -137,7 +137,7 @@ public class FocusFragment extends BaseFragment {
                             TextView focus = view.findViewById(R.id.focus_rc_focusbt);
                             focusTv.setText("已关注"+bean.getData().getTotal()+"个");
                             if (focus.getText().toString().equals("+关注")) {
-                                focus.setText("取消关注");
+                                focus.setText("已关注");
                                 focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
                                 initFocusFriend(true,i);
                             } else {

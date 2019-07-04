@@ -3,7 +3,9 @@ package com.mymusic.music.View.Activity;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,17 +14,31 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.mymusic.music.DataBean.HomeData;
+import com.mymusic.music.DataBean.Hot;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
+import com.mymusic.music.View.Activity.Detail.DetailsActivity;
+import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseActivity;
+import com.mymusic.music.base.UrlManager;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 public class FoundActivity extends BaseActivity implements View.OnKeyListener {
 
@@ -47,6 +63,7 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
     private List<String> list;
     private LayoutInflater inflater;
     private String text;
+    private List<String> list2;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -62,8 +79,24 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
     protected void LoadData() {
         userFind.setOnKeyListener(this);
         inflater = getLayoutInflater();
-        //初始化流式布局
-        initFlow();
+        initHot();
+    }
+
+    private void initHot() {
+        NetRequest.getFormRequest(UrlManager.Home_Find, null, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Hot hot = GsonUtil.GsonToBean(result, Hot.class);
+                list2 = hot.getData().getList();
+                //初始化流式布局
+                initFlow();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
     }
 
     private void initFlow() {
@@ -92,7 +125,7 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
         });
 
         //加载数据
-        hotFound.setAdapter(new TagAdapter<String>(list) {
+        hotFound.setAdapter(new TagAdapter<String>(list2) {
             @Override
             public View getView(FlowLayout parent, int position, String dataBean) {
                 TextView textView = (TextView) inflater.inflate(R.layout.search_page_flowlayout_tv2, FoundActivity.this.history, false);
@@ -104,7 +137,7 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
         hotFound.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-
+                initNet(list2.get(position));
                 return true;
             }
         });
@@ -126,12 +159,43 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
             } else {
                 list.add(inputContent);
                 SharedPrefrenceUtils.putStringList(this,"history",list);
-
+                initNet(inputContent);
             }
         }
         return false;
     }
 
+    private void initNet(String inputContent) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("keyword",inputContent);
+        NetRequest.postFormHeadRequest(UrlManager.Home_Find, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Rc.setVisibility(View.VISIBLE);
+                found.setVisibility(View.GONE);
+                HomeData data = GsonUtil.GsonToBean(result, HomeData.class);
+                initRc(data.getData().getList());
+        }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
+    }
+
+    private void initRc(List<HomeData.DataBean.ListBean> list) {
+        Rc.setLayoutManager(new LinearLayoutManager(this));
+        HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(list);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(FoundActivity.this, DetailsActivity.class);
+                intent.putExtra("id",list.get(position).getId());
+                startActivity(intent);
+            }
+        });
+    }
 
 
     @OnClick({R.id.toCenter,R.id.deleteFound})
