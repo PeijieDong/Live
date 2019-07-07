@@ -148,7 +148,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         text.post(new Runnable() {
                             @Override
                             public void run() {
-                                if(text.getLineCount() >= 3){
+                                if(text.getLineCount() > 3){
                                     text.setMaxLines(3);
                                     vis.setVisibility(View.VISIBLE);
                                 }

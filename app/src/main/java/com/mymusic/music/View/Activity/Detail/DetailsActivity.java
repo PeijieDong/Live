@@ -298,7 +298,7 @@ public class DetailsActivity extends BaseActivity {
 
     private void initLike(String pid) {
         HashMap<String, String> map = new HashMap<>();
-        map.put("type","2");
+        map.put("type","1");
         map.put("id",pid);
         NetRequest.postFormHeadRequest(UrlManager.CommentLike, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
