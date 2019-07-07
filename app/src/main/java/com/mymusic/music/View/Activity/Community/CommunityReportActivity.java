@@ -52,7 +52,7 @@ public class CommunityReportActivity extends BaseActivity implements View.OnClic
     private void initRc() {
         Rc.setLayoutManager(new GridLayoutManager(this,3));
         adapter = new CommunityRcAdapter(R.layout.community_advice_item,list);
-        View view = LayoutInflater.from(this).inflate(R.layout.activity_community_advice_foot, null);
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_community_advice_foot2, null);
         view.setOnClickListener(this);
         adapter.addFooterView(view);
         Rc.setAdapter(adapter);
@@ -73,7 +73,7 @@ public class CommunityReportActivity extends BaseActivity implements View.OnClic
 
     private void initCamera() {
         Matisse.from(this)
-                .choose(MimeType.ofAll(), false) // 选择 mime 的类型
+                .choose(MimeType.ofImage(), false) // 选择 mime 的类型
                 .countable(true)
                 .theme(R.style.Matisse_Zhihu )
                 .maxSelectable(9) // 图片选择的最多数量

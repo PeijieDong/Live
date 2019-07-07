@@ -83,6 +83,7 @@ public class FocusFragment extends BaseFragment {
                     bean = GsonUtil.GsonToBean(result, FocusPerson.class);
                     focusRc.setLayoutManager(new LinearLayoutManager(getContext()));
                     FocusrcAdaper2 adaper = new FocusrcAdaper2(R.layout.focus_rc_layout, bean.getData().getList());
+                    adaper.setEmptyView(LayoutInflater.from(getContext()).inflate(R.layout.empty_layout,null));
                     adaper.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                         @Override
                         public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {

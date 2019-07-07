@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.mymusic.music.DataBean.Money;
 import com.mymusic.music.DataBean.Wallet;
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.Live;
@@ -43,6 +44,8 @@ public class MywalletActivity extends BaseActivity {
     TextView money_detail;
     @BindView(R.id.wallet_balance_num)
     TextView money_balance;
+    @BindView(R.id.go_money)
+    TextView goMoney;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -94,7 +97,7 @@ public class MywalletActivity extends BaseActivity {
             }
         });
     }
-    @OnClick({R.id.money_detail,R.id.helper,R.id.fankui})
+    @OnClick({R.id.money_detail,R.id.helper,R.id.fankui,R.id.go_money})
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.money_detail:
@@ -110,7 +113,31 @@ public class MywalletActivity extends BaseActivity {
                 Intent intent2 = new Intent(this, WalletFeedback.class);
                 startActivity(intent2);
                 break;
+            case R.id.go_money:
+                initMoney();
+                break;
         }
+    }
+
+    private void initMoney() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("money","100");
+        map.put("coin","1000");
+        map.put("type","1");
+        NetRequest.postFormHeadRequest(UrlManager.Money, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Money money = GsonUtil.GsonToBean(result, Money.class);
+                Intent intent1 = new Intent(MywalletActivity.this, WebActivity.class);
+                intent1.putExtra("url",money.getData().getUrl());
+                startActivity(intent1);
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
     }
 
 

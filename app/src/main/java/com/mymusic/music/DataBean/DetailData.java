@@ -120,7 +120,7 @@ public class DetailData {
             private String catename;
             private String avatar;
             private String sex;
-            private List<?> images;
+            private List<String> images;
 
             public String getId() {
                 return id;
@@ -314,11 +314,11 @@ public class DetailData {
                 this.sex = sex;
             }
 
-            public List<?> getImages() {
+            public List<String> getImages() {
                 return images;
             }
 
-            public void setImages(List<?> images) {
+            public void setImages(List<String> images) {
                 this.images = images;
             }
         }

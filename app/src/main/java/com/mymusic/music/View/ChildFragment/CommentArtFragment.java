@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.Art;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
@@ -67,6 +69,7 @@ public class CommentArtFragment extends BaseFragment {
         NetRequest.postFormHeadRequest(UrlManager.My_Comment, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 Art bean = GsonUtil.GsonToBean(result, Art.class);
                 initView(bean);
             }
@@ -81,6 +84,32 @@ public class CommentArtFragment extends BaseFragment {
     private void initView(Art bean) {
         rc.setLayoutManager(new LinearLayoutManager(getContext()));
         ArRcAdpater adpater = new ArRcAdpater(R.layout.art_rc_layout,bean.getData().getList());
+        adpater.setEmptyView(LayoutInflater.from(getContext()).inflate(R.layout.empty_layout,null));
+        adpater.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.close:
+                        initClose();
+                        break;
+                }
+            }
+        });
         rc.setAdapter(adpater);
+    }
+
+    private void initClose() {
+        NetRequest.getFormRequest(UrlManager.Delete, null, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Toast.makeText(getContext(),"删除成功",Toast.LENGTH_SHORT).show();
+                initNet();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(getContext(),"删除失败",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -49,13 +49,14 @@ public class PutVideoActivity extends BaseActivity {
     ImageView Video;
     @BindView(R.id.post)
     TextView Post;
-    @BindView(R.id.sign)
+    @BindView(R.id.chose_flow)
     TagFlowLayout flowLayout;
     @BindView(R.id.et_content)
     EditText content;
     @BindView(R.id.have_chose)
     TextView haveChose;
-
+    @BindView(R.id.chose_sign2)
+    ImageView logosign;
     private List<String> list;
     private int REQUEST_CODE_CHOOSE = 2;
     private List<Uri> image = new ArrayList<>();
@@ -158,10 +159,16 @@ public class PutVideoActivity extends BaseActivity {
                     }
                 });
             }
+            if(list.size() == 0){
+                logosign.setImageResource(R.drawable.tag_icon_grey);
+            }
             if(i == 0){
-
+                list = new ArrayList<>();
+                haveChose.setText("添加标签优先审核");
+                logosign.setImageResource(R.drawable.tag_icon_grey);
             }else{
                 haveChose.setText("已选"+i+"个标签");
+                logosign.setImageResource(R.drawable.tag_icon_red_l);
             }
         }
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
@@ -169,4 +176,5 @@ public class PutVideoActivity extends BaseActivity {
             Glide.with(this).load(image.get(0)).into(Video);
         }
     }
+
 }

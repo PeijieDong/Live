@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +75,7 @@ public class MyfansActivity extends BaseActivity {
     private void initView(Fans fans) {
         rc.setLayoutManager(new LinearLayoutManager(this));
         FansRcAdapter adapter = new FansRcAdapter(R.layout.focus_rc_layout,fans.getData().getList());
+        adapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.empty_layout,null));
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {

@@ -10,8 +10,7 @@
         android:id="@+id/userDetail_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:background="@drawable/blue_white">
+        android:fitsSystemWindows="true">
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,124 +18,151 @@
             app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false">
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="10dp"
-                android:src="@drawable/icon_white_back"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_collapseMode="pin">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/head"
-                    android:layout_width="92dp"
-                    android:layout_height="92dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="75dp" />
-                <android.support.constraint.ConstraintLayout
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/back_random"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
-                    <TextView
-                        android:id="@+id/userDetail_username"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:textColor="#333333"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginLeft="15dp" />
-                    <LinearLayout
-                        android:layout_width="75dp"
-                        android:layout_height="24dp"
-                        android:orientation="horizontal"
+                    android:layout_height="200dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/my_home_page_member_default">
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="10dp"
+                        android:src="@drawable/icon_white_back"/>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/head"
+                        android:layout_width="92dp"
+                        android:layout_height="92dp"
                         android:layout_marginLeft="15dp"
-                        android:gravity="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:background="@drawable/back_level"
-                        app:layout_constraintLeft_toRightOf="@id/userDetail_username">
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/my_icon_level"
-                            android:layout_gravity="center_vertical"/>
-                        <TextView
-                            android:id="@+id/level"
-                            android:layout_width="43dp"
-                            android:layout_height="28dp"
-                            android:gravity="center"
-                            android:textColor="#B3842B"
-                            android:text="Lv.1" />
-                    </LinearLayout>
+                        android:layout_marginTop="30dp"/>
+                </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/edit_tv"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/userdetail_editor"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:textColor="#999999"
-                        android:textSize="12sp"
-                        android:gravity="center"
-                        android:background="@drawable/gray_back"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginRight="16dp"/>
-                </android.support.constraint.ConstraintLayout>
-                <TextView
-                    android:id="@+id/userDetail_des"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:textSize="14sp"
-                    android:textColor="#999999"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#F4F4F6"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_collapseMode="pin">
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
+                        <TextView
+                            android:id="@+id/userDetail_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginLeft="15dp" />
+                        <LinearLayout
+                            android:layout_width="75dp"
+                            android:layout_height="24dp"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:background="@drawable/back_level"
+                            app:layout_constraintLeft_toRightOf="@id/userDetail_username">
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/my_icon_level"
+                                android:layout_gravity="center_vertical"/>
+                            <TextView
+                                android:id="@+id/level"
+                                android:layout_width="43dp"
+                                android:layout_height="28dp"
+                                android:gravity="center"
+                                android:textColor="#B3842B"
+                                android:text="Lv.1" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/edit_tv"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/userdetail_editor"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textColor="#999999"
+                            android:textSize="12sp"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:background="@drawable/gray_back"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginRight="16dp"/>
+                        <TextView
+                            android:id="@+id/userDetail_focus"
+                            android:layout_width="60dp"
+                            android:layout_height="24dp"
+                            android:textColor="@color/white"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:background="@drawable/focus"
+                            android:text="@string/focus"/>
+                    </android.support.constraint.ConstraintLayout>
                     <TextView
-                        android:id="@+id/fansNum"
+                        android:id="@+id/userDetail_des"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#999999"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:textSize="14sp"
-                        android:layout_marginLeft="15dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#999999"
-                        android:text="粉丝"
-                        android:layout_marginLeft="4dp"/>
-                    <TextView
-                        android:id="@+id/focusNum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#999999"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="40dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#999999"
-                        android:text="关注"
-                        android:layout_marginLeft="4dp"/>
+                        android:textColor="#999999"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#F4F4F6"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/fansNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#999999"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="15dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#999999"
+                            android:text="粉丝"
+                            android:layout_marginLeft="4dp"/>
+                        <TextView
+                            android:id="@+id/focusNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#999999"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="40dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#999999"
+                            android:text="关注"
+                            android:layout_marginLeft="4dp"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="#F4F4F6"/>
                 </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:background="#F4F4F6"/>
             </LinearLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

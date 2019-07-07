@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -86,6 +87,7 @@ public class MoneyDetailActivity extends BaseActivity {
     private void initRc() {
         rc.setLayoutManager(new LinearLayoutManager(this));
         MoneyDetailAdapter adapter = new MoneyDetailAdapter(R.layout.moner_detail_layout,bean.getData().getList());
+        adapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.empty_layout,null));
         rc.setAdapter(adapter);
     }
 

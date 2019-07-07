@@ -11,7 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mymusic.music.DataBean.UserDetail;
@@ -31,6 +33,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,7 +65,12 @@ public class UserDetailActivity extends BaseActivity {
     TextView level;
     @BindView(R.id.edit_tv)
     TextView editTv;
+    @BindView(R.id.userDetail_focus)
+    TextView focus;
+    @BindView(R.id.back_random)
+    LinearLayout backRandom;
     private String id;
+    private boolean isFocus = false;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -76,8 +84,29 @@ public class UserDetailActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
+        Random random = new Random();
+        int i = random.nextInt(4);
+        switch (i){
+            case 0:
+                backRandom.setBackgroundResource(R.drawable.circle_single_bg_1);
+                break;
+            case 1:
+                backRandom.setBackgroundResource(R.drawable.circle_single_bg_2);
+                break;
+            case 2:
+                backRandom.setBackgroundResource(R.drawable.circle_single_bg_3);
+                break;
+            case 3:
+                backRandom.setBackgroundResource(R.drawable.circle_single_bg_4);
+                break;
+            case 4:
+                backRandom.setBackgroundResource(R.drawable.circle_single_bg_1);
+                break;
+        }
         if(id.equals(Live.getInstance().getUser(this).getData().getId())){
-            editTv.setVisibility(View.GONE);
+            editTv.setVisibility(View.VISIBLE);
+        }else{
+            focus.setVisibility(View.VISIBLE);
         }
         initNet();
         initView();
@@ -137,15 +166,23 @@ public class UserDetailActivity extends BaseActivity {
         list.add(getResources().getString(R.string.dynamic));
         list.add(getResources().getString(R.string.video));
         list.add(getResources().getString(R.string.archives));
+        Bundle bundle = new Bundle();
+        bundle.putString("id",id);
         List<Fragment> data = new ArrayList<>();
-        data.add(new UserDynamicFragment());
-        data.add(new UserVideoFragment());
-        data.add(new UserArchivesFragment());
+        UserDynamicFragment dynamicFragment = new UserDynamicFragment();
+        dynamicFragment.setArguments(bundle);
+        data.add(dynamicFragment);
+        UserVideoFragment videoFragment = new UserVideoFragment();
+        videoFragment.setArguments(bundle);
+        data.add(videoFragment);
+        UserArchivesFragment archivesFragment = new UserArchivesFragment();
+        archivesFragment.setArguments(bundle);
+        data.add(archivesFragment);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager(),list,data));
     }
 
-    @OnClick({R.id.edit_tv,R.id.back})
+    @OnClick({R.id.edit_tv,R.id.back,R.id.userDetail_focus})
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.edit_tv:
@@ -155,6 +192,67 @@ public class UserDetailActivity extends BaseActivity {
             case R.id.back:
                 finish();
                 break;
+            case R.id.userDetail_focus:
+                initFocus();
+                break;
         }
+    }
+    private void initFocus() {
+        if(isFocus){
+            checkLogin();
+            isFocus = false;
+            focus.setBackgroundResource(R.drawable.focus);
+            focus.setText("+关注");
+            initFocusCencel();
+        }else{
+            checkLogin();
+            isFocus = true;
+            focus.setBackgroundResource(R.drawable.isfocus);
+            focus.setText("已关注");
+            initFocusNet();
+        }
+    }
+
+    private void initFocusCencel() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("touid",id);
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
+        NetRequest.postFormHeadRequest(UrlManager.Focus_Cencel, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                Toast.makeText(UserDetailActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(UserDetailActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void initFocusNet() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("touid",id);
+        if(Live.getInstance().getToken(this) == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
+        NetRequest.postFormHeadRequest(UrlManager.Focus_Friend, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                Toast.makeText(UserDetailActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(UserDetailActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

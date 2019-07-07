@@ -14,7 +14,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:padding="10dp"
+            android:src="@drawable/my_publish_delete"/>
         <TextView
             android:id="@+id/post"
             android:layout_width="50dp"
@@ -109,12 +110,12 @@
             android:id="@+id/image_icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <com.zhy.view.flowlayout.TagFlowLayout
-            android:id="@+id/chose_flow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/image_icon"/>
     </RelativeLayout>
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/chose_flow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_icon"/>
     <LinearLayout
         android:id="@+id/chose_sign"
         android:layout_width="wrap_content"
@@ -127,9 +128,10 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/back_gray_radio">
         <ImageView
+            android:id="@+id/chose_sign2"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/tag_icon_grey" />
         <TextView
             android:id="@+id/have_chose"
             android:layout_width="wrap_content"

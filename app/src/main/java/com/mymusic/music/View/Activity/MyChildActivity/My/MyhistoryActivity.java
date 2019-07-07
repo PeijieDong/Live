@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -74,6 +75,7 @@ public class MyhistoryActivity extends BaseActivity {
     private void initView(History bean) {
         historyRc.setLayoutManager(new LinearLayoutManager(this));
         HistoryRcAdapter adapter = new HistoryRcAdapter(R.layout.history_rc_item, bean.getData().getList());
+        adapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.empty_layout,null));
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

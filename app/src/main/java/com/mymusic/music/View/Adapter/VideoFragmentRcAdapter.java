@@ -28,6 +28,7 @@ public class VideoFragmentRcAdapter extends BaseQuickAdapter<CommentBean.DataBea
         helper.setText(R.id.detail_name,item.getUser_nicename())
                 .setText(R.id.detail_time,item.getCreatetime())
                 .setText(R.id.detail_content,item.getContent())
-                .addOnClickListener(R.id.comment_like);
+                .addOnClickListener(R.id.comment_like)
+                .addOnClickListener(R.id.detail_head_cir);
     }
 }

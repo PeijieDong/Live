@@ -100,6 +100,10 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
             startActivity(intent);
             return;
         }
+        if(group.getCheckedRadioButtonId() == -1){
+            Toast.makeText(JubaoActivity.this,"请选择举报类型",Toast.LENGTH_SHORT).show();
+            return;
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("type",group.getCheckedRadioButtonId()+"");
         map.put("content",des.getText().toString());

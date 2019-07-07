@@ -17,7 +17,8 @@
         app:layout_constraintLeft_toLeftOf="@id/video_image"
         android:layout_margin="2dp"
         android:layout_width="25dp"
-        android:layout_height="20dp" />
+        android:layout_height="20dp"
+        android:src="@drawable/icon_video"/>
     <TextView
         android:id="@+id/video_time"
         android:layout_width="wrap_content"

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -73,6 +74,7 @@ public class MylikeActivity extends BaseActivity {
     private void initView(HomeData bean) {
         rc.setLayoutManager(new LinearLayoutManager(this));
         HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(bean.getData().getList());
+        adapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.empty_layout,null));
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp">
                     <ImageView
-                        android:id="@+id/back"
+                        android:id="@+id/close"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:padding="5dp"
@@ -57,9 +57,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:layout_centerInParent="true"/>
                 </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EDEDED"/>
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="85dp"
@@ -179,7 +183,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/commentNum"
-                        android:src="@drawable/home_comment"/>
+                        android:src="@drawable/post_collect_menu_n"/>
                     <TextView
                         android:id="@+id/commentNum"
                         android:layout_width="wrap_content"
@@ -236,10 +240,11 @@
                             android:layout_height="wrap_content"
                             android:text="@string/newhot"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:id="@+id/hotIcon"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:padding="2dp"
-                            android:src="@drawable/back_new"
+                            android:src="@drawable/post_sort_last"
                             android:layout_marginLeft="4dp"/>
                     </LinearLayout>
                     <TextView

@@ -28,7 +28,11 @@ public class ArRcAdpater extends BaseQuickAdapter<Art.DataBean.ListBean,BaseView
     protected void convert(BaseViewHolder helper, Art.DataBean.ListBean s) {
         helper.setText(R.id.title,Live.getInstance().get(mContext).getList().getUser_nicename())
                 .setText(R.id.time,s.getCreatetime())
-                .setText(R.id.detail,s.getContent());
+                .setText(R.id.detail,s.getContent())
+                .setText(R.id.type,s.getType())
+                .setText(R.id.des,s.getCatename())
+                .addOnClickListener(R.id.close);
         Glide.with(mContext).load(Live.getInstance().get(mContext).getList().getAvatar()).into((CircleImageView) helper.getView(R.id.head));
+        Glide.with(mContext).load(s.getImage()).into((ImageView) helper.getView(R.id.image));
     }
 }

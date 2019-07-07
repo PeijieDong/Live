@@ -23,6 +23,7 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
+import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
@@ -67,21 +68,40 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
     private void initNet() {
         Bundle bundle = getArguments();
         position = bundle.getInt("position");
-        HashMap<String, String> map = new HashMap<>();
-        map.put("cate", position+1+"");
-        NetRequest.getFormRequest(UrlManager.HOME_DATA, map, new NetRequest.DataCallBack() {
-            @Override
-            public void requestSuccess(String result) throws Exception {
-                Log.e("33",result);
-                HomeData data = GsonUtil.GsonToBean(result, HomeData.class);
-                initRc(data.getData().getList());
-            }
+        if(bundle.getString("found") != null){
+            HashMap<String, String> map = new HashMap<>();
+            map.put("type", position+1+"");
+            map.put("keyword",bundle.getString("found"));
+            NetRequest.postFormRequest(UrlManager.Home_Find, map, new NetRequest.DataCallBack() {
+                @Override
+                public void requestSuccess(String result) throws Exception {
+                    Log.e("33",result);
+                    HomeData data = GsonUtil.GsonToBean(result, HomeData.class);
+                    initRc(data.getData().getList());
+                }
 
-            @Override
-            public void requestFailure(Request request, IOException e) {
+                @Override
+                public void requestFailure(Request request, IOException e) {
 
-            }
-        });
+                }
+            });
+        }else {
+            HashMap<String, String> map = new HashMap<>();
+            map.put("cate", position + 1 + "");
+            NetRequest.getFormRequest(UrlManager.HOME_DATA, map, new NetRequest.DataCallBack() {
+                @Override
+                public void requestSuccess(String result) throws Exception {
+                    Log.e("33", result);
+                    HomeData data = GsonUtil.GsonToBean(result, HomeData.class);
+                    initRc(data.getData().getList());
+                }
+
+                @Override
+                public void requestFailure(Request request, IOException e) {
+
+                }
+            });
+        }
     }
     TextView likeNum;
     ImageView likeIcon;
@@ -102,11 +122,13 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()){
                     case R.id.themeBt:
+                        checkLogin();
                         Intent intent = new Intent(getActivity(), FriendDetailActivity.class);
                         intent.putExtra("id",list.get(position).getUid());
                         getContext().startActivity(intent);
                         break;
                     case R.id.icon_more:
+                        checkLogin();
                         BottomSheetDialog bottomSheet = new BottomSheetDialog(getContext());//实例化
                         bottomSheet.setCancelable(true);//设置点击外部是否可以取消
                         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_layout, null);
@@ -163,9 +185,15 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                         bottomSheet.show();//显示弹窗
                         break;
                     case R.id.ll_home_like:
+                        checkLogin();
                         likeNum = view.findViewById(R.id.likeNum);
                         likeIcon = view.findViewById(R.id.icon_like);
                         initLike(list,position);
+                        break;
+                    case R.id.found_head:
+                        Intent intent1 = new Intent(getContext(), UserDetailActivity.class);
+                        intent1.putExtra("UserId",1);
+                        startActivity(intent1);
                         break;
                 }
 
@@ -185,7 +213,6 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
                 Toast.makeText(getContext(),"操作成功",Toast.LENGTH_SHORT).show();
-                initNet();
             }
 
             @Override
@@ -214,7 +241,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             @Override
             public void requestSuccess(String result) throws Exception {
                 Toast.makeText(getContext(),"点赞成功",Toast.LENGTH_SHORT).show();
-                likeIcon.setBackground(getContext().getResources().getDrawable(R.drawable.ic_launcher_background));
+                likeIcon.setImageResource(R.drawable.like_press);
                 likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
             }
 
@@ -231,6 +258,13 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         initNet();
         refresh.finishRefresh();
+    }
+
+    public void checkLogin(){
+        if(Live.getInstance().getToken(getContext()) == null){
+            startActivity(new Intent(getContext(),LoginActivity.class));
+            return;
+        }
     }
 }
 

@@ -103,6 +103,10 @@ public class WalletFeedback extends BaseActivity implements View.OnClickListener
             Toast.makeText(this,"请完善信息",Toast.LENGTH_SHORT).show();
             return;
         }
+        if(group.getCheckedRadioButtonId() == -1){
+            Toast.makeText(this,"请选择举报类型",Toast.LENGTH_SHORT).show();
+            return;
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("file",PicToBase64.imageToBase64(list.get(0).getPath()));
         map.put("content",des.getText().toString());

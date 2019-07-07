@@ -3,6 +3,11 @@ package com.mymusic.music.View.Activity;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,6 +23,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.DataBean.Hot;
+import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
@@ -25,6 +31,8 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
+import com.mymusic.music.View.ChildFragment.HomePagerFragment;
+import com.mymusic.music.View.Fragment.HomeFragment;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -55,15 +63,19 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
     TagFlowLayout history;
     @BindView(R.id.flowLayout2)
     TagFlowLayout hotFound;
-    @BindView(R.id.foundRecycler)
-    RecyclerView Rc;
     @BindView(R.id.found)
     LinearLayout found;
+    @BindView(R.id.home_tab)
+    TabLayout tabLayout;
+    @BindView(R.id.home_vp)
+    ViewPager viewPager;
 
     private List<String> list;
     private LayoutInflater inflater;
     private String text;
     private List<String> list2;
+    private List<String> title;
+    private String inputContent;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -102,7 +114,7 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
     private void initFlow() {
         list = new ArrayList<>();
         List<String> data = SharedPrefrenceUtils.getStringList(this, "history");
-        if(data != null){
+        if (data != null) {
             list = data;
         }
         //加载数据
@@ -119,7 +131,8 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
         history.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-
+                inputContent = list.get(position);
+                initTab();
                 return true;
             }
         });
@@ -137,7 +150,8 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
         hotFound.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-                initNet(list2.get(position));
+                inputContent = list2.get(position);
+                initTab();
                 return true;
             }
         });
@@ -153,63 +167,86 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
                             .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
             // 其次再做相应操作
-            String inputContent = userFind.getText().toString().trim();
+            inputContent = userFind.getText().toString().trim();
             if (inputContent.equals("")) {
 
             } else {
-                list.add(inputContent);
-                SharedPrefrenceUtils.putStringList(this,"history",list);
-                initNet(inputContent);
+                if (SharedPrefrenceUtils.getStringList(this, "history") != null) {
+                    List<String> history = SharedPrefrenceUtils.getStringList(this, "history");
+                    if (!history.contains(inputContent)) {
+                        list.add(inputContent);
+                        SharedPrefrenceUtils.putStringList(this, "history", list);
+                    }
+                } else {
+                    list.add(inputContent);
+                    SharedPrefrenceUtils.putStringList(this, "history", list);
+                }
+                initTab();
             }
         }
         return false;
     }
 
-    private void initNet(String inputContent) {
-        HashMap<String, String> map = new HashMap<>();
-        map.put("keyword",inputContent);
-        NetRequest.postFormHeadRequest(UrlManager.Home_Find, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
-            @Override
-            public void requestSuccess(String result) throws Exception {
-                Rc.setVisibility(View.VISIBLE);
-                found.setVisibility(View.GONE);
-                HomeData data = GsonUtil.GsonToBean(result, HomeData.class);
-                initRc(data.getData().getList());
-        }
-
-            @Override
-            public void requestFailure(Request request, IOException e) {
-
-            }
-        });
-    }
-
-    private void initRc(List<HomeData.DataBean.ListBean> list) {
-        Rc.setLayoutManager(new LinearLayoutManager(this));
-        HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(list);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(FoundActivity.this, DetailsActivity.class);
-                intent.putExtra("id",list.get(position).getId());
-                startActivity(intent);
-            }
-        });
+    private void initTab() {
+        viewPager.setVisibility(View.VISIBLE);
+        tabLayout.setVisibility(View.VISIBLE);
+        found.setVisibility(View.GONE);
+        title = new ArrayList<>();
+        title.add("综合");
+        title.add("视频");
+        title.add("图片");
+        title.add("短文");
+        title.add("啪啪");
+        title.add("用户");
+        HomePagerAdapter adapter = new HomePagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
 
-    @OnClick({R.id.toCenter,R.id.deleteFound})
-    public void Onclick(View v){
-        switch (v.getId()){
+    @OnClick({R.id.toCenter, R.id.deleteFound})
+    public void Onclick(View v) {
+        switch (v.getId()) {
             case R.id.toCenter:
                 finish();
                 break;
             case R.id.deleteFound:
-                SharedPrefrenceUtils.clearn(this,"history");
+                SharedPrefrenceUtils.clearn(this, "history");
                 initFlow();
                 break;
         }
+
     }
 
+    class HomePagerAdapter extends FragmentStatePagerAdapter {
 
+
+        public HomePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            HomePagerFragment fragment = new HomePagerFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("position", i);
+            bundle.putString("found",inputContent);
+            fragment.setArguments(bundle);
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return title.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return title.get(position);
+        }
+    }
 }
+
+
+

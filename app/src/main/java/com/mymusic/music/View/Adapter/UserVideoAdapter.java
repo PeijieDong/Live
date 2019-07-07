@@ -1,6 +1,7 @@
 package com.mymusic.music.View.Adapter;
 
 import android.support.annotation.Nullable;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -23,6 +24,6 @@ public class UserVideoAdapter extends BaseQuickAdapter<UserVideo.DataBean.ListBe
     @Override
     protected void convert(BaseViewHolder helper, UserVideo.DataBean.ListBean item) {
         helper.setText(R.id.zan,item.getZan());
-//        Glide.with(mContext).load(item.get)
+        Glide.with(mContext).load(item.getFilepath()).into((ImageView) helper.getView(R.id.video));
     }
 }

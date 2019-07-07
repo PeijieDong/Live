@@ -10,8 +10,12 @@
     <style name="TabLayoutTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
         <item name="android:textSize">@dimen/pickerview_topbar_btn_textsize</item>
         <item name="android:textColor">@color/text_gray</item>
+        <item name="android:textStyle">bold</item>
     </style>
-
+    <style name="FoundTabLayoutTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">@dimen/pickerview_topbar_btn_textsize</item>
+        <item name="android:textColor">@color/text_gray_33</item>
+    </style>
     <declare-styleable name="SwitchButton">
         <attr name="border_width" format="dimension"></attr>
         <attr name="border_color" format="color"></attr>

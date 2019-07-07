@@ -22,6 +22,8 @@ import java.util.List;
 public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.ListBeanX,BaseViewHolder> implements View.OnClickListener {
     LinearLayout ll;
     FriendAllData.DataBean.ListBeanX item;
+    private ImageView open;
+
     public FriendAllAdapter(int layoutResId, @Nullable List<FriendAllData.DataBean.ListBeanX> data) {
         super(layoutResId, data);
     }
@@ -54,6 +56,7 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
         ImageView down = helper.getView(R.id.friend_all_down);
         down.setOnClickListener(this);
         ll = helper.getView(R.id.ll_back);
+        open = helper.getView(R.id.friend_all_down);
     }
 
     @Override
@@ -62,9 +65,11 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
             case R.id.friend_all_down:
                 int visibility = ll.getVisibility();
                 if(visibility == View.GONE){
+                    open.setImageResource(R.drawable.icon_arraw_open);
                     ll.setVisibility(View.VISIBLE);
                 }
                 if(visibility == View.VISIBLE){
+                    open.setImageResource(R.drawable.icon_arraw_close);
                     ll.setVisibility(View.GONE);
                 }
                 break;

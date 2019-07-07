@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,6 +63,8 @@ public class FriendDetailActivity extends BaseActivity {
     TextView gonggao_content;
     @BindView(R.id.floatBt)
     FloatingActionButton floatingActionButton;
+    @BindView(R.id.back_random)
+    LinearLayout backRandom;
     private String id;
     private FriendDetailTOP bean;
     private Boolean focuslogo = false;
@@ -112,6 +115,25 @@ public class FriendDetailActivity extends BaseActivity {
     }
 
     private void initView() {
+        Random random = new Random();
+        int i = random.nextInt(4);
+        switch (i){
+            case 0:
+                backRandom.setBackgroundResource(R.drawable.circle_single_bg_1);
+                break;
+            case 1:
+                backRandom.setBackgroundResource(R.drawable.circle_single_bg_2);
+                break;
+            case 2:
+                backRandom.setBackgroundResource(R.drawable.circle_single_bg_3);
+                break;
+            case 3:
+                backRandom.setBackgroundResource(R.drawable.circle_single_bg_4);
+                break;
+            case 4:
+                backRandom.setBackgroundResource(R.drawable.circle_single_bg_1);
+                break;
+        }
         List<String> title = new ArrayList<>();
         List<Fragment> list = new ArrayList<>();
         title.add(getResources().getString(R.string.dynamic));

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.mymusic.music.Util.BottomNavigation;
 import com.mymusic.music.Util.NetRequest;
@@ -23,10 +24,13 @@ import com.mymusic.music.View.Fragment.HomeFragment;
 import com.mymusic.music.View.Fragment.LiveFragment;
 import com.mymusic.music.View.Fragment.MyFragment;
 import com.mymusic.music.View.Fragment.VideoFragment;
+import com.mymusic.music.base.ActivityCollector;
 import com.mymusic.music.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 
@@ -109,4 +113,24 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
     protected void onResume() {
         super.onResume();
     }
+
+
+    private static boolean mBackKeyPressed = false;
+
+    @Override
+    public void onBackPressed() {
+        if(!mBackKeyPressed){
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            mBackKeyPressed = true;
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    mBackKeyPressed = false;
+                    }
+                }, 2000);
+        }else{//退出程序
+            this.finish();
+            ActivityCollector.finishAll();
+        }
+}
 }

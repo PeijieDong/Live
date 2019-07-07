@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class UserVideoFragment extends BaseFragment {
 
     @BindView(R.id.Rc)
     RecyclerView Rc;
-
+    String id;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_user_video,container,false);
@@ -39,18 +40,17 @@ public class UserVideoFragment extends BaseFragment {
 
     @Override
     protected void initVariables(Bundle bundle) {
-
+        id = bundle.getString("id");
     }
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
         initNet();
-
     }
 
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
-        map.put("uid","9999");
+        map.put("uid",id);
         map.put("page","1");
         NetRequest.postFormRequest(UrlManager.User_Video, map, new NetRequest.DataCallBack() {
             @Override
@@ -58,6 +58,8 @@ public class UserVideoFragment extends BaseFragment {
                 UserVideo bean = GsonUtil.GsonToBean(result, UserVideo.class);
                 Rc.setLayoutManager(new GridLayoutManager(getContext(),3));
                 UserVideoAdapter adapter = new UserVideoAdapter(R.layout.user_video_item,bean.getData().getList());
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.empty_layout, null);
+                adapter.setEmptyView(view);
                 adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

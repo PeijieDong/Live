@@ -17,7 +17,10 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:padding="7dp"
+                android:background="@drawable/white_cir"
+                android:src="@drawable/video_copy"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,12 +37,16 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:padding="7dp"
+                android:background="@drawable/white_cir"
+                android:src="@drawable/video_report"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="举报"
-                android:layout_marginBottom="15dp"/>
+                android:layout_marginBottom="15dp"
+                />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/collection"
@@ -51,7 +58,10 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:padding="7dp"
+                android:background="@drawable/white_cir"
+                android:src="@drawable/post_collect_menu_n"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,6 +78,8 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     TextView title;
     @BindView(R.id.icon_more)
     TextView icon_more;
+    @BindView(R.id.chose_sign2)
+    ImageView logosign;
     @BindView(R.id.chose_flow)
     TagFlowLayout choseFlow;
     private boolean isVideo = true;
@@ -99,12 +102,12 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void LoadData() {
-        navigation.addTab(new PutBottomNavigation.Tab().setNormalIcon(R.drawable.icon_home_normal)
-                .setPressedIcon(R.drawable.icon_home_pressed).setText("视频").setTextColor(R.color.navi_title_color));
-        navigation.addTab(new PutBottomNavigation.Tab().setNormalIcon(R.drawable.icon_home_normal)
-                .setPressedIcon(R.drawable.icon_home_pressed).setText("图片").setTextColor(R.color.navi_title_color));
-        navigation.addTab(new PutBottomNavigation.Tab().setNormalIcon(R.drawable.icon_home_normal)
-                .setPressedIcon(R.drawable.icon_home_pressed).setText("短文").setTextColor(R.color.navi_title_color));
+        navigation.addTab(new PutBottomNavigation.Tab().setNormalIcon(R.drawable.publish_video_n)
+                .setPressedIcon(R.drawable.publish_video_s).setText("视频").setTextColor(R.color.navi_title_color));
+        navigation.addTab(new PutBottomNavigation.Tab().setNormalIcon(R.drawable.publish_image_n)
+                .setPressedIcon(R.drawable.publish_image_s).setText("图片").setTextColor(R.color.navi_title_color));
+        navigation.addTab(new PutBottomNavigation.Tab().setNormalIcon(R.drawable.publish_read_n)
+                .setPressedIcon(R.drawable.publish_read_s).setText("短文").setTextColor(R.color.navi_title_color));
         navigation.setOnTabChechListener(new PutBottomNavigation.OnTabCheckListener() {
             @Override
             public void onTabSelected(View v, int position) {
@@ -223,11 +226,18 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         if(requestCode == 200 && resultCode == 100){
             int i = data.getIntExtra("data", 0);
             list = (List<String>)data.getStringArrayListExtra("tag");
+            if(list.size() == 0){
+                logosign.setImageResource(R.drawable.tag_icon_grey);
+            }
             if(i == 0){
-
+                list = new ArrayList<>();
+                initFlow();
+                haveChose.setText("添加标签优先审核");
+                logosign.setImageResource(R.drawable.tag_icon_grey);
             }else{
                 initFlow();
                 haveChose.setText("已选"+i+"个标签");
+                logosign.setImageResource(R.drawable.tag_icon_red_l);
             }
         }
         if(requestCode == 100 && resultCode == 300){

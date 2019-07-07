@@ -37,12 +37,14 @@
         <ImageView
             android:id="@+id/toCenter"
             android:layout_width="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.15"
             android:layout_height="50dp"
             android:textSize="16sp"
             android:gravity="center"
+            android:padding="7dp"
             android:textColor="#EB5F59"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:src="@drawable/post_search_cancel"/>
     </LinearLayout>
     <com.mymusic.music.Util.LeftNavigation
         android:id="@+id/leftNavigation"

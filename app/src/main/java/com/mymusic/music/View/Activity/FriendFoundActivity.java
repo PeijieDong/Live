@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Request;
 
 public class FriendFoundActivity extends BaseActivity {
@@ -102,6 +104,7 @@ public class FriendFoundActivity extends BaseActivity {
     private void initFindRc(List<FriendAllData.DataBean.ListBeanX> list) {
         Rc.setLayoutManager(new LinearLayoutManager(this));
         FriendFoundRcAdapter adapter = new FriendFoundRcAdapter(R.layout.friend_found_item,list);
+        adapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.empty_layout,null));
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
@@ -167,6 +170,7 @@ public class FriendFoundActivity extends BaseActivity {
     private void initRc(List<FriendAllData.DataBean.ListBeanX> list) {
         rc.setLayoutManager(new LinearLayoutManager(this));
         FriendFoundRcAdapter adapter = new FriendFoundRcAdapter(R.layout.friend_found_item,list);
+        adapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.empty_layout,null));
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
@@ -184,5 +188,13 @@ public class FriendFoundActivity extends BaseActivity {
             }
         });
         rc.setAdapter(adapter);
+    }
+    @OnClick({R.id.toCenter})
+    public void ClickEvent(View view){
+        switch (view.getId()){
+            case R.id.toCenter:
+                finish();
+                break;
+        }
     }
 }

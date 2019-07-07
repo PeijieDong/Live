@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.Image;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -101,6 +102,8 @@ public class DetailsActivity extends BaseActivity {
     TextView title;
     @BindView(R.id.icon_comment)
     ImageView collectionBt;
+    @BindView(R.id.hotIcon)
+    ImageView hotIcon;
     private String id;
     private DetailCommentRcAdapter adapter;
     private DetailData data;
@@ -158,9 +161,7 @@ public class DetailsActivity extends BaseActivity {
             TextView content = view.findViewById(R.id.tv_content);
             MyGridView grid = view.findViewById(R.id.home_rc_grid);
             content.setText(data.getData().getList().getContent());
-            List<String> list = new ArrayList<>();
-            list.add(data.getData().getList().getImage());
-            HomeGridAdapter adapter = new HomeGridAdapter(this,list);
+            HomeGridAdapter adapter = new HomeGridAdapter(this,data.getData().getList().getImages());
             grid.setAdapter(adapter);
             detail_ll.addView(view);
         }
@@ -170,10 +171,10 @@ public class DetailsActivity extends BaseActivity {
                 break;
             case "1":
                 //男
-                detail_sex.setImageResource(R.drawable.back_close);
+                detail_sex.setImageResource(R.drawable.fq_ic_gender_male);
                 break;
             case "2":
-                detail_sex.setImageResource(R.drawable.ic_launcher_background);
+                detail_sex.setImageResource(R.drawable.fq_ic_gender_female);
                 break;
         }
         detail_name.setText(data.getData().getList().getUsername());
@@ -215,6 +216,8 @@ public class DetailsActivity extends BaseActivity {
     private void initCommentList(List<CommentData.DataBean.ListBean> list) {
         detailRc.setLayoutManager(new LinearLayoutManager(this));
         adapter = new DetailCommentRcAdapter(R.layout.detail_item_layout,list);
+        View view2 = LayoutInflater.from(this).inflate(R.layout.empty_layout, null);
+        adapter.setEmptyView(view2);
         View view = LayoutInflater.from(this).inflate(R.layout.null_comment, null);
         if(list == null || list.size() == 0){
             adapter.addFooterView(view);
@@ -231,13 +234,19 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                 TextView likeNum = (TextView) adapter.getViewByPosition(detailRc,i, R.id.detail_like_num);
+                ImageView noLike = (ImageView) adapter.getViewByPosition(detailRc,i, R.id.detail_no_like);
+                ImageView isLike = (ImageView) adapter.getViewByPosition(detailRc,i, R.id.detail_is_like);
                 switch(view.getId()){
                     case R.id.detail_is_like:
-                        initLike();
+                        initLike(list.get(i).getPid());
+                        noLike.setImageResource(R.drawable.post_un_thumb_n);
+                        isLike.setImageResource(R.drawable.post_thumb_s);
                         likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
                         break;
                     case R.id.detail_no_like:
-                        initHate();
+                        initHate(list.get(i).getPid());
+                        noLike.setImageResource(R.drawable.post_un_thumb_s);
+                        isLike.setImageResource(R.drawable.post_thumb_n);
                         likeNum.setText(Integer.valueOf(likeNum.getText().toString())-1+"");
                         break;
                     case R.id.detail_more:
@@ -270,15 +279,41 @@ public class DetailsActivity extends BaseActivity {
         detailRc.setAdapter(adapter);
     }
 
-    private void initHate() {
+    private void initHate(String pid) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type","2");
+        map.put("id",pid);
+        NetRequest.postFormHeadRequest(UrlManager.CommentLike, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Toast.makeText(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
     }
 
-    private void initLike() {
+    private void initLike(String pid) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type","2");
+        map.put("id",pid);
+        NetRequest.postFormHeadRequest(UrlManager.CommentLike, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Toast.makeText(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+        });
     }
 
-    @OnClick({R.id.detail_head,R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.back,R.id.icon_comment})
+    @OnClick({R.id.detail_head,R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.close,R.id.icon_comment})
     public void Click(View view){
         switch (view.getId()){
             case R.id.detail_head:
@@ -304,17 +339,20 @@ public class DetailsActivity extends BaseActivity {
             case R.id.changeState:
                 if(hot.getText().toString().equals("最新")){
                     hot.setText("最热");
+                    hotIcon.setImageResource(R.drawable.post_sort_hot);
                     initComment("hot","0");
                 }else{
                     hot.setText("最新");
+                    hotIcon.setImageResource(R.drawable.post_sort_last);
                     initComment("new","0");
                 }
                 break;
-            case R.id.back:
+            case R.id.close:
                 finish();
                 break;
             case R.id.icon_comment:
                 initCollection();
+                collectionBt.setImageResource(R.drawable.post_collect_menu_s);
                 break;
         }
     }

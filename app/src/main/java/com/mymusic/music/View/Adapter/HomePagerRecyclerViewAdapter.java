@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -21,11 +24,14 @@ import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.LogUtils;
 import com.mymusic.music.Util.MyGridView;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
+import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
+import com.mymusic.music.base.BaseRecAdapter;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
@@ -46,10 +52,13 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     private final int VIDEO = 3;
     private final int RECOMMEND = 4;
     private final int ADV = 5;
+    private final int PAPA = 6;
+    private final int USER = 7;
     HomeData.DataBean.ListBean item;
 
     public HomePagerRecyclerViewAdapter(@Nullable List<HomeData.DataBean.ListBean> data) {
         super(data);
+
         setMultiTypeDelegate(new MultiTypeDelegate<HomeData.DataBean.ListBean>() {
             @Override
             protected int getItemType(HomeData.DataBean.ListBean s) {
@@ -72,6 +81,10 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                     //广告
                     case "关注":
                         return ADV;
+                    case "啪啪":
+                        return PAPA;
+                    case "用户":
+                        return USER;
                 }
                 return 5;
             }
@@ -79,8 +92,10 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         getMultiTypeDelegate().registerItemType(PICTURE,R.layout.home_rc_item_picture)
                               .registerItemType(ARTICLE,R.layout.home_rc_item_article)
                               .registerItemType(VIDEO,R.layout.home_rc_video)
-                              .registerItemType(RECOMMEND,R.layout.home_rc_recommend)
-                              .registerItemType(ADV,R.layout.home_rc_adv);
+                              .registerItemType(RECOMMEND,R.layout.empty_layout)
+                              .registerItemType(ADV,R.layout.home_rc_adv)
+                              .registerItemType(PAPA,R.layout.found_video_layout)
+                              .registerItemType(USER,R.layout.found_user_layout);
     }
 
     @Override
@@ -127,11 +142,22 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 helper.addOnClickListener(R.id.icon_more);
                 TextView text = helper.getView(R.id.tv_content_text);
                 TextView vis = helper.getView(R.id.tv_content_vis);
-                int count = text.getLineCount();
-                if(count == 3){
-                    text.setMaxLines(3);
-                    vis.setVisibility(View.VISIBLE);
-                }
+                text.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        text.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(text.getLineCount() >= 3){
+                                    text.setMaxLines(3);
+                                    vis.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
+                        text.getViewTreeObserver().removeOnPreDrawListener(this);
+                        return false;
+                    }
+                });
                 Glide.with(mContext).load(item.getAvatar())
                         .into((CircleImageView) helper.getView(R.id.userHead));
                 break;
@@ -157,6 +183,31 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 break;
             case ADV:
                 break;
+            case PAPA:
+                RecyclerView FoundRc = helper.getView(R.id.found_rc);
+                FoundRc.setLayoutManager(new GridLayoutManager(mContext,2));
+                FoundRcAdapter foundAdapter = new FoundRcAdapter(R.layout.found_video_item,null);
+                foundAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+                    @Override
+                    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                        switch (view.getId()){
+                            case R.id.video_icon:
+                                Intent intent = new Intent(mContext, VideoPlayActivity.class);
+                                intent.putExtra("video",0);
+                                intent.putExtra("position",position);
+                                mContext.startActivity(intent);
+                                break;
+                        }
+                    }
+                });
+                FoundRc.setAdapter(foundAdapter);
+                break;
+            case USER:
+                helper.setText(R.id.found_name,item.getUsername())
+                        .setText(R.id.found_content,item.getContent())
+                        .addOnClickListener(R.id.found_head);
+                Glide.with(mContext).load(item.getAvatar()).into((ImageView) helper.getView(R.id.found_head));
+                break;
         }
     }
     ImageView like;
@@ -171,7 +222,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         share.setOnClickListener(this);
         LinearLayout userBt = helper.getView(R.id.userBt);
         userBt.setOnClickListener(this);
-    };
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){

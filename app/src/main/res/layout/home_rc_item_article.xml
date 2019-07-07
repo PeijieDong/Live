@@ -60,6 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:textColor="@color/blue"
+                android:textSize="13sp"
                 android:text="置顶"/>
         </LinearLayout>
         <TextView
@@ -67,6 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="#000"
             android:text="你听过七月的风八月的雨吗？"/>
     </LinearLayout>
     <TextView
@@ -79,9 +83,10 @@
         android:id="@+id/tv_content_vis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="5dp"
         android:textColor="#FF5252"
-        android:visibility="gone"
         android:text="全文"/>
     <LinearLayout
         android:id="@+id/userBt"

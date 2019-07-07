@@ -46,7 +46,7 @@ public class UserArchivesFragment extends BaseFragment {
     TextView zhanghao;
     @BindView(R.id.qianming)
     TextView qianming;
-
+    String id;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_user_archives,container,false);
@@ -54,7 +54,7 @@ public class UserArchivesFragment extends BaseFragment {
 
     @Override
     protected void initVariables(Bundle bundle) {
-
+        id = bundle.getString("id");
     }
 
     @Override
@@ -64,7 +64,7 @@ public class UserArchivesFragment extends BaseFragment {
 
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
-        map.put("uid","9999");
+        map.put("uid",id);
         NetRequest.postFormRequest(UrlManager.User_Info, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

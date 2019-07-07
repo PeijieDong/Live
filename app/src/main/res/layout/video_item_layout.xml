@@ -23,7 +23,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="15dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/video_publish"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/video_head"
             android:layout_width="50dp"

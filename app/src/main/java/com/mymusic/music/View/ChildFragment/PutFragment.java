@@ -87,6 +87,7 @@ public class PutFragment extends BaseFragment {
         this.list = list;
         Rc.setLayoutManager(new LinearLayoutManager(getContext()));
         HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(list);
+        adapter.setEmptyView(LayoutInflater.from(getContext()).inflate(R.layout.empty_layout,null));
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

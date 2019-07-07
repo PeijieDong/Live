@@ -44,12 +44,23 @@
             android:layout_gravity="center"
             android:text="取消"/>
     </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/foundRecycler"
-        android:visibility="gone"
+    <com.mymusic.music.DiyTab.TabLayout
+        android:id="@+id/home_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="45dp"
+        app:tabIndicatorColor="@color/navi_title_color"
+        app:tabIndicatorHeight="2dp"
+        app:tabSelectedTextColor="@color/navi_title_color"
+        app:tabTextAppearance="@style/FoundTabLayoutTextStyle"
+        android:visibility="gone"
+        android:padding="5dp"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/home_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
     <LinearLayout
         android:id="@+id/found"
         android:layout_width="wrap_content"

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -194,6 +195,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
             public void requestSuccess(String result) throws Exception {
                 Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();
                 holder.likeNum.setText(Integer.parseInt(holder.likeNum.getText().toString())+1+"");
+                holder.video_like.setImageResource(R.drawable.yp_video_like);
             }
 
             @Override
@@ -255,19 +257,37 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         Rc = view.findViewById(R.id.Rc);
         Rc.setLayoutManager(new LinearLayoutManager(context));
         adapter = new VideoFragmentRcAdapter(R.layout.video_comment_layout, listbean);
+        adapter.setEmptyView(LayoutInflater.from(context).inflate(R.layout.empty_layout, null));
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 TextView likeNum = (TextView) adapter.getViewByPosition(Rc, position, R.id.comment_likeNum);
-                CircleImageView head = (CircleImageView) adapter.getViewByPosition(Rc, position, R.id.detail_head_cir);
-                head.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                ImageView likeIcon = (ImageView) adapter.getViewByPosition(Rc, position, R.id.comment_like);
+                switch (view.getId()){
+                    case R.id.detail_head_cir:
                         Intent intent = new Intent(context, UserDetailActivity.class);
                         intent.putExtra("UserId",listbean.get(position).getUid());
                         context.startActivity(intent);
-                    }
-                });
+                        break;
+                    case R.id.comment_like:
+                        HashMap<String, String> map = new HashMap<>();
+                        map.put("type","1");
+                        map.put("id",list.get(position).getId());
+                        NetRequest.postFormRequest(UrlManager.Video_Comment, map, new NetRequest.DataCallBack() {
+                            @Override
+                            public void requestSuccess(String result) throws Exception {
+                                Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();
+                                likeNum.setText(Integer.parseInt(holder.likeNum.getText().toString())+1+"");
+                                likeIcon.setImageResource(R.drawable.video_favor_s);
+                            }
+
+                            @Override
+                            public void requestFailure(Request request, IOException e) {
+
+                            }
+                        });
+                        break;
+                }
             }
         });
         Rc.setAdapter(adapter);

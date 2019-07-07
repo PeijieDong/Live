@@ -46,14 +46,15 @@
         android:layout_height="50dp"
         android:layout_marginTop="1dp"
         android:background="@color/white">
+
         <ImageView
             android:id="@+id/my_icon11"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="13dp"
-            android:src="@drawable/my_icon_live"
+            android:layout_margin="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_margin="10dp"/>
+            android:src="@drawable/icon_post_review" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,7 +82,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="13dp"
-            android:src="@drawable/my_icon_live"
+            android:src="@drawable/icon_penalties_violations"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="10dp"/>
         <TextView
@@ -111,7 +112,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="13dp"
-            android:src="@drawable/my_icon_live"
+            android:src="@drawable/icon_sugest_reply"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="10dp"/>
         <TextView
@@ -146,7 +147,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="13dp"
-            android:src="@drawable/my_icon_live"
+            android:src="@drawable/icon_pinglun_huifu"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="10dp"/>
         <TextView
@@ -181,7 +182,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="13dp"
-            android:src="@drawable/my_icon_live"
+            android:src="@drawable/icon_system_message"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="10dp"/>
         <TextView

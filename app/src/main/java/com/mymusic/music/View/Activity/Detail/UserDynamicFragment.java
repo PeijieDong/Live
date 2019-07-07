@@ -31,6 +31,7 @@ import okhttp3.Request;
 public class UserDynamicFragment extends BaseFragment {
     @BindView(R.id.Rc)
     RecyclerView Rc;
+    String id;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_user_dynamic,container,false);
@@ -38,8 +39,9 @@ public class UserDynamicFragment extends BaseFragment {
 
     @Override
     protected void initVariables(Bundle bundle) {
-
+        id = bundle.getString("id");
     }
+
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class UserDynamicFragment extends BaseFragment {
 
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
-        map.put("uid","1");
+        map.put("uid",id);
         map.put("page","1");
         NetRequest.postFormRequest(UrlManager.User_Activity, map, new NetRequest.DataCallBack() {
             @Override
@@ -57,6 +59,8 @@ public class UserDynamicFragment extends BaseFragment {
                 HomeData bean = GsonUtil.GsonToBean(result, HomeData.class);
                 Rc.setLayoutManager(new LinearLayoutManager(getContext()));
                 HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(bean.getData().getList());
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.empty_layout, null);
+                adapter.setEmptyView(view);
                 adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
