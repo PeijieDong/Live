@@ -17,6 +17,7 @@ import com.mymusic.music.DataBean.FocusPerson;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
@@ -115,6 +116,11 @@ public class FocusFragment extends BaseFragment {
                 public void requestFailure(Request request, IOException e) {
 
                 }
+                @Override
+                public void TokenFail() {
+                    LoginDialog dialog = new LoginDialog(getActivity());
+                    dialog.Show();
+                }
             });
         } else {
             HashMap<String, String> map = new HashMap<>();
@@ -163,6 +169,11 @@ public class FocusFragment extends BaseFragment {
                 public void requestFailure(Request request, IOException e) {
 
                 }
+                @Override
+                public void TokenFail() {
+                    LoginDialog dialog = new LoginDialog(getActivity());
+                    dialog.Show();
+                }
             });
 
 
@@ -194,6 +205,11 @@ public class FocusFragment extends BaseFragment {
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(getContext(),"操作失败",Toast.LENGTH_SHORT).show();
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -221,6 +237,11 @@ public class FocusFragment extends BaseFragment {
             @Override
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(getContext(),"操作失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

@@ -17,6 +17,7 @@ import com.mymusic.music.DataBean.User;
 import com.mymusic.music.DataBean.UserBean;
 import com.mymusic.music.Live;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
@@ -143,11 +144,20 @@ public class MyFragment extends BaseFragment {
                 level.setText("LV"+bean.getData().getLevel()+"经验值"+bean.getData().getLevel_anchor()+" >");
                 name.setText(bean.getData().getUser_nicename());
                 Glide.with(getContext()).load(bean.getData().getAvatar()).into(head);
+                String guanying = bean.getData().getGuanying();
+                String[] split = guanying.split("/");
+                number.setText(split[0]);
+                totalNumber.setText("/"+split[1]);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

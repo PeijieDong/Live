@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.mymusic.music.DataBean.UserInfo;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
@@ -85,6 +86,11 @@ public class UserArchivesFragment extends BaseFragment {
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

@@ -28,15 +28,77 @@
             android:textColor="@color/white"
             android:text="我的等级"/>
     </RelativeLayout>
-        <ImageView
+        <TextView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:src="@drawable/icon_level_s"/>
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:background="@drawable/icon_level_s"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="5dp"
+                    android:background="@drawable/icon_user_level_1">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/icon_user_level_10"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:text="LV8"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_centerInParent="true" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="5dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/icon_user_level_1">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/icon_user_level_10"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:text="LV8"/>
+                </LinearLayout>
+            </RelativeLayout>
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
         </LinearLayout>
     </LinearLayout>
 

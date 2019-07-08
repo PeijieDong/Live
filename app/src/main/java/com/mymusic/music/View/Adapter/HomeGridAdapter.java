@@ -69,6 +69,7 @@ public class HomeGridAdapter extends BaseAdapter {
             }
         });
         ImageView typeImage = v.findViewById(R.id.grid_image);
+
         Glide.with(context).load(data.get(i)).into(typeImage);
         return v;
     }

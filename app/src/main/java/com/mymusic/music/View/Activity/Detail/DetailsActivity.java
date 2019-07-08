@@ -34,7 +34,9 @@ import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.MyGridView;
+import com.mymusic.music.Util.MyJzvdStd;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
@@ -75,7 +77,7 @@ public class DetailsActivity extends BaseActivity {
     @BindView(R.id.detail_head)
     CircleImageView detail_head;
     @BindView(R.id.video_play)
-    JZVideoPlayerStandard VideoPlay;
+    MyJzvdStd VideoPlay;
     @BindView(R.id.detail_ll)
     LinearLayout detail_ll;
     @BindView(R.id.detail_Rc)
@@ -92,8 +94,6 @@ public class DetailsActivity extends BaseActivity {
     TextView focus;
     @BindView(R.id.hot)
     TextView hot;
-    @BindView(R.id.iv_full)
-    ImageView full;
     @BindView(R.id.rl_play)
     RelativeLayout rlPlay;
     @BindView(R.id.detail_sex)
@@ -104,6 +104,32 @@ public class DetailsActivity extends BaseActivity {
     ImageView collectionBt;
     @BindView(R.id.hotIcon)
     ImageView hotIcon;
+    @BindView(R.id.play_layout)
+    LinearLayout playLayout;
+    @BindView(R.id.other_playout)
+    LinearLayout otherPlayout;
+
+
+    @BindView(R.id.close_video)
+    ImageView closeVideo;
+    @BindView(R.id.detail_head2)
+    CircleImageView head2;
+    @BindView(R.id.detail_name2)
+    TextView name2;
+    @BindView(R.id.detail_sex2)
+    ImageView sex2;
+    @BindView(R.id.detail_time2)
+    TextView time2;
+    @BindView(R.id.detail_focus2)
+    TextView focus3;
+    @BindView(R.id.play_content)
+    TextView content;
+    @BindView(R.id.friend_name)
+    TextView friendName;
+    @BindView(R.id.playNum)
+    TextView playNum;
+
+
     private String id;
     private DetailCommentRcAdapter adapter;
     private DetailData data;
@@ -131,6 +157,11 @@ public class DetailsActivity extends BaseActivity {
             public void requestFailure(Request request, IOException e) {
 
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -139,14 +170,10 @@ public class DetailsActivity extends BaseActivity {
         if(data.getData().getList().getType().equals("视频")){
             VideoPlay.setVisibility(View.VISIBLE);
             rlPlay.setVisibility(View.VISIBLE);
+            playLayout.setVisibility(View.VISIBLE);
+            otherPlayout.setVisibility(View.GONE);
             title.setText("视频详情");
-            full.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FullScreen();
-                }
-            });
-            VideoPlay.setUp(data.getData().getList().getContent(),
+            VideoPlay.setUp(data.getData().getList().getVideourl(),
                     JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
             VideoPlay.startVideo();
             Glide.with(this).load(data.getData().getList().getImage()).into(VideoPlay.thumbImageView);
@@ -166,30 +193,32 @@ public class DetailsActivity extends BaseActivity {
             detail_ll.addView(view);
         }
         switch (data.getData().getList().getSex()){
-            case "0":
-                detail_sex.setImageResource(R.drawable.ic_arrow_drop_down_white_24dp);
-                break;
             case "1":
                 //男
+                sex2.setImageResource(R.drawable.fq_ic_gender_male);
                 detail_sex.setImageResource(R.drawable.fq_ic_gender_male);
                 break;
             case "2":
+                sex2.setImageResource(R.drawable.fq_ic_gender_female);
                 detail_sex.setImageResource(R.drawable.fq_ic_gender_female);
                 break;
         }
+        name2.setText(data.getData().getList().getUsername());
         detail_name.setText(data.getData().getList().getUsername());
+        time2.setText(data.getData().getList().getCreatetime());
+        content.setText(data.getData().getList().getContent());
+        friendName.setText("#"+data.getData().getList().getCatename()+"#");
+        playNum.setText("|  "+data.getData().getList().getClick()+"次浏览");
         detail_time.setText(data.getData().getList().getCreatetime()+"  "+data.getData().getList().getClick()+"次浏览");
         home_rc_type.setText(data.getData().getList().getCatename());
         shareNum.setText(data.getData().getList().getShare());
-        commentNum.setText(data.getData().getList().getComment());
+        commentNum.setText(data.getData().getList().getCollect());
         likenum.setText(data.getData().getList().getZan());
         Glide.with(this).load(data.getData().getList().getAvatar()).into(detail_head);
+        Glide.with(this).load(data.getData().getList().getAvatar()).into(head2);
         initComment("new","0");
     }
 
-    private void FullScreen() {
-
-    }
 
     private void initComment(String type,String somebody) {
         HashMap<String, String> map = new HashMap<>();
@@ -209,6 +238,11 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }
@@ -238,13 +272,13 @@ public class DetailsActivity extends BaseActivity {
                 ImageView isLike = (ImageView) adapter.getViewByPosition(detailRc,i, R.id.detail_is_like);
                 switch(view.getId()){
                     case R.id.detail_is_like:
-                        initLike(list.get(i).getPid());
+                        initLike(list.get(i).getCid());
                         noLike.setImageResource(R.drawable.post_un_thumb_n);
                         isLike.setImageResource(R.drawable.post_thumb_s);
                         likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
                         break;
                     case R.id.detail_no_like:
-                        initHate(list.get(i).getPid());
+                        initHate(list.get(i).getCid());
                         noLike.setImageResource(R.drawable.post_un_thumb_s);
                         isLike.setImageResource(R.drawable.post_thumb_n);
                         likeNum.setText(Integer.valueOf(likeNum.getText().toString())-1+"");
@@ -279,10 +313,10 @@ public class DetailsActivity extends BaseActivity {
         detailRc.setAdapter(adapter);
     }
 
-    private void initHate(String pid) {
+    private void initHate(String cid) {
         HashMap<String, String> map = new HashMap<>();
         map.put("type","2");
-        map.put("id",pid);
+        map.put("id",cid);
         NetRequest.postFormHeadRequest(UrlManager.CommentLike, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -292,6 +326,11 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }
@@ -303,6 +342,7 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.CommentLike, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 Toast.makeText(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT).show();
             }
 
@@ -310,12 +350,20 @@ public class DetailsActivity extends BaseActivity {
             public void requestFailure(Request request, IOException e) {
 
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
-    @OnClick({R.id.detail_head,R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.close,R.id.icon_comment})
+    @OnClick({R.id.close_video,R.id.detail_head,R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.close,R.id.icon_comment})
     public void Click(View view){
         switch (view.getId()){
+            case R.id.close_video:
+                finish();
+                break;
             case R.id.detail_head:
                 Intent intent = new Intent(this, UserDetailActivity.class);
                 intent.putExtra("UserId",data.getData().getList().getUid());
@@ -335,6 +383,9 @@ public class DetailsActivity extends BaseActivity {
                 break;
             case R.id.detail_focus:
                 initFocus();
+                break;
+            case R.id.detail_focus2:
+                initFocus2();
                 break;
             case R.id.changeState:
                 if(hot.getText().toString().equals("最新")){
@@ -377,6 +428,11 @@ public class DetailsActivity extends BaseActivity {
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(DetailsActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -392,6 +448,21 @@ public class DetailsActivity extends BaseActivity {
             isFocus = true;
             focus.setBackgroundResource(R.drawable.isfocus);
             focus.setText("已关注");
+            initFocusNet();
+        }
+    }
+    private void initFocus2() {
+        if(isFocus){
+            checkLogin();
+            isFocus = false;
+            focus3.setBackgroundResource(R.drawable.focus);
+            focus3.setText("+关注");
+            initFocusCencel();
+        }else{
+            checkLogin();
+            isFocus = true;
+            focus3.setBackgroundResource(R.drawable.isfocus);
+            focus3.setText("已关注");
             initFocusNet();
         }
     }
@@ -415,6 +486,11 @@ public class DetailsActivity extends BaseActivity {
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(DetailsActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -437,6 +513,11 @@ public class DetailsActivity extends BaseActivity {
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(DetailsActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -457,6 +538,11 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(DetailsActivity.this,"点赞失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }
@@ -485,6 +571,11 @@ public class DetailsActivity extends BaseActivity {
                 @Override
                 public void requestFailure(Request request, IOException e) {
                     Toast.makeText(DetailsActivity.this,"提交评论失败",Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void TokenFail() {
+                    LoginDialog dialog = new LoginDialog(getActivity());
+                    dialog.Show();
                 }
             });
         }

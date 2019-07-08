@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.Live;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.VideoRecyclerViewAdapter;
@@ -100,6 +101,7 @@ public class VideoFragment extends BaseFragment {
         NetRequest.postFormRequest(UrlManager.Video_List, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 bean = GsonUtil.GsonToBean(result, VideoData.class);
                 initView(bean);
             }
@@ -107,6 +109,11 @@ public class VideoFragment extends BaseFragment {
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }
@@ -181,6 +188,11 @@ public class VideoFragment extends BaseFragment {
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

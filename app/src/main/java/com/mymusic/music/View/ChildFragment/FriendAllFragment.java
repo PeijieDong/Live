@@ -18,6 +18,7 @@ import com.mymusic.music.DataBean.FriendAllTitle;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.TopNavigation;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
@@ -89,6 +90,11 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
             public void requestFailure(Request request, IOException e) {
 
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -111,6 +117,11 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }
@@ -168,6 +179,11 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
             @Override
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(getContext(),"操作失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

@@ -17,6 +17,7 @@ import com.mymusic.music.DataBean.FriendFindData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.FriendListActivity;
@@ -78,6 +79,7 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
         NetRequest.postFormRequest(UrlManager.FRIEND_FIND, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 FriendFindData data = GsonUtil.GsonToBean(result, FriendFindData.class);
                 initRc(data);
                 refreshLayout.finishRefresh();
@@ -86,6 +88,11 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }
@@ -161,6 +168,11 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
             @Override
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(getContext(),"操作失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

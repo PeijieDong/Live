@@ -18,6 +18,7 @@ import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.post.PutVideoActivity;
@@ -91,6 +92,7 @@ public class FriendDetailActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.FRIEND_DETAILS, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 bean = GsonUtil.GsonToBean(result, FriendDetailTOP.class);
                 Glide.with(FriendDetailActivity.this).load(bean.getData().getList().getIcon()).into(head);
                 title.setText(bean.getData().getList().getTitle());
@@ -110,6 +112,11 @@ public class FriendDetailActivity extends BaseActivity {
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }
@@ -216,6 +223,11 @@ public class FriendDetailActivity extends BaseActivity {
             @Override
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(FriendDetailActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

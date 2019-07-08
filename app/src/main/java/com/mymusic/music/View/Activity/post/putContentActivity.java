@@ -34,9 +34,11 @@ import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.BottomNavigation;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.PicToBase64;
 import com.mymusic.music.Util.PutBottomNavigation;
+import com.mymusic.music.Util.Uri2PathUtil;
 import com.mymusic.music.View.Activity.Community.CommunityAdviceActivity;
 import com.mymusic.music.View.Activity.FriendFoundActivity;
 import com.mymusic.music.View.Adapter.CommunityRcAdapter;
@@ -49,15 +51,25 @@ import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
+import org.litepal.util.LogUtil;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class putContentActivity extends BaseActivity implements View.OnClickListener {
 
@@ -90,6 +102,11 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     private String type ;
     private StringBuilder tag = new StringBuilder();
     private List<String> list = new ArrayList<>();
+    // Storage Permissions
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE };
     @Override
     protected void initVariables(Intent intent) {
 
@@ -149,6 +166,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 startActivityForResult(intent,200);
                 break;
             case R.id.post:
+                verifyStoragePermissions(this);
                 switch (navigation.getPosition()){
                     case 0:
                         type = "5";
@@ -171,7 +189,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initNet() {
-        verifyStoragePermissions(this);
+
         String url = UrlManager.Post_Video;
         File file = null;
         HashMap<String, String> map = new HashMap<>();
@@ -180,10 +198,11 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         map.put("tag", tag.toString());
         map.put("content", title.getText().toString());
         if (navigation.getPosition() == 1) {
-            map.put("images",PicToBase64.imageToBase64(image.get(0).getPath()+""));
+            map.put("images","data:image/jpeg;base64,"+PicToBase64.imageToBase64(image.get(0).getPath()+""));
             NetRequest.postmorePicRequest(url, this, map, image, new NetRequest.DataCallBack() {
                 @Override
                 public void requestSuccess(String result) throws Exception {
+                    Log.e("23",result);
                     Toast.makeText(putContentActivity.this,"提交成功，等待管理员审核",Toast.LENGTH_SHORT).show();
                     finish();
                     closeLoading();
@@ -191,15 +210,21 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
 
                 @Override
                 public void requestFailure(Request request, IOException e) {
+                    Log.e("23",e.getMessage());
                     closeLoading();
+                }
+                @Override
+                public void TokenFail() {
+                    LoginDialog dialog = new LoginDialog(getActivity());
+                    dialog.Show();
                 }
             });
             return;
         }
         if (navigation.getPosition() == 0) {
             file = getFileByUri(image.get(0), this);
-            map.put("playtime", getLocalVideoDuration(image.get(0).getPath())+"");
-            map.put("images", getVideoImage(getRealPathFromURI(putContentActivity.this,image.get(0))));
+            map.put("playtime", getRingDuring(image.get(0)));
+            map.put("images", "data:image/jpeg;base64,"+getVideoImage(getRealPathFromURI(putContentActivity.this,image.get(0))));
         }
         NetRequest.postmoreRequest(url, this, map, file, new NetRequest.DataCallBack() {
             @Override
@@ -215,7 +240,11 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 Log.e("33",e.getMessage());
                 closeLoading();
             }
-
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -282,7 +311,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             Matisse.from(this)
                     .choose(MimeType.ofVideo(), false) // 选择 mime 的类型
                     .countable(true)
-                    .theme(R.style.Matisse_Zhihu | R.style.Matisse_Dracula)
+                    .theme(R.style.Matisse_Zhihu)
                     .maxSelectable(1) // 图片选择的最多数量
                     .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
@@ -293,7 +322,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             Matisse.from(this)
                     .choose(MimeType.ofImage(), false) // 选择 mime 的类型
                     .countable(true)
-                    .theme(R.style.Matisse_Zhihu | R.style.Matisse_Dracula)
+                    .theme(R.style.Matisse_Zhihu)
                     .maxSelectable(9) // 图片选择的最多数量
                     .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
@@ -302,25 +331,31 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     .forResult(REQUEST_CODE_CHOOSE); // 设置作为标记的请求码
         }
     }
-    public static int getLocalVideoDuration(String videoPath) {
-        int duration;
+    public static String getRingDuring(Uri mUri){
+        String url = mUri.getAuthority();
+        Log.e("23",url);
+        String duration=null;
+        android.media.MediaMetadataRetriever mmr = new android.media.MediaMetadataRetriever();
+
         try {
-            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-            mmr.setDataSource(videoPath);
-            duration = Integer.parseInt(mmr.extractMetadata
-                    (MediaMetadataRetriever.METADATA_KEY_DURATION));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+            if (mUri != null) {
+                HashMap<String, String> headers=null;
+                if (headers == null) {
+                    headers = new HashMap<String, String>();
+                    headers.put("User-Agent", "Mozilla/5.0 (Linux; U; Android 4.4.2; zh-CN; MW-KW-001 Build/JRO03C) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 UCBrowser/1.0.0.001 U4/0.8.0 Mobile Safari/533.1");
+                }
+                mmr.setDataSource(url, headers);
+            }
+            duration = mmr.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION);
+            Log.e("23",duration+"");
+        } catch (Exception ex) {
+        } finally {
+            mmr.release();
         }
+
         return duration;
     }
 
-    // Storage Permissions
-      private static final int REQUEST_EXTERNAL_STORAGE = 1;
-      private static String[] PERMISSIONS_STORAGE = {
-                         Manifest.permission.READ_EXTERNAL_STORAGE,
-                         Manifest.permission.WRITE_EXTERNAL_STORAGE };
 
 
         public static void verifyStoragePermissions(Activity activity) {
@@ -384,7 +419,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         media.setDataSource(videoPath);
         Bitmap bitmap = media.getFrameAtTime();
         String base64 = PicToBase64.bitmapToBase64(bitmap);
-        return base64;
+        return "data:image/jpeg;base64,"+base64;
     }
 
     public static String getRealPathFromURI(Context context, Uri contentURI) {
@@ -401,4 +436,51 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         }
         return result;
     }
+
+    /**
+     * 上传文件及参数
+     */
+    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
+    private void sendMultipart(List<File> fileList){
+        //设置超时时间及缓存
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS);
+
+
+        OkHttpClient mOkHttpClient=builder.build();
+
+        MultipartBody.Builder mbody=new MultipartBody.Builder().setType(MultipartBody.FORM);
+
+        int i=0;
+        for(File file:fileList){
+            if(file.exists()){
+                Log.i("imageName:",file.getName());//经过测试，此处的名称不能相同，如果相同，只能保存最后一个图片，不知道那些同名的大神是怎么成功保存图片的。
+                mbody.addFormDataPart("image"+i,file.getName(),RequestBody.create(MEDIA_TYPE_PNG,file));
+                i++;
+            }
+        }
+
+        RequestBody requestBody =mbody.build();
+        Request request = new Request.Builder()
+                .header("Authorization", "Client-ID " + "...")
+                .url("http://192.168.1.105/interface/index.php?action=sendMultipart")
+                .post(requestBody)
+                .build();
+
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.i("InfoMSG", response.body().string());
+            }
+        });
+    }
+
+
 }

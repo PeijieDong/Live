@@ -119,7 +119,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .setText(R.id.home_rc_type,item.getCatename())
                         .setText(R.id.tv_content,item.getContent());
                 helper.addOnClickListener(R.id.icon_more);
-                Glide.with(mContext).load(item.getAvatar())
+                Glide.with(mContext).load(item.getAvatar()).placeholder(R.drawable.fq_bottom_transparent)
                         .into((CircleImageView) helper.getView(R.id.userHead));
                 HomeGridAdapter adapter = new HomeGridAdapter(mContext,item.getImages());
                 MyGridView grid = helper.getView(R.id.home_rc_grid);
@@ -173,11 +173,18 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .setText(R.id.shareNum,item.getShare())
                         .setText(R.id.username,item.getUsername())
                         .setText(R.id.home_rc_type,item.getCatename())
-                        .setText(R.id.tv_content,item.getContent());
+                        .setText(R.id.tv_content,item.getContent())
+                        .setText(R.id.play_num,item.getClick()+"次播放"+" "+item.getPlaytime());
                 helper.addOnClickListener(R.id.icon_more);
                 Glide.with(mContext).load(item.getAvatar())
                         .into((CircleImageView) helper.getView(R.id.userHead));
-                Glide.with(mContext).load(item.getImage()).into((ImageView) helper.getView(R.id.video_image));
+                if(item.getImage().equals("")){
+                    Glide.with(mContext).load(R.drawable.play_holder).placeholder(R.drawable.fq_bottom_transparent)
+                            .into((ImageView) helper.getView(R.id.video_image));
+                }else {
+                    Glide.with(mContext).load(item.getImage()).placeholder(R.drawable.fq_bottom_transparent)
+                            .into((ImageView) helper.getView(R.id.video_image));
+                }
                 break;
             case RECOMMEND:
                 break;

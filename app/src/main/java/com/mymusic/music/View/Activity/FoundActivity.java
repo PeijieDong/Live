@@ -27,6 +27,7 @@ import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
@@ -107,6 +108,11 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

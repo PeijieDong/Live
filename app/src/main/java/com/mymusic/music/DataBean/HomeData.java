@@ -108,12 +108,48 @@ public class HomeData {
             private String isgonggao;
             private String title;
             private String tag;
-            private Object playtime;
+            private String playtime;
             private String videourl;
             private String catename;
             private String username;
             private String avatar;
+            private String avatar_thumb;
+            private String signature;
+            private String sex;
+            private String user_nicename;
             private List<String> images;
+
+            public String getUser_nicename() {
+                return user_nicename;
+            }
+
+            public void setUser_nicename(String user_nicename) {
+                this.user_nicename = user_nicename;
+            }
+
+            public String getSex() {
+                return sex;
+            }
+
+            public void setSex(String sex) {
+                this.sex = sex;
+            }
+
+            public String getSignature() {
+                return signature;
+            }
+
+            public void setSignature(String signature) {
+                this.signature = signature;
+            }
+
+            public String getAvatar_thumb() {
+                return avatar_thumb;
+            }
+
+            public void setAvatar_thumb(String avatar_thumb) {
+                this.avatar_thumb = avatar_thumb;
+            }
 
             public String getId() {
                 return id;
@@ -251,11 +287,11 @@ public class HomeData {
                 this.tag = tag;
             }
 
-            public Object getPlaytime() {
+            public String getPlaytime() {
                 return playtime;
             }
 
-            public void setPlaytime(Object playtime) {
+            public void setPlaytime(String playtime) {
                 this.playtime = playtime;
             }
 

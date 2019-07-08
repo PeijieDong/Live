@@ -15,6 +15,7 @@ import com.mymusic.music.DataBean.Fans;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.FansRcAdapter;
@@ -69,6 +70,11 @@ public class MyfansActivity extends BaseActivity {
             public void requestFailure(Request request, IOException e) {
 
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -119,6 +125,11 @@ public class MyfansActivity extends BaseActivity {
             @Override
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(MyfansActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

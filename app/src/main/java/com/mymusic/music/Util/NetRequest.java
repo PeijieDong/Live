@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.mymusic.music.DataBean.BaseBack;
 import com.mymusic.music.Live;
 
 import org.json.JSONException;
@@ -356,6 +357,10 @@ public class NetRequest {
                 if (response.isSuccessful()) { // 请求成功
                     //执行请求成功的操作
                     String result = response.body().string();
+                    BaseBack back = GsonUtil.GsonToBean(result, BaseBack.class);
+                    if(back.getStatus().equals("-997")){
+                        callBack.TokenFail();
+                    }
                     deliverDataSuccess(result, callBack);
                 } else {
                     throw new IOException(response + "");
@@ -404,48 +409,42 @@ public class NetRequest {
 
     }
 
-
+    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
     private void upLoadPicFile(final String url, Context context, final Map<String, String> map, List<Uri> fileList, final DataCallBack callBack) {
 
-        if (fileList != null && fileList.size() > 0) {
-            for (int i = 0; i < fileList.size(); i++) {
-                OkHttpClient client = new OkHttpClient();
-                // form 表单形式上传
-                MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-                File file = getFileByUri(fileList.get(i), context);
-                if (file != null) {
-                    requestBody.addFormDataPart("file", file.getName());
-                    RequestBody.create(MediaType.parse("png"), file);
-                }
-                if (map != null) {
-                    // map 里面是请求中所需要的 key 和 value
-                    for (Map.Entry entry : map.entrySet()) {
-                        requestBody.addFormDataPart(valueOf(entry.getKey()), valueOf(entry.getValue()));
-                    }
-                }
-                final Request request = new Request.Builder().url(url).addHeader("token", Live.getInstance().getToken(context)).post(requestBody.build()).build();
-                // readTimeout("请求超时时间" , 时间单位);
-                client.newBuilder().readTimeout(10000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        deliverDataFailure(request, e, callBack);
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (response.isSuccessful()) {
-                            if (response.isSuccessful()) { // 请求成功
-                                //执行请求成功的操作
-                                String result = response.body().string();
-                                deliverDataSuccess(result, callBack);
-                            } else {
-                                throw new IOException(response + "");
-                            }
-                        }
-                    }
-                });
+        OkHttpClient client = new OkHttpClient();
+        // form 表单形式上传
+        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        for (Uri path : fileList) {
+            requestBody.addFormDataPart("file", null, RequestBody.create(MEDIA_TYPE_PNG, new File(path.getPath())));
+        }
+        if (map != null) {
+            // map 里面是请求中所需要的 key 和 value
+            for (Map.Entry entry : map.entrySet()) {
+                requestBody.addFormDataPart(valueOf(entry.getKey()), valueOf(entry.getValue()));
             }
         }
+        final Request request = new Request.Builder().url(url).addHeader("token", Live.getInstance().getToken(context)).post(requestBody.build()).build();
+        // readTimeout("请求超时时间" , 时间单位);
+        client.newBuilder().readTimeout(10000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                deliverDataFailure(request, e, callBack);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    if (response.isSuccessful()) { // 请求成功
+                        //执行请求成功的操作
+                        String result = response.body().string();
+                        deliverDataSuccess(result, callBack);
+                    } else {
+                        throw new IOException(response + "");
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -543,6 +542,8 @@ public class NetRequest {
         void requestSuccess(String result) throws Exception;
 
         void requestFailure(Request request, IOException e);
+
+        void TokenFail();
     }
 
     /**

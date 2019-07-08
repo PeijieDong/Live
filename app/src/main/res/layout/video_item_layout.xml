@@ -33,6 +33,15 @@
             android:layout_marginRight="10dp"
             app:layout_constraintRight_toRightOf="parent" />
         <ImageView
+            android:id="@+id/focus_bt"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            app:layout_constraintBottom_toTopOf="@id/video_like"
+            android:layout_marginBottom="3dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="26dp"
+            android:src="@drawable/papa_add_person"/>
+        <ImageView
             android:id="@+id/video_like"
             android:layout_width="30dp"
             android:layout_height="30dp"

@@ -10,6 +10,7 @@ import com.mymusic.music.Live;
 import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
@@ -78,6 +79,11 @@ public class LaunchAcvtivity extends BaseActivity {
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

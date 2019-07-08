@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -123,6 +124,11 @@ public class SetPasswordActivity extends BaseActivity {
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(SetPasswordActivity.this,"失败",Toast.LENGTH_SHORT).show();
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -142,6 +148,11 @@ public class SetPasswordActivity extends BaseActivity {
             @Override
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(SetPasswordActivity.this,"失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.mymusic.music.DataBean.UserBean;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -82,6 +83,11 @@ public class MyexchangeActivity extends BaseActivity {
             public void requestFailure(Request request, IOException e) {
                 Log.e("33",e.getMessage());
                 Toast.makeText(MyexchangeActivity.this,"兑换失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.FileUtils;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.FriendFoundActivity;
 import com.mymusic.music.base.BaseActivity;
@@ -87,7 +88,7 @@ public class PutVideoActivity extends BaseActivity {
                 Matisse.from(this)
                         .choose(MimeType.ofVideo(), false) // 选择 mime 的类型
                         .countable(true)
-                        .theme(R.style.Matisse_Zhihu | R.style.Matisse_Dracula)
+                        .theme(R.style.Matisse_Zhihu )
                         .maxSelectable(1) // 图片选择的最多数量
                         .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                         .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
@@ -134,6 +135,11 @@ public class PutVideoActivity extends BaseActivity {
                     @Override
                     public void requestFailure(Request request, IOException e) {
 
+                    }
+                    @Override
+                    public void TokenFail() {
+                        LoginDialog dialog = new LoginDialog(getActivity());
+                        dialog.Show();
                     }
                 });
                 break;

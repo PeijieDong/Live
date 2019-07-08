@@ -18,6 +18,7 @@ import com.mymusic.music.DataBean.FriendDetail;
 import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
@@ -156,6 +157,11 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
             public void requestFailure(Request request, IOException e) {
 
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(context);
+                dialog.Show();
+            }
         });
     }
 
@@ -176,6 +182,11 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(context);
+                dialog.Show();
             }
         });
     }

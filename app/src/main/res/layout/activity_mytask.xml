@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".View.Activity.MyChildActivity.My.MytaskActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -103,7 +104,10 @@
                     android:layout_marginLeft="45dp" />
             </LinearLayout>
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#80EFEFEF"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -260,6 +264,10 @@
                 android:gravity="center"
                 android:text="做任务"/>
         </android.support.constraint.ConstraintLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#80EFEFEF"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"

@@ -36,7 +36,7 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
         helper.setText(R.id.friend_find_title,item.getTitle())
                 .setText(R.id.friend_find_dec,item.getDescription())
                 .setText(R.id.friend_find_type,item.getName())
-                .setText(R.id.tv2,item.getIsguanzhu()+"")
+                .setText(R.id.tv2,item.getGnum()+"")
                 .setText(R.id.tv4,item.getTui())
                 .setText(R.id.image_type_1,item.getList().get(0).getType())
                 .setText(R.id.image_type_2,item.getList().get(1).getType())
@@ -113,6 +113,7 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
     public void goActivity(String id){
         Intent intent = new Intent(mContext, DetailsActivity.class);
         intent.putExtra("id",id);
+        Log.e("33",id);
         mContext.startActivity(intent);
     }
 }

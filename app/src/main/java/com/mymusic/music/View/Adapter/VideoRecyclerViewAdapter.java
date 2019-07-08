@@ -24,6 +24,7 @@ import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.JubaoVideoActiviy;
@@ -75,6 +76,30 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
             public void onClick(View v) {
                 Intent intent = new Intent(context, PutVideoActivity.class);
                 context.startActivity(intent);
+            }
+        });
+        holder.focus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String, String> map = new HashMap<>();
+                map.put("touid",list.get(position).getUid());
+                NetRequest.postFormHeadRequest(UrlManager.Focus_User, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
+                    @Override
+                    public void requestSuccess(String result) throws Exception {
+                        Toast.makeText(context,"关注成功",Toast.LENGTH_SHORT).show();
+                        holder.focus.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void requestFailure(Request request, IOException e) {
+
+                    }
+                    @Override
+                    public void TokenFail() {
+                        LoginDialog dialog = new LoginDialog(context);
+                        dialog.Show();
+                    }
+                });
             }
         });
         holder.video_share.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +207,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
             public void requestFailure(Request request, IOException e) {
 
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(context);
+                dialog.Show();
+            }
         });
     }
 
@@ -201,6 +231,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(context);
+                dialog.Show();
             }
         });
     }
@@ -234,6 +269,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                     return;
                 }
                 HashMap<String, String> map = new HashMap<>();
+                Log.e("33",list.get(position).getVid());
                 map.put("vid",list.get(position).getVid());
                 map.put("pid","0");
                 map.put("content",commentEt.getText().toString());
@@ -250,6 +286,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                     @Override
                     public void requestFailure(Request request, IOException e) {
 
+                    }
+                    @Override
+                    public void TokenFail() {
+                        LoginDialog dialog = new LoginDialog(context);
+                        dialog.Show();
                     }
                 });
             }
@@ -285,6 +326,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                             public void requestFailure(Request request, IOException e) {
 
                             }
+                            @Override
+                            public void TokenFail() {
+                                LoginDialog dialog = new LoginDialog(context);
+                                dialog.Show();
+                            }
                         });
                         break;
                 }
@@ -313,6 +359,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(context);
+                dialog.Show();
             }
         });
     }

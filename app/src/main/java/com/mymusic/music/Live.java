@@ -45,7 +45,7 @@ public class Live extends Application {
             UserBean user = getUser(context);
             return user.getData().getToken();
         }else{
-            return null;
+            return "";
         }
     }
 

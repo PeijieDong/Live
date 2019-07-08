@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -83,7 +84,7 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
         Matisse.from(this)
                 .choose(MimeType.ofImage(), false) // 选择 mime 的类型
                 .countable(true)
-                .theme(R.style.Matisse_Zhihu | R.style.Matisse_Dracula)
+                .theme(R.style.Matisse_Zhihu )
                 .maxSelectable(1) // 图片选择的最多数量
                 .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                 .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
@@ -138,6 +139,11 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
             @Override
             public void requestFailure(Request request, IOException e) {
                 Log.e("33",e.getMessage());
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

@@ -28,6 +28,7 @@ public class VideoViewHolder extends BaseRecViewHolder {
     public TextView likeNum;
     public TextView shareNum;
     public TextView commentNum;
+    public ImageView focus;
 
 
 
@@ -46,6 +47,7 @@ public class VideoViewHolder extends BaseRecViewHolder {
         likeNum = rootView.findViewById(R.id.likeNum);
         shareNum = rootView.findViewById(R.id.shareNum);
         commentNum = rootView.findViewById(R.id.commentNum);
+        focus = rootView.findViewById(R.id.focus_bt);
     }
 
 }

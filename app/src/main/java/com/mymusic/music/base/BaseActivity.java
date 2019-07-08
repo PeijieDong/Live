@@ -104,10 +104,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void checkLogin(){
-        if(Live.getInstance().getToken(this) == null){
-            startActivity(new Intent(this,LoginActivity.class));
-            return;
-        }
+
     }
     @Override
     protected void onResume() {

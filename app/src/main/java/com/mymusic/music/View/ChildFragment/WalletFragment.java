@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.mymusic.music.DataBean.Wallet;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Adapter.WalletAdapter;
 import com.mymusic.music.base.BaseFragment;
@@ -81,6 +82,11 @@ public class WalletFragment extends BaseFragment {
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

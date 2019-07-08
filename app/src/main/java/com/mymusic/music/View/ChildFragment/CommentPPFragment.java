@@ -15,6 +15,7 @@ import com.mymusic.music.DataBean.Art;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.ArRcAdpater;
@@ -76,6 +77,11 @@ public class CommentPPFragment extends BaseFragment {
             public void requestFailure(Request request, IOException e) {
 
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -107,6 +113,11 @@ public class CommentPPFragment extends BaseFragment {
             @Override
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(getContext(),"删除失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

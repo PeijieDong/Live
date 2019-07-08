@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.Live;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
@@ -84,6 +85,11 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                 public void requestFailure(Request request, IOException e) {
 
                 }
+                @Override
+                public void TokenFail() {
+                    LoginDialog dialog = new LoginDialog(getActivity());
+                    dialog.Show();
+                }
             });
         }else {
             HashMap<String, String> map = new HashMap<>();
@@ -99,6 +105,11 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                 @Override
                 public void requestFailure(Request request, IOException e) {
 
+                }
+                @Override
+                public void TokenFail() {
+                    LoginDialog dialog = new LoginDialog(getActivity());
+                    dialog.Show();
                 }
             });
         }
@@ -161,6 +172,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                                 map.put("touid",list.get(position).getUid());
                                 initBt(UrlManager.PingBI,position,map);
                                 bottomSheet.dismiss();
+                                initNet();
 
                             }
                         });
@@ -219,6 +231,11 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
 
@@ -248,6 +265,11 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             @Override
             public void requestFailure(Request request, IOException e) {
                 Toast.makeText(getContext(),"点赞失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }

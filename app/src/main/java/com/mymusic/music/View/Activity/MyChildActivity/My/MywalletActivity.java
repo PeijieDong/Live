@@ -14,6 +14,7 @@ import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MoneyDetailActivity;
@@ -95,6 +96,11 @@ public class MywalletActivity extends BaseActivity {
             public void requestFailure(Request request, IOException e) {
 
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
         });
     }
     @OnClick({R.id.money_detail,R.id.helper,R.id.fankui,R.id.go_money})
@@ -136,6 +142,11 @@ public class MywalletActivity extends BaseActivity {
             @Override
             public void requestFailure(Request request, IOException e) {
 
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }
