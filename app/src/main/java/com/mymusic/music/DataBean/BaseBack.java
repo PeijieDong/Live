@@ -13,14 +13,14 @@ public class BaseBack {
      * state : 1
      */
 
-    private String status;
+    private Object status;
 
 
-    public String getStatus() {
+    public Object getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Object status) {
         this.status = status;
     }
 }

@@ -153,9 +153,12 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         navigation.setCurrentItem(0);
         initRc();
     }
-    @OnClick({R.id.choseFriend,R.id.chose_sign,R.id.post})
+    @OnClick({R.id.choseFriend,R.id.chose_sign,R.id.post,R.id.close})
     public void ClickEvent(View view){
         switch (view.getId()){
+            case R.id.close:
+                finish();
+                break;
             case R.id.choseFriend:
                 Intent intent1 = new Intent(putContentActivity.this, FriendFoundActivity.class);
                 intent1.putExtra("chose",true);
@@ -189,6 +192,14 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initNet() {
+        if(title.getText().equals("")){
+            Toast.makeText(this,"请输入标题",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(cid.equals("")){
+            Toast.makeText(this,"请选择圈子",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         String url = UrlManager.Post_Video;
         File file = null;
@@ -197,9 +208,18 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         map.put("type", type);
         map.put("tag", tag.toString());
         map.put("content", title.getText().toString());
+        List<File> fileList = new ArrayList<>();
         if (navigation.getPosition() == 1) {
             map.put("images","data:image/jpeg;base64,"+PicToBase64.imageToBase64(image.get(0).getPath()+""));
-            NetRequest.postmorePicRequest(url, this, map, image, new NetRequest.DataCallBack() {
+            for (int i = 0 ;i<image.size();i++){
+                File file1 = new File(image.get(i).getPath());
+                fileList.add(file1);
+            }
+            if(fileList.size() == 0){
+                Toast.makeText(this,"请选择要上传的图片",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            NetRequest.postmorePicRequest(url, this, map, fileList, new NetRequest.DataCallBack() {
                 @Override
                 public void requestSuccess(String result) throws Exception {
                     Log.e("23",result);
@@ -223,8 +243,18 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         }
         if (navigation.getPosition() == 0) {
             file = getFileByUri(image.get(0), this);
+            if(file == null){
+                Toast.makeText(this,"请选择要上传的视频",Toast.LENGTH_SHORT).show();
+                return;
+            }
             map.put("playtime", getRingDuring(image.get(0)));
             map.put("images", "data:image/jpeg;base64,"+getVideoImage(getRealPathFromURI(putContentActivity.this,image.get(0))));
+        }
+        if(navigation.getPosition() == 2){
+            if(text.getText().toString().equals("")){
+                Toast.makeText(this,"请输入内容",Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
         NetRequest.postmoreRequest(url, this, map, file, new NetRequest.DataCallBack() {
             @Override
@@ -437,50 +467,6 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         return result;
     }
 
-    /**
-     * 上传文件及参数
-     */
-    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
-    private void sendMultipart(List<File> fileList){
-        //设置超时时间及缓存
-        OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS);
-
-
-        OkHttpClient mOkHttpClient=builder.build();
-
-        MultipartBody.Builder mbody=new MultipartBody.Builder().setType(MultipartBody.FORM);
-
-        int i=0;
-        for(File file:fileList){
-            if(file.exists()){
-                Log.i("imageName:",file.getName());//经过测试，此处的名称不能相同，如果相同，只能保存最后一个图片，不知道那些同名的大神是怎么成功保存图片的。
-                mbody.addFormDataPart("image"+i,file.getName(),RequestBody.create(MEDIA_TYPE_PNG,file));
-                i++;
-            }
-        }
-
-        RequestBody requestBody =mbody.build();
-        Request request = new Request.Builder()
-                .header("Authorization", "Client-ID " + "...")
-                .url("http://192.168.1.105/interface/index.php?action=sendMultipart")
-                .post(requestBody)
-                .build();
-
-        mOkHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                Log.i("InfoMSG", response.body().string());
-            }
-        });
-    }
 
 
 }

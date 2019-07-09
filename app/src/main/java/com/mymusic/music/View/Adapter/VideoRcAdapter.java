@@ -80,7 +80,7 @@ public class VideoRcAdapter  extends BaseRecAdapter<VideoData.DataBean.ListBean,
             return;
         }
         HashMap<String, String> map = new HashMap<>();
-        map.put("id",list.get(position).getId());
+        map.put("id",list.get(position).getVid());
         NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

@@ -358,7 +358,7 @@ public class DetailsActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.close_video,R.id.detail_head,R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.close,R.id.icon_comment})
+    @OnClick({R.id.go_friend_detail2,R.id.go_friend_detail,R.id.detail_focus2,R.id.close_video,R.id.detail_head,R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.close,R.id.icon_comment})
     public void Click(View view){
         switch (view.getId()){
             case R.id.close_video:
@@ -404,6 +404,16 @@ public class DetailsActivity extends BaseActivity {
             case R.id.icon_comment:
                 initCollection();
                 collectionBt.setImageResource(R.drawable.post_collect_menu_s);
+                break;
+            case R.id.go_friend_detail:
+                Intent intent1 = new Intent(this,FriendDetailActivity.class);
+                intent1.putExtra("id",data.getData().getList().getUid());
+                startActivity(intent1);
+                break;
+            case R.id.go_friend_detail2:
+                Intent intent2 = new Intent(this,FriendDetailActivity.class);
+                intent2.putExtra("id",data.getData().getList().getUid());
+                startActivity(intent2);
                 break;
         }
     }
@@ -502,7 +512,7 @@ public class DetailsActivity extends BaseActivity {
             startActivity(intent);
             return;
         }
-        NetRequest.postFormHeadRequest(UrlManager.Focus_Friend, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+        NetRequest.postFormHeadRequest(UrlManager.Focus_User, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);

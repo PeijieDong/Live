@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.mymusic.music.DataBean.FriendDetail;
 import com.mymusic.music.DataBean.UserVideo;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
@@ -20,6 +21,7 @@ import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -56,7 +58,7 @@ public class UserVideoFragment extends BaseFragment {
         NetRequest.postFormRequest(UrlManager.User_Video, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                UserVideo bean = GsonUtil.GsonToBean(result, UserVideo.class);
+                FriendDetail bean = GsonUtil.GsonToBean(result, FriendDetail.class);
                 Rc.setLayoutManager(new GridLayoutManager(getContext(),3));
                 UserVideoAdapter adapter = new UserVideoAdapter(R.layout.user_video_item,bean.getData().getList());
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.empty_layout, null);
@@ -64,8 +66,9 @@ public class UserVideoFragment extends BaseFragment {
                 adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        Intent intent = new Intent(getContext(), DetailsActivity.class);
-                        intent.putExtra("id",bean.getData().getList().get(position).getVid());
+                        Intent intent = new Intent(getContext(), VideoPlayActivity.class);
+                        intent.putExtra("userVideo",(Serializable) bean.getData().getList());
+                        intent.putExtra("id",bean.getData().getList().get(position).getId());
                         startActivity(intent);
                     }
                 });

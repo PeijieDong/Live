@@ -2,7 +2,7 @@
 <ImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="60dp"
-    android:layout_height="60dp"
+    android:layout_height="100dp"
     android:src="@drawable/fq_add_id_card"
     android:background="@color/white"
     android:padding="18dp">

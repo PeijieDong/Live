@@ -186,6 +186,9 @@ public class FriendDetailActivity extends BaseActivity {
                 startActivity(intent1);
                 break;
             case R.id.gonggao:
+                Intent intent2 = new Intent(this, DetailsActivity.class);
+                intent2.putExtra("id",bean.getData().getList().getGonggao().getId());
+                startActivity(intent2);
                 break;
         }
     }

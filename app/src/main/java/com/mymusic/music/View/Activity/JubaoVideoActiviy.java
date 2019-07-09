@@ -24,9 +24,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.PicToBase64;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 import com.zhihu.matisse.Matisse;
@@ -117,6 +119,18 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.post:
+                if(des.getText().toString().equals("")){
+                    Toast.makeText(this,"请输入举报内容",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(group.getCheckedRadioButtonId() == -1){
+                    Toast.makeText(this,"请选择举报类型",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(imageList.size() == 0){
+                    Toast.makeText(this,"请上传举报截图",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 initNet();
                 break;
         }
@@ -127,8 +141,10 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
         map.put("type",group.getCheckedRadioButtonId()+"");
         map.put("content",des.getText().toString());
         map.put("nid",id);
+        map.put("touid",Live.getInstance().getUser(this).getData().getId());
+        map.put("file",PicToBase64.imageToBase64(imageList.get(0).getPath()));
         File file = getFileByUri(imageList.get(0), this);
-        NetRequest.postmoreRequest(UrlManager.Jubao_Video, this, map, file, new NetRequest.DataCallBack() {
+        NetRequest.postFormHeadRequest(UrlManager.Jubao_Video, map ,Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);

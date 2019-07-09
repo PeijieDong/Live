@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 
@@ -39,6 +40,7 @@ public class LoginDialog {
         builder.setPositiveButton("现在登录", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Live.getInstance().clear(context);
                 Intent intent = new Intent(context, LoginActivity.class);
                 context.startActivity(intent);
             }

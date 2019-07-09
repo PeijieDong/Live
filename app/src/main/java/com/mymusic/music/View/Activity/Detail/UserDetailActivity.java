@@ -253,7 +253,7 @@ public class UserDetailActivity extends BaseActivity {
             startActivity(intent);
             return;
         }
-        NetRequest.postFormHeadRequest(UrlManager.Focus_Friend, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+        NetRequest.postFormHeadRequest(UrlManager.Focus_User, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);

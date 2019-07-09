@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.mymusic.music.DataBean.HomeData;
+import com.mymusic.music.DataBean.UserDetail;
 import com.mymusic.music.Live;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
@@ -132,10 +133,15 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()){
+                    case R.id.user_go:
+                        Intent intent2 = new Intent(getContext(), UserDetailActivity.class);
+                        intent2.putExtra("UserId",list.get(position).getId());
+                        startActivity(intent2);
+                        break;
                     case R.id.themeBt:
                         checkLogin();
-                        Intent intent = new Intent(getActivity(), FriendDetailActivity.class);
-                        intent.putExtra("id",list.get(position).getUid());
+                        Intent intent = new Intent(getContext(), FriendDetailActivity.class);
+                        intent.putExtra("id",list.get(position).getCate());
                         getContext().startActivity(intent);
                         break;
                     case R.id.icon_more:

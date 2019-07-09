@@ -1,5 +1,7 @@
 package com.mymusic.music.DataBean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -118,6 +120,8 @@ public class HomeData {
             private String sex;
             private String user_nicename;
             private List<String> images;
+            private List<ObjsBean> objs;
+
 
             public String getUser_nicename() {
                 return user_nicename;
@@ -333,6 +337,139 @@ public class HomeData {
 
             public void setImages(List<String> images) {
                 this.images = images;
+            }
+
+            public List<ObjsBean> getObjs() {
+                return objs;
+            }
+
+            public void setObjs(List<ObjsBean> objs) {
+                this.objs = objs;
+            }
+
+            public static class ObjsBean {
+                /**
+                 * vid : 4
+                 * uid : 100001
+                 * content : 怒目而视
+                 * zan : 0
+                 * comment : 0
+                 * share : 0
+                 * status : 0
+                 * createtime : 1562677630
+                 * filepath : /data/upload/video/5d24917ecd86d.mp4
+                 * tag : 护士,白领,
+                 * image : /image2.jpg
+                 */
+
+                private String vid;
+                @SerializedName("uid")
+                private String uidX;
+                @SerializedName("content")
+                private String contentX;
+                @SerializedName("zan")
+                private String zanX;
+                @SerializedName("comment")
+                private String commentX;
+                @SerializedName("share")
+                private String shareX;
+                @SerializedName("status")
+                private String statusX;
+                @SerializedName("createtime")
+                private String createtimeX;
+                private String filepath;
+                @SerializedName("tag")
+                private String tagX;
+                @SerializedName("image")
+                private String imageX;
+
+                public String getVid() {
+                    return vid;
+                }
+
+                public void setVid(String vid) {
+                    this.vid = vid;
+                }
+
+                public String getUidX() {
+                    return uidX;
+                }
+
+                public void setUidX(String uidX) {
+                    this.uidX = uidX;
+                }
+
+                public String getContentX() {
+                    return contentX;
+                }
+
+                public void setContentX(String contentX) {
+                    this.contentX = contentX;
+                }
+
+                public String getZanX() {
+                    return zanX;
+                }
+
+                public void setZanX(String zanX) {
+                    this.zanX = zanX;
+                }
+
+                public String getCommentX() {
+                    return commentX;
+                }
+
+                public void setCommentX(String commentX) {
+                    this.commentX = commentX;
+                }
+
+                public String getShareX() {
+                    return shareX;
+                }
+
+                public void setShareX(String shareX) {
+                    this.shareX = shareX;
+                }
+
+                public String getStatusX() {
+                    return statusX;
+                }
+
+                public void setStatusX(String statusX) {
+                    this.statusX = statusX;
+                }
+
+                public String getCreatetimeX() {
+                    return createtimeX;
+                }
+
+                public void setCreatetimeX(String createtimeX) {
+                    this.createtimeX = createtimeX;
+                }
+
+                public String getFilepath() {
+                    return filepath;
+                }
+
+                public void setFilepath(String filepath) {
+                    this.filepath = filepath;
+                }
+
+                public String getTagX() {
+                    return tagX;
+                }
+
+                public void setTagX(String tagX) {
+                    this.tagX = tagX;
+                }
+
+                public String getImageX() {
+                    return imageX;
+                }
+
+                public void setImageX(String imageX) {
+                    this.imageX = imageX;
+                }
             }
         }
     }

@@ -49,7 +49,8 @@ public class VideoFragment extends BaseFragment {
     private int select = 0;
     long mLastTime=0;
     long mCurTime=0;
-
+    public VideoViewHolder selectHolder;
+    public int selectPosition;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -70,7 +71,7 @@ public class VideoFragment extends BaseFragment {
 
                     break;
                 case 2:
-                    initCollection();
+                    initLike(selectHolder);
                     break;
             }
         }
@@ -127,7 +128,9 @@ public class VideoFragment extends BaseFragment {
         adapter = new VideoRecyclerViewAdapter(getContext(), bean.getData().getList());
         adapter.setListener(new VideoRecyclerViewAdapter.VideoListener() {
             @Override
-            public void click(View v, int position) {
+            public void click(View v, int position,VideoViewHolder holder) {
+                selectPosition = position;
+                selectHolder = holder;
                 select = position;
                 mLastTime=mCurTime;
                 mCurTime= System.currentTimeMillis();
@@ -177,7 +180,7 @@ public class VideoFragment extends BaseFragment {
             return;
         }
         HashMap<String, String> map = new HashMap<>();
-        map.put("id",bean.getData().getList().get(select).getId());
+        map.put("id",bean.getData().getList().get(select).getVid());
         NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -196,7 +199,29 @@ public class VideoFragment extends BaseFragment {
             }
         });
     }
+    private void initLike(VideoViewHolder holder) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type","1");
+        map.put("id",bean.getData().getList().get(selectPosition).getId());
+        NetRequest.postFormRequest(UrlManager.Video_Zan, map, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Toast.makeText(getContext(),"点赞成功",Toast.LENGTH_SHORT).show();
+                holder.likeNum.setText(Integer.parseInt(holder.likeNum.getText().toString())+1+"");
+                holder.video_like.setImageResource(R.drawable.yp_video_like);
+            }
 
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getContext());
+                dialog.Show();
+            }
+        });
+    }
     @Override
     public void onPause() {
         super.onPause();

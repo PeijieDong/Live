@@ -143,7 +143,7 @@ public class NetRequest {
         getInstance().upLoadFile(url,context, params,file, callBack);
     }
 
-    public static void postmorePicRequest(String url, Context context, Map<String,String> params, List<Uri> fileList,DataCallBack callBack){
+    public static void postmorePicRequest(String url, Context context, Map<String,String> params, List<File> fileList,DataCallBack callBack){
         getInstance().upLoadPicFile(url,context,params,fileList,callBack);
     }
     //-------------对外提供的方法End--------------------------------
@@ -357,10 +357,10 @@ public class NetRequest {
                 if (response.isSuccessful()) { // 请求成功
                     //执行请求成功的操作
                     String result = response.body().string();
-                    BaseBack back = GsonUtil.GsonToBean(result, BaseBack.class);
-                    if(back.getStatus().equals("-997")){
-                        callBack.TokenFail();
-                    }
+//                    BaseBack back = GsonUtil.GsonToBean(result, BaseBack.class);
+//                    if(back.getStatus().equals("-997")){
+//                        callBack.TokenFail();
+//                    }
                     deliverDataSuccess(result, callBack);
                 } else {
                     throw new IOException(response + "");
@@ -410,13 +410,17 @@ public class NetRequest {
     }
 
     private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
-    private void upLoadPicFile(final String url, Context context, final Map<String, String> map, List<Uri> fileList, final DataCallBack callBack) {
+    private void upLoadPicFile(final String url, Context context, final Map<String, String> map, List<File> fileList, final DataCallBack callBack) {
 
         OkHttpClient client = new OkHttpClient();
         // form 表单形式上传
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        for (Uri path : fileList) {
-            requestBody.addFormDataPart("file", null, RequestBody.create(MEDIA_TYPE_PNG, new File(path.getPath())));
+        int i=0;
+        for(File file:fileList){
+            if(file.exists()){
+                requestBody.addFormDataPart("file",file.getName(),RequestBody.create(MEDIA_TYPE_PNG,file));
+                i++;
+            }
         }
         if (map != null) {
             // map 里面是请求中所需要的 key 和 value

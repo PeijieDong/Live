@@ -109,9 +109,15 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
                 switch (view.getId()) {
                     case R.id.find_item_focus:
                         TextView focus = view.findViewById(R.id.find_item_focus);
-                        focus.setBackgroundResource(R.drawable.isfocus);
-                        focus.setText("取消关注");
-                        initFocusFriend(true,position);
+                        if(focus.getText().toString().equals("取消关注")){
+                            focus.setText("+关注");
+                            focus.setBackgroundResource(R.drawable.focus);
+                            initFocusFriend(true,position);
+                        }else{
+                            focus.setText("取消关注");
+                            focus.setBackgroundResource(R.drawable.isfocus);
+                            initFocusFriend(false,position);
+                        }
                         break;
                     case R.id.four_head:
                         Intent intent = new Intent(getContext(), ListUserActivity.class);

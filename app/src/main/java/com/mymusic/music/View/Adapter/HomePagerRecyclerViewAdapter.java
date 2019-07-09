@@ -58,10 +58,12 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
 
     public HomePagerRecyclerViewAdapter(@Nullable List<HomeData.DataBean.ListBean> data) {
         super(data);
-
         setMultiTypeDelegate(new MultiTypeDelegate<HomeData.DataBean.ListBean>() {
             @Override
             protected int getItemType(HomeData.DataBean.ListBean s) {
+                if(s.getObjs() != null){
+                    return PAPA;
+                }
                 switch (s.getType()){
                     //多图片
                     case "图片":
@@ -193,7 +195,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
             case PAPA:
                 RecyclerView FoundRc = helper.getView(R.id.found_rc);
                 FoundRc.setLayoutManager(new GridLayoutManager(mContext,2));
-                FoundRcAdapter foundAdapter = new FoundRcAdapter(R.layout.found_video_item,null);
+                FoundRcAdapter foundAdapter = new FoundRcAdapter(R.layout.found_video_item,item.getObjs());
                 foundAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
                     @Override
                     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -210,10 +212,10 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 FoundRc.setAdapter(foundAdapter);
                 break;
             case USER:
-                helper.setText(R.id.found_name,item.getUsername())
-                        .setText(R.id.found_content,item.getContent())
-                        .addOnClickListener(R.id.found_head);
-                Glide.with(mContext).load(item.getAvatar()).into((ImageView) helper.getView(R.id.found_head));
+                helper.setText(R.id.found_name,item.getUser_nicename())
+                        .setText(R.id.found_content,item.getSignature())
+                        .addOnClickListener(R.id.user_go);
+                Glide.with(mContext).load(item.getAvatar_thumb()).into((ImageView) helper.getView(R.id.found_head));
                 break;
         }
     }

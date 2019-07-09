@@ -27,6 +27,7 @@
         android:layout_marginLeft="29dp"
         android:text="@string/welcome"/>
     <ImageView
+        android:id="@+id/close"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="15dp"

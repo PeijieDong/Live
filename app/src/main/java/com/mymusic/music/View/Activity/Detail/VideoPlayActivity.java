@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.mymusic.music.DataBean.FriendDetail;
+import com.mymusic.music.DataBean.UserVideo;
 import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;

@@ -91,9 +91,12 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.bt_login,R.id.phone_login,R.id.forget_pwd,R.id.register_fast})
+    @OnClick({R.id.bt_login,R.id.phone_login,R.id.forget_pwd,R.id.register_fast,R.id.close})
     public void OnclickEvent(View view) {
         switch (view.getId()) {
+            case R.id.close:
+                finish();
+                break;
             case R.id.bt_login:
                 if (userName.getText().toString().equals("") || userPwd.getText().toString().equals("")) {
                     Toast.makeText(LoginActivity.this, "请完善内容", Toast.LENGTH_SHORT).show();

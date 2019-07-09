@@ -115,6 +115,7 @@
                             android:text="@string/focus"/>
                     </android.support.constraint.ConstraintLayout>
                     <RelativeLayout
+                        android:id="@+id/go_friend_detail"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginLeft="10dp">
@@ -217,6 +218,7 @@
                         android:layout_marginBottom="3dp"
                         android:textSize="16sp"/>
                     <LinearLayout
+                        android:id="@+id/go_friend_detail2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"

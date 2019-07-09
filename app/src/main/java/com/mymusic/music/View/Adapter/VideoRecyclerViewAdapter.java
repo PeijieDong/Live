@@ -174,7 +174,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.click(v,position);
+                listener.click(v,position,holder);
             }
         });
         if (position == 0) {
@@ -196,7 +196,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
             return;
         }
         HashMap<String, String> map = new HashMap<>();
-        map.put("id",list.get(position).getId());
+        map.put("id",list.get(position).getVid());
         NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -220,7 +220,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
         map.put("id",list.get(position).getId());
-        NetRequest.postFormRequest(UrlManager.Video_Comment, map, new NetRequest.DataCallBack() {
+        NetRequest.postFormRequest(UrlManager.Video_Zan, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();
@@ -376,7 +376,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
     }
 
     public interface VideoListener{
-        void click(View v, int position);
+        void click(View v, int position,VideoViewHolder holder);
     }
 
     public void setListener(VideoListener listener){
