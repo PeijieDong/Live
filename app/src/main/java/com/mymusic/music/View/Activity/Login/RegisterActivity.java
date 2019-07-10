@@ -24,8 +24,8 @@ public class RegisterActivity extends BaseActivity {
     EditText phone;
     @BindView(R.id.register_userPwd)
     EditText code;
-    @BindView(R.id.get_code)
-    TextView getCode;
+//    @BindView(R.id.get_code)
+//    TextView getCode;
     @BindView(R.id.bt_login)
     Button go;
     @Override
@@ -79,26 +79,29 @@ public class RegisterActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.bt_login,R.id.get_code})
+    @OnClick({R.id.bt_login,R.id.close})
     public void ClickEvent(View view){
         switch (view.getId()){
+            case R.id.close:
+                finish();
+                break;
             case R.id.bt_login:
                 initRegister();
                 break;
-            case R.id.get_code:
-                CountDownTimer timer = new CountDownTimer(60000, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        getCode.setText(millisUntilFinished/1000+"s");
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        getCode.setText("重新获取");
-                    }
-                };
-                timer.start();
-                break;
+//            case R.id.get_code:
+//                CountDownTimer timer = new CountDownTimer(60000, 1000) {
+//                    @Override
+//                    public void onTick(long millisUntilFinished) {
+//                        getCode.setText(millisUntilFinished/1000+"s");
+//                    }
+//
+//                    @Override
+//                    public void onFinish() {
+//                        getCode.setText("重新获取");
+//                    }
+//                };
+//                timer.start();
+//                break;
         }
     }
 

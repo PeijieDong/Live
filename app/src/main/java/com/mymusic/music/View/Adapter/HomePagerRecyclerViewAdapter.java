@@ -239,18 +239,17 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                 initComment();
                 break;
             case R.id.icon_share:
-                initShare();
-                break;
-            case R.id.userBt:
                 if(Live.getInstance().getUser(mContext) == null){
                     Intent intent = new Intent(mContext, LoginActivity.class);
                     mContext.startActivity(intent);
-                    return ;
-                }else {
-                    Intent intent1 = new Intent(mContext, UserDetailActivity.class);
-                    intent1.putExtra("UserId", item.getUid());
-                    mContext.startActivity(intent1);
+                    return;
                 }
+                initShare();
+                break;
+            case R.id.userBt:
+                Intent intent1 = new Intent(mContext, UserDetailActivity.class);
+                intent1.putExtra("UserId", item.getUid());
+                mContext.startActivity(intent1);
                 break;
         }
     }

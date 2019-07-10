@@ -139,13 +139,15 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                         startActivity(intent2);
                         break;
                     case R.id.themeBt:
-                        checkLogin();
                         Intent intent = new Intent(getContext(), FriendDetailActivity.class);
                         intent.putExtra("id",list.get(position).getCate());
                         getContext().startActivity(intent);
                         break;
                     case R.id.icon_more:
-                        checkLogin();
+                        if(Live.getInstance().getUser(getContext()) == null){
+                            startActivity(new Intent(getContext(),LoginActivity.class));
+                            return;
+                        }
                         BottomSheetDialog bottomSheet = new BottomSheetDialog(getContext());//实例化
                         bottomSheet.setCancelable(true);//设置点击外部是否可以取消
                         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_layout, null);
@@ -156,7 +158,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                             public void onClick(View v) {
                                 HashMap<String, String> map = new HashMap<>();
                                 map.put("touid",list.get(position).getUid());
-                                initBt(UrlManager.Friend_Focus,position,map);
+                                initBt(UrlManager.Focus_User,position,map);
                                 bottomSheet.dismiss();
                             }
                         });
@@ -186,6 +188,10 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                         jubao.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                if(Live.getInstance().getUser(getContext()) == null){
+                                    startActivity(new Intent(getContext(),LoginActivity.class));
+                                    return;
+                                }
                                 Intent intent1 = new Intent(getContext(), JubaoActivity.class);
                                 intent1.putExtra("uid",list.get(position).getId());
                                 intent1.putExtra("touid",list.get(position).getUid());
@@ -203,7 +209,10 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                         bottomSheet.show();//显示弹窗
                         break;
                     case R.id.ll_home_like:
-                        checkLogin();
+                        if(Live.getInstance().getUser(getContext()) == null){
+                            startActivity(new Intent(getContext(),LoginActivity.class));
+                            return;
+                        }
                         likeNum = view.findViewById(R.id.likeNum);
                         likeIcon = view.findViewById(R.id.icon_like);
                         initLike(list,position);

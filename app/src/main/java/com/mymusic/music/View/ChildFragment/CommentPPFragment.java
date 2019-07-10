@@ -94,7 +94,7 @@ public class CommentPPFragment extends BaseFragment {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()){
                     case R.id.close:
-                        initClose();
+                        initClose(bean,position);
                         break;
                 }
             }
@@ -102,8 +102,10 @@ public class CommentPPFragment extends BaseFragment {
         rc.setAdapter(adpater);
     }
 
-    private void initClose() {
-        NetRequest.getFormRequest(UrlManager.Delete, null, new NetRequest.DataCallBack() {
+    private void initClose(Art bean, int position) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id",bean.getData().getList().get(position).getId());
+        NetRequest.postFormHeadRequest(UrlManager.Delete, map,Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Toast.makeText(getContext(),"删除成功",Toast.LENGTH_SHORT).show();

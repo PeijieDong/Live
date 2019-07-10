@@ -358,7 +358,7 @@ public class DetailsActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.go_friend_detail2,R.id.go_friend_detail,R.id.detail_focus2,R.id.close_video,R.id.detail_head,R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.close,R.id.icon_comment})
+    @OnClick({R.id.go_friend_detail2,R.id.go_friend_detail,R.id.detail_focus2,R.id.close_video,R.id.detail_head2,R.id.detail_head,R.id.detail_post,R.id.icon_like,R.id.icon_share,R.id.detail_focus,R.id.changeState,R.id.close,R.id.icon_comment})
     public void Click(View view){
         switch (view.getId()){
             case R.id.close_video:
@@ -369,22 +369,52 @@ public class DetailsActivity extends BaseActivity {
                 intent.putExtra("UserId",data.getData().getList().getUid());
                 startActivity(intent);
                 break;
+            case R.id.detail_head2:
+                Intent intent2 = new Intent(this, UserDetailActivity.class);
+                intent2.putExtra("UserId",data.getData().getList().getUid());
+                startActivity(intent2);
+                break;
             case R.id.detail_post:
+                if(Live.getInstance().getUser(this) == null){
+                    Intent intent1 = new Intent(this, LoginActivity.class);
+                    startActivity(intent1);
+                    return;
+                }
                 initNet();
                 break;
             case R.id.icon_like:
+                if(Live.getInstance().getUser(this) == null){
+                    Intent intent1 = new Intent(this, LoginActivity.class);
+                    startActivity(intent1);
+                    return;
+                }
                 initNet2();
                 break;
             case R.id.icon_share:
+                if(Live.getInstance().getUser(this) == null){
+                    Intent intent1 = new Intent(this, LoginActivity.class);
+                    startActivity(intent1);
+                    return;
+                }
                 ClipboardManager clipboard = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clipData = ClipData.newPlainText(null, data.getData().getList().getContent());
                 clipboard.setPrimaryClip(clipData);
                 Toast.makeText(DetailsActivity.this,"复制成功,快去分享吧",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.detail_focus:
+                if(Live.getInstance().getUser(this) == null){
+                    Intent intent1 = new Intent(this, LoginActivity.class);
+                    startActivity(intent1);
+                    return;
+                }
                 initFocus();
                 break;
             case R.id.detail_focus2:
+                if(Live.getInstance().getUser(this) == null){
+                    Intent intent1 = new Intent(this, LoginActivity.class);
+                    startActivity(intent1);
+                    return;
+                }
                 initFocus2();
                 break;
             case R.id.changeState:
@@ -402,18 +432,23 @@ public class DetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.icon_comment:
+                if(Live.getInstance().getUser(this) == null){
+                    Intent intent1 = new Intent(this, LoginActivity.class);
+                    startActivity(intent1);
+                    return;
+                }
                 initCollection();
                 collectionBt.setImageResource(R.drawable.post_collect_menu_s);
                 break;
             case R.id.go_friend_detail:
                 Intent intent1 = new Intent(this,FriendDetailActivity.class);
-                intent1.putExtra("id",data.getData().getList().getUid());
+                intent1.putExtra("id",data.getData().getList().getCate());
                 startActivity(intent1);
                 break;
             case R.id.go_friend_detail2:
-                Intent intent2 = new Intent(this,FriendDetailActivity.class);
-                intent2.putExtra("id",data.getData().getList().getUid());
-                startActivity(intent2);
+                Intent intent3 = new Intent(this,FriendDetailActivity.class);
+                intent3.putExtra("id",data.getData().getList().getCate());
+                startActivity(intent3);
                 break;
         }
     }

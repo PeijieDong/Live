@@ -71,6 +71,11 @@ public class VideoFragment extends BaseFragment {
 
                     break;
                 case 2:
+                    if(Live.getInstance().getUser(getContext()) == null){
+                        Intent intent1 = new Intent(getContext(), LoginActivity.class);
+                        startActivity(intent1);
+                        return;
+                    }
                     initLike(selectHolder);
                     break;
             }
@@ -173,36 +178,36 @@ public class VideoFragment extends BaseFragment {
         });
     }
 
-    private void initCollection() {
-        if(Live.getInstance().getToken(getContext()) == null){
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            getContext().startActivity(intent);
-            return;
-        }
-        HashMap<String, String> map = new HashMap<>();
-        map.put("id",bean.getData().getList().get(select).getVid());
-        NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
-            @Override
-            public void requestSuccess(String result) throws Exception {
-                Log.e("33",result);
-                Toast.makeText(getContext(),"收藏成功",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void requestFailure(Request request, IOException e) {
-
-            }
-            @Override
-            public void TokenFail() {
-                LoginDialog dialog = new LoginDialog(getActivity());
-                dialog.Show();
-            }
-        });
-    }
+//    private void initCollection() {
+//        if(Live.getInstance().getToken(getContext()) == null){
+//            Intent intent = new Intent(getContext(), LoginActivity.class);
+//            getContext().startActivity(intent);
+//            return;
+//        }
+//        HashMap<String, String> map = new HashMap<>();
+//        map.put("id",bean.getData().getList().get(select).getVid());
+//        NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
+//            @Override
+//            public void requestSuccess(String result) throws Exception {
+//                Log.e("33",result);
+//                Toast.makeText(getContext(),"收藏成功",Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void requestFailure(Request request, IOException e) {
+//
+//            }
+//            @Override
+//            public void TokenFail() {
+//                LoginDialog dialog = new LoginDialog(getActivity());
+//                dialog.Show();
+//            }
+//        });
+//    }
     private void initLike(VideoViewHolder holder) {
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
-        map.put("id",bean.getData().getList().get(selectPosition).getId());
+        map.put("id",bean.getData().getList().get(selectPosition).getVid());
         NetRequest.postFormRequest(UrlManager.Video_Zan, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

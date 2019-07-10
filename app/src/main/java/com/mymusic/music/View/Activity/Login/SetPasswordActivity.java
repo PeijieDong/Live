@@ -88,9 +88,12 @@ public class SetPasswordActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.sure})
+    @OnClick({R.id.sure,R.id.back})
     public void ClickEvent(View view){
         switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
             case R.id.sure:
                 if(pwd.getText().toString().length()<6 && !pwd.getText().toString().equals(pwd2)){
                     Toast.makeText(this,"密码不正确",Toast.LENGTH_SHORT).show();

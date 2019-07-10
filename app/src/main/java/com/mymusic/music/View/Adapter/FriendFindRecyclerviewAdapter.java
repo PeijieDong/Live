@@ -47,6 +47,13 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
                 .addOnClickListener(R.id.find_item_focus)
                 .addOnClickListener(R.id.four_head)
                 .addOnClickListener(R.id.friend_list);
+        if(item.getIsguanzhu().equals("已关注")){
+            helper.setText(R.id.find_item_focus,"取消关注");
+            helper.setBackgroundRes(R.id.find_item_focus,R.drawable.isfocus);
+        }else{
+            helper.setText(R.id.find_item_focus,"+关注");
+            helper.setBackgroundRes(R.id.find_item_focus,R.drawable.focus);
+        }
         ImageView head = helper.getView(R.id.friend_find_head);
         ImageView one = helper.getView(R.id.friend_find_one);
         ImageView two = helper.getView(R.id.friend_find_two);

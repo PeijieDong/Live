@@ -26,6 +26,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.JubaoVideoActiviy;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
@@ -74,6 +75,14 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.putVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Live.getInstance().getUser(context) == null ){
+                    context.startActivity(new Intent(context, LoginActivity.class));
+                    return;
+                }
+                if(Integer.parseInt(Live.getInstance().getUser(context).getData().getLevel())<3){
+                    Toast.makeText(context,"只有3级以上用户可以使用",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 Intent intent = new Intent(context, PutVideoActivity.class);
                 context.startActivity(intent);
             }
@@ -81,6 +90,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.focus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Live.getInstance().getUser(context) == null){
+                    Intent intent1 = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent1);
+                    return;
+                }
                 HashMap<String, String> map = new HashMap<>();
                 map.put("touid",list.get(position).getUid());
                 NetRequest.postFormHeadRequest(UrlManager.Focus_User, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
@@ -129,6 +143,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                 feedback.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(Live.getInstance().getUser(context) == null){
+                            Intent intent1 = new Intent(context, LoginActivity.class);
+                            context.startActivity(intent1);
+                            return;
+                        }
                         Intent intent = new Intent(context, JubaoVideoActiviy.class);
                         intent.putExtra("id",list.get(position).getId());
                         context.startActivity(intent);
@@ -138,6 +157,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                 collection.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(Live.getInstance().getUser(context) == null){
+                            Intent intent1 = new Intent(context, LoginActivity.class);
+                            context.startActivity(intent1);
+                            return;
+                        }
                         initCollection();
                         bottomSheet.dismiss();
                     }
@@ -149,6 +173,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.video_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Live.getInstance().getUser(context) == null){
+                    Intent intent1 = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent1);
+                    return;
+                }
                 initLike(holder);
             }
         });
@@ -161,11 +190,6 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.video_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Live.getInstance().getUser(context) == null){
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    context.startActivity(intent);
-                    return ;
-                }
                 Intent intent = new Intent(context, UserDetailActivity.class);
                 intent.putExtra("UserId",list.get(position).getUid());
                 context.startActivity(intent);
@@ -190,11 +214,6 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
     }
 
     private void initCollection() {
-        if(Live.getInstance().getToken(context) == null){
-            Intent intent = new Intent(context, LoginActivity.class);
-            context.startActivity(intent);
-            return;
-        }
         HashMap<String, String> map = new HashMap<>();
         map.put("id",list.get(position).getVid());
         NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
@@ -217,9 +236,14 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
 
 
     private void initLike(VideoViewHolder holder) {
+        if(Live.getInstance().getUser(context) == null){
+            Intent intent1 = new Intent(context, LoginActivity.class);
+            context.startActivity(intent1);
+            return;
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
-        map.put("id",list.get(position).getId());
+        map.put("id",list.get(position).getVid());
         NetRequest.postFormRequest(UrlManager.Video_Zan, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -259,13 +283,13 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(commentEt.getText().toString().equals("")){
-                    Toast.makeText(context,"不能为空哦",Toast.LENGTH_SHORT).show();
+                if(Live.getInstance().getUser(context) == null){
+                    Intent intent1 = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent1);
                     return;
                 }
-                if(Live.getInstance().getToken(context) == null){
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    context.startActivity(intent);
+                if(commentEt.getText().toString().equals("")){
+                    Toast.makeText(context,"不能为空哦",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 HashMap<String, String> map = new HashMap<>();
@@ -311,10 +335,14 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                         context.startActivity(intent);
                         break;
                     case R.id.comment_like:
+                        if(Live.getInstance().getToken(context) == null){
+                            context.startActivity(new Intent(context,LoginActivity.class));
+                            return;
+                        }
                         HashMap<String, String> map = new HashMap<>();
                         map.put("type","1");
-                        map.put("id",list.get(position).getId());
-                        NetRequest.postFormRequest(UrlManager.Video_Comment, map, new NetRequest.DataCallBack() {
+                        map.put("id",listbean.get(position).getVid());
+                        NetRequest.postFormRequest(UrlManager.Video_CommentLike, map, new NetRequest.DataCallBack() {
                             @Override
                             public void requestSuccess(String result) throws Exception {
                                 Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();
@@ -347,7 +375,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         map.put("id",list.get(position).getVid());
         map.put("sortby","new");
         map.put("uid","0");
-        NetRequest.postFormRequest(UrlManager.Detail_Comment, map, new NetRequest.DataCallBack() {
+        NetRequest.postFormRequest(UrlManager.GetComment_Video, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);

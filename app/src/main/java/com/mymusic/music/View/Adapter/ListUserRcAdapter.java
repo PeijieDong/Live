@@ -29,13 +29,17 @@ public class ListUserRcAdapter extends BaseQuickAdapter<UserList.DataBean.ListBe
     @Override
     protected void convert(BaseViewHolder helper, UserList.DataBean.ListBean item) {
         helper.setText(R.id.focus_rc_name,item.getUser_nick())
-                .setText(R.id.focus_rc_dec,item.getSignature());
+                .setText(R.id.focus_rc_dec,item.getSignature())
+                .addOnClickListener(R.id.focus);
         Glide.with(mContext).load(item.getAvatar()).into((CircleImageView) helper.getView(R.id.focus_rc_head));
         focus = helper.getView(R.id.focus_rc_focusbt);
         if(item.getGuanzhu().equals("关注")){
             focus.setText("+关注");
+            focus.setBackgroundResource(R.drawable.focus);
+        }else{
+            focus.setText("取消关注");
+            focus.setBackgroundResource(R.drawable.isfocus);
         }
-        focus.setOnClickListener(this);
     }
 
     @Override

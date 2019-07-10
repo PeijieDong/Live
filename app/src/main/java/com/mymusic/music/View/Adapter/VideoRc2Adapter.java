@@ -92,6 +92,11 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
         holder.focus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Live.getInstance().getUser(context) == null){
+                    Intent intent1 = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent1);
+                    return;
+                }
                 holder.focus.setText("取消关注");
                 holder.focus.setBackgroundResource(R.drawable.isfocus);
                 initNet();
@@ -126,6 +131,11 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Live.getInstance().getUser(context) == null){
+                    Intent intent1 = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent1);
+                    return;
+                }
                 Intent intent = new Intent(context, JubaoVideoActiviy.class);
                 intent.putExtra("id",list.get(position).getId());
                 context.startActivity(intent);
@@ -135,6 +145,11 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
         collection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Live.getInstance().getUser(context) == null){
+                    Intent intent1 = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent1);
+                    return;
+                }
                 initCollection();
                 bottomSheet.dismiss();
             }

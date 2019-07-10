@@ -42,6 +42,13 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
                 .setText(R.id.friend_all_content2,item.getList().get(1).getContent())
                 .setText(R.id.friend_all_content3,item.getList().get(2).getContent())
                 .addOnClickListener(R.id.friend_all_bt);
+        if(item.getIsguanzhu().equals("已关注")){
+            helper.setText(R.id.friend_all_bt,"取消关注");
+            helper.setBackgroundRes(R.id.friend_all_bt,R.drawable.isfocus);
+        }else{
+            helper.setText(R.id.friend_all_bt,"+关注");
+            helper.setBackgroundRes(R.id.friend_all_bt,R.drawable.focus);
+        }
         ImageView head = helper.getView(R.id.friend_item_head);
         ImageView image1 = helper.getView(R.id.friend_all_image1);
         ImageView image2 = helper.getView(R.id.friend_all_image2);

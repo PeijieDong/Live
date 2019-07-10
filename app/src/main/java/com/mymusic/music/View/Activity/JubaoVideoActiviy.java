@@ -29,6 +29,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.PicToBase64;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 import com.zhihu.matisse.Matisse;
@@ -141,7 +142,13 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
         map.put("type",group.getCheckedRadioButtonId()+"");
         map.put("content",des.getText().toString());
         map.put("nid",id);
-        map.put("touid",Live.getInstance().getUser(this).getData().getId());
+        if(Live.getInstance().getUser(this) != null){
+            map.put("touid",Live.getInstance().getUser(this).getData().getId());
+        }else{
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
         map.put("file",PicToBase64.imageToBase64(imageList.get(0).getPath()));
         File file = getFileByUri(imageList.get(0), this);
         NetRequest.postFormHeadRequest(UrlManager.Jubao_Video, map ,Live.getInstance().getToken(this), new NetRequest.DataCallBack() {

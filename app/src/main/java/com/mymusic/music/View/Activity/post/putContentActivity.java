@@ -185,14 +185,15 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     tag.append(list.get(i));
                     tag.append(",");
                 }
-                initNet();
                 showLoading();
+                initNet();
+                closeLoading();
                 break;
         }
     }
 
     private void initNet() {
-        if(title.getText().equals("")){
+        if(title.getText().toString().equals("")){
             Toast.makeText(this,"请输入标题",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -210,14 +211,14 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         map.put("content", title.getText().toString());
         List<File> fileList = new ArrayList<>();
         if (navigation.getPosition() == 1) {
+            if(image.size() == 0){
+                Toast.makeText(this,"请选择要上传的图片",Toast.LENGTH_SHORT).show();
+                return;
+            }
             map.put("images","data:image/jpeg;base64,"+PicToBase64.imageToBase64(image.get(0).getPath()+""));
             for (int i = 0 ;i<image.size();i++){
                 File file1 = new File(image.get(i).getPath());
                 fileList.add(file1);
-            }
-            if(fileList.size() == 0){
-                Toast.makeText(this,"请选择要上传的图片",Toast.LENGTH_SHORT).show();
-                return;
             }
             NetRequest.postmorePicRequest(url, this, map, fileList, new NetRequest.DataCallBack() {
                 @Override
@@ -242,11 +243,11 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             return;
         }
         if (navigation.getPosition() == 0) {
-            file = getFileByUri(image.get(0), this);
-            if(file == null){
+            if(image.size() == 0){
                 Toast.makeText(this,"请选择要上传的视频",Toast.LENGTH_SHORT).show();
                 return;
             }
+            file = getFileByUri(image.get(0), this);
             map.put("playtime", getRingDuring(image.get(0)));
             map.put("images", "data:image/jpeg;base64,"+getVideoImage(getRealPathFromURI(putContentActivity.this,image.get(0))));
         }

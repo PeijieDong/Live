@@ -143,10 +143,21 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.friend_all_bt:
+                        if(Live.getInstance().getUser(getContext()) == null){
+                            Intent intent1 = new Intent(getContext(), LoginActivity.class);
+                            getContext().startActivity(intent1);
+                            return;
+                        }
                         TextView focus = view.findViewById(R.id.friend_all_bt);
-                        focus.setBackgroundResource(R.drawable.isfocus);
-                        focus.setText("取消关注");
-                        initFocusFriend(true,position);
+                        if(focus.getText().toString().equals("取消关注")){
+                            focus.setBackgroundResource(R.drawable.focus);
+                            focus.setText("+关注");
+                            initFocusFriend(false, position);
+                        }else {
+                            focus.setBackgroundResource(R.drawable.isfocus);
+                            focus.setText("取消关注");
+                            initFocusFriend(true, position);
+                        }
                         break;
                 }
             }

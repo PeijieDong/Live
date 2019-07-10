@@ -32,7 +32,7 @@ public class ArRcAdpater extends BaseQuickAdapter<Art.DataBean.ListBean,BaseView
                 .setText(R.id.type,s.getType())
                 .setText(R.id.des,s.getCatename())
                 .addOnClickListener(R.id.close);
-        Glide.with(mContext).load(Live.getInstance().get(mContext).getList().getAvatar()).into((CircleImageView) helper.getView(R.id.head));
+        Glide.with(mContext).load(Live.getInstance().get(mContext).getList().getAvatar_thumb()).into((CircleImageView) helper.getView(R.id.head));
         Glide.with(mContext).load(s.getImage()).into((ImageView) helper.getView(R.id.image));
     }
 }

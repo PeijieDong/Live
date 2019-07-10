@@ -79,6 +79,8 @@ public class UrlManager {
 
     public static final String Video_Comment = BaseUrl+"index/getComment";
 
+    public static final String Video_CommentLike = BaseUrl+"index/pzan";
+
     public static final String Jubao_Video = BaseUrl+"video/videoreport";
 
     public static final String User_Detail = BaseUrl+"index/getUserinfo";
@@ -103,6 +105,8 @@ public class UrlManager {
 
     public static final String Comment_Video =BaseUrl + "video/putComment";
 
+    public static final String GetComment_Video =BaseUrl + "video/getComment";
+
     public static final String Clear_History =BaseUrl + "users/cleanhistory";
 
     public static final String Feedback_wallet =BaseUrl + "users/feedback";
@@ -123,9 +127,13 @@ public class UrlManager {
 
     public static final String Home_Find = BaseUrl+"index/search";
 
-    public static final String Delete = BaseUrl+"index/search";
+    public static final String Delete = BaseUrl+"users/delcomment";
 
     public static final String CommentLike = BaseUrl+"index/pzan";
 
     public static final String Money = BaseUrl+"users/toorder";
+
+    public static final String Task = BaseUrl+"users/task";
+
+    public static final String Level = BaseUrl+"users/levels";
 }

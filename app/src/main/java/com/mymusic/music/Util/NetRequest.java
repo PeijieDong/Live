@@ -357,10 +357,10 @@ public class NetRequest {
                 if (response.isSuccessful()) { // 请求成功
                     //执行请求成功的操作
                     String result = response.body().string();
-//                    BaseBack back = GsonUtil.GsonToBean(result, BaseBack.class);
-//                    if(back.getStatus().equals("-997")){
-//                        callBack.TokenFail();
-//                    }
+                    BaseBack back = GsonUtil.GsonToBean(result, BaseBack.class);
+                    if(back.getStatus().equals("-997")){
+                        callBack.TokenFail();
+                    }
                     deliverDataSuccess(result, callBack);
                 } else {
                     throw new IOException(response + "");

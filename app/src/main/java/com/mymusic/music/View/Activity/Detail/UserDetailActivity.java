@@ -104,9 +104,12 @@ public class UserDetailActivity extends BaseActivity {
                 backRandom.setBackgroundResource(R.drawable.circle_single_bg_1);
                 break;
         }
-        if(id.equals(Live.getInstance().getUser(this).getData().getId())){
-            editTv.setVisibility(View.VISIBLE);
-        }else{
+        if(Live.getInstance().getUser(this) != null){
+            if(id.equals(Live.getInstance().getUser(this).getData().getId())){
+                editTv.setVisibility(View.VISIBLE);
+            }else{
+                focus.setVisibility(View.VISIBLE);
+            }
             focus.setVisibility(View.VISIBLE);
         }
         initNet();
@@ -114,14 +117,8 @@ public class UserDetailActivity extends BaseActivity {
     }
 
     private void initNet() {
-        if(Live.getInstance().getToken(this) == null){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            return;
-        }
         HashMap<String, String> map = new HashMap<>();
         map.put("uid",id);
-        Log.e("33",id);
         NetRequest.postFormHeadRequest(UrlManager.User_Detail, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -222,7 +219,7 @@ public class UserDetailActivity extends BaseActivity {
     private void initFocusCencel() {
         HashMap<String, String> map = new HashMap<>();
         map.put("touid",id);
-        if(Live.getInstance().getToken(this) == null){
+        if(Live.getInstance().getUser(this) == null){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             return;
@@ -248,7 +245,7 @@ public class UserDetailActivity extends BaseActivity {
     private void initFocusNet() {
         HashMap<String, String> map = new HashMap<>();
         map.put("touid",id);
-        if(Live.getInstance().getToken(this) == null){
+        if(Live.getInstance().getUser(this) == null){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             return;

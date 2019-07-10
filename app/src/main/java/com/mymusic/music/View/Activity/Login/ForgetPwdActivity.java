@@ -23,8 +23,8 @@ public class ForgetPwdActivity extends BaseActivity {
     EditText phone;
     @BindView(R.id.register_userPwd)
     EditText pwd;
-    @BindView(R.id.get_code)
-    TextView code;
+//    @BindView(R.id.get_code)
+//    TextView code;
     @BindView(R.id.bt_login)
     Button go;
 
@@ -79,26 +79,29 @@ public class ForgetPwdActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.bt_login,R.id.get_code})
+    @OnClick({R.id.bt_login,R.id.close})
     public void ClickEvent(View view){
         switch (view.getId()){
+            case R.id.close:
+                finish();
+                break;
             case R.id.bt_login:
                 initForget();
                 break;
-            case R.id.get_code:
-                CountDownTimer timer = new CountDownTimer(60000, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        code.setText(millisUntilFinished/1000+"s");
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        code.setText("重新获取");
-                    }
-                };
-                timer.start();
-                break;
+//            case R.id.get_code:
+//                CountDownTimer timer = new CountDownTimer(60000, 1000) {
+//                    @Override
+//                    public void onTick(long millisUntilFinished) {
+//                        code.setText(millisUntilFinished/1000+"s");
+//                    }
+//
+//                    @Override
+//                    public void onFinish() {
+//                        code.setText("重新获取");
+//                    }
+//                };
+//                timer.start();
+//                break;
         }
     }
 

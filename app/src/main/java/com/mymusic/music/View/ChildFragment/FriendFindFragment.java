@@ -108,15 +108,20 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.find_item_focus:
+                        if(Live.getInstance().getUser(getContext()) == null){
+                            Intent intent1 = new Intent(getContext(), LoginActivity.class);
+                            getContext().startActivity(intent1);
+                            return;
+                        }
                         TextView focus = view.findViewById(R.id.find_item_focus);
                         if(focus.getText().toString().equals("取消关注")){
                             focus.setText("+关注");
                             focus.setBackgroundResource(R.drawable.focus);
-                            initFocusFriend(true,position);
+                            initFocusFriend(false,position);
                         }else{
                             focus.setText("取消关注");
                             focus.setBackgroundResource(R.drawable.isfocus);
-                            initFocusFriend(false,position);
+                            initFocusFriend(true,position);
                         }
                         break;
                     case R.id.four_head:
@@ -139,11 +144,6 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        if(Live.getInstance().getUser(getContext()) == null){
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            getActivity().startActivity(intent);
-            return ;
-        }
         Intent intent = new Intent(getContext(), FriendDetailActivity.class);
         String cid = data.getData().getList().get(position).getCid();
         intent.putExtra("id",cid);

@@ -158,6 +158,14 @@ public class FriendDetailActivity extends BaseActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Live.getInstance().getUser(FriendDetailActivity.this) == null ){
+                    startActivity(new Intent(FriendDetailActivity.this, LoginActivity.class));
+                    return;
+                }
+                if(Integer.parseInt(Live.getInstance().getUser(FriendDetailActivity.this).getData().getLevel())<3){
+                    Toast.makeText(FriendDetailActivity.this,"只有3级以上用户可以使用",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 Intent intent = new Intent(FriendDetailActivity.this, PutVideoActivity.class);
                 startActivity(intent);
             }
@@ -178,6 +186,11 @@ public class FriendDetailActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.friend_detail_focus:
+                if(Live.getInstance().getUser(this) == null){
+                    Intent intent1 = new Intent(this, LoginActivity.class);
+                    startActivity(intent1);
+                    return;
+                }
                 focus(focuslogo);
                 break;
             case R.id.zhiding:
@@ -198,12 +211,12 @@ public class FriendDetailActivity extends BaseActivity {
         if(isfocus){
             focus.setText("取消关注");
             focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
-            focuslogo = false;
+            focuslogo = true;
             initFocusFriend(true);
         }else{
             focus.setText("+关注");
             focus.setBackgroundResource(R.drawable.back_friend_detail_focus);
-            focuslogo = true;
+            focuslogo = false;
             initFocusFriend(false);
         }
     }
