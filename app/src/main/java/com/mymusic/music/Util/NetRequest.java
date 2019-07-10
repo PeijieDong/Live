@@ -30,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -415,12 +416,9 @@ public class NetRequest {
         OkHttpClient client = new OkHttpClient();
         // form 表单形式上传
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        int i=0;
+
         for(File file:fileList){
-            if(file.exists()){
-                requestBody.addFormDataPart("file",file.getName(),RequestBody.create(MEDIA_TYPE_PNG,file));
-                i++;
-            }
+            requestBody.addFormDataPart("file",file.getName(),RequestBody.create(MEDIA_TYPE_PNG,file));
         }
         if (map != null) {
             // map 里面是请求中所需要的 key 和 value
@@ -430,7 +428,7 @@ public class NetRequest {
         }
         final Request request = new Request.Builder().url(url).addHeader("token", Live.getInstance().getToken(context)).post(requestBody.build()).build();
         // readTimeout("请求超时时间" , 时间单位);
-        client.newBuilder().readTimeout(10000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
+        client.newBuilder().addInterceptor(new LoggerInterceptor(true)).readTimeout(10000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 deliverDataFailure(request, e, callBack);
@@ -438,6 +436,7 @@ public class NetRequest {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                Log.e("33",response.toString());
                 if (response.isSuccessful()) {
                     if (response.isSuccessful()) { // 请求成功
                         //执行请求成功的操作
@@ -668,6 +667,7 @@ public class NetRequest {
         }
         return null;
     }
+
 }
 
 

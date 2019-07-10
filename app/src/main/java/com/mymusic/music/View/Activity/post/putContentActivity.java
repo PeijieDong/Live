@@ -215,9 +215,9 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 Toast.makeText(this,"请选择要上传的图片",Toast.LENGTH_SHORT).show();
                 return;
             }
-            map.put("images","data:image/jpeg;base64,"+PicToBase64.imageToBase64(image.get(0).getPath()+""));
+            map.put("images", "data:image/jpeg;base64,"+getVideoImage(getRealPathFromURI(putContentActivity.this,image.get(0))));
             for (int i = 0 ;i<image.size();i++){
-                File file1 = new File(image.get(i).getPath());
+                File file1 = getFileByUri(image.get(i),putContentActivity.this);
                 fileList.add(file1);
             }
             NetRequest.postmorePicRequest(url, this, map, fileList, new NetRequest.DataCallBack() {
@@ -400,7 +400,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 REQUEST_EXTERNAL_STORAGE);
             }
         }
-    public static File getFileByUri(Uri uri,Context context) {
+    public File getFileByUri(Uri uri,Context context) {
         String path = null;
         if ("file".equals(uri.getScheme())) {
             path = uri.getEncodedPath();

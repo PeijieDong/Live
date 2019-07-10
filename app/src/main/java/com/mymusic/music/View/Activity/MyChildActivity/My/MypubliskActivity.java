@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MypubliskActivity extends BaseActivity {
 
@@ -51,5 +53,9 @@ public class MypubliskActivity extends BaseActivity {
         list.add(fragment1);
         viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager(),title,list));
         tabLayout.setupWithViewPager(viewPager);
+    }
+    @OnClick({R.id.back})
+    public void ClickBack(View view){
+        finish();
     }
 }

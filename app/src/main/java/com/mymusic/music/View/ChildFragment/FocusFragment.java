@@ -90,13 +90,13 @@ public class FocusFragment extends BaseFragment {
                         public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                             TextView focus = view.findViewById(R.id.focus_rc_focusbt);
                             if (focus.getText().toString().equals("+关注")) {
-                                focus.setText("已关注");
+                                focus.setText("取消关注");
                                 initFocus(true,i);
-                                focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
+                                focus.setBackgroundResource(R.drawable.isfocus);
                             } else {
                                 focus.setText("+关注");
                                 initFocus(false,i);
-                                focus.setBackgroundResource(R.drawable.back_friend_detail_focus);
+                                focus.setBackgroundResource(R.drawable.focus);
                             }
                         }
                     });
@@ -144,13 +144,13 @@ public class FocusFragment extends BaseFragment {
                             TextView focus = view.findViewById(R.id.focus_rc_focusbt);
                             focusTv.setText("已关注"+bean.getData().getTotal()+"个");
                             if (focus.getText().toString().equals("+关注")) {
-                                focus.setText("已关注");
-                                focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
+                                focus.setText("取消关注");
+                                focus.setBackgroundResource(R.drawable.isfocus);
                                 initFocusFriend(true,i);
                             } else {
                                 focus.setText("+关注");
-                                focus.setBackgroundResource(R.drawable.back_friend_detail_focus);
-                                initFocusFriend(true,i);
+                                focus.setBackgroundResource(R.drawable.focus);
+                                initFocusFriend(false,i);
                             }
                         }
                     });

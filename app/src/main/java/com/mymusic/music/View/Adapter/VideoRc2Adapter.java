@@ -162,10 +162,10 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
         map.put("id",list.get(position).getId());
-        NetRequest.postFormRequest(UrlManager.Video_Comment, map, new NetRequest.DataCallBack() {
+        NetRequest.postFormRequest(UrlManager.Focus_User, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"关注成功",Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -136,4 +136,9 @@ public class UrlManager {
     public static final String Task = BaseUrl+"users/task";
 
     public static final String Level = BaseUrl+"users/levels";
+    //赚取积分
+    public static final String Get_Score = "";
+
+    public static final String GetExp = "";
+
 }

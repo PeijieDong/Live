@@ -38,7 +38,9 @@ public class LaunchAcvtivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
-        if(Live.getInstance().getUser(this)!=null && Live.getInstance().getToken(this) != null){
+        if(Live.getInstance().getUser(this) == null || Live.getInstance().getUser(this).getData() ==null){
+            Live.getInstance().clear(this);
+        }else{
             initNet();
         }
         Intent intent = null;

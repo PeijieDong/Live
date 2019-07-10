@@ -16,4 +16,7 @@
     <color name="color_bg_selected">#FFF</color>
     <color name="blank">#000000</color>
     <color name="text_gray_33">#333333</color>
+    <color name="text_gray_66">#666</color>
+    <color name="text_gray_88">#888</color>
+    <color name="text_gray_99">#D1D0D0</color>
 </resources>

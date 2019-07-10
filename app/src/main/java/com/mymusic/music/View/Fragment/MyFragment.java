@@ -120,6 +120,10 @@ public class MyFragment extends BaseFragment {
         }else{
             cl3.setVisibility(View.VISIBLE);
             cl4.setVisibility(View.GONE);
+            focusNum.setText("0");
+            fansNum.setText("0");
+            fabuNum.setText("0");
+            collectionNum.setText("0");
             goLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

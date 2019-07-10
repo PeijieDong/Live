@@ -12,6 +12,7 @@
         android:layout_height="45dp"
         android:background="@drawable/back_gradient">
         <ImageView
+            android:id="@+id/back"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:padding="5dp"

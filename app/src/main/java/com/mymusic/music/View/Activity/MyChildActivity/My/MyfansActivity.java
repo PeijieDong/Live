@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Request;
 
 public class MyfansActivity extends BaseActivity {
@@ -132,5 +133,9 @@ public class MyfansActivity extends BaseActivity {
                 dialog.Show();
             }
         });
+    }
+    @OnClick({R.id.back})
+    public void ClickBack(View view){
+        finish();
     }
 }

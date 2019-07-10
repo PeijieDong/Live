@@ -98,11 +98,14 @@ public class MysettingActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.setting_information,R.id.setting_accountSecurity,R.id.setting_lockScreen,
+    @OnClick({R.id.back,R.id.setting_information,R.id.setting_accountSecurity,R.id.setting_lockScreen,
             R.id.setting_language,R.id.setting_clearCache,R.id.setting_version,R.id.setting_backlist,
             R.id.setting_aboutOur,R.id.setting_loginBack})
     public void onClick(View view){
         switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
             case R.id.setting_information:
                 goActivity(UserActivity.class);
                 break;

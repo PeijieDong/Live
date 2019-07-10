@@ -103,9 +103,12 @@ public class MywalletActivity extends BaseActivity {
             }
         });
     }
-    @OnClick({R.id.money_detail,R.id.helper,R.id.fankui,R.id.go_money})
+    @OnClick({R.id.money_detail,R.id.helper,R.id.fankui,R.id.go_money,R.id.back})
     public void ClickEvent(View view){
         switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
             case R.id.money_detail:
                 Intent intent = new Intent(this, MoneyDetailActivity.class);
                 startActivity(intent);

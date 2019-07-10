@@ -89,7 +89,9 @@
         <activity android:name=".View.Activity.message.CommendActivity" />
         <activity android:name=".View.Activity.message.NoticeActivity" />
         <activity android:name=".View.Activity.Detail.VideoPlayActivity" />
-        <activity android:name=".View.Activity.FriendListActivity"></activity>
+        <activity android:name=".View.Activity.FriendListActivity" />
+        <activity android:name=".View.Activity.user.IntegalActivity" />
+        <activity android:name=".View.Activity.user.ExpActivity"></activity>
     </application>
 
 </manifest>

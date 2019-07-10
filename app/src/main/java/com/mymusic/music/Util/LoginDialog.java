@@ -51,7 +51,5 @@ public class LoginDialog {
                 dialog.dismiss();
             }
         });
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }

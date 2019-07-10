@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Request;
 
 public class MycollectionActivity extends BaseActivity {
@@ -89,5 +90,13 @@ public class MycollectionActivity extends BaseActivity {
             }
         });
         rc.setAdapter(adapter);
+    }
+    @OnClick({R.id.back})
+    public void Clickevent(View view){
+        switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
+        }
     }
 }

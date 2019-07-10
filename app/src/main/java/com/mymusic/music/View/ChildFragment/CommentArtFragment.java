@@ -106,7 +106,7 @@ public class CommentArtFragment extends BaseFragment {
 
     private void initClose(Art bean, int position) {
         HashMap<String, String> map = new HashMap<>();
-        map.put("id",bean.getData().getList().get(position).getId());
+        map.put("id",bean.getData().getList().get(position).getVid());
         NetRequest.postFormHeadRequest(UrlManager.Delete, map,Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

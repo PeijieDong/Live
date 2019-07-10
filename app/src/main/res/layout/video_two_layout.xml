@@ -18,8 +18,8 @@
         android:background="#00000000">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/head"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="20dp"
             app:layout_constraintBottom_toTopOf="@id/video_des"
@@ -38,7 +38,7 @@
         <TextView
             android:id="@+id/focus"
             android:layout_width="58dp"
-            android:layout_height="20dp"
+            android:layout_height="25dp"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="12sp"
@@ -64,6 +64,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="10dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/post_comment_more"/>
     </android.support.constraint.ConstraintLayout>
 </RelativeLayout>
