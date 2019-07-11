@@ -8,6 +8,7 @@ import java.util.Collection;
  **/
 public class UrlManager {
 
+
     private static final String BaseUrl = "http://live.shuiqiao.net/";
     //home页
     public static final String HOME_DATA = BaseUrl+"index/homepage";
@@ -137,8 +138,17 @@ public class UrlManager {
 
     public static final String Level = BaseUrl+"users/levels";
     //赚取积分
-    public static final String Get_Score = "";
+    public static final String Get_Score = BaseUrl+ "users/scorelist";
 
-    public static final String GetExp = "";
+    public static final String GetExp = BaseUrl+ "users/jingyanlist";
 
+    public static final String FeedBack = BaseUrl+"users/guestbook";
+
+    public static final String History_FeedBack = BaseUrl+"users/gblist";
+
+    public static final String Mess_Noti = BaseUrl+"users/notice";
+
+    public static final String Play_Num = BaseUrl+"video/addvisit";
+
+    public static final String GoMoney = BaseUrl+"users/scoretovideo";
 }

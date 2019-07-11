@@ -255,7 +255,7 @@ public class MyFragment extends BaseFragment {
                 }
                 break;
             case R.id.my_about:
-                goActivity(MyaboutActivity.class);
+//                goActivity(MyaboutActivity.class);
                 break;
             case R.id.my_community:
                 Intent intent = new Intent();
@@ -280,6 +280,17 @@ public class MyFragment extends BaseFragment {
         Intent intent = new Intent(getContext(), clazz);
         startActivity(intent);
     }
+
+
+    //判断是否展示—与RadioGroup等连用，进行点击切换
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden){
+            initLogin();
+        }
+    }
+
 
     @Override
     public void onResume() {

@@ -215,7 +215,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 Toast.makeText(this,"请选择要上传的图片",Toast.LENGTH_SHORT).show();
                 return;
             }
-            map.put("images", "data:image/jpeg;base64,"+getVideoImage(getRealPathFromURI(putContentActivity.this,image.get(0))));
+            map.put("images", "data:image/jpeg;base64,"+PicToBase64.imageToBase64(getRealPathFromURI(putContentActivity.this,image.get(0))));
             for (int i = 0 ;i<image.size();i++){
                 File file1 = getFileByUri(image.get(i),putContentActivity.this);
                 fileList.add(file1);
@@ -249,7 +249,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             }
             file = getFileByUri(image.get(0), this);
             map.put("playtime", getRingDuring(image.get(0)));
-            map.put("images", "data:image/jpeg;base64,"+getVideoImage(getRealPathFromURI(putContentActivity.this,image.get(0))));
+            map.put("images", "data:image/jpeg;base64,"+PicToBase64.imageToBase64(getRealPathFromURI(putContentActivity.this,image.get(0))));
         }
         if(navigation.getPosition() == 2){
             if(text.getText().toString().equals("")){
@@ -389,7 +389,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
 
 
 
-        public static void verifyStoragePermissions(Activity activity) {
+    public static void verifyStoragePermissions(Activity activity) {
             // Check if we have write permission
             int permission = ActivityCompat.checkSelfPermission(activity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -400,6 +400,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 REQUEST_EXTERNAL_STORAGE);
             }
         }
+
     public File getFileByUri(Uri uri,Context context) {
         String path = null;
         if ("file".equals(uri.getScheme())) {
@@ -444,6 +445,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         }
         return null;
     }
+
     public String getVideoImage(String videoPath){
             Log.e("33",videoPath);
         MediaMetadataRetriever media = new MediaMetadataRetriever();

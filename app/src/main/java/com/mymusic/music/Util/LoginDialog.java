@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
 import com.mymusic.music.Live;
+import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 
@@ -26,30 +28,31 @@ public class LoginDialog {
     public LoginDialog(Context context) {
         this.context = context;
     }
-    public LoginDialog(Activity activity){
-        this.activity = activity;
-        context = activity;
-    }
-    public LoginDialog(Fragment fragment){
-        this.fragment = fragment;
-        context = fragment.getContext();
-    }
+
+//    public void Show(){
+//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//        builder.setTitle("您还未登录！");
+//        builder.setPositiveButton("现在登录", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Live.getInstance().clear(context);
+//                Intent intent = new Intent(context, LoginActivity.class);
+//                context.startActivity(intent);
+//            }
+//        });
+//        builder.setNegativeButton("不了", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+//    }
     public void Show(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("您还未登录！");
-        builder.setPositiveButton("现在登录", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Live.getInstance().clear(context);
-                Intent intent = new Intent(context, LoginActivity.class);
-                context.startActivity(intent);
-            }
-        });
-        builder.setNegativeButton("不了", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        Toast.makeText(context,"登录失效",Toast.LENGTH_SHORT).show();
+        Live.getInstance().clear(context);
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
     }
 }

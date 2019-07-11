@@ -358,10 +358,6 @@ public class NetRequest {
                 if (response.isSuccessful()) { // 请求成功
                     //执行请求成功的操作
                     String result = response.body().string();
-                    BaseBack back = GsonUtil.GsonToBean(result, BaseBack.class);
-                    if(back.getStatus().equals("-997")){
-                        callBack.TokenFail();
-                    }
                     deliverDataSuccess(result, callBack);
                 } else {
                     throw new IOException(response + "");
@@ -418,7 +414,7 @@ public class NetRequest {
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
         for(File file:fileList){
-            requestBody.addFormDataPart("file",file.getName(),RequestBody.create(MEDIA_TYPE_PNG,file));
+            requestBody.addFormDataPart("file[]",file.getName(),RequestBody.create(MEDIA_TYPE_PNG,file));
         }
         if (map != null) {
             // map 里面是请求中所需要的 key 和 value
@@ -436,7 +432,6 @@ public class NetRequest {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.e("33",response.toString());
                 if (response.isSuccessful()) {
                     if (response.isSuccessful()) { // 请求成功
                         //执行请求成功的操作
@@ -528,7 +523,12 @@ public class NetRequest {
             public void run() {
                 if (callBack != null) {
                     try {
-                        callBack.requestSuccess(result);
+                        BaseBack back = GsonUtil.GsonToBean(result, BaseBack.class);
+                        if(back.getStatus().equals("-997")){
+                            callBack.TokenFail();
+                        }else {
+                            callBack.requestSuccess(result);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

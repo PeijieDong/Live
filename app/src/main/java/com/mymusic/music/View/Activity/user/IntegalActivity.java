@@ -10,6 +10,7 @@ import android.view.View;
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
 import com.mymusic.music.View.Activity.WebActivity;
+import com.mymusic.music.View.Adapter.ViewpagerAdapter;
 import com.mymusic.music.View.ChildFragment.ScroeFragment;
 import com.mymusic.music.base.BaseActivity;
 
@@ -48,10 +49,12 @@ public class IntegalActivity extends BaseActivity {
         fragment1.setArguments(bundle);
         list.add(fragment1);
         Bundle bundle2 = new Bundle();
-        bundle2.putString("position","2");
+        bundle2.putString("position","0");
         ScroeFragment fragment2 = new ScroeFragment();
         fragment2.setArguments(bundle2);
         list.add(fragment2);
+        viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager(),tablist,list));
+        tab.setupWithViewPager(viewPager);
     }
 
     @OnClick({R.id.back,R.id.get_Score})

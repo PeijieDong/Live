@@ -35,13 +35,25 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
                 .setText(R.id.friend_item_des,item.getDescription())
                 .setText(R.id.friend_item_focus,"关注"+"\r"+item.getGnum())
                 .setText(R.id.friend_item_art,"帖子"+"\r"+item.getTiezi())
-                .setText(R.id.friend_all_num1,item.getList().get(0).getCate()+"张")
-                .setText(R.id.friend_all_num2,item.getList().get(1).getCate()+"张")
-                .setText(R.id.friend_all_num3,item.getList().get(2).getCate()+"张")
-                .setText(R.id.friend_all_content1,item.getList().get(0).getContent())
-                .setText(R.id.friend_all_content2,item.getList().get(1).getContent())
-                .setText(R.id.friend_all_content3,item.getList().get(2).getContent())
                 .addOnClickListener(R.id.friend_all_bt);
+        if(item.getList() != null){
+            helper.setText(R.id.friend_all_num1,item.getList().get(0).getCate()+"张")
+                    .setText(R.id.friend_all_num2,item.getList().get(1).getCate()+"张")
+                    .setText(R.id.friend_all_num3,item.getList().get(2).getCate()+"张")
+                    .setText(R.id.friend_all_content1,item.getList().get(0).getContent())
+                    .setText(R.id.friend_all_content2,item.getList().get(1).getContent())
+                    .setText(R.id.friend_all_content3,item.getList().get(2).getContent());
+            ImageView image1 = helper.getView(R.id.friend_all_image1);
+            ImageView image2 = helper.getView(R.id.friend_all_image2);
+            ImageView image3 = helper.getView(R.id.friend_all_image3);
+            image1.setOnClickListener(this);
+            image2.setOnClickListener(this);
+            image3.setOnClickListener(this);
+            Glide.with(mContext).load(item.getList().get(0).getImage()).into(image1);
+            Glide.with(mContext).load(item.getList().get(1).getImage()).into(image2);
+            Glide.with(mContext).load(item.getList().get(2).getImage()).into(image3);
+            open.setClickable(false);
+        }
         if(item.getIsguanzhu().equals("已关注")){
             helper.setText(R.id.friend_all_bt,"取消关注");
             helper.setBackgroundRes(R.id.friend_all_bt,R.drawable.isfocus);
@@ -50,16 +62,8 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
             helper.setBackgroundRes(R.id.friend_all_bt,R.drawable.focus);
         }
         ImageView head = helper.getView(R.id.friend_item_head);
-        ImageView image1 = helper.getView(R.id.friend_all_image1);
-        ImageView image2 = helper.getView(R.id.friend_all_image2);
-        ImageView image3 = helper.getView(R.id.friend_all_image3);
-        image1.setOnClickListener(this);
-        image2.setOnClickListener(this);
-        image3.setOnClickListener(this);
         Glide.with(mContext).load(item.getIcon()).into(head);
-        Glide.with(mContext).load(item.getList().get(0).getImage()).into(image1);
-        Glide.with(mContext).load(item.getList().get(1).getImage()).into(image2);
-        Glide.with(mContext).load(item.getList().get(2).getImage()).into(image3);
+
         ImageView down = helper.getView(R.id.friend_all_down);
         down.setOnClickListener(this);
         ll = helper.getView(R.id.ll_back);

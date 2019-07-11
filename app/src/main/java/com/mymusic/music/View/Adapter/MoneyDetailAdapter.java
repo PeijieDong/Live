@@ -1,7 +1,9 @@
 package com.mymusic.music.View.Adapter;
 
 import android.support.annotation.Nullable;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mymusic.music.DataBean.MoneyDetail;
@@ -24,5 +26,11 @@ public class MoneyDetailAdapter extends BaseQuickAdapter <MoneyDetail.DataBean.L
         helper.setText(R.id.title,item.getContent())
                 .setText(R.id.time,item.getCreatetime())
                 .setText(R.id.detail,item.getNum()+"币");
+        if(item.getType().equals("1") || item.getType().equals("2")){
+            Glide.with(mContext).load(R.drawable.icon_recharge_income).into((ImageView) helper.getView(R.id.icon));
+        }
+        if(item.getType().equals("3")){
+            Glide.with(mContext).load(R.drawable.icon_recharge_cost).into((ImageView) helper.getView(R.id.icon));
+        }
     }
 }

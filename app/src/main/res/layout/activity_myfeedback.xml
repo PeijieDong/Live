@@ -26,6 +26,7 @@
             android:textSize="18sp"
             android:textColor="#030303" />
         <TextView
+            android:id="@+id/feedback_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#EB5F59"

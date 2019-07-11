@@ -83,6 +83,7 @@ public class History {
             private String createtime;
             private String uid;
             private String title;
+            private String image;
 
             public String getHid() {
                 return hid;
@@ -130,6 +131,14 @@ public class History {
 
             public void setTitle(String title) {
                 this.title = title;
+            }
+
+            public String getImage() {
+                return image;
+            }
+
+            public void setImage(String image) {
+                this.image = image;
             }
         }
     }

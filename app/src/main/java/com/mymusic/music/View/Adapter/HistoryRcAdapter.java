@@ -1,6 +1,7 @@
 package com.mymusic.music.View.Adapter;
 
 import android.support.annotation.Nullable;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -23,7 +24,10 @@ public class HistoryRcAdapter extends BaseQuickAdapter<History.DataBean.ListBean
     @Override
     protected void convert(BaseViewHolder helper, History.DataBean.ListBean item) {
         helper.setText(R.id.history_rc_time,item.getCreatetime())
-                .setText(R.id.history_rc_title,item.getTitle());
-
+                .setText(R.id.history_rc_title,"["+item.getTitle()+"]");
+        if(item.getTitle().equals("视频")){
+            helper.setVisible(R.id.play_icon,true);
+        }
+        Glide.with(mContext).load(item.getImage()).into((ImageView) helper.getView(R.id.image));
     }
 }

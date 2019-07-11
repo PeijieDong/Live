@@ -3,7 +3,10 @@ package com.mymusic.music.View.Activity.MyChildActivity.My;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.mymusic.music.DataBean.Task;
 import com.mymusic.music.Live;
@@ -12,15 +15,28 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.user.ExpActivity;
 import com.mymusic.music.View.Activity.user.IntegalActivity;
+import com.mymusic.music.View.Adapter.MyTaskRcAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Request;
 
 public class MytaskActivity extends BaseActivity {
+
+    @BindView(R.id.score)
+    TextView Score;
+    @BindView(R.id.exp)
+    TextView Exp;
+    @BindView(R.id.level_exp)
+    TextView levelExp;
+    @BindView(R.id.Rc1)
+    RecyclerView Rc1;
+    @BindView(R.id.Rc2)
+    RecyclerView Rc2;
 
 
     @Override
@@ -43,6 +59,14 @@ public class MytaskActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Task bean = GsonUtil.GsonToBean(result, Task.class);
+                Rc1.setLayoutManager(new LinearLayoutManager(MytaskActivity.this));
+                MyTaskRcAdapter taskAdapter = new MyTaskRcAdapter(R.layout.my_task_layout,bean.getData().getList().get(1).getList());
+                Rc1.setAdapter(taskAdapter);
+                Score.setText(bean.getData().getList().get(0).getScore());
+                Exp.setText(bean.getData().getList().get(0).getConsumption());
+                Rc2.setLayoutManager(new LinearLayoutManager(MytaskActivity.this));
+                MyTaskRcAdapter taskAdapter2 = new MyTaskRcAdapter(R.layout.my_task_layout,bean.getData().getList().get(2).getList());
+                Rc2.setAdapter(taskAdapter2);
             }
 
             @Override
@@ -56,7 +80,7 @@ public class MytaskActivity extends BaseActivity {
             }
         });
     }
-    @OnClick({R.id.back,R.id.exp,R.id.intergal})
+    @OnClick({R.id.back,R.id.expScore,R.id.intergal})
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.back:
@@ -66,7 +90,7 @@ public class MytaskActivity extends BaseActivity {
                 Intent intent = new Intent(this, IntegalActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.exp:
+            case R.id.expScore:
                 Intent intent2 = new Intent(this, ExpActivity.class);
                 startActivity(intent2);
                 break;

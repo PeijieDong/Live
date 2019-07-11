@@ -33,6 +33,7 @@
             android:text="我的等级"/>
     </RelativeLayout>
         <TextView
+            android:id="@+id/levelNum"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
@@ -44,7 +45,7 @@
             android:background="@drawable/icon_level_s"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -52,6 +53,7 @@
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp">
                 <LinearLayout
+                    android:id="@+id/back1"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:gravity="center_vertical"
@@ -59,10 +61,12 @@
                     android:paddingRight="5dp"
                     android:background="@drawable/icon_user_level_1">
                     <ImageView
+                        android:id="@+id/level_back1"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:src="@drawable/icon_user_level_10"/>
+                        android:src="@drawable/my_icon_level"/>
                     <TextView
+                        android:id="@+id/level_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
@@ -71,11 +75,13 @@
                         android:text="LV8"/>
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/expNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:layout_centerInParent="true" />
                 <LinearLayout
+                    android:id="@+id/back2"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:gravity="center_vertical"
@@ -84,10 +90,12 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/icon_user_level_1">
                     <ImageView
+                        android:id="@+id/level_back2"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:src="@drawable/icon_user_level_10"/>
+                        android:src="@drawable/my_icon_level"/>
                     <TextView
+                        android:id="@+id/level_num2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
@@ -124,7 +132,7 @@
         android:padding="7dp"/>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint1"
-        android:layout_width="160dp"
+        android:layout_width="155dp"
         android:layout_height="75dp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="230dp"
@@ -137,7 +145,6 @@
             android:id="@+id/image1"
             android:layout_width="50dp"
             android:layout_height="75dp"
-            android:layout_marginLeft="5dp"
             android:padding="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@drawable/level_income_1" />
@@ -162,10 +169,17 @@
             app:layout_constraintTop_toBottomOf="@id/text"
             android:layout_marginTop="8dp"
             android:text="浏览海量帖子"/>
+        <ImageView
+            android:id="@+id/clock1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="#99FFFFFF"
+            android:src="@drawable/dkplayer_ic_action_lock_outline"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint2"
-        android:layout_width="160dp"
+        android:layout_width="155dp"
         android:layout_height="75dp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="230dp"
@@ -179,7 +193,6 @@
             android:id="@+id/image2"
             android:layout_width="50dp"
             android:layout_height="75dp"
-            android:layout_marginLeft="5dp"
             android:padding="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@drawable/level_income_2" />
@@ -204,10 +217,17 @@
             app:layout_constraintTop_toBottomOf="@id/text2"
             android:layout_marginTop="8dp"
             android:text="圈子中找到真爱"/>
+        <ImageView
+            android:id="@+id/clock2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="#99FFFFFF"
+            android:src="@drawable/dkplayer_ic_action_lock_outline"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint3"
-        android:layout_width="160dp"
+        android:layout_width="155dp"
         android:layout_height="75dp"
         app:layout_constraintTop_toBottomOf="@id/constraint1"
         android:layout_marginTop="15dp"
@@ -220,7 +240,6 @@
             android:id="@+id/image3"
             android:layout_width="50dp"
             android:layout_height="75dp"
-            android:layout_marginLeft="5dp"
             android:padding="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@drawable/level_income_3" />
@@ -245,10 +264,17 @@
             app:layout_constraintTop_toBottomOf="@id/text3"
             android:layout_marginTop="8dp"
             android:text="和水友一起嗨聊"/>
+        <ImageView
+            android:id="@+id/clock3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="#99FFFFFF"
+            android:src="@drawable/dkplayer_ic_action_lock_outline"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint4"
-        android:layout_width="160dp"
+        android:layout_width="155dp"
         android:layout_height="75dp"
         app:layout_constraintTop_toBottomOf="@id/constraint2"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -262,7 +288,6 @@
             android:id="@+id/image4"
             android:layout_width="50dp"
             android:layout_height="75dp"
-            android:layout_marginLeft="5dp"
             android:padding="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@drawable/level_income_4" />
@@ -287,10 +312,17 @@
             app:layout_constraintTop_toBottomOf="@id/text4"
             android:layout_marginTop="8dp"
             android:text="和大家分享快乐"/>
+        <ImageView
+            android:id="@+id/clock4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="#99FFFFFF"
+            android:src="@drawable/dkplayer_ic_action_lock_outline"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint5"
-        android:layout_width="160dp"
+        android:layout_width="155dp"
         android:layout_height="75dp"
         app:layout_constraintTop_toBottomOf="@id/constraint3"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -303,7 +335,6 @@
             android:id="@+id/image5"
             android:layout_width="50dp"
             android:layout_height="75dp"
-            android:layout_marginLeft="5dp"
             android:padding="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@drawable/level_income_5" />
@@ -328,5 +359,12 @@
             app:layout_constraintTop_toBottomOf="@id/text5"
             android:layout_marginTop="8dp"
             android:text="保存视频到本地"/>
+        <ImageView
+            android:id="@+id/clock5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="#99FFFFFF"
+            android:src="@drawable/dkplayer_ic_action_lock_outline"/>
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

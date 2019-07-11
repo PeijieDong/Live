@@ -8,15 +8,16 @@ import java.util.List;
  * USE:
  **/
 public class Task {
+
     /**
-     * data : {"list":[{"title":"推广任务","list":[{"id":"1","title":"邀请用户，下载并登陆","desc":"积分+10 经验+4 完成0/2","status":"0"},{"id":"2","title":"分享帖子或啪啪","desc":"积分+10 经验+5 完成0/5","status":"0"}]},{"title":"新手任务","list":[{"id":"3","title":"点赞帖子或评论","desc":"积分+10 经验+4 完成0/2","status":"0"},{"id":"4","title":"完成账号注册","desc":"积分+10 经验+5 完成0/1","status":"0"},{"id":"5","title":"修改昵称，完善个人资料","desc":"积分+10 经验+5 完成0/1","status":"0"},{"id":"46","title":"浏览帖子","desc":"积分+10 经验+5 完成0/5","status":"0"}]}]}
+     * data : {"list":[{"score":"32","consumption":"79","title":"推广任务","list":[{"id":"1","title":"邀请用户，下载并登陆","desc":"积分 10 经验 4 ","num1":"0","num2":"2","status":"0"},{"id":"2","title":"分享帖子或啪啪","desc":"积分 10 经验 5","num1":"0","num2":"5","status":"0"}]},{"title":"推广任务","list":[{"id":"1","title":"邀请用户，下载并登陆","desc":"积分 10 经验 4 ","num1":"0","num2":"2","status":"0"},{"id":"2","title":"分享帖子或啪啪","desc":"积分 10 经验 5","num1":"0","num2":"5","status":"0"}]},{"title":"新手任务","list":[{"id":"3","title":"点赞帖子或评论","desc":"积分 10 经验 4 ","num1":"0","num2":"2","status":"0"},{"id":"4","title":"完成账号注册","desc":"积分 10 经验 5","num1":"0","num2":"1","status":"0"},{"id":"5","title":"修改昵称，完善个人资料","desc":"积分 10 经验 5 ","num1":"0","num2":"1","status":"0"},{"id":"46","title":"浏览帖子","desc":"积分 10 经验 5 ","num1":"0","num2":"5","status":"0"}]}]}
      * status : 1
      * referer :
      * state : 1
      */
 
     private DataBean data;
-    private int status;
+    private String status;
     private String referer;
     private String state;
 
@@ -28,11 +29,11 @@ public class Task {
         this.data = data;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -65,12 +66,32 @@ public class Task {
 
         public static class ListBeanX {
             /**
+             * score : 32
+             * consumption : 79
              * title : 推广任务
-             * list : [{"id":"1","title":"邀请用户，下载并登陆","desc":"积分+10 经验+4 完成0/2","status":"0"},{"id":"2","title":"分享帖子或啪啪","desc":"积分+10 经验+5 完成0/5","status":"0"}]
+             * list : [{"id":"1","title":"邀请用户，下载并登陆","desc":"积分 10 经验 4 ","num1":"0","num2":"2","status":"0"},{"id":"2","title":"分享帖子或啪啪","desc":"积分 10 经验 5","num1":"0","num2":"5","status":"0"}]
              */
 
+            private String score;
+            private String consumption;
             private String title;
             private List<ListBean> list;
+
+            public String getScore() {
+                return score;
+            }
+
+            public void setScore(String score) {
+                this.score = score;
+            }
+
+            public String getConsumption() {
+                return consumption;
+            }
+
+            public void setConsumption(String consumption) {
+                this.consumption = consumption;
+            }
 
             public String getTitle() {
                 return title;
@@ -92,13 +113,17 @@ public class Task {
                 /**
                  * id : 1
                  * title : 邀请用户，下载并登陆
-                 * desc : 积分+10 经验+4 完成0/2
+                 * desc : 积分 10 经验 4
+                 * num1 : 0
+                 * num2 : 2
                  * status : 0
                  */
 
                 private String id;
                 private String title;
                 private String desc;
+                private String num1;
+                private String num2;
                 private String status;
 
                 public String getId() {
@@ -123,6 +148,22 @@ public class Task {
 
                 public void setDesc(String desc) {
                     this.desc = desc;
+                }
+
+                public String getNum1() {
+                    return num1;
+                }
+
+                public void setNum1(String num1) {
+                    this.num1 = num1;
+                }
+
+                public String getNum2() {
+                    return num2;
+                }
+
+                public void setNum2(String num2) {
+                    this.num2 = num2;
                 }
 
                 public String getStatus() {

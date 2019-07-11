@@ -40,17 +40,17 @@ public class LaunchAcvtivity extends BaseActivity {
     protected void LoadData() {
         if(Live.getInstance().getUser(this) == null || Live.getInstance().getUser(this).getData() ==null){
             Live.getInstance().clear(this);
+            Intent intent = null;
+            if(!SharedPrefrenceUtils.getString(this,"Password").equals("")){
+                intent = new Intent(LaunchAcvtivity.this, LockScreenActivity.class);
+            }else{
+                intent = new Intent(LaunchAcvtivity.this, MainActivity.class);
+            }
+            startActivity(intent);
+            finish();
         }else{
             initNet();
         }
-        Intent intent = null;
-        if(!SharedPrefrenceUtils.getString(this,"Password").equals("")){
-            intent = new Intent(LaunchAcvtivity.this, LockScreenActivity.class);
-        }else{
-            intent = new Intent(LaunchAcvtivity.this, MainActivity.class);
-        }
-        startActivity(intent);
-        finish();
     }
 
     private void initNet() {
@@ -59,23 +59,14 @@ public class LaunchAcvtivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.User_Detail, map, Live.getInstance().getToken(LaunchAcvtivity.this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                UserDetail bean = GsonUtil.GsonToBean(result, UserDetail.class);
-                if(bean.getStatus() == -997){
-                    Toast.makeText(LaunchAcvtivity.this,"登录过期，请重新登录",Toast.LENGTH_SHORT).show();
-                    Live.getInstance().clear(LaunchAcvtivity.this);
-                    Intent intent = new Intent(LaunchAcvtivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                Intent intent = null;
+                if(!SharedPrefrenceUtils.getString(LaunchAcvtivity.this,"Password").equals("")){
+                    intent = new Intent(LaunchAcvtivity.this, LockScreenActivity.class);
                 }else{
-                    Intent intent = null;
-                    if(!SharedPrefrenceUtils.getString(LaunchAcvtivity.this,"Password").equals("")){
-                        intent = new Intent(LaunchAcvtivity.this, LockScreenActivity.class);
-                    }else{
-                        intent = new Intent(LaunchAcvtivity.this, MainActivity.class);
-                    }
-                    startActivity(intent);
-                    finish();
+                    intent = new Intent(LaunchAcvtivity.this, MainActivity.class);
                 }
+                startActivity(intent);
+                finish();
             }
 
             @Override

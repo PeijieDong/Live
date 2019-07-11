@@ -159,8 +159,10 @@ public class VideoFragment extends BaseFragment {
                         View view = helper.findSnapView(layoutManager);
                         JZVideoPlayer.releaseAllVideos();
                         viewHolder = recyclerView.getChildViewHolder(view);
+                        int position = viewHolder.getAdapterPosition();
                         //播放视频
                         ((VideoViewHolder) viewHolder).mp_video.startVideo();
+                        initPlay(bean.getData().getList().get(position).getVid());
 
                     case RecyclerView.SCROLL_STATE_DRAGGING://拖动
                         break;
@@ -178,7 +180,23 @@ public class VideoFragment extends BaseFragment {
         });
     }
 
-//    private void initCollection() {
+    private void initPlay(String position) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id",position);
+        NetRequest.postFormHeadRequest(UrlManager.Play_Num, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+            }
+            @Override
+            public void requestFailure(Request request, IOException e) {
+            }
+            @Override
+            public void TokenFail() {
+            }
+        });
+    }
+
+    //    private void initCollection() {
 //        if(Live.getInstance().getToken(getContext()) == null){
 //            Intent intent = new Intent(getContext(), LoginActivity.class);
 //            getContext().startActivity(intent);

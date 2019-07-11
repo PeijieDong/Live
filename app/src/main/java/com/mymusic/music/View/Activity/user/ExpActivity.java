@@ -9,14 +9,18 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.mymusic.music.DataBean.Scroe;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Adapter.ScroeRcAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -52,11 +56,15 @@ public class ExpActivity extends BaseActivity {
     }
 
     private void initNet() {
-        NetRequest.postFormHeadRequest(UrlManager.GetExp, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type","0");
+        map.put("page","1");
+        NetRequest.postFormHeadRequest(UrlManager.GetExp, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Scroe bean = GsonUtil.GsonToBean(result, Scroe.class);
                 rc.setLayoutManager(new LinearLayoutManager(ExpActivity.this));
-                rc.setAdapter(new ScroeRcAdapter(R.layout.get_scroe_item, null));
+                rc.setAdapter(new ScroeRcAdapter(R.layout.get_scroe_item, bean.getData().getList()));
             }
 
             @Override
@@ -66,7 +74,7 @@ public class ExpActivity extends BaseActivity {
 
             @Override
             public void TokenFail() {
-
+                new LoginDialog(ExpActivity.this).Show();
             }
         });
     }

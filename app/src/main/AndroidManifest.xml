@@ -91,7 +91,9 @@
         <activity android:name=".View.Activity.Detail.VideoPlayActivity" />
         <activity android:name=".View.Activity.FriendListActivity" />
         <activity android:name=".View.Activity.user.IntegalActivity" />
-        <activity android:name=".View.Activity.user.ExpActivity"></activity>
+        <activity android:name=".View.Activity.user.ExpActivity" />
+        <activity android:name=".View.Activity.HistoryFeedBackActivity" />
+        <activity android:name=".View.Activity.Detail.HistoryFeedDetail"></activity>
     </application>
 
 </manifest>

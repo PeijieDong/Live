@@ -19,4 +19,7 @@
     <color name="text_gray_66">#666</color>
     <color name="text_gray_88">#888</color>
     <color name="text_gray_99">#D1D0D0</color>
+    <color name="level10">#B5D318</color>
+    <color name="level15">#6BC3FF</color>
+    <color name="level20">#DE69FF</color>
 </resources>

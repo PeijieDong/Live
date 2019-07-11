@@ -29,6 +29,10 @@ public class VideoViewHolder extends BaseRecViewHolder {
     public TextView shareNum;
     public TextView commentNum;
     public ImageView focus;
+    public ConstraintLayout noNum;
+    public TextView goLook;
+    public TextView goMoney;
+    public TextView noMoneyTitle;
 
 
 
@@ -48,6 +52,12 @@ public class VideoViewHolder extends BaseRecViewHolder {
         shareNum = rootView.findViewById(R.id.shareNum);
         commentNum = rootView.findViewById(R.id.commentNum);
         focus = rootView.findViewById(R.id.focus_bt);
+
+        noNum = rootView.findViewById(R.id.no_num);
+        goLook = rootView.findViewById(R.id.goLook);
+        goMoney = rootView.findViewById(R.id.goMoney);
+        noMoneyTitle = rootView.findViewById(R.id.noMoneyTitle);
+
     }
 
 }

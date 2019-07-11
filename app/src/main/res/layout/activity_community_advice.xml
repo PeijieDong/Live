@@ -50,6 +50,7 @@
             app:counterMaxLength="200"
             android:layout_margin="15dp">
             <EditText
+                android:id="@+id/edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="10"
@@ -63,6 +64,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <EditText
+            android:id="@+id/adress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
