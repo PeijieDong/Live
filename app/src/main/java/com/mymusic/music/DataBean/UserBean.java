@@ -7,14 +7,14 @@ package com.mymusic.music.DataBean;
 public class UserBean {
 
     /**
-     * data : {"id":"9999","user_login":"123123123","user_nicename":"11","avatar":"http://live.shuiqiao.net/default.jpg","avatar_thumb":"http://live.shuiqiao.net/default_thumb.jpg","sex":"0","signature":"2","consumption":"0","votestotal":"0","province":"","city":"","coin":"0","votes":"0.00","token":"c712f54da2e1f129ea4976e173696ed4","birthday":"2","issuper":"0","lighttime":"0","light":0,"level":"1","level_anchor":"1","vip":{"type":"0"},"liang":{"name":"0"},"follows":"3","fans":"8","fabu":"6","shoucang":"13","guanying":"999/999","notice":1}
+     * data : {"id":"100001","user_login":"123456789","user_nicename":"手机用户6789","avatar":"http://live.shuiqiao.net/default.jpg","avatar_thumb":"http://live.shuiqiao.net/default_thumb.jpg","sex":"女","signature":"ghhhj","consumption":"48","votestotal":"0","province":"","city":"","coin":"0","score":"24","votes":"0.00","token":"8668b140a4e832b3fbead443e69a776f","birthday":"2019年7月12日","issuper":"0","create_time":"2019-07-03 23:30:10","is_vip":"0","lighttime":"0","light":0,"level":"1","level_anchor":"1","shenfen":"普通用户","sexf":"未知","hunlian":"未知","yixiang":"未知","status":"账号异常","vip":{"type":"0"},"liang":{"name":"0"},"follows":18,"fans":"1","fabu":"14","shoucang":"5","guanying":"0/999","notice":1}
      * status : 1
      * referer :
      * state : 1
      */
 
     private DataBean data;
-    private int status;
+    private String status;
     private String referer;
     private String state;
 
@@ -26,11 +26,11 @@ public class UserBean {
         this.data = data;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -52,33 +52,41 @@ public class UserBean {
 
     public static class DataBean {
         /**
-         * id : 9999
-         * user_login : 123123123
-         * user_nicename : 11
+         * id : 100001
+         * user_login : 123456789
+         * user_nicename : 手机用户6789
          * avatar : http://live.shuiqiao.net/default.jpg
          * avatar_thumb : http://live.shuiqiao.net/default_thumb.jpg
-         * sex : 0
-         * signature : 2
-         * consumption : 0
+         * sex : 女
+         * signature : ghhhj
+         * consumption : 48
          * votestotal : 0
          * province :
          * city :
          * coin : 0
+         * score : 24
          * votes : 0.00
-         * token : c712f54da2e1f129ea4976e173696ed4
-         * birthday : 2
+         * token : 8668b140a4e832b3fbead443e69a776f
+         * birthday : 2019年7月12日
          * issuper : 0
+         * create_time : 2019-07-03 23:30:10
+         * is_vip : 0
          * lighttime : 0
          * light : 0
          * level : 1
          * level_anchor : 1
+         * shenfen : 普通用户
+         * sexf : 未知
+         * hunlian : 未知
+         * yixiang : 未知
+         * status : 账号异常
          * vip : {"type":"0"}
          * liang : {"name":"0"}
-         * follows : 3
-         * fans : 8
-         * fabu : 6
-         * shoucang : 13
-         * guanying : 999/999
+         * follows : 18
+         * fans : 1
+         * fabu : 14
+         * shoucang : 5
+         * guanying : 0/999
          * notice : 1
          */
 
@@ -94,17 +102,25 @@ public class UserBean {
         private String province;
         private String city;
         private String coin;
+        private String score;
         private String votes;
         private String token;
         private String birthday;
         private String issuper;
+        private String create_time;
+        private String is_vip;
         private String lighttime;
         private int light;
         private String level;
         private String level_anchor;
+        private String shenfen;
+        private String sexf;
+        private String hunlian;
+        private String yixiang;
+        private String status;
         private VipBean vip;
         private LiangBean liang;
-        private String follows;
+        private int follows;
         private String fans;
         private String fabu;
         private String shoucang;
@@ -207,6 +223,14 @@ public class UserBean {
             this.coin = coin;
         }
 
+        public String getScore() {
+            return score;
+        }
+
+        public void setScore(String score) {
+            this.score = score;
+        }
+
         public String getVotes() {
             return votes;
         }
@@ -237,6 +261,22 @@ public class UserBean {
 
         public void setIssuper(String issuper) {
             this.issuper = issuper;
+        }
+
+        public String getCreate_time() {
+            return create_time;
+        }
+
+        public void setCreate_time(String create_time) {
+            this.create_time = create_time;
+        }
+
+        public String getIs_vip() {
+            return is_vip;
+        }
+
+        public void setIs_vip(String is_vip) {
+            this.is_vip = is_vip;
         }
 
         public String getLighttime() {
@@ -271,6 +311,46 @@ public class UserBean {
             this.level_anchor = level_anchor;
         }
 
+        public String getShenfen() {
+            return shenfen;
+        }
+
+        public void setShenfen(String shenfen) {
+            this.shenfen = shenfen;
+        }
+
+        public String getSexf() {
+            return sexf;
+        }
+
+        public void setSexf(String sexf) {
+            this.sexf = sexf;
+        }
+
+        public String getHunlian() {
+            return hunlian;
+        }
+
+        public void setHunlian(String hunlian) {
+            this.hunlian = hunlian;
+        }
+
+        public String getYixiang() {
+            return yixiang;
+        }
+
+        public void setYixiang(String yixiang) {
+            this.yixiang = yixiang;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
         public VipBean getVip() {
             return vip;
         }
@@ -287,11 +367,11 @@ public class UserBean {
             this.liang = liang;
         }
 
-        public String getFollows() {
+        public int getFollows() {
             return follows;
         }
 
-        public void setFollows(String follows) {
+        public void setFollows(int follows) {
             this.follows = follows;
         }
 

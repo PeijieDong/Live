@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:name=".Live"
@@ -18,6 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ActivityAdv"></activity>
+        <activity android:name=".View.ActivitySplash" />
         <activity android:name=".View.Activity.Detail.CommentDetailActivity" />
         <activity
             android:name=".MainActivity"
@@ -72,20 +75,30 @@
         <activity android:name=".View.Activity.PostArtActivity.PostArtActivity" />
         <activity android:name=".View.Activity.FriendFoundActivity" />
         <activity android:name=".View.Activity.Detail.FriendDetailTwoActivity" />
-        <activity android:name=".View.Activity.post.putContentActivity" />
+        <activity
+            android:name=".View.Activity.post.putContentActivity"
+            android:exported="true" />
         <activity android:name=".View.Activity.user.ListUserActivity" />
         <activity android:name=".View.Activity.Login.SetPasswordActivity" />
         <activity android:name=".View.Activity.post.SignActivity" />
         <activity android:name=".View.Activity.MoneyDetailActivity" />
         <activity android:name=".View.Activity.WebActivity" />
-        <activity android:name=".View.Activity.post.PutVideoActivity" />
-        <activity android:name=".View.Activity.JubaoActivity" />
-        <activity android:name=".View.Activity.JubaoVideoActiviy" />
+        <activity
+            android:name=".View.Activity.post.PutVideoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".View.Activity.JubaoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".View.Activity.JubaoVideoActiviy"
+            android:exported="true" />
         <activity android:name=".View.Activity.WalletFeedback" />
         <activity android:name=".View.Activity.message.SettingActivity" />
         <activity android:name=".View.Activity.message.AuditActivity" />
         <activity android:name=".View.Activity.message.ViolationActivity" />
-        <activity android:name=".View.Activity.message.FeedbackActivity" />
+        <activity
+            android:name=".View.Activity.message.FeedbackActivity"
+            android:exported="true" />
         <activity android:name=".View.Activity.message.CommendActivity" />
         <activity android:name=".View.Activity.message.NoticeActivity" />
         <activity android:name=".View.Activity.Detail.VideoPlayActivity" />
@@ -93,7 +106,7 @@
         <activity android:name=".View.Activity.user.IntegalActivity" />
         <activity android:name=".View.Activity.user.ExpActivity" />
         <activity android:name=".View.Activity.HistoryFeedBackActivity" />
-        <activity android:name=".View.Activity.Detail.HistoryFeedDetail"></activity>
+        <activity android:name=".View.Activity.Detail.HistoryFeedDetail" />
     </application>
 
 </manifest>

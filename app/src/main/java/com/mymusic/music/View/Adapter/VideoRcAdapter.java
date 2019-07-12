@@ -22,6 +22,7 @@ import com.mymusic.music.DataBean.Play;
 import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
@@ -80,7 +81,7 @@ public class VideoRcAdapter  extends BaseRecAdapter<VideoData.DataBean.ListBean,
 
     private void initPlay(String position) {
         HashMap<String, String> map = new HashMap<>();
-        map.put("id",position);
+        map.put("client", AppUtil.getSerialNumber());
         NetRequest.postFormHeadRequest(UrlManager.Play_Num, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {

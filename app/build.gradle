@@ -65,5 +65,9 @@ dependencies {
     //loading
     implementation 'com.carson_ho:Kawaii_LoadingView:1.0.0'
 
+    implementation 'cn.aigestudio.wheelpicker:WheelPicker:1.1.3'
+
+    implementation 'pub.devrel:easypermissions:1.2.0'
+
 
 }

@@ -2,13 +2,14 @@ package com.mymusic.music.DataBean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Create By mr.mao in 2019/6/5 20:24
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class HomeData {
+public class HomeData implements Serializable {
 
 
     /**
@@ -55,7 +56,7 @@ public class HomeData {
         this.state = state;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         private List<ListBean> list;
 
         public List<ListBean> getList() {
@@ -66,7 +67,7 @@ public class HomeData {
             this.list = list;
         }
 
-        public static class ListBean {
+        public static class ListBean implements Serializable{
             /**
              * id : 15
              * uid : 1
@@ -347,7 +348,7 @@ public class HomeData {
                 this.objs = objs;
             }
 
-            public static class ObjsBean {
+            public static class ObjsBean implements Serializable{
                 /**
                  * vid : 4
                  * uid : 100001

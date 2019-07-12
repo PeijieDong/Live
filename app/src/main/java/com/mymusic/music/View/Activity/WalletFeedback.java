@@ -72,7 +72,7 @@ public class WalletFeedback extends BaseActivity implements View.OnClickListener
     private void initRc() {
         Rc.setLayoutManager(new GridLayoutManager(this,3));
         adapter = new CommunityRcAdapter(R.layout.community_advice_item,list);
-        View view = LayoutInflater.from(this).inflate(R.layout.activity_community_advice_foot, null);
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_community_advice_foot2, null);
         view.setOnClickListener(this);
         adapter.addFooterView(view);
         Rc.setAdapter(adapter);

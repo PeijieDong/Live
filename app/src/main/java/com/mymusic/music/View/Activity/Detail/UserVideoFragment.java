@@ -66,8 +66,8 @@ public class UserVideoFragment extends BaseFragment {
                 adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        Intent intent = new Intent(getContext(), DetailsActivity.class);
-//                        intent.putExtra("userVideo",(Serializable) bean.getData().getList());
+                        Intent intent = new Intent(getContext(), VideoPlayActivity.class);
+                        intent.putExtra("userVideo",(Serializable) bean.getData().getList());
                         intent.putExtra("id",bean.getData().getList().get(position).getId());
                         startActivity(intent);
                     }

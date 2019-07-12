@@ -22,8 +22,8 @@ public class RegisterActivity extends BaseActivity {
 
     @BindView(R.id.register_userName)
     EditText phone;
-    @BindView(R.id.register_userPwd)
-    EditText code;
+//    @BindView(R.id.register_userPwd)
+//    EditText code;
 //    @BindView(R.id.get_code)
 //    TextView getCode;
     @BindView(R.id.bt_login)
@@ -50,7 +50,7 @@ public class RegisterActivity extends BaseActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
-                if(!code.getText().toString().equals("") && !phone.getText().toString().equals("")){
+                if( !phone.getText().toString().equals("")){
                     go.setBackgroundResource(R.drawable.login_press);
                     go.setClickable(true);
                 }else{
@@ -59,24 +59,24 @@ public class RegisterActivity extends BaseActivity {
                 }
             }
         });
-        code.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(!code.getText().toString().equals("") && !phone.getText().toString().equals("")){
-                    go.setBackgroundResource(R.drawable.login_press);
-                    go.setClickable(true);
-                }else{
-                    go.setBackgroundResource(R.drawable.login_normal);
-                    go.setClickable(false);
-                }
-            }
-        });
+//        code.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if(!code.getText().toString().equals("") && !phone.getText().toString().equals("")){
+//                    go.setBackgroundResource(R.drawable.login_press);
+//                    go.setClickable(true);
+//                }else{
+//                    go.setBackgroundResource(R.drawable.login_normal);
+//                    go.setClickable(false);
+//                }
+//            }
+//        });
     }
 
     @OnClick({R.id.bt_login,R.id.close})

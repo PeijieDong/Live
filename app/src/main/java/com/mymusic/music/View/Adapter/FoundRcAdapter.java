@@ -23,7 +23,7 @@ public class FoundRcAdapter extends BaseQuickAdapter<HomeData.DataBean.ListBean.
 
     @Override
     protected void convert(BaseViewHolder helper, HomeData.DataBean.ListBean.ObjsBean item) {
-        Glide.with(mContext).load(item.getImageX()).into((ImageView) helper.getView(R.id.video_icon));
+        Glide.with(mContext).load(item.getImageX()).error(R.drawable.gray_back).into((ImageView) helper.getView(R.id.video_icon));
         helper.setText(R.id.like_num,item.getZanX()).addOnClickListener(R.id.video_icon);
     }
 }

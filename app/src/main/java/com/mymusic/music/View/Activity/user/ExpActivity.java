@@ -39,10 +39,11 @@ public class ExpActivity extends BaseActivity {
     TextView score;
     @BindView(R.id.level)
     TextView level;
+    String exp;
 
     @Override
     protected void initVariables(Intent intent) {
-
+        exp = intent.getStringExtra("exp");
     }
 
     @Override
@@ -52,6 +53,7 @@ public class ExpActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
+        score.setText(exp);
         initNet();
     }
 

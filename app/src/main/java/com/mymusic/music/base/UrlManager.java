@@ -8,7 +8,6 @@ import java.util.Collection;
  **/
 public class UrlManager {
 
-
     private static final String BaseUrl = "http://live.shuiqiao.net/";
     //home页
     public static final String HOME_DATA = BaseUrl+"index/homepage";
@@ -151,4 +150,6 @@ public class UrlManager {
     public static final String Play_Num = BaseUrl+"video/addvisit";
 
     public static final String GoMoney = BaseUrl+"users/scoretovideo";
+
+    public static final String ADV =BaseUrl+"ad/startad";
 }

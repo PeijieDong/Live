@@ -15,7 +15,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Create By mr.mao in 2019/7/3 21:46
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class VideoViewHolder2 extends BaseRecViewHolder {
+public class VideoViewHolder3 extends BaseRecViewHolder {
     public View rootView;
     public MyVideoPlayer mp_video;
     public CircleImageView video_head;
@@ -31,7 +31,7 @@ public class VideoViewHolder2 extends BaseRecViewHolder {
 
 
 
-    public VideoViewHolder2(View rootView) {
+    public VideoViewHolder3(View rootView) {
         super(rootView);
         this.rootView = rootView;
         mp_video = rootView.findViewById(R.id.mp_video);

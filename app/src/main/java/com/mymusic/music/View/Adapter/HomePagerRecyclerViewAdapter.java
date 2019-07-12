@@ -35,6 +35,7 @@ import com.mymusic.music.base.BaseRecAdapter;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                     //广告
                     case "关注":
                         return ADV;
-                    case "啪啪":
+                    case "小视频":
                         return PAPA;
                     case "用户":
                         return USER;
@@ -202,7 +203,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         switch (view.getId()){
                             case R.id.video_icon:
                                 Intent intent = new Intent(mContext, VideoPlayActivity.class);
-                                intent.putExtra("video",0);
+                                intent.putExtra("playData",(Serializable) item.getObjs());
                                 intent.putExtra("position",position);
                                 mContext.startActivity(intent);
                                 break;

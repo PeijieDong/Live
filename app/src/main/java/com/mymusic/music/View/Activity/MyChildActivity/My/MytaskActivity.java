@@ -37,7 +37,7 @@ public class MytaskActivity extends BaseActivity {
     RecyclerView Rc1;
     @BindView(R.id.Rc2)
     RecyclerView Rc2;
-
+    Task bean;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -58,7 +58,7 @@ public class MytaskActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.Task, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Task bean = GsonUtil.GsonToBean(result, Task.class);
+                bean = GsonUtil.GsonToBean(result, Task.class);
                 Rc1.setLayoutManager(new LinearLayoutManager(MytaskActivity.this));
                 MyTaskRcAdapter taskAdapter = new MyTaskRcAdapter(R.layout.my_task_layout,bean.getData().getList().get(1).getList());
                 Rc1.setAdapter(taskAdapter);
@@ -88,10 +88,12 @@ public class MytaskActivity extends BaseActivity {
                 break;
             case R.id.intergal:
                 Intent intent = new Intent(this, IntegalActivity.class);
+                intent.putExtra("integal",bean.getData().getList().get(0).getScore());
                 startActivity(intent);
                 break;
             case R.id.expScore:
                 Intent intent2 = new Intent(this, ExpActivity.class);
+                intent2.putExtra("exp",bean.getData().getList().get(0).getConsumption());
                 startActivity(intent2);
                 break;
         }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.Image;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -30,8 +31,10 @@ import com.google.gson.Gson;
 import com.mymusic.music.DataBean.CommentData;
 import com.mymusic.music.DataBean.DetailData;
 import com.mymusic.music.DataBean.Details;
+import com.mymusic.music.DataBean.Play;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
@@ -40,6 +43,8 @@ import com.mymusic.music.Util.MyJzvdStd;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
+import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
+import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
 import com.mymusic.music.View.Adapter.DetailCommentRcAdapter;
 import com.mymusic.music.View.Adapter.HomeGridAdapter;
 import com.mymusic.music.base.BaseActivity;
@@ -128,6 +133,14 @@ public class DetailsActivity extends BaseActivity {
     TextView friendName;
     @BindView(R.id.playNum)
     TextView playNum;
+    @BindView(R.id.no_num)
+    ConstraintLayout noNum;
+    @BindView(R.id.noMoneyTitle)
+    TextView noMoneyTitle;
+    @BindView(R.id.goLook)
+    TextView goLook;
+    @BindView(R.id.goMoney)
+    TextView goMoney;
 
 
     private String id;
@@ -176,6 +189,7 @@ public class DetailsActivity extends BaseActivity {
             VideoPlay.setUp(data.getData().getList().getVideourl(),
                     JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
             VideoPlay.startVideo();
+            initPlay(data.getData().getList().getId());
             Glide.with(this).load(data.getData().getList().getImage()).into(VideoPlay.thumbImageView);
         }else if(data.getData().getList().getType().equals("文字")){
             title.setText("短文详情");
@@ -219,6 +233,84 @@ public class DetailsActivity extends BaseActivity {
         initComment("new","0");
     }
 
+    private void initPlay(String id) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("client", AppUtil.getSerialNumber());
+        NetRequest.postFormHeadRequest(UrlManager.Play_Num, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Play bean = GsonUtil.GsonToBean(result, Play.class);
+                if(bean.getData().getList().getCount() == 997){
+                    VideoPlay.onStatePause();
+                    noNum.setVisibility(View.VISIBLE);
+                    noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看\n当前积分"+bean.getData().getList().getScore()
+                            +"个，番茄币"+bean.getData().getList().getMoney()+"个");
+                    if(Integer.parseInt(bean.getData().getList().getMoney()) < 10){
+                        goMoney.setText("充值番茄币");
+                        goMoney.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(DetailsActivity.this, MywalletActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }else{
+                        goMoney.setText("10币观看");
+                        goMoney.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                initLook("1");
+                            }
+                        });
+                    }
+                    if(Integer.parseInt(bean.getData().getList().getScore()) < 10){
+                        goLook.setText("赚取积分");
+                        goLook.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(DetailsActivity.this, MytaskActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }else{
+                        goLook.setText("10积分观看");
+                        goLook.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                initLook("0");
+                            }
+                        });
+                    }
+                }
+            }
+            @Override
+            public void requestFailure(Request request, IOException e) {
+            }
+            @Override
+            public void TokenFail() {
+            }
+        });
+    }
+    private void initLook(String type) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type",type);
+        NetRequest.postFormHeadRequest(UrlManager.GoMoney, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                VideoPlay.startVideo();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void TokenFail() {
+
+            }
+        });
+    }
 
     private void initComment(String type,String somebody) {
         HashMap<String, String> map = new HashMap<>();
@@ -259,9 +351,9 @@ public class DetailsActivity extends BaseActivity {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                Intent intent = new Intent(DetailsActivity.this, CommentDetailActivity.class);
-                intent.putExtra("commentList",list.get(i));
-                startActivity(intent);
+//                Intent intent = new Intent(DetailsActivity.this, CommentDetailActivity.class);
+//                intent.putExtra("commentList",list.get(i));
+//                startActivity(intent);
             }
         });
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

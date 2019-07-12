@@ -362,9 +362,9 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     .forResult(REQUEST_CODE_CHOOSE); // 设置作为标记的请求码
         }
     }
-    public static String getRingDuring(Uri mUri){
-        String url = mUri.getAuthority();
-        Log.e("23",url);
+
+    public String getRingDuring(Uri mUri){
+        String uri = getRealPathFromURI(putContentActivity.this, mUri);
         String duration=null;
         android.media.MediaMetadataRetriever mmr = new android.media.MediaMetadataRetriever();
 
@@ -375,7 +375,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     headers = new HashMap<String, String>();
                     headers.put("User-Agent", "Mozilla/5.0 (Linux; U; Android 4.4.2; zh-CN; MW-KW-001 Build/JRO03C) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 UCBrowser/1.0.0.001 U4/0.8.0 Mobile Safari/533.1");
                 }
-                mmr.setDataSource(url, headers);
+                mmr.setDataSource(uri, headers);
             }
             duration = mmr.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION);
             Log.e("23",duration+"");
@@ -383,7 +383,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         } finally {
             mmr.release();
         }
-
+        Log.e("33",duration);
         return duration;
     }
 

@@ -97,7 +97,7 @@ public class MyTaskRcAdapter extends BaseQuickAdapter<Task.DataBean.ListBeanX.Li
         }
         helper.setText(R.id.task_title,item.getTitle())
                 .setText(R.id.task_num,item.getDesc())
-                .setText(R.id.unfinish,item.getNum1())
+                .setText(R.id.unfinish,item.getNum1()+"/")
                 .setText(R.id.total,item.getNum2());
         if(item.getStatus().equals("1")){
             helper.getView(R.id.doit).setClickable(false);

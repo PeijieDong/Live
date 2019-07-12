@@ -14,9 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.mymusic.music.DataBean.FriendDetail;
+import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.DataBean.Play;
-import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.AppUtil;
@@ -24,7 +23,6 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
-import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
 import com.mymusic.music.View.Activity.JubaoVideoActiviy;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
@@ -43,17 +41,17 @@ import okhttp3.Request;
  * Create By mr.mao in 2019/7/3 21:45
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListBean, VideoViewHolder2> {
+public class VideoRc3Adapter  extends BaseRecAdapter<HomeData.DataBean.ListBean.ObjsBean, VideoViewHolder3> {
     public Context context;
-    List<FriendDetail.DataBean.ListBean> list ;
+    List<HomeData.DataBean.ListBean.ObjsBean> list ;
     public static final int CURRENT_STATE_PAUSE = 5;
     private long pressedTime = 0;
     private int position;
     private RecyclerView Rc;
-    private VideoViewHolder2 holder;
+    private VideoViewHolder3 holder;
     private ViewHolderListener listener;
 
-    public VideoRc2Adapter(Context context, List<FriendDetail.DataBean.ListBean> list) {
+    public VideoRc3Adapter(Context context, List<HomeData.DataBean.ListBean.ObjsBean> list) {
         super(list);
         this.context = context;
         this.list = list;
@@ -61,20 +59,20 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
 
 
     @Override
-    public void onHolder(VideoViewHolder2 holder, FriendDetail.DataBean.ListBean bean, int position) {
+    public void onHolder(VideoViewHolder3 holder, HomeData.DataBean.ListBean.ObjsBean bean, int position) {
         //设置视频大小
         this.holder = holder;
         this.position = position;
         ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
         layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-        holder.mp_video.setUp(bean.getVideourl(), JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
+        holder.mp_video.setUp(bean.getFilepath(), JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
         if (position == 0) {
             holder.mp_video.startVideo();
-            initPlay(list.get(0).getId());
+            initPlay(list.get(0).getVid());
         }
-        Glide.with(context).load(bean.getAvatar()).into(holder.video_head);
-        holder.title.setText(bean.getTitle());
-        holder.des.setText(bean.getContent());
+        Glide.with(context).load(bean.getImageX()).into(holder.video_head);
+        holder.title.setText(bean.getContentX());
+        holder.des.setText(bean.getCreatetimeX());
         holder.focus.setText("+关注");
         holder.video_head.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +83,7 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
                     return ;
                 }
                 Intent intent = new Intent(context, UserDetailActivity.class);
-                intent.putExtra("UserId",list.get(position).getUid());
+                intent.putExtra("UserId",list.get(position).getUidX());
                 context.startActivity(intent);
             }
         });
@@ -211,7 +209,7 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
         copy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CopyText(list.get(position).getContent());
+                CopyText(list.get(position).getContentX());
                 Toast.makeText(context,"复制成功，快去分享吧！",Toast.LENGTH_SHORT).show();
                 bottomSheet.dismiss();
             }
@@ -225,7 +223,7 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
                     return;
                 }
                 Intent intent = new Intent(context, JubaoVideoActiviy.class);
-                intent.putExtra("id",list.get(position).getId());
+                intent.putExtra("id",list.get(position).getUidX());
                 context.startActivity(intent);
                 bottomSheet.dismiss();
             }
@@ -249,7 +247,7 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
-        map.put("id",list.get(position).getId());
+        map.put("id",list.get(position).getUidX());
         NetRequest.postFormRequest(UrlManager.Focus_User, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -275,7 +273,7 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
             return;
         }
         HashMap<String, String> map = new HashMap<>();
-        map.put("id",list.get(position).getId());
+        map.put("id",list.get(position).getUidX());
         NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -296,8 +294,8 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
 
 
     @Override
-    public VideoViewHolder2 onCreateHolder() {
-        return new VideoViewHolder2(getViewByRes(R.layout.video_two_layout));
+    public VideoViewHolder3 onCreateHolder() {
+        return new VideoViewHolder3(getViewByRes(R.layout.video_three_layout));
     }
 
 
@@ -309,7 +307,7 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
     }
 
     public interface ViewHolderListener{
-        void backViewHolder(VideoViewHolder2 holder);
+        void backViewHolder(VideoViewHolder3 holder);
     }
     public void setListener(ViewHolderListener listener){
         this.listener = listener;

@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
@@ -26,10 +27,13 @@ public class IntegalActivity extends BaseActivity {
     TabLayout tab;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
+    @BindView(R.id.score)
+    TextView score;
+    String integal;
 
     @Override
     protected void initVariables(Intent intent) {
-
+        integal = intent.getStringExtra("integal");
     }
 
     @Override
@@ -39,6 +43,7 @@ public class IntegalActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
+        score.setText(integal);
         List<String> tablist = new ArrayList<>();
         List<Fragment> list = new ArrayList<>();
         tablist.add("获取记录");
