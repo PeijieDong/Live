@@ -112,7 +112,7 @@ public class MyFragment extends BaseFragment {
     }
 
     private void initLogin() {
-        if(Live.getInstance().get(getContext()) != null){
+        if(!Live.getInstance().getToken(getContext()).equals("")){
             initUserInfo();
             cl3.setVisibility(View.GONE);
             cl4.setVisibility(View.VISIBLE);
@@ -173,84 +173,84 @@ public class MyFragment extends BaseFragment {
     public void onClick(View view){
         switch (view.getId()){
             case R.id.my_setting:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MysettingActivity.class);
                 }
                 break;
             case R.id.my_level:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MylevelActivity.class);
                 }
                 break;
             case R.id.my_user_head:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     Intent intent = new Intent(getContext(), UserDetailActivity.class);
                     intent.putExtra("UserId",bean.getData().getId());
                     startActivity(intent);
                 }
                 break;
             case R.id.my_foucus:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MyfocusActivity.class);
                 }
                 break;
             case R.id.my_fans:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MyfansActivity.class);
                 }
                 break;
             case R.id.my_publish:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MypubliskActivity.class);
                 }
                 break;
             case R.id.my_collection:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MycollectionActivity.class);
                 }
                 break;
             case R.id.my_cl_task:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MytaskActivity.class);
                 }
                 break;
             case R.id.my_wallet:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MywalletActivity.class);
                 }
                 break;
             case R.id.my_live:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MyLiveActivity.class);
                 }
                 break;
             case R.id.my_exchange:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MyexchangeActivity.class);
                 }
                 break;
             case R.id.my_message:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MymessageActivity.class);
                 }
                 break;
             case R.id.my_comment:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MycommentActivity.class);
                 }
                 break;
             case R.id.my_like:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MylikeActivity.class);
                 }
                 break;
             case R.id.my_history:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MyhistoryActivity.class);
                 }
                 break;
             case R.id.my_feedback:
-                if(Live.getInstance().get(getContext()) != null){
+                if(Live.getInstance().getUser(getContext()) != null){
                     goActivity(MyfeedbackActivity.class);
                 }
                 break;

@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.TopNavigation;
+import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.FriendAllAdapter;
@@ -159,6 +162,34 @@ public class FriendAllFragment extends BaseFragment implements TopNavigation.OnT
                             focus.setText("取消关注");
                             initFocusFriend(true, position);
                         }
+                        break;
+                    case R.id.friend_all_down:
+                        LinearLayout ll = (LinearLayout) adapter.getViewByPosition(rc, position, R.id.ll_back);
+                        ImageView open = (ImageView) adapter.getViewByPosition(rc, position, R.id.friend_all_down);
+                        int visibility = ll.getVisibility();
+                        if(visibility == View.GONE){
+                            open.setImageResource(R.drawable.icon_arraw_open);
+                            ll.setVisibility(View.VISIBLE);
+                        }
+                        if(visibility == View.VISIBLE){
+                            open.setImageResource(R.drawable.icon_arraw_close);
+                            ll.setVisibility(View.GONE);
+                        }
+                        break;
+                    case R.id.friend_all_image1:
+                        Intent intent = new Intent(getContext(), DetailsActivity.class);
+                        intent.putExtra("id",list.get(position).getList().get(0).getId());
+                        getContext().startActivity(intent);
+                        break;
+                    case R.id.friend_all_image2:
+                        Intent intent1 = new Intent(getContext(), DetailsActivity.class);
+                        intent1.putExtra("id",list.get(position).getList().get(1).getId());
+                        getContext().startActivity(intent1);
+                        break;
+                    case R.id.friend_all_image3:
+                        Intent intent2 = new Intent(getContext(), DetailsActivity.class);
+                        intent2.putExtra("id",list.get(position).getList().get(2).getId());
+                        getContext().startActivity(intent2);
                         break;
                 }
             }

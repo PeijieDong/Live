@@ -62,9 +62,6 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         setMultiTypeDelegate(new MultiTypeDelegate<HomeData.DataBean.ListBean>() {
             @Override
             protected int getItemType(HomeData.DataBean.ListBean s) {
-                if(s.getObjs() != null){
-                    return PAPA;
-                }
                 switch (s.getType()){
                     //多图片
                     case "图片":
@@ -142,6 +139,9 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .setText(R.id.home_rc_type,item.getCatename())
                         .setText(R.id.tv_content_text,item.getContent())
                         .setText(R.id.tv_content,item.getTitle());
+                if(item.getTitle().equals("")){
+                    helper.setText(R.id.tv_content,"暂无标题");
+                }
                 helper.addOnClickListener(R.id.icon_more);
                 TextView text = helper.getView(R.id.tv_content_text);
                 TextView vis = helper.getView(R.id.tv_content_vis);

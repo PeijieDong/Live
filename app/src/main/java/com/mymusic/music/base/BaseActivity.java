@@ -1,5 +1,7 @@
 package com.mymusic.music.base;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
@@ -25,8 +28,8 @@ import scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView;
  **/
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private Kawaii_LoadingView loading;
-    private AlertDialog builder;
+    private ProgressBar loading;
+    private Dialog builder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,26 +79,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         builder.create();
         builder.show();
     }
-
+    ProgressDialog progressDialog;
     public void showLoading(){
-        builder = new AlertDialog.Builder(this).create();
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_loading_layout, null);
-        loading = view.findViewById(R.id.LoadingView);
-        loading.startMoving();
-        builder.setView(view);
-        builder.setCancelable(false);
-        builder.show();
-        WindowManager.LayoutParams  lp= builder.getWindow().getAttributes();
-        lp.width=650;//定义宽度
-        lp.height=450;//定义高度
-        lp.alpha=0.5f;
-        builder.getWindow().setAttributes(lp);
+        final int MAX = 100;
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("正在努力上传");
+        progressDialog.setMessage("等待中");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
     }
 
     public void closeLoading(){
-        loading.stopMoving();
-        builder.dismiss();
+        progressDialog.dismiss();
     }
     @Override
     protected void onDestroy() {

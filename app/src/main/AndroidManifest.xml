@@ -20,7 +20,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ActivityAdv"></activity>
-        <activity android:name=".View.ActivitySplash" />
         <activity android:name=".View.Activity.Detail.CommentDetailActivity" />
         <activity
             android:name=".MainActivity"

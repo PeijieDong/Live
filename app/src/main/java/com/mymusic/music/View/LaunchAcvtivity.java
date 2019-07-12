@@ -108,7 +108,7 @@ public class LaunchAcvtivity extends BaseActivity implements EasyPermissions.Per
 
     public void checkLogin(){
         Intent intent = null;
-        if(Live.getInstance().getUser(this) == null || Live.getInstance().getUser(this).getData() ==null){
+        if(Live.getInstance().get(this) == null){
             Live.getInstance().clear(this);
             if(!SharedPrefrenceUtils.getString(this,"Password").equals("")){
                 intent = new Intent(LaunchAcvtivity.this, LockScreenActivity.class);

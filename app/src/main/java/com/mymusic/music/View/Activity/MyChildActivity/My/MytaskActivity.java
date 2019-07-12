@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.Task;
 import com.mymusic.music.Live;
+import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
@@ -61,6 +63,23 @@ public class MytaskActivity extends BaseActivity {
                 bean = GsonUtil.GsonToBean(result, Task.class);
                 Rc1.setLayoutManager(new LinearLayoutManager(MytaskActivity.this));
                 MyTaskRcAdapter taskAdapter = new MyTaskRcAdapter(R.layout.my_task_layout,bean.getData().getList().get(1).getList());
+                taskAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                    @Override
+                    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                        switch (view.getId()){
+                            case R.id.doit:
+                                if (bean.getData().getList().get(position).getTitle().equals("邀请用户，下载并登录")){
+                                    Intent intent = new Intent(MytaskActivity.this, MyshareActivity.class);
+                                    startActivity(intent);
+                                }else{
+                                    Intent intent = new Intent(MytaskActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                                break;
+                        }
+
+                    }
+                });
                 Rc1.setAdapter(taskAdapter);
                 Score.setText(bean.getData().getList().get(0).getScore());
                 Exp.setText(bean.getData().getList().get(0).getConsumption());

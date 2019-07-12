@@ -189,8 +189,8 @@ public class DetailsActivity extends BaseActivity {
             VideoPlay.setUp(data.getData().getList().getVideourl(),
                     JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
             VideoPlay.startVideo();
-            initPlay(data.getData().getList().getId());
             Glide.with(this).load(data.getData().getList().getImage()).into(VideoPlay.thumbImageView);
+            initPlay(data.getData().getList().getId());
         }else if(data.getData().getList().getType().equals("文字")){
             title.setText("短文详情");
             TextView view = (TextView) LayoutInflater.from(this).inflate(R.layout.detail_text_item, null);
@@ -240,9 +240,11 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Play bean = GsonUtil.GsonToBean(result, Play.class);
-                if(bean.getData().getList().getCount() == 997){
-                    VideoPlay.onStatePause();
+                if(bean.getData().getList().getCount() == 0){
+                    VideoPlay.goOnPlayOnPause();
                     noNum.setVisibility(View.VISIBLE);
+                    VideoPlay.setVisibility(View.GONE);
+                    VideoPlay.setClickable(false);
                     noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看\n当前积分"+bean.getData().getList().getScore()
                             +"个，番茄币"+bean.getData().getList().getMoney()+"个");
                     if(Integer.parseInt(bean.getData().getList().getMoney()) < 10){
@@ -250,8 +252,13 @@ public class DetailsActivity extends BaseActivity {
                         goMoney.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(DetailsActivity.this, MywalletActivity.class);
-                                startActivity(intent);
+                                if(Live.getInstance().getToken(DetailsActivity.this).equals("")){
+                                    Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Intent intent = new Intent(DetailsActivity.this, MywalletActivity.class);
+                                    startActivity(intent);
+                                }
                             }
                         });
                     }else{
@@ -268,8 +275,13 @@ public class DetailsActivity extends BaseActivity {
                         goLook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(DetailsActivity.this, MytaskActivity.class);
-                                startActivity(intent);
+                                if(Live.getInstance().getToken(DetailsActivity.this).equals("")){
+                                    Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Intent intent = new Intent(DetailsActivity.this, MytaskActivity.class);
+                                    startActivity(intent);
+                                }
                             }
                         });
                     }else{
@@ -298,6 +310,9 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 VideoPlay.startVideo();
+                VideoPlay.setVisibility(View.VISIBLE);
+                VideoPlay.setClickable(true);
+                noNum.setVisibility(View.GONE);
             }
 
             @Override

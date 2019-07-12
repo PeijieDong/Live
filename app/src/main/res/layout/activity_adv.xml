@@ -9,7 +9,7 @@
         android:id="@+id/iv_adv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY" />
+        android:scaleType="centerCrop" />
 
     <Button
         android:id="@+id/bt_jump"
@@ -20,9 +20,8 @@
         android:textColor="@color/white"
         android:background="@drawable/shape_bor_white_bg_tran60_4"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="13dp"
-        android:layout_marginBottom="106dp"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>

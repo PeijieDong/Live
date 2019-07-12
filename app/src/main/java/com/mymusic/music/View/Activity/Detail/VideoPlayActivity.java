@@ -2,26 +2,27 @@ package com.mymusic.music.View.Activity.Detail;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mymusic.music.DataBean.FriendDetail;
 import com.mymusic.music.DataBean.HomeData;
-import com.mymusic.music.DataBean.UserVideo;
-import com.mymusic.music.DataBean.VideoData;
+import com.mymusic.music.DataBean.Play;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
+import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
+import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
 import com.mymusic.music.View.Adapter.VideoRc2Adapter;
 import com.mymusic.music.View.Adapter.VideoRc3Adapter;
-import com.mymusic.music.View.Adapter.VideoRcAdapter;
-import com.mymusic.music.View.Adapter.VideoRecyclerViewAdapter;
 import com.mymusic.music.View.Adapter.VideoViewHolder;
 import com.mymusic.music.View.Adapter.VideoViewHolder2;
 
@@ -30,7 +31,6 @@ import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -89,6 +89,12 @@ public class VideoPlayActivity extends BaseActivity {
                 public void backViewHolder(VideoViewHolder2 holder) {
                     holder.mp_video.startVideo();
                 }
+
+                @Override
+                public void holder(VideoViewHolder2 holder) {
+                    viewHolder = holder;
+                    initPlay(holder);
+                }
             });
         }
         if(playData != null){
@@ -98,6 +104,11 @@ public class VideoPlayActivity extends BaseActivity {
                 @Override
                 public void backViewHolder(VideoViewHolder3 holder) {
                     holder.mp_video.startVideo();
+                }
+                @Override
+                public void holder(VideoViewHolder3 holder) {
+                    viewHolder = holder;
+                    initPlay2(holder);
                 }
             });
         }
@@ -114,11 +125,11 @@ public class VideoPlayActivity extends BaseActivity {
                         //播放视频
                         if(userVideo != null){
                             ((VideoViewHolder2) viewHolder).mp_video.startVideo();
-                            initPlay(userVideo.get(position).getId());
+                            initPlay((VideoViewHolder2)viewHolder);
                         }
                         if(playData != null){
                             ((VideoViewHolder3) viewHolder).mp_video.startVideo();
-                            initPlay(playData.get(position).getVid());
+                            initPlay2((VideoViewHolder3) viewHolder);
                         }
                     case RecyclerView.SCROLL_STATE_DRAGGING://拖动
                         break;
@@ -135,18 +146,201 @@ public class VideoPlayActivity extends BaseActivity {
             }
         });
     }
-    private void initPlay(String position) {
+
+    private void initPlay2(VideoViewHolder3 viewHolder) {
         HashMap<String, String> map = new HashMap<>();
         map.put("client", AppUtil.getSerialNumber());
         NetRequest.postFormHeadRequest(UrlManager.Play_Num, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
-            public void requestSuccess(String result) throws Exception {
+            public void requestSuccess(String result) {
+                Log.e("3333",result);
+                Play bean = GsonUtil.GsonToBean(result, Play.class);
+                if(bean.getData().getList().getCount() == 0){
+                    JZVideoPlayer.releaseAllVideos();
+                    JZVideoPlayer.goOnPlayOnPause();
+                    viewHolder.noNum.setVisibility(View.VISIBLE);
+                    viewHolder.mp_video.setVisibility(View.GONE);
+                    viewHolder.noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看\n当前积分"+bean.getData().getList().getScore()
+                            +"个，番茄币"+bean.getData().getList().getMoney()+"个");
+                    if(Integer.parseInt(bean.getData().getList().getMoney()) < 10){
+                        viewHolder.goMoney.setText("充值番茄币");
+                        viewHolder.goMoney.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(Live.getInstance().getToken(VideoPlayActivity.this).equals("")){
+                                    Intent intent = new Intent(VideoPlayActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Intent intent = new Intent(VideoPlayActivity.this, MywalletActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                    }else{
+                        viewHolder.goMoney.setText("10币观看");
+                        viewHolder.goMoney.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                initLook2("1",viewHolder);
+                            }
+                        });
+                    }
+                    if(Integer.parseInt(bean.getData().getList().getScore()) < 10){
+                        viewHolder.goLook.setText("赚取积分");
+                        viewHolder.goLook.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(Live.getInstance().getToken(VideoPlayActivity.this).equals("")){
+                                    Intent intent = new Intent(VideoPlayActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Intent intent = new Intent(VideoPlayActivity.this, MytaskActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                    }else{
+                        viewHolder.goLook.setText("10积分观看");
+                        viewHolder.goLook.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                initLook2("0",viewHolder);
+                            }
+                        });
+                    }
+                }
             }
             @Override
             public void requestFailure(Request request, IOException e) {
             }
             @Override
             public void TokenFail() {
+            }
+        });
+    }
+
+    private void initLook2(String type, VideoViewHolder3 viewHolder) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type",type);
+        NetRequest.postFormHeadRequest(UrlManager.GoMoney, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) {
+                Log.e("3333",result);
+                viewHolder.mp_video.startVideo();
+                viewHolder.mp_video.setVisibility(View.VISIBLE);
+                viewHolder.noNum.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(VideoPlayActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void TokenFail() {
+                Intent intent = new Intent(VideoPlayActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initPlay(VideoViewHolder2 viewHolder) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("client", AppUtil.getSerialNumber());
+        NetRequest.postFormHeadRequest(UrlManager.Play_Num, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) {
+                Log.e("3333",result);
+                Play bean = GsonUtil.GsonToBean(result, Play.class);
+                if(bean.getData().getList().getCount() == 0){
+                    JZVideoPlayer.releaseAllVideos();
+                    JZVideoPlayer.goOnPlayOnPause();
+                    viewHolder.mp_video.goOnPlayOnPause();
+                    viewHolder.noNum.setVisibility(View.VISIBLE);
+                    viewHolder.mp_video.setVisibility(View.GONE);
+                    viewHolder.noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看当前积分"+bean.getData().getList().getScore()
+                            +"个，番茄币"+bean.getData().getList().getMoney()+"个");
+                    if(Integer.parseInt(bean.getData().getList().getMoney()) < 10){
+                        viewHolder.goMoney.setText("充值番茄币");
+                        viewHolder.goMoney.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(Live.getInstance().getToken(VideoPlayActivity.this).equals("")){
+                                    Intent intent = new Intent(VideoPlayActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Intent intent = new Intent(VideoPlayActivity.this, MywalletActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                    }else{
+                        viewHolder.goMoney.setText("10币观看");
+                        viewHolder.goMoney.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                initLook("1",viewHolder);
+                            }
+                        });
+                    }
+                    if(Integer.parseInt(bean.getData().getList().getScore()) < 10){
+                        viewHolder.goLook.setText("赚取积分");
+                        viewHolder.goLook.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(Live.getInstance().getToken(VideoPlayActivity.this).equals("")){
+                                    Intent intent = new Intent(VideoPlayActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Intent intent = new Intent(VideoPlayActivity.this, MytaskActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                    }else{
+                        viewHolder.goLook.setText("10积分观看");
+                        viewHolder.goLook.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                initLook("0",viewHolder);
+                            }
+                        });
+                    }
+                }
+            }
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(VideoPlayActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void TokenFail() {
+                Intent intent = new Intent(VideoPlayActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initLook(String type,VideoViewHolder2 viewHolder) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type",type);
+        NetRequest.postFormHeadRequest(UrlManager.GoMoney, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) {
+                Log.e("3333",result);
+                viewHolder.mp_video.startVideo();
+                viewHolder.mp_video.setVisibility(View.VISIBLE);
+                viewHolder.noNum.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Toast.makeText(VideoPlayActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void TokenFail() {
+                Intent intent = new Intent(VideoPlayActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -77,14 +77,14 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             NetRequest.postFormRequest(UrlManager.Home_Find, map, new NetRequest.DataCallBack() {
                 @Override
                 public void requestSuccess(String result) throws Exception {
-                    Log.e("33",result);
+                    Log.e("333",result);
                     HomeData data = GsonUtil.GsonToBean(result, HomeData.class);
                     initRc(data.getData().getList());
                 }
 
                 @Override
                 public void requestFailure(Request request, IOException e) {
-
+                    Log.e("33",e.getMessage());
                 }
                 @Override
                 public void TokenFail() {

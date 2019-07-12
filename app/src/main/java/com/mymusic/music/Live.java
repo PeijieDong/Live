@@ -41,9 +41,9 @@ public class Live extends Application {
     }
 
     public String getToken(Context context){
-        if(getUser(context) != null){
-            UserBean user = getUser(context);
-            return user.getData().getToken();
+        if(get(context) != null){
+            User user = get(context);
+            return user.getList().getToken();
         }else{
             return "";
         }

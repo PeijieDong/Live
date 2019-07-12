@@ -85,7 +85,7 @@
                 android:layout_height="fill_parent"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
-                android:scaleType="centerInside"
+                android:scaleType="centerCrop"
                 android:src="@drawable/jz_enlarge" />
         </LinearLayout>
     </LinearLayout>

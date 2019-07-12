@@ -19,7 +19,7 @@ import java.util.List;
  * Create By mr.mao in 2019/6/8 9:52
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.ListBeanX,BaseViewHolder> implements View.OnClickListener {
+public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.ListBeanX,BaseViewHolder>  {
     LinearLayout ll;
     FriendAllData.DataBean.ListBeanX item;
     private ImageView open;
@@ -35,7 +35,12 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
                 .setText(R.id.friend_item_des,item.getDescription())
                 .setText(R.id.friend_item_focus,"关注"+"\r"+item.getGnum())
                 .setText(R.id.friend_item_art,"帖子"+"\r"+item.getTiezi())
-                .addOnClickListener(R.id.friend_all_bt);
+                .addOnClickListener(R.id.friend_all_bt)
+                .addOnClickListener(R.id.friend_all_down)
+                .addOnClickListener(R.id.friend_all_image1)
+                .addOnClickListener(R.id.friend_all_image2)
+                .addOnClickListener(R.id.friend_all_image3);
+        open = helper.getView(R.id.friend_all_down);
         if(item.getList() != null){
             helper.setText(R.id.friend_all_num1,item.getList().get(0).getCate()+"张")
                     .setText(R.id.friend_all_num2,item.getList().get(1).getCate()+"张")
@@ -46,13 +51,11 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
             ImageView image1 = helper.getView(R.id.friend_all_image1);
             ImageView image2 = helper.getView(R.id.friend_all_image2);
             ImageView image3 = helper.getView(R.id.friend_all_image3);
-            image1.setOnClickListener(this);
-            image2.setOnClickListener(this);
-            image3.setOnClickListener(this);
             Glide.with(mContext).load(item.getList().get(0).getImage()).into(image1);
             Glide.with(mContext).load(item.getList().get(1).getImage()).into(image2);
             Glide.with(mContext).load(item.getList().get(2).getImage()).into(image3);
-            open.setClickable(false);
+        }else{
+            open.setVisibility(View.GONE);
         }
         if(item.getIsguanzhu().equals("已关注")){
             helper.setText(R.id.friend_all_bt,"取消关注");
@@ -63,43 +66,8 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
         }
         ImageView head = helper.getView(R.id.friend_item_head);
         Glide.with(mContext).load(item.getIcon()).into(head);
-
         ImageView down = helper.getView(R.id.friend_all_down);
-        down.setOnClickListener(this);
-        ll = helper.getView(R.id.ll_back);
-        open = helper.getView(R.id.friend_all_down);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.friend_all_down:
-                int visibility = ll.getVisibility();
-                if(visibility == View.GONE){
-                    open.setImageResource(R.drawable.icon_arraw_open);
-                    ll.setVisibility(View.VISIBLE);
-                }
-                if(visibility == View.VISIBLE){
-                    open.setImageResource(R.drawable.icon_arraw_close);
-                    ll.setVisibility(View.GONE);
-                }
-                break;
-            case R.id.friend_all_image1:
-                Intent intent = new Intent(mContext, DetailsActivity.class);
-                intent.putExtra("id",item.getList().get(0).getId());
-                mContext.startActivity(intent);
-                break;
-            case R.id.friend_all_image2:
-                Intent intent1 = new Intent(mContext, DetailsActivity.class);
-                intent1.putExtra("id",item.getList().get(1).getId());
-                mContext.startActivity(intent1);
-                break;
-            case R.id.friend_all_image3:
-                Intent intent2 = new Intent(mContext, DetailsActivity.class);
-                intent2.putExtra("id",item.getList().get(2).getId());
-                mContext.startActivity(intent2);
-                break;
-        }
-    }
 
 }

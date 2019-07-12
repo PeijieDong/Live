@@ -120,7 +120,7 @@ public class UserBean {
         private String status;
         private VipBean vip;
         private LiangBean liang;
-        private int follows;
+        private String follows;
         private String fans;
         private String fabu;
         private String shoucang;
@@ -367,11 +367,11 @@ public class UserBean {
             this.liang = liang;
         }
 
-        public int getFollows() {
+        public String getFollows() {
             return follows;
         }
 
-        public void setFollows(int follows) {
+        public void setFollows(String follows) {
             this.follows = follows;
         }
 

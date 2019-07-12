@@ -107,6 +107,7 @@ public class LoginActivity extends BaseActivity {
                     NetRequest.postFormRequest(UrlManager.Login, map, new NetRequest.DataCallBack() {
                         @Override
                         public void requestSuccess(String result) throws Exception {
+                            Log.e("33",result);
                             User user = GsonUtil.GsonToBean(result, User.class);
                             if(user.getMsg().equals("登录成功")){
                                 Live.getInstance().put(LoginActivity.this,result);

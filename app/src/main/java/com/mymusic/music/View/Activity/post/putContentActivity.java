@@ -185,9 +185,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     tag.append(list.get(i));
                     tag.append(",");
                 }
-                showLoading();
                 initNet();
-                closeLoading();
                 break;
         }
     }
@@ -201,7 +199,6 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             Toast.makeText(this,"请选择圈子",Toast.LENGTH_SHORT).show();
             return;
         }
-
         String url = UrlManager.Post_Video;
         File file = null;
         HashMap<String, String> map = new HashMap<>();
@@ -215,6 +212,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 Toast.makeText(this,"请选择要上传的图片",Toast.LENGTH_SHORT).show();
                 return;
             }
+            showLoading();
             map.put("images", "data:image/jpeg;base64,"+PicToBase64.imageToBase64(getRealPathFromURI(putContentActivity.this,image.get(0))));
             for (int i = 0 ;i<image.size();i++){
                 File file1 = getFileByUri(image.get(i),putContentActivity.this);
@@ -236,6 +234,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 }
                 @Override
                 public void TokenFail() {
+                    closeLoading();
                     LoginDialog dialog = new LoginDialog(getActivity());
                     dialog.Show();
                 }
@@ -257,6 +256,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 return;
             }
         }
+        showLoading();
         NetRequest.postmoreRequest(url, this, map, file, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -273,6 +273,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             }
             @Override
             public void TokenFail() {
+                closeLoading();
                 LoginDialog dialog = new LoginDialog(getActivity());
                 dialog.Show();
             }
@@ -365,9 +366,8 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
 
     public String getRingDuring(Uri mUri){
         String uri = getRealPathFromURI(putContentActivity.this, mUri);
-        String duration=null;
+        String duration="30";
         android.media.MediaMetadataRetriever mmr = new android.media.MediaMetadataRetriever();
-
         try {
             if (mUri != null) {
                 HashMap<String, String> headers=null;
@@ -378,12 +378,11 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 mmr.setDataSource(uri, headers);
             }
             duration = mmr.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION);
-            Log.e("23",duration+"");
         } catch (Exception ex) {
+
         } finally {
             mmr.release();
         }
-        Log.e("33",duration);
         return duration;
     }
 

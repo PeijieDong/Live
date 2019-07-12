@@ -143,7 +143,7 @@
                 android:id="@+id/friend_find_one"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"/>
+                android:scaleType="centerCrop"/>
             <TextView
                 android:id="@+id/image_type_1"
                 android:layout_width="40dp"
@@ -166,14 +166,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:layout_marginBottom="5dp">
                 <ImageView
                     android:id="@+id/friend_find_two"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_launcher_background"
-                    android:scaleType="fitXY" />
+                    android:scaleType="centerCrop" />
                 <TextView
                     android:id="@+id/image_type_2"
                     android:layout_width="40dp"
@@ -196,7 +196,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_launcher_background"
-                    android:scaleType="fitXY" />
+                    android:scaleType="centerCrop" />
                 <TextView
                     android:id="@+id/image_type_3"
                     android:layout_width="40dp"
@@ -225,7 +225,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_launcher_background"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop" />
             <TextView
                 android:id="@+id/image_type_4"
                 android:layout_width="40dp"
@@ -248,7 +248,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_launcher_background"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop" />
             <TextView
                 android:id="@+id/image_type_5"
                 android:layout_width="40dp"
@@ -271,7 +271,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_launcher_background"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop" />
             <TextView
                 android:id="@+id/image_type_6"
                 android:layout_width="40dp"

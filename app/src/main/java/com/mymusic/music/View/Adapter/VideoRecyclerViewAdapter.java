@@ -20,9 +20,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.CommentBean;
+import com.mymusic.music.DataBean.Play;
 import com.mymusic.music.DataBean.VideoData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
@@ -30,6 +32,8 @@ import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.JubaoVideoActiviy;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
+import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
+import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
 import com.mymusic.music.View.Activity.post.PutVideoActivity;
 import com.mymusic.music.base.BaseRecAdapter;
 import com.mymusic.music.base.UrlManager;
@@ -201,9 +205,10 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                 listener.click(v,position,holder);
             }
         });
-        if (position == 0) {
-            holder.mp_video.startVideo();
-        }
+
+        holder.mp_video.startVideo();
+
+//        initPlay(list.get(position).getVid());
 //        Glide.with(context).load(bean).into(holder.mp_video.thumbImageView);
         Glide.with(context).load(bean.getAvatar_thumb()).into(holder.video_head);
         holder.title.setText(bean.getSharecontent());
@@ -211,7 +216,12 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.likeNum.setText(bean.getZan());
         holder.commentNum.setText(bean.getComment());
         holder.shareNum.setText(bean.getShare());
+        if(position == 0){
+            listener.holder(holder);
+        }
+
     }
+
 
     private void initCollection() {
         HashMap<String, String> map = new HashMap<>();
@@ -405,6 +415,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
 
     public interface VideoListener{
         void click(View v, int position,VideoViewHolder holder);
+        void holder(VideoViewHolder holder);
     }
 
     public void setListener(VideoListener listener){

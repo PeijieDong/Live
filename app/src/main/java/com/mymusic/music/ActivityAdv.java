@@ -1,6 +1,7 @@
 package com.mymusic.music;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.mymusic.music.DataBean.AdvEntity;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
-import com.mymusic.music.Util.SPUtils;
 import com.mymusic.music.View.Activity.WebActivity;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -59,7 +59,7 @@ public class ActivityAdv extends BaseActivity implements View.OnClickListener{
             @Override
             public void requestSuccess(String result) throws Exception {
                 bean = GsonUtil.GsonToBean(result, AdvEntity.class);
-                Glide.with(ActivityAdv.this).load(bean.list.imgurl).into(iv_adv);
+                Glide.with(ActivityAdv.this).load(bean.getData().getList().getImgurl()).into(iv_adv);
             }
 
             @Override
@@ -87,11 +87,11 @@ public class ActivityAdv extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_adv:
-                Intent intent = new Intent(this, WebActivity.class);
-                intent.putExtra("url",bean.list.link);
+                Intent intent= new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(bean.getData().getList().getLink());
+                intent.setData(content_url);
                 startActivity(intent);
-                handler.removeCallbacks(runnable);
-                finish();
                 break;
             case R.id.bt_jump:
                 startActivity(new Intent(this,MainActivity.class));

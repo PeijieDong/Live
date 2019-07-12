@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:cardElevation="0dp"
+<RelativeLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView
+    <ProgressBar
         android:id="@+id/LoadingView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80000000"
-        app:blockColor="#ffffff"
-        app:lineNumber="3"
-        app:fixBlock_Angle="5"
-        app:moveBlock_Angle="20"
-        app:blockInterval="8dp"
-        app:half_BlockWidth="15dp"
-        app:initPosition="0"
-        app:isClock_Wise="false"
-        app:moveSpeed="500"
-        app:move_Interpolator="@android:anim/bounce_interpolator"/>
-</android.support.v7.widget.CardView>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:foregroundGravity="center"
+        android:layout_centerInParent="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/navi_title_color"/>
+    <!--<scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView-->
+        <!--android:id="@+id/LoadingView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="#80000000"-->
+        <!--app:blockColor="#ffffff"-->
+        <!--app:lineNumber="3"-->
+        <!--app:fixBlock_Angle="5"-->
+        <!--app:moveBlock_Angle="20"-->
+        <!--app:blockInterval="8dp"-->
+        <!--app:half_BlockWidth="15dp"-->
+        <!--app:initPosition="0"-->
+        <!--app:isClock_Wise="false"-->
+        <!--app:moveSpeed="500"-->
+        <!--app:move_Interpolator="@android:anim/bounce_interpolator"/>-->
+</RelativeLayout>

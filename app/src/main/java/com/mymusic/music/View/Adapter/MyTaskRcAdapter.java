@@ -23,82 +23,40 @@ public class MyTaskRcAdapter extends BaseQuickAdapter<Task.DataBean.ListBeanX.Li
 
     @Override
     protected void convert(BaseViewHolder helper, Task.DataBean.ListBeanX.ListBean item) {
+        helper.addOnClickListener(R.id.doit);
         if(item.getTitle().equals("邀请用户，下载并登陆")){
             helper.setImageDrawable(R.id.task_head,mContext.getResources().getDrawable(R.drawable.task_center_share));
-            helper.getView(R.id.doit).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
         if(item.getTitle().equals("分享帖子或啪啪")){
             helper.setImageDrawable(R.id.task_head,mContext.getResources().getDrawable(R.drawable.task_center_share));
-            helper.getView(R.id.doit).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
         if(item.getTitle().equals("点赞帖子或评论")){
             helper.setImageDrawable(R.id.task_head,mContext.getResources().getDrawable(R.drawable.task_center_thumb));
-            helper.getView(R.id.doit).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
         if(item.getTitle().equals("完成账号注册")){
             helper.setImageDrawable(R.id.task_head,mContext.getResources().getDrawable(R.drawable.task_center_publish));
-            helper.getView(R.id.doit).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
         if(item.getTitle().equals("修改昵称，完善个人资料")){
             helper.setImageDrawable(R.id.task_head,mContext.getResources().getDrawable(R.drawable.task_center_publish));
-            helper.getView(R.id.doit).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
         if(item.getTitle().equals("浏览帖子")){
             helper.setImageDrawable(R.id.task_head,mContext.getResources().getDrawable(R.drawable.task_center_browse_post));
-            helper.getView(R.id.doit).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
         if(item.getTitle().equals("保存推广二维码至相册")){
             helper.setImageDrawable(R.id.task_head,mContext.getResources().getDrawable(R.drawable.task_center_qcode));
-            helper.getView(R.id.doit).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
         if(item.getTitle().equals("收到点赞")){
             helper.setImageDrawable(R.id.task_head,mContext.getResources().getDrawable(R.drawable.task_center_thumb));
-            helper.getView(R.id.doit).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
         helper.setText(R.id.task_title,item.getTitle())
                 .setText(R.id.task_num,item.getDesc())
                 .setText(R.id.unfinish,item.getNum1()+"/")
                 .setText(R.id.total,item.getNum2());
+        if(item.getNum1().equals(item.getNum2())){
+            helper.setBackgroundRes(R.id.doit,R.drawable.isfocus);
+            helper.setText(R.id.doit,"已完成");
+            helper.getView(R.id.doit).setClickable(false);
+        }
         if(item.getStatus().equals("1")){
             helper.getView(R.id.doit).setClickable(false);
         }

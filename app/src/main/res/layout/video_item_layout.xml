@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.mymusic.music.Util.MyVideoPlayer
         android:id="@+id/mp_video"
@@ -119,10 +120,10 @@
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/no_num"
-        android:layout_width="280dp"
-        android:layout_height="130dp"
-        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#000"
+        android:visibility="gone"
         android:layout_centerInParent="true">
         <TextView
             android:id="@+id/noMoneyTitle"
@@ -133,7 +134,8 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="30dp"
-            android:textColor="#999" />
+            android:text="dsdsdsdsdsdsds"
+            android:textColor="@color/white" />
         <TextView
             android:id="@+id/goLook"
             android:layout_width="80dp"
@@ -141,10 +143,10 @@
             android:gravity="center"
             android:background="@drawable/white_radio_stoke"
             android:textColor="#999"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/noMoneyTitle"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="40dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="50dp"
             android:text="10积分观看"/>
         <TextView
             android:id="@+id/goMoney"
@@ -153,7 +155,8 @@
             android:gravity="center"
             android:background="@drawable/white_radio_stoke"
             android:textColor="#999"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/noMoneyTitle"
+            android:layout_marginTop="50dp"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="20dp"

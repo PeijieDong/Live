@@ -147,9 +147,11 @@ public class UrlManager {
 
     public static final String Mess_Noti = BaseUrl+"users/notice";
 
-    public static final String Play_Num = BaseUrl+"video/addvisit";
+    public static final String Play_Num = BaseUrl+"video/getNums";
 
     public static final String GoMoney = BaseUrl+"users/scoretovideo";
 
     public static final String ADV =BaseUrl+"ad/startad";
+
+    public static final String AddVideoNum = BaseUrl +"video/addvisit";
 }

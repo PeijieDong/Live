@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,10 +69,6 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
         ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
         layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
         holder.mp_video.setUp(bean.getVideourl(), JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
-        if (position == 0) {
-            holder.mp_video.startVideo();
-            initPlay(list.get(0).getId());
-        }
         Glide.with(context).load(bean.getAvatar()).into(holder.video_head);
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getContent());
@@ -109,7 +106,11 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
                 holder.focus.setClickable(false);
             }
         });
-        listener.backViewHolder(holder);
+//        listener.backViewHolder(holder);
+        holder.mp_video.startVideo();
+        if(position == 0){
+            listener.holder(holder);
+        }
     }
 
 
@@ -119,8 +120,9 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
         NetRequest.postFormHeadRequest(UrlManager.Play_Num, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 Play bean = GsonUtil.GsonToBean(result, Play.class);
-                if(bean.getData().getList().getCount() == 997){
+                if(bean.getData().getList().getCount() == 0){
                     holder.mp_video.onStatePause();
                     holder.noNum.setVisibility(View.VISIBLE);
                     holder.noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看\n当前积分"+bean.getData().getList().getScore()
@@ -310,6 +312,7 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
 
     public interface ViewHolderListener{
         void backViewHolder(VideoViewHolder2 holder);
+        void holder(VideoViewHolder2 holder);
     }
     public void setListener(ViewHolderListener listener){
         this.listener = listener;

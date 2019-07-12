@@ -86,7 +86,7 @@ public class VideoRcAdapter  extends BaseRecAdapter<VideoData.DataBean.ListBean,
             @Override
             public void requestSuccess(String result) throws Exception {
                 Play bean = GsonUtil.GsonToBean(result, Play.class);
-                if(bean.getData().getList().getCount() == 997){
+                if(bean.getData().getList().getCount() == 0){
                     holder.mp_video.onStatePause();
                     holder.noNum.setVisibility(View.VISIBLE);
                     holder.noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看\n当前积分"+bean.getData().getList().getScore()
