@@ -36,7 +36,7 @@ public class MyhistoryActivity extends BaseActivity {
 
     @BindView(R.id.my_history_rc)
     RecyclerView historyRc;
-
+    History bean;
     @Override
     protected void initVariables(Intent intent) {
 
@@ -62,7 +62,7 @@ public class MyhistoryActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                History bean = GsonUtil.GsonToBean(result, History.class);
+                bean = GsonUtil.GsonToBean(result, History.class);
                 initView(bean);
             }
 
@@ -96,7 +96,9 @@ public class MyhistoryActivity extends BaseActivity {
     public void ClickEvent(View view){
         switch (view.getId()) {
             case R.id.clear_history:
-                initClear();
+                if(bean.getData().getList() != null){
+                    initClear();
+                }
                 break;
             case R.id.back:
                 break;

@@ -5,11 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -89,6 +92,10 @@ public class MyFragment extends BaseFragment {
     TextView totalNumber;
     @BindView(R.id.my_number)
     TextView number;
+    @BindView(R.id.logo_level)
+    ImageView logo_level;
+    @BindView(R.id.level_back)
+    LinearLayout levelBack;
     private User user;
     private UserBean bean;
     @Override
@@ -152,6 +159,21 @@ public class MyFragment extends BaseFragment {
                 String[] split = guanying.split("/");
                 number.setText(split[0]);
                 totalNumber.setText("/"+split[1]);
+                if(Integer.parseInt(bean.getData().getLevel()) > 5 && Integer.parseInt(bean.getData().getLevel()) < 11){
+                    level.setTextColor(ContextCompat.getColor(getContext(),R.color.text_level_10));
+                    levelBack.setBackgroundResource(R.drawable.level_back_10);
+                    logo_level.setImageResource(R.drawable.icon_user_level_10);
+                }
+                if(Integer.parseInt(bean.getData().getLevel()) > 10 && Integer.parseInt(bean.getData().getLevel()) < 16){
+                    level.setTextColor(ContextCompat.getColor(getContext(),R.color.text_level_15));
+                    levelBack.setBackgroundResource(R.drawable.level_back_15);
+                    logo_level.setImageResource(R.drawable.icon_user_level_15);
+                }
+                if(Integer.parseInt(bean.getData().getLevel()) > 15){
+                    level.setTextColor(ContextCompat.getColor(getContext(),R.color.text_level_20));
+                    levelBack.setBackgroundResource(R.drawable.level_back_20);
+                    logo_level.setImageResource(R.drawable.icon_user_level_20);
+                }
             }
 
             @Override
@@ -267,6 +289,7 @@ public class MyFragment extends BaseFragment {
             case R.id.my_share:
                 Intent intent1 = new Intent(getContext(), WebActivity.class);
                 intent1.putExtra("url","http://live.shuiqiao.net/users/share");
+                intent1.putExtra("share","1");
                 startActivity(intent1);
                 break;
         }

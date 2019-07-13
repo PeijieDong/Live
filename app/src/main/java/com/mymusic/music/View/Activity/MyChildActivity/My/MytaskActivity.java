@@ -68,11 +68,12 @@ public class MytaskActivity extends BaseActivity {
                     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                         switch (view.getId()){
                             case R.id.doit:
-                                if (bean.getData().getList().get(position).getTitle().equals("邀请用户，下载并登录")){
+                                if (bean.getData().getList().get(1).getList().get(position).getId().equals("1")){
                                     Intent intent = new Intent(MytaskActivity.this, MyshareActivity.class);
                                     startActivity(intent);
-                                }else{
+                                }else if(bean.getData().getList().get(1).getList().get(position).getId().equals("2")){
                                     Intent intent = new Intent(MytaskActivity.this, MainActivity.class);
+                                    intent.putExtra("position",1);
                                     startActivity(intent);
                                 }
                                 break;
@@ -85,6 +86,18 @@ public class MytaskActivity extends BaseActivity {
                 Exp.setText(bean.getData().getList().get(0).getConsumption());
                 Rc2.setLayoutManager(new LinearLayoutManager(MytaskActivity.this));
                 MyTaskRcAdapter taskAdapter2 = new MyTaskRcAdapter(R.layout.my_task_layout,bean.getData().getList().get(2).getList());
+                taskAdapter2.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                    @Override
+                    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                        switch (view.getId()){
+                            case R.id.doit:
+                                Intent intent = new Intent(MytaskActivity.this, MainActivity.class);
+                                intent.putExtra("position",0);
+                                startActivity(intent);
+                                break;
+                        }
+                    }
+                });
                 Rc2.setAdapter(taskAdapter2);
             }
 

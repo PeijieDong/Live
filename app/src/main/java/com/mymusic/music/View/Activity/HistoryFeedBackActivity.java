@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -57,6 +58,7 @@ public class HistoryFeedBackActivity extends BaseActivity {
                 FeedBack bean = GsonUtil.GsonToBean(result, FeedBack.class);
                 Rc.setLayoutManager(new LinearLayoutManager(HistoryFeedBackActivity.this));
                 FeedBackRcAdapter adapter = new FeedBackRcAdapter(R.layout.history_feedback_layout,bean.getData().getList());
+                adapter.setEmptyView(LayoutInflater.from(HistoryFeedBackActivity.this).inflate(R.layout.empty_layout,null));
                 adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

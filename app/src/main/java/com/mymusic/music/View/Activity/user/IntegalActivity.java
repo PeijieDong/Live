@@ -71,6 +71,7 @@ public class IntegalActivity extends BaseActivity {
             case R.id.get_Score:
                 Intent intent = new Intent(this, WebActivity.class);
                 intent.putExtra("url","http://live.shuiqiao.net/users/level");
+                startActivity(intent);
                 break;
         }
     }

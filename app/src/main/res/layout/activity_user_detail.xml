@@ -62,6 +62,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:layout_marginLeft="15dp" />
                         <LinearLayout
+                            android:id="@+id/level_back"
                             android:layout_width="75dp"
                             android:layout_height="24dp"
                             android:orientation="horizontal"
@@ -71,6 +72,7 @@
                             android:background="@drawable/back_level"
                             app:layout_constraintLeft_toRightOf="@id/userDetail_username">
                             <ImageView
+                                android:id="@+id/level_image"
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_marginLeft="5dp"
@@ -81,7 +83,7 @@
                                 android:layout_width="43dp"
                                 android:layout_height="28dp"
                                 android:gravity="center"
-                                android:textColor="#B3842B"
+                                android:textColor="@color/text_level_10"
                                 android:text="Lv.1" />
                         </LinearLayout>
 

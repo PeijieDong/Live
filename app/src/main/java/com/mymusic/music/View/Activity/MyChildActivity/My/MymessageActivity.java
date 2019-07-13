@@ -55,28 +55,29 @@ public class MymessageActivity extends BaseActivity {
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.message_setting:
-                goActivity(SettingActivity.class);
+                goActivity(SettingActivity.class,"0");
                 break;
             case R.id.message_audit:
-                goActivity(AuditActivity.class);
+                goActivity(AuditActivity.class,"1");
                 break;
             case R.id.message_violations:
-                goActivity(ViolationActivity.class);
+                goActivity(ViolationActivity.class,"2");
                 break;
             case R.id.message_feedback:
-                goActivity(FeedbackActivity.class);
+                goActivity(FeedbackActivity.class,"3");
                 break;
             case R.id.message_commend:
-                goActivity(CommendActivity.class);
+                goActivity(CommendActivity.class,"4");
                 break;
             case R.id.message_notice:
-                goActivity(NoticeActivity.class);
+                goActivity(NoticeActivity.class,"5");
                 break;
         }
     }
 
-    public void goActivity(Class<?> clazz){
+    public void goActivity(Class<?> clazz,String position){
         Intent intent = new Intent(this, clazz);
+        intent.putExtra("position",position);
         startActivity(intent);
     }
 }

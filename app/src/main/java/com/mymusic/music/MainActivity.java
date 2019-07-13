@@ -6,6 +6,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,8 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
 
     @BindView(R.id.bottom_navigation)
     BottomNavigation bottomNavigation;
+    @BindView(R.id.card_view)
+    CardView cardView;
     @BindView(R.id.containter)
     FrameLayout containter;
     @BindView(R.id.main_rl)
@@ -97,9 +100,11 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
                 if(position == 1){
                     params.removeRule(RelativeLayout.ABOVE);
                     bottomNavigation.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    cardView.setBackgroundColor(getResources().getColor(R.color.transparent));
                 }else {
-                    params.addRule(RelativeLayout.ABOVE, R.id.bottom_navigation);
+                    params.addRule(RelativeLayout.ABOVE, R.id.card_view);
                     bottomNavigation.setBackgroundColor(getResources().getColor(R.color.white));
+                    cardView.setBackgroundColor(getResources().getColor(R.color.white));
                 }
                 transaction.show(list.get(i));
             }else{
@@ -133,4 +138,11 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
             ActivityCollector.finishAll();
         }
 }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        int position = intent.getIntExtra("position", 0);
+        bottomNavigation.setCurrentItem(position);
+    }
 }

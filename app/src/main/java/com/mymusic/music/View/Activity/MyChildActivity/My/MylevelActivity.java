@@ -104,22 +104,16 @@ public class MylevelActivity extends BaseActivity {
 
                 if(Integer.parseInt(bean.getData().getList().getNowlevel()) > 5 && Integer.parseInt(bean.getData().getList().getNowlevel()) < 11){
                     back1.setBackgroundResource(R.drawable.level_back_10);
-                    level_num.setTextColor(ContextCompat.getColor(MylevelActivity.this,R.color.level10));
-                    level_num2.setTextColor(ContextCompat.getColor(MylevelActivity.this,R.color.level10));
                     levelBack1.setImageResource(R.drawable.icon_user_level_10);
                     levelBack2.setImageResource(R.drawable.icon_user_level_10);
                 }
                 if(Integer.parseInt(bean.getData().getList().getNowlevel()) > 10 && Integer.parseInt(bean.getData().getList().getNowlevel()) < 16){
                     back1.setBackgroundResource(R.drawable.level_back_15);
-                    level_num.setTextColor(ContextCompat.getColor(MylevelActivity.this,R.color.level15));
-                    level_num2.setTextColor(ContextCompat.getColor(MylevelActivity.this,R.color.level15));
                     levelBack1.setImageResource(R.drawable.icon_user_level_15);
                     levelBack2.setImageResource(R.drawable.icon_user_level_15);
                 }
                 if(Integer.parseInt(bean.getData().getList().getNowlevel()) > 15){
                     back1.setBackgroundResource(R.drawable.level_back_20);
-                    level_num.setTextColor(ContextCompat.getColor(MylevelActivity.this,R.color.level20));
-                    level_num2.setTextColor(ContextCompat.getColor(MylevelActivity.this,R.color.level20));
                     levelBack1.setImageResource(R.drawable.icon_user_level_20);
                     levelBack2.setImageResource(R.drawable.icon_user_level_20);
                 }

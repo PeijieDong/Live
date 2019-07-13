@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".Live"
@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ActivityAdv"></activity>
+        <activity android:name=".ActivityAdv" />
         <activity android:name=".View.Activity.Detail.CommentDetailActivity" />
         <activity
             android:name=".MainActivity"
@@ -106,6 +106,8 @@
         <activity android:name=".View.Activity.user.ExpActivity" />
         <activity android:name=".View.Activity.HistoryFeedBackActivity" />
         <activity android:name=".View.Activity.Detail.HistoryFeedDetail" />
+        <activity android:name=".View.Activity.OrderFindAvtivity" />
+        <activity android:name=".View.Activity.message.NoticeDetailActivity"></activity>
     </application>
 
 </manifest>

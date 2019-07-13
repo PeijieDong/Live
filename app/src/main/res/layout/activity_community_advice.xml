@@ -89,7 +89,7 @@
             android:layout_height="50dp"
             android:layout_gravity="bottom"
             android:gravity="center"
-            android:background="#FAFAFB"
+            android:background="@color/white"
             android:layout_below="@id/ll1">
             <ImageView
                 android:layout_width="26dp"

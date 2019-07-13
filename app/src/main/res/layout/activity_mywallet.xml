@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".View.Activity.MyChildActivity.My.MywalletActivity">
     <RelativeLayout
         android:id="@+id/wallet_head"
@@ -81,7 +82,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    <LinearLayout
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp">
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true">
@@ -121,4 +126,5 @@
             android:background="@color/navi_title_color"
             android:text="@string/wallet_top_up"/>
     </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

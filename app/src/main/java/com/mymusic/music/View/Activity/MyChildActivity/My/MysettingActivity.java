@@ -126,7 +126,7 @@ public class MysettingActivity extends BaseActivity {
 
                 break;
             case R.id.setting_backlist:
-                goActivity(BacklistActivity.class);
+//                goActivity(BacklistActivity.class);
                 break;
             case R.id.setting_aboutOur:
                 goActivity(MyaboutActivity.class);

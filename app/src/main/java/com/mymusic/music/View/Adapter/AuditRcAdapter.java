@@ -1,9 +1,12 @@
 package com.mymusic.music.View.Adapter;
 
 import android.support.annotation.Nullable;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.mymusic.music.R;
 
 import java.util.List;
 
@@ -18,6 +21,11 @@ public class AuditRcAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, String item) {
-
+        helper.setText(R.id.title,item)
+                .setText(R.id.time,item)
+                .setText(R.id.state,item)
+                .setText(R.id.content,item)
+                .setText(R.id.content_title,item);
+        Glide.with(mContext).load(item).into((ImageView) helper.getView(R.id.image));
     }
 }

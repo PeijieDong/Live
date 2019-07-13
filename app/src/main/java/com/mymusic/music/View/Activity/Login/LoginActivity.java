@@ -19,6 +19,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.message.NoticeActivity;
 import com.mymusic.music.base.ActivityCollector;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -53,6 +54,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
+        Live.getInstance().clear(this);
         userName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

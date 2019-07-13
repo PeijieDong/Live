@@ -6,11 +6,13 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +72,10 @@ public class UserDetailActivity extends BaseActivity {
     TextView focus;
     @BindView(R.id.back_random)
     LinearLayout backRandom;
+    @BindView(R.id.level_back)
+    LinearLayout levelBack;
+    @BindView(R.id.level_image)
+    ImageView levelImage;
     private String id;
     private boolean isFocus = false;
 
@@ -146,6 +152,21 @@ public class UserDetailActivity extends BaseActivity {
         focusNum.setText(bean.getData().getList().getFollows());
         des.setText(bean.getData().getList().getSignature());
         level.setText("Lv."+bean.getData().getList().getLevel());
+        if(Integer.parseInt(bean.getData().getList().getLevel()) > 5 && Integer.parseInt(bean.getData().getList().getLevel()) < 11){
+            level.setTextColor(ContextCompat.getColor(this,R.color.text_level_10));
+            levelBack.setBackgroundResource(R.drawable.level_back_10);
+            levelImage.setImageResource(R.drawable.icon_user_level_10);
+        }
+        if(Integer.parseInt(bean.getData().getList().getLevel()) > 10 && Integer.parseInt(bean.getData().getList().getLevel()) < 16){
+            level.setTextColor(ContextCompat.getColor(this,R.color.text_level_15));
+            levelBack.setBackgroundResource(R.drawable.level_back_15);
+            levelImage.setImageResource(R.drawable.icon_user_level_15);
+        }
+        if(Integer.parseInt(bean.getData().getList().getLevel()) > 15){
+            level.setTextColor(ContextCompat.getColor(this,R.color.text_level_20));
+            levelBack.setBackgroundResource(R.drawable.level_back_20);
+            levelImage.setImageResource(R.drawable.icon_user_level_20);
+        }
     }
 
     private void initView() {

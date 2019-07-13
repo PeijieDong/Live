@@ -257,8 +257,14 @@ public class SwitchButton extends View {
                     return false;
                 }
                 if (checkState == UNCHECKED) {
+                    if(ClickListener != null){
+                        ClickListener.Click(true);
+                    }
                     toogleOn();
                 } else if (checkState == CHECKED) {
+                    if(ClickListener != null){
+                        ClickListener.Click(false);
+                    }
                     toogleOff();
                 }
                 break;
@@ -273,7 +279,7 @@ public class SwitchButton extends View {
     /**
      * 打开
      */
-    private void toogleOn() {
+    public void toogleOn() {
         isAnimation = true;
         valueAnimator.start();
     }
@@ -281,7 +287,7 @@ public class SwitchButton extends View {
     /**
      * 关闭
      */
-    private void toogleOff() {
+    public void toogleOff() {
         isAnimation = true;
         valueAnimator.start();
     }
@@ -300,12 +306,20 @@ public class SwitchButton extends View {
      * 定义一个选中接口回调
      */
     OnCheckListener onCheckListener;
-
+    OnClickListener ClickListener;
     public interface OnCheckListener {
         void onCheck(boolean isCheck);
+
     }
 
     public void setOnCheckListener(OnCheckListener onCheckListener) {
         this.onCheckListener = onCheckListener;
+    }
+
+    public interface OnClickListener{
+        void Click(boolean isClick);
+    }
+    public void setOnClickListener(OnClickListener listener){
+        this.ClickListener = listener;
     }
 }

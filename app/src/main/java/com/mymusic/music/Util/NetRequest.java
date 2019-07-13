@@ -147,6 +147,10 @@ public class NetRequest {
     public static void postmorePicRequest(String url, Context context, Map<String,String> params, List<File> fileList,DataCallBack callBack){
         getInstance().upLoadPicFile(url,context,params,fileList,callBack);
     }
+
+    public static void getFormHeadRequest(String url, Map<String, String> params,String head, DataCallBack callBack) {
+        getInstance().inner_postFormAsync3(url,head, params, callBack);
+    }
     //-------------对外提供的方法End--------------------------------
 
     /**
@@ -290,6 +294,62 @@ public class NetRequest {
         Request.Builder builder1 = new Request.Builder();
         final Request request = new Request.Builder().url(url)
                 .post(requestBody).build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                deliverDataFailure(request, e, callBack);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) { // 请求成功
+                    //执行请求成功的操作
+                    String result = response.body().string();
+                    deliverDataSuccess(result, callBack);
+                } else {
+                    throw new IOException(response + "");
+                }
+            }
+        });
+    }
+    /**
+     * 异步get请求（Form）,内部实现方法
+     *
+     * @param url      url
+     * @param params   params
+     * @param callBack callBack
+     */
+    private void inner_postFormAsync3(String url,String head, Map<String, String> params, final DataCallBack callBack) {
+        RequestBody requestBody;
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        FormBody.Builder builder = new FormBody.Builder();
+        /**
+         * 在这对添加的参数进行遍历
+         */
+        for (Map.Entry<String, String> map : params.entrySet()) {
+            String key = map.getKey();
+            String value;
+            /**
+             * 判断值是否是空的
+             */
+            if (map.getValue() == null) {
+                value = "";
+            } else {
+                value = map.getValue();
+            }
+            /**
+             * 把key和value添加到formbody中
+             */
+            builder.add(key, value);
+        }
+        requestBody = builder.build();
+        //结果返回
+        Request.Builder builder1 = new Request.Builder();
+        builder1.addHeader("token",head);
+        final Request request = new Request.Builder().url(url)
+                .get().addHeader("token",head).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -523,8 +583,7 @@ public class NetRequest {
             public void run() {
                 if (callBack != null) {
                     try {
-                        BaseBack back = GsonUtil.GsonToBean(result, BaseBack.class);
-                        if(back.getStatus().equals("-997")){
+                        if(GsonUtil.GsonString(result).contains("-997")){
                             callBack.TokenFail();
                         }else {
                             callBack.requestSuccess(result);

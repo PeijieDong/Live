@@ -145,8 +145,6 @@ public class UrlManager {
 
     public static final String History_FeedBack = BaseUrl+"users/gblist";
 
-    public static final String Mess_Noti = BaseUrl+"users/notice";
-
     public static final String Play_Num = BaseUrl+"video/getNums";
 
     public static final String GoMoney = BaseUrl+"users/scoretovideo";
@@ -154,4 +152,8 @@ public class UrlManager {
     public static final String ADV =BaseUrl+"ad/startad";
 
     public static final String AddVideoNum = BaseUrl +"video/addvisit";
+
+    public static final String Get_Message = BaseUrl +"users/noticeset";
+
+    public static final String Notice_Mes = BaseUrl +"users/notice";
 }

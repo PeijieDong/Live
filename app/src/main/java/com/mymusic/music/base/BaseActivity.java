@@ -81,7 +81,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     ProgressDialog progressDialog;
     public void showLoading(){
-        final int MAX = 100;
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("正在努力上传");
         progressDialog.setMessage("等待中");

@@ -22,4 +22,7 @@
     <color name="level10">#B5D318</color>
     <color name="level15">#6BC3FF</color>
     <color name="level20">#DE69FF</color>
+    <color name="text_level_10">#B3842B</color>
+    <color name="text_level_15">#3A5FCD</color>
+    <color name="text_level_20">#8B008B</color>
 </resources>

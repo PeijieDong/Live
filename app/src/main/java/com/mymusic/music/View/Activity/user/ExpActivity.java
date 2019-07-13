@@ -15,6 +15,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.WebActivity;
 import com.mymusic.music.View.Adapter.ScroeRcAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -81,11 +82,16 @@ public class ExpActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.back})
+    @OnClick({R.id.back,R.id.get_exp})
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.back:
                 finish();
+                break;
+            case R.id.get_exp:
+                Intent intent = new Intent(this,WebActivity.class);
+                intent.putExtra("url","http://live.shuiqiao.net/users/level");
+                startActivity(intent);
                 break;
         }
 

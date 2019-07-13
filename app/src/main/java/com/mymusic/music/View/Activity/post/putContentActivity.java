@@ -248,7 +248,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             }
             file = getFileByUri(image.get(0), this);
             map.put("playtime", getRingDuring(image.get(0)));
-            map.put("images", "data:image/jpeg;base64,"+PicToBase64.imageToBase64(getRealPathFromURI(putContentActivity.this,image.get(0))));
+            map.put("images", "data:image/jpeg;base64,"+getVideoImage(image.get(0)));
         }
         if(navigation.getPosition() == 2){
             if(text.getText().toString().equals("")){
@@ -445,12 +445,13 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         return null;
     }
 
-    public String getVideoImage(String videoPath){
-            Log.e("33",videoPath);
+    public String getVideoImage(Uri uri){
+        String videoPath = getRealPathFromURI(this, uri);
         MediaMetadataRetriever media = new MediaMetadataRetriever();
         media.setDataSource(videoPath);
         Bitmap bitmap = media.getFrameAtTime();
         String base64 = PicToBase64.bitmapToBase64(bitmap);
+        Log.e("33",base64);
         return "data:image/jpeg;base64,"+base64;
     }
 
