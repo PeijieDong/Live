@@ -25,6 +25,6 @@ public class UserVideoAdapter extends BaseQuickAdapter<FriendDetail.DataBean.Lis
     @Override
     protected void convert(BaseViewHolder helper, FriendDetail.DataBean.ListBean item) {
         helper.setText(R.id.zan,item.getZan());
-        Glide.with(mContext).load(item.getImage()).into((ImageView) helper.getView(R.id.video));
+        Glide.with(mContext).load(item.getImage()).error(R.drawable.fq_ic_placeholder).into((ImageView) helper.getView(R.id.video));
     }
 }

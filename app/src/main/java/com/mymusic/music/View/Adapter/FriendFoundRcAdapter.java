@@ -25,6 +25,6 @@ public class FriendFoundRcAdapter extends BaseQuickAdapter <FriendAllData.DataBe
     @Override
     protected void convert(BaseViewHolder helper, FriendAllData.DataBean.ListBeanX s) {
         helper.setText(R.id.name,s.getTitle()).setText(R.id.des,s.getDescription());
-        Glide.with(mContext).load(s.getIcon()).into((CircleImageView)helper.getView(R.id.head));
+        Glide.with(mContext).load(s.getIcon()).error(R.drawable.fq_ic_placeholder).into((CircleImageView)helper.getView(R.id.head));
     }
 }

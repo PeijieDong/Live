@@ -12,11 +12,16 @@ import android.widget.RelativeLayout;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.base.UrlManager;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 import cn.jzvd.JZMediaManager;
 import cn.jzvd.JZUtils;
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
+import okhttp3.Request;
 
 /**
  * 作者： ch
@@ -30,7 +35,7 @@ public class MyVideoPlayer extends JZVideoPlayerStandard {
     private RelativeLayout rl_touch_help;
     private ImageView iv_start;
     private LinearLayout ll_start;
-
+    private String id;
     private Context context;
 
 
@@ -157,4 +162,35 @@ public class MyVideoPlayer extends JZVideoPlayerStandard {
         return false;
     }
 
+    @Override
+    public void onStatePlaying() {
+        super.onStatePlaying();
+        initPlay();
+    }
+
+    private void initPlay() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id",id);
+        map.put("client",AppUtil.getSerialNumber());
+        NetRequest.postFormHeadRequest(UrlManager.AddVideoNum, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void TokenFail() {
+
+            }
+        });
+    }
+
+    public void setId(String id){
+        this.id = id;
+    }
 }

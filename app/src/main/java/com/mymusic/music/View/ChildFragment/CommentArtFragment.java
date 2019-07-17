@@ -17,6 +17,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.ArRcAdpater;
 import com.mymusic.music.base.BaseFragment;
@@ -91,6 +92,14 @@ public class CommentArtFragment extends BaseFragment {
         rc.setLayoutManager(new LinearLayoutManager(getContext()));
         ArRcAdpater adpater = new ArRcAdpater(R.layout.art_rc_layout,bean.getData().getList());
         adpater.setEmptyView(LayoutInflater.from(getContext()).inflate(R.layout.empty_layout,null));
+        adpater.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("id",bean.getData().getList().get(position).getCid());
+                startActivity(intent);
+            }
+        });
         adpater.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {

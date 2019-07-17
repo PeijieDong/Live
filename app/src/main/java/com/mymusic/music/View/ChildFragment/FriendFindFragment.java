@@ -19,6 +19,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.FriendListActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
@@ -134,12 +135,37 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
                         intent1.putExtra("name",data.getData().getList().get(position).getName());
                         getContext().startActivity(intent1);
                         break;
+                    case  R.id.image_Container1:
+                        goActivity(data.getData().getList().get(position).getList().get(0).getId());
+                        break;
+                    case  R.id.image_Container2:
+                        goActivity(data.getData().getList().get(position).getList().get(1).getId());
+                        break;
+                    case  R.id.image_Container3:
+                        goActivity(data.getData().getList().get(position).getList().get(2).getId());
+                        break;
+                    case  R.id.image_Container4:
+                        goActivity(data.getData().getList().get(position).getList().get(3).getId());
+                        break;
+                    case  R.id.image_Container5:
+                        goActivity(data.getData().getList().get(position).getList().get(4).getId());
+                        break;
+                    case  R.id.image_Container6:
+                        goActivity(data.getData().getList().get(position).getList().get(5).getId());
+                        break;
                 }
             }
         });
         recyclerView.setAdapter(adapter);
         refreshLayout.finishRefresh();
 
+    }
+
+    public void goActivity(String id){
+        Intent intent = new Intent(getContext(), DetailsActivity.class);
+        intent.putExtra("id",id);
+        Log.e("33",id);
+        startActivity(intent);
     }
 
     @Override

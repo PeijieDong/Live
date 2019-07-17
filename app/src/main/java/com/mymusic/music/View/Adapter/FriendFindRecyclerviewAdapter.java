@@ -24,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Create By mr.mao in 2019/6/1 16:47
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindData.DataBean.ListBeanX,BaseViewHolder> implements View.OnClickListener {
+public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindData.DataBean.ListBeanX,BaseViewHolder> {
     FriendFindData.DataBean.ListBeanX item;
     public FriendFindRecyclerviewAdapter(int layoutResId, @Nullable List<FriendFindData.DataBean.ListBeanX> data) {
         super(layoutResId, data);
@@ -46,7 +46,13 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
                 .setText(R.id.image_type_6,item.getList().get(5).getType())
                 .addOnClickListener(R.id.find_item_focus)
                 .addOnClickListener(R.id.four_head)
-                .addOnClickListener(R.id.friend_list);
+                .addOnClickListener(R.id.friend_list)
+                .addOnClickListener(R.id.image_Container1)
+                .addOnClickListener(R.id.image_Container2)
+                .addOnClickListener(R.id.image_Container3)
+                .addOnClickListener(R.id.image_Container4)
+                .addOnClickListener(R.id.image_Container5)
+                .addOnClickListener(R.id.image_Container6);
         if(item.getIsguanzhu().equals("已关注")){
             helper.setText(R.id.find_item_focus,"取消关注");
             helper.setBackgroundRes(R.id.find_item_focus,R.drawable.isfocus);
@@ -69,58 +75,18 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
         CircleImageView ci2 = (CircleImageView)helper.getView(R.id.ci2);
         CircleImageView ci3 = (CircleImageView)helper.getView(R.id.ci3);
         CircleImageView ci4 = (CircleImageView)helper.getView(R.id.ci4);
-        Glide.with(mContext).load(item.getUlist().getHead1()).into(ci1);
-        Glide.with(mContext).load(item.getUlist().getHead2()).into(ci2);
-        Glide.with(mContext).load(item.getUlist().getHead3()).into(ci3);
-        Glide.with(mContext).load(item.getUlist().getHead4()).into(ci4);
+        Glide.with(mContext).load(item.getUlist().getHead1()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(ci1);
+        Glide.with(mContext).load(item.getUlist().getHead2()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(ci2);
+        Glide.with(mContext).load(item.getUlist().getHead3()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(ci3);
+        Glide.with(mContext).load(item.getUlist().getHead4()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(ci4);
         Glide.with(mContext).load(item.getIcon()).into(head);
-        Glide.with(mContext).load(item.getList().get(0).getImage()).into(one);
-        Glide.with(mContext).load(item.getList().get(1).getImage()).into(two);
-        Glide.with(mContext).load(item.getList().get(2).getImage()).into(three);
-        Glide.with(mContext).load(item.getList().get(3).getImage()).into(four);
-        Glide.with(mContext).load(item.getList().get(4).getImage()).into(five);
-        Glide.with(mContext).load(item.getList().get(5).getImage()).into(six);
-        ConstraintLayout container6 = helper.getView(R.id.image_Container6);
-        ConstraintLayout container5 = helper.getView(R.id.image_Container5);
-        ConstraintLayout container4 = helper.getView(R.id.image_Container4);
-        ConstraintLayout container3 = helper.getView(R.id.image_Container3);
-        ConstraintLayout container2 = helper.getView(R.id.image_Container2);
-        ConstraintLayout container1 = helper.getView(R.id.image_Container1);
-        container1.setOnClickListener(this);
-        container2.setOnClickListener(this);
-        container3.setOnClickListener(this);
-        container4.setOnClickListener(this);
-        container5.setOnClickListener(this);
-        container6.setOnClickListener(this);
+        Glide.with(mContext).load(item.getList().get(0).getImage()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(one);
+        Glide.with(mContext).load(item.getList().get(1).getImage()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(two);
+        Glide.with(mContext).load(item.getList().get(2).getImage()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(three);
+        Glide.with(mContext).load(item.getList().get(3).getImage()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(four);
+        Glide.with(mContext).load(item.getList().get(4).getImage()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(five);
+        Glide.with(mContext).load(item.getList().get(5).getImage()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(six);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case  R.id.image_Container1:
-                goActivity(item.getList().get(0).getId());
-                break;
-            case  R.id.image_Container2:
-                goActivity(item.getList().get(1).getId());
-                break;
-            case  R.id.image_Container3:
-                goActivity(item.getList().get(2).getId());
-                break;
-            case  R.id.image_Container4:
-                goActivity(item.getList().get(3).getId());
-                break;
-            case  R.id.image_Container5:
-                goActivity(item.getList().get(4).getId());
-                break;
-            case  R.id.image_Container6:
-                goActivity(item.getList().get(5).getId());
-                break;
-        }
-    }
-    public void goActivity(String id){
-        Intent intent = new Intent(mContext, DetailsActivity.class);
-        intent.putExtra("id",id);
-        Log.e("33",id);
-        mContext.startActivity(intent);
-    }
+
 }

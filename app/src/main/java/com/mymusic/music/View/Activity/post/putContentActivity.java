@@ -205,9 +205,9 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         map.put("cate", cid);
         map.put("type", type);
         map.put("tag", tag.toString());
-        map.put("content", title.getText().toString());
         List<File> fileList = new ArrayList<>();
         if (navigation.getPosition() == 1) {
+            map.put("content", title.getText().toString());
             if(image.size() == 0){
                 Toast.makeText(this,"请选择要上传的图片",Toast.LENGTH_SHORT).show();
                 return;
@@ -242,19 +242,22 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             return;
         }
         if (navigation.getPosition() == 0) {
+            map.put("content", title.getText().toString());
             if(image.size() == 0){
                 Toast.makeText(this,"请选择要上传的视频",Toast.LENGTH_SHORT).show();
                 return;
             }
             file = getFileByUri(image.get(0), this);
-            map.put("playtime", getRingDuring(image.get(0)));
-            map.put("images", "data:image/jpeg;base64,"+getVideoImage(image.get(0)));
+            map.put("playtime", getVideoDuration(image.get(0)));
+            map.put("images", getVideoImage(image.get(0)));
         }
         if(navigation.getPosition() == 2){
             if(text.getText().toString().equals("")){
                 Toast.makeText(this,"请输入内容",Toast.LENGTH_SHORT).show();
                 return;
             }
+            map.put("title",text.getText().toString());
+            map.put("content", title.getText().toString());
         }
         showLoading();
         NetRequest.postmoreRequest(url, this, map, file, new NetRequest.DataCallBack() {
@@ -363,28 +366,35 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     .forResult(REQUEST_CODE_CHOOSE); // 设置作为标记的请求码
         }
     }
-
-    public String getRingDuring(Uri mUri){
-        String uri = getRealPathFromURI(putContentActivity.this, mUri);
-        String duration="30";
-        android.media.MediaMetadataRetriever mmr = new android.media.MediaMetadataRetriever();
-        try {
-            if (mUri != null) {
-                HashMap<String, String> headers=null;
-                if (headers == null) {
-                    headers = new HashMap<String, String>();
-                    headers.put("User-Agent", "Mozilla/5.0 (Linux; U; Android 4.4.2; zh-CN; MW-KW-001 Build/JRO03C) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 UCBrowser/1.0.0.001 U4/0.8.0 Mobile Safari/533.1");
-                }
-                mmr.setDataSource(uri, headers);
-            }
-            duration = mmr.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION);
-        } catch (Exception ex) {
-
-        } finally {
-            mmr.release();
-        }
-        return duration;
+    //获取视频总时长
+    private String getVideoDuration(Uri uri){
+        String path = getRealPathFromURI(putContentActivity.this, uri);
+        android.media.MediaMetadataRetriever media = new android.media.MediaMetadataRetriever();
+        media.setDataSource(path);
+        String duration = media.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+        return "30";
     }
+//    public String getRingDuring(Uri mUri){
+//        String uri = getRealPathFromURI(putContentActivity.this, mUri);
+//        String duration="30";
+//        android.media.MediaMetadataRetriever mmr = new android.media.MediaMetadataRetriever();
+//        try {
+//            if (mUri != null) {
+//                HashMap<String, String> headers=null;
+//                if (headers == null) {
+//                    headers = new HashMap<String, String>();
+//                    headers.put("User-Agent", "Mozilla/5.0 (Linux; U; Android 4.4.2; zh-CN; MW-KW-001 Build/JRO03C) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 UCBrowser/1.0.0.001 U4/0.8.0 Mobile Safari/533.1");
+//                }
+//                mmr.setDataSource(uri, headers);
+//            }
+//            duration = mmr.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION);
+//        } catch (Exception ex) {
+//
+//        } finally {
+//            mmr.release();
+//        }
+//        return duration;
+//    }
 
 
 

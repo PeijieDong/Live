@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,8 +12,10 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,23 +55,23 @@ public class WebActivity extends BaseActivity {
     @BindView(R.id.close)
     ImageView close;
     String url;
-    String isshare = "";
+    Boolean isshare = false;
 
     @Override
     protected void initVariables(Intent intent) {
         url = intent.getStringExtra("url");
-        isshare = intent.getStringExtra("share");
+        isshare = intent.getBooleanExtra("share",false);
     }
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.activity_web);
-        ewCode.setImageBitmap(setCode(url,600,600));
     }
 
     @Override
     protected void LoadData() {
-        if(isshare.equals("1")){
+        ewCode.setImageBitmap(setCode(url,600,600));
+        if(isshare){
             share.setVisibility(View.VISIBLE);
         }
         save.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +79,7 @@ public class WebActivity extends BaseActivity {
             public void onClick(View v) {
                 shareCode.setVisibility(View.VISIBLE);
                 close.setVisibility(View.VISIBLE);
-                Toast.makeText(WebActivity.this,"保存成功，快去分享吧",Toast.LENGTH_SHORT).show();
-                saveImageToGallery(WebActivity.this,createBitmap3(shareCode,800,800),"share_code");
+                saveQrcodeToGallery();
             }
         });
         copy.setOnClickListener(new View.OnClickListener() {
@@ -99,55 +101,7 @@ public class WebActivity extends BaseActivity {
         webView.loadUrl(url);
     }
 
-    /**
-     * 保存图片到指定路径
-     *
-     * @param context
-     * @param bitmap   要保存的图片
-     * @param fileName 自定义图片名称
-     * @return
-     */
-    public static boolean saveImageToGallery(Context context, Bitmap bitmap, String fileName) {
-        // 保存图片至指定路径
-        String storePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "qrcode";
-        File appDir = new File(storePath);
-        if (!appDir.exists()) {
-            appDir.mkdir();
-        }
-        File file = new File(appDir, fileName);
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            //通过io流的方式来压缩保存图片(80代表压缩20%)
-            boolean isSuccess = bitmap.compress(Bitmap.CompressFormat.JPEG, 80, fos);
-            fos.flush();
-            fos.close();
 
-            //发送广播通知系统图库刷新数据
-            Uri uri = Uri.fromFile(file);
-            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
-            if (isSuccess) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-    public Bitmap createBitmap3(View v, int width, int height) {
-        //测量使得view指定大小
-        int measuredWidth = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY);
-        int measuredHeight = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY);
-        v.measure(measuredWidth, measuredHeight);
-        //调用layout方法布局后，可以得到view的尺寸大小
-        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
-        Bitmap bmp = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(bmp);
-        c.drawColor(Color.WHITE);
-        v.draw(c);
-        return bmp;
-    }
     public Bitmap setCode(String contents,int width,int height){
 
         HashMap hints=new HashMap();
@@ -177,4 +131,109 @@ public class WebActivity extends BaseActivity {
         return null;
     }
 
+    //生成页面并保存至图库
+    private void saveQrcodeToGallery() {
+        //创建视图
+        View qrcodeView = getLayoutInflater().inflate(R.layout.share_code, null, false);
+        ((ImageView)qrcodeView.findViewById(R.id.ewCode)).setImageDrawable(ewCode.getDrawable());
+        //计算视图大小
+        DisplayMetrics displayMetrics = getWindowDisplayMetrics(this);
+        final int width = displayMetrics.widthPixels;
+        final int height = displayMetrics.heightPixels - getStatusBarHeight(this) - getActionBarHeight(this) - getResources().getDimensionPixelSize(R.dimen.dp_10);
+
+        //将视图生成图片
+        Bitmap image = generateImageFromView(qrcodeView, width, height);
+
+        //将图片保存到系统相册
+        boolean isSuccess = saveImageToGallery(this, image);
+        image.recycle();
+        if (isSuccess) {
+            Toast.makeText(this, "已保存到系统相册！", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "保存到系统相册失败！", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public static int getActionBarHeight(Context context) {
+        int[] attrs = {android.R.attr.actionBarSize};
+        TypedArray values = context.getTheme().obtainStyledAttributes(attrs);
+        int actionBarHeight = values.getDimensionPixelSize(0, 0);
+        values.recycle();
+
+        if (actionBarHeight <= 0) {
+            actionBarHeight = context.getResources().getDimensionPixelSize(R.dimen.dp_10);
+        }
+
+        return actionBarHeight;
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        } else {
+            result = context.getResources().getDimensionPixelSize(R.dimen.dp_10);
+        }
+        return result;
+    }
+
+    public static DisplayMetrics getWindowDisplayMetrics(Context context) {
+        WindowManager wm = (android.view.WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics;
+    }
+
+    public static Bitmap generateImageFromView(View view, int width, int height) {
+        view.setDrawingCacheEnabled(true);
+        view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        view.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY));
+        view.layout(0, 0, width, height);
+        Bitmap image = Bitmap.createBitmap(view.getDrawingCache());
+        view.destroyDrawingCache();
+
+        return image;
+    }
+
+    /**
+     * 将图片保存到系统相册
+     *
+     * @param context
+     * @param bmp
+     * @return
+     */
+    public static boolean saveImageToGallery(Context context, Bitmap bmp) {
+
+        String galleryPath = Environment.getExternalStorageDirectory() + File.separator + Environment.DIRECTORY_PICTURES;
+        File galleryDir = new File(galleryPath);
+        if (!galleryDir.exists()) {
+            galleryDir.mkdirs();
+        }
+        String fileName = System.currentTimeMillis() + ".jpg";
+        File file = new File(galleryPath, fileName);
+
+        FileOutputStream fos = null;
+        boolean isSuccess = false;
+
+        try {
+            fos = new FileOutputStream(file);
+            isSuccess = bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+
+            //保存图片后发送广播通知更新数据库
+            Uri uri = Uri.fromFile(file);
+            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fos != null)
+                    fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return isSuccess;
+    }
 }

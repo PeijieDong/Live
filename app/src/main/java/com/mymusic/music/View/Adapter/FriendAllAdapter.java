@@ -51,9 +51,9 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
             ImageView image1 = helper.getView(R.id.friend_all_image1);
             ImageView image2 = helper.getView(R.id.friend_all_image2);
             ImageView image3 = helper.getView(R.id.friend_all_image3);
-            Glide.with(mContext).load(item.getList().get(0).getImage()).into(image1);
-            Glide.with(mContext).load(item.getList().get(1).getImage()).into(image2);
-            Glide.with(mContext).load(item.getList().get(2).getImage()).into(image3);
+            Glide.with(mContext).load(item.getList().get(0).getImage()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(image1);
+            Glide.with(mContext).load(item.getList().get(1).getImage()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(image2);
+            Glide.with(mContext).load(item.getList().get(2).getImage()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(image3);
         }else{
             open.setVisibility(View.GONE);
         }
@@ -65,7 +65,7 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
             helper.setBackgroundRes(R.id.friend_all_bt,R.drawable.focus);
         }
         ImageView head = helper.getView(R.id.friend_item_head);
-        Glide.with(mContext).load(item.getIcon()).into(head);
+        Glide.with(mContext).load(item.getIcon()).error(R.drawable.fq_ic_placeholder).into(head);
         ImageView down = helper.getView(R.id.friend_all_down);
     }
 

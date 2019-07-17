@@ -50,7 +50,8 @@ public class VideoPlayActivity extends BaseActivity {
     private int position;
     private List<HomeData.DataBean.ListBean.ObjsBean> playData;
     private List<FriendDetail.DataBean.ListBean> userVideo;
-
+    private VideoViewHolder3 viewHolder3;
+    private VideoViewHolder2 viewHolder2;
     @Override
     protected void initVariables(Intent intent) {
         userVideo = (List<FriendDetail.DataBean.ListBean>) intent.getSerializableExtra("userVideo");
@@ -82,8 +83,9 @@ public class VideoPlayActivity extends BaseActivity {
         VideoRc2Adapter adapter = null;
         VideoRc3Adapter adapter3 = null;
         if(userVideo != null){
-            adapter = new VideoRc2Adapter(this, userVideo);
+            adapter = new VideoRc2Adapter(this, userVideo,position);
             videoRc.setAdapter(adapter);
+            initPlay(viewHolder2);
             adapter.setListener(new VideoRc2Adapter.ViewHolderListener() {
                 @Override
                 public void backViewHolder(VideoViewHolder2 holder) {
@@ -94,12 +96,14 @@ public class VideoPlayActivity extends BaseActivity {
                 public void holder(VideoViewHolder2 holder) {
                     viewHolder = holder;
                     initPlay(holder);
+                    holder.mp_video.setId(data.getData().getList().get(position).getId());
                 }
             });
         }
         if(playData != null){
-            adapter3 = new VideoRc3Adapter(this, playData);
+            adapter3 = new VideoRc3Adapter(this, playData,position);
             videoRc.setAdapter(adapter3);
+            initPlay2(viewHolder3);
             adapter3.setListener(new VideoRc3Adapter.ViewHolderListener() {
                 @Override
                 public void backViewHolder(VideoViewHolder3 holder) {
@@ -109,6 +113,7 @@ public class VideoPlayActivity extends BaseActivity {
                 public void holder(VideoViewHolder3 holder) {
                     viewHolder = holder;
                     initPlay2(holder);
+                    holder.mp_video.setId(data.getData().getList().get(position).getId());
                 }
             });
         }
@@ -122,6 +127,7 @@ public class VideoPlayActivity extends BaseActivity {
                         View view = helper.findSnapView(layoutManager);
                         JZVideoPlayer.releaseAllVideos();
                         viewHolder = recyclerView.getChildViewHolder(view);
+
                         //播放视频
                         if(userVideo != null){
                             ((VideoViewHolder2) viewHolder).mp_video.startVideo();
@@ -146,6 +152,7 @@ public class VideoPlayActivity extends BaseActivity {
             }
         });
     }
+
 
     private void initPlay2(VideoViewHolder3 viewHolder) {
         HashMap<String, String> map = new HashMap<>();

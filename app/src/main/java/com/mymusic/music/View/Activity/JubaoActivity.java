@@ -153,7 +153,7 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
 
         @Override
         protected void convert(BaseViewHolder helper, Uri item) {
-            Glide.with(mContext).load(item).into((ImageView) helper.getView(R.id.pic));
+            Glide.with(mContext).load(item).error(R.drawable.fq_ic_placeholder).into((ImageView) helper.getView(R.id.pic));
         }
     }
 

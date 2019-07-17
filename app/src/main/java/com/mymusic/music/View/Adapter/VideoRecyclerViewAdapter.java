@@ -210,7 +210,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
 
 //        initPlay(list.get(position).getVid());
 //        Glide.with(context).load(bean).into(holder.mp_video.thumbImageView);
-        Glide.with(context).load(bean.getAvatar_thumb()).into(holder.video_head);
+        Glide.with(context).load(bean.getAvatar_thumb()).error(R.drawable.fq_ic_placeholder).into(holder.video_head);
         holder.title.setText(bean.getSharecontent());
         holder.des.setText(bean.getUser_nicename());
         holder.likeNum.setText(bean.getZan());
@@ -218,9 +218,12 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.shareNum.setText(bean.getShare());
         if(position == 0){
             listener.holder(holder);
+            holder.mp_video.setId(bean.getVid());
         }
 
     }
+
+
 
 
     private void initCollection() {

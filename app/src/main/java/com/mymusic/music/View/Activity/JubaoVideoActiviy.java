@@ -104,7 +104,7 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
 
         @Override
         protected void convert(BaseViewHolder helper, Uri item) {
-            Glide.with(mContext).load(item).into((ImageView) helper.getView(R.id.img_jubao));
+            Glide.with(mContext).load(item).error(R.drawable.fq_ic_placeholder).into((ImageView) helper.getView(R.id.img_jubao));
         }
     }
 

@@ -173,7 +173,6 @@ public class VideoFragment extends BaseFragment {
                         //播放视频
                         ((VideoViewHolder) viewHolder).mp_video.startVideo();
                         initPlay();
-
                     case RecyclerView.SCROLL_STATE_DRAGGING://拖动
                         break;
                     case RecyclerView.SCROLL_STATE_SETTLING://惯性滑动
@@ -190,6 +189,8 @@ public class VideoFragment extends BaseFragment {
         });
 
     }
+
+
 
     private void initPlay() {
         HashMap<String, String> map = new HashMap<>();

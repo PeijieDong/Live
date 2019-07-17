@@ -23,7 +23,7 @@ public class FriendDetailAdapter extends BaseQuickAdapter<FriendDetail.DataBean.
 
     @Override
     protected void convert(BaseViewHolder helper, FriendDetail.DataBean.ListBean item) {
-        Glide.with(mContext).load(item.getImage()).error(R.drawable.gray_back).into((ImageView) helper.getView(R.id.video_image));
+        Glide.with(mContext).load(item.getImage()).error(R.drawable.fq_ic_placeholder).into((ImageView) helper.getView(R.id.video_image));
         helper.setText(R.id.video_time, (String) item.getPlaytime());
 //        helper.setText(R.id.video_time,item.)
     }

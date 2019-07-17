@@ -68,7 +68,7 @@ public class FriendDetailActivity extends BaseActivity {
     LinearLayout backRandom;
     private String id;
     private FriendDetailTOP bean;
-    private Boolean focuslogo = false;
+    private Boolean focuslogo = true;
 
 
     @Override
@@ -211,12 +211,12 @@ public class FriendDetailActivity extends BaseActivity {
         if(isfocus){
             focus.setText("取消关注");
             focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
-            focuslogo = true;
+            focuslogo = false;
             initFocusFriend(true);
         }else{
             focus.setText("+关注");
             focus.setBackgroundResource(R.drawable.back_friend_detail_focus);
-            focuslogo = false;
+            focuslogo = true;
             initFocusFriend(false);
         }
     }

@@ -66,7 +66,7 @@ public class CommentDetailActivity extends BaseActivity {
         name.setText(list.getUser_nicename());
         time.setText(list.getCreatetime());
         content.setText(list.getContent());
-        Glide.with(this).load(list.getAvatar()).into(head);
+        Glide.with(this).load(list.getAvatar()).error(R.drawable.fq_ic_placeholder).into(head);
         initNet();
     }
 

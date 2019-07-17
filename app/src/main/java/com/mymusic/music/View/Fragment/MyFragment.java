@@ -277,19 +277,20 @@ public class MyFragment extends BaseFragment {
                 }
                 break;
             case R.id.my_about:
-//                goActivity(MyaboutActivity.class);
+                goActivity(MyaboutActivity.class);
                 break;
             case R.id.my_community:
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.VIEW");
-                Uri uri = Uri.parse("http://www.baidu.com");
+                Uri uri = Uri.parse("https://www.baidu.com");
+//                Uri uri = Uri.parse("https://potato.im/joinchat/202cb962ac59075b964b07152d234b70");
                 intent.setData(uri);
                 startActivity(intent);
                 break;
             case R.id.my_share:
                 Intent intent1 = new Intent(getContext(), WebActivity.class);
                 intent1.putExtra("url","http://live.shuiqiao.net/users/share");
-                intent1.putExtra("share","1");
+                intent1.putExtra("share",true);
                 startActivity(intent1);
                 break;
         }

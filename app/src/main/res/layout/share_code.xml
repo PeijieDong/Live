@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/share_cdeo"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
+    android:orientation="vertical"
+    android:visibility="gone"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_centerInParent="true"
+    android:background="@drawable/spread_code_bg">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="我的二维码"/>
+    <ImageView
+        android:id="@+id/ewCode"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="center" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="#000"
+        android:paddingTop="20dp"
+        android:gravity="center"
+        android:text="扫码下载"/>
+</LinearLayout>

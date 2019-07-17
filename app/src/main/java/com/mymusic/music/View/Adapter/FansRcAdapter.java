@@ -30,7 +30,7 @@ public class FansRcAdapter extends BaseQuickAdapter<Fans.DataBean.ListBean,BaseV
     protected void convert(BaseViewHolder helper, Fans.DataBean.ListBean item) {
         helper.setText(R.id.focus_rc_name,item.getUser_nicename())
                 .setText(R.id.focus_rc_dec,item.getSignature());
-        Glide.with(mContext).load(item.getAvatar()).into((CircleImageView) helper.getView(R.id.focus_rc_head));
+        Glide.with(mContext).load(item.getAvatar()).error(R.drawable.fq_ic_placeholder).into((CircleImageView) helper.getView(R.id.focus_rc_head));
         focus = helper.getView(R.id.focus_rc_focusbt);
         if(item.getGuanzhu().equals("已关注")){
             focus.setText("取消关注");

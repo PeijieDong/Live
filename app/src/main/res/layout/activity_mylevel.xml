@@ -175,7 +175,7 @@
             android:layout_height="match_parent"
             android:padding="10dp"
             android:background="#99FFFFFF"
-            android:src="@drawable/dkplayer_ic_action_lock_outline"/>
+            android:src="@drawable/icon_level_lock"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint2"
@@ -223,7 +223,7 @@
             android:layout_height="match_parent"
             android:padding="10dp"
             android:background="#99FFFFFF"
-            android:src="@drawable/dkplayer_ic_action_lock_outline"/>
+            android:src="@drawable/icon_level_lock"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint3"
@@ -270,7 +270,7 @@
             android:layout_height="match_parent"
             android:padding="10dp"
             android:background="#99FFFFFF"
-            android:src="@drawable/dkplayer_ic_action_lock_outline"/>
+            android:src="@drawable/icon_level_lock"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint4"
@@ -318,7 +318,7 @@
             android:layout_height="match_parent"
             android:padding="10dp"
             android:background="#99FFFFFF"
-            android:src="@drawable/dkplayer_ic_action_lock_outline"/>
+            android:src="@drawable/icon_level_lock"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint5"
@@ -365,6 +365,6 @@
             android:layout_height="match_parent"
             android:padding="10dp"
             android:background="#99FFFFFF"
-            android:src="@drawable/dkplayer_ic_action_lock_outline"/>
+            android:src="@drawable/icon_level_lock"/>
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

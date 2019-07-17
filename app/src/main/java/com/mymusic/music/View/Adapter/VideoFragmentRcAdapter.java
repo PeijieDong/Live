@@ -24,10 +24,11 @@ public class VideoFragmentRcAdapter extends BaseQuickAdapter<CommentBean.DataBea
 
     @Override
     protected void convert(BaseViewHolder helper, CommentBean.DataBean.ListBean item) {
-        Glide.with(mContext).load(item.getAvatar()).into((CircleImageView) helper.getView(R.id.detail_head_cir));
+        Glide.with(mContext).load(item.getAvatar()).error(R.drawable.fq_ic_placeholder).error(R.drawable.fq_ic_placeholder).error(R.drawable.fq_ic_placeholder).into((CircleImageView) helper.getView(R.id.detail_head_cir));
         helper.setText(R.id.detail_name,item.getUser_nicename())
                 .setText(R.id.detail_time,item.getCreatetime())
                 .setText(R.id.detail_content,item.getContent())
+                .setText(R.id.comment_likeNum,item.getNum())
                 .addOnClickListener(R.id.comment_like)
                 .addOnClickListener(R.id.detail_head_cir);
     }

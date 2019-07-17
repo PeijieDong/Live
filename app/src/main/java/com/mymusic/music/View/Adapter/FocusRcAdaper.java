@@ -30,8 +30,8 @@ public class FocusRcAdaper extends BaseQuickAdapter<Focus.DataBean.ListBean,Base
     @Override
     protected void convert(BaseViewHolder helper, Focus.DataBean.ListBean item) {
         CircleImageView head = helper.getView(R.id.focus_rc_head);
-        helper.setText(R.id.focus_rc_name,item.getUser_nick())
-                .setText(R.id.focus_rc_dec,item.getSignature());
+        helper.setText(R.id.focus_rc_name,item.getTitle())
+                .setText(R.id.focus_rc_dec,item.getDescription());
         if(item.getGuanzhu().equals("已关注")){
             helper.setText(R.id.focus_rc_focusbt,"取消关注");
             helper.setBackgroundRes(R.id.focus_rc_focusbt,R.drawable.isfocus);
@@ -39,7 +39,7 @@ public class FocusRcAdaper extends BaseQuickAdapter<Focus.DataBean.ListBean,Base
             helper.setText(R.id.focus_rc_focusbt,"+关注");
             helper.setBackgroundRes(R.id.focus_rc_focusbt,R.drawable.focus);
         }
-        Glide.with(mContext).load(item.getAvatar()).into(head);
+        Glide.with(mContext).load(item.getIcon()).error(R.drawable.fq_ic_placeholder).into(head);
         helper.addOnClickListener(R.id.focus_rc_focusbt);
     }
 

@@ -17,6 +17,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.FansRcAdapter;
 import com.mymusic.music.base.BaseActivity;
@@ -83,6 +84,14 @@ public class MyfansActivity extends BaseActivity {
         rc.setLayoutManager(new LinearLayoutManager(this));
         FansRcAdapter adapter = new FansRcAdapter(R.layout.focus_rc_layout,fans.getData().getList());
         adapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.empty_layout,null));
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(MyfansActivity.this, UserDetailActivity.class);
+                intent.putExtra("UserId",fans.getData().getList().get(position).getUid());
+                startActivity(intent);
+            }
+        });
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {

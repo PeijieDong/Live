@@ -38,7 +38,7 @@ public class FocusrcAdaper2 extends BaseQuickAdapter<FocusPerson.DataBean.ListBe
             helper.setText(R.id.focus_rc_focusbt,"+关注");
             helper.setBackgroundRes(R.id.focus_rc_focusbt,R.drawable.focus);
         }
-        Glide.with(mContext).load(item.getAvatar()).into(head);
+        Glide.with(mContext).load(item.getAvatar()).error(R.drawable.fq_ic_placeholder).into(head);
         helper.addOnClickListener(R.id.focus_rc_focusbt);
     }
 

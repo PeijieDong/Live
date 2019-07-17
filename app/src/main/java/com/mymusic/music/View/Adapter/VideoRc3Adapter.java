@@ -50,11 +50,13 @@ public class VideoRc3Adapter  extends BaseRecAdapter<HomeData.DataBean.ListBean.
     private RecyclerView Rc;
     private VideoViewHolder3 holder;
     private ViewHolderListener listener;
+    private int select;
 
-    public VideoRc3Adapter(Context context, List<HomeData.DataBean.ListBean.ObjsBean> list) {
+    public VideoRc3Adapter(Context context, List<HomeData.DataBean.ListBean.ObjsBean> list,int select) {
         super(list);
         this.context = context;
         this.list = list;
+        this.select = select;
     }
 
 
@@ -104,7 +106,8 @@ public class VideoRc3Adapter  extends BaseRecAdapter<HomeData.DataBean.ListBean.
             }
         });
         holder.mp_video.startVideo();
-        if(position == 0){
+        initAdd(position+"");
+        if(position == select){
             listener.holder(holder);
         }
     }
@@ -159,6 +162,28 @@ public class VideoRc3Adapter  extends BaseRecAdapter<HomeData.DataBean.ListBean.
         });
         bottomSheet.setContentView(view);//设置对框框中的布局
         bottomSheet.show();//显示弹窗
+    }
+
+    private void initAdd(String id) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id",id);
+        map.put("client",AppUtil.getSerialNumber());
+        NetRequest.postFormHeadRequest(UrlManager.AddVideoNum, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void TokenFail() {
+
+            }
+        });
     }
 
     private void initNet() {

@@ -189,6 +189,7 @@ public class DetailsActivity extends BaseActivity {
             VideoPlay.setUp(data.getData().getList().getVideourl(),
                     JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
             VideoPlay.startVideo();
+            VideoPlay.setId(data.getData().getList().getId());
             Glide.with(this).load(data.getData().getList().getImage()).into(VideoPlay.thumbImageView);
             initPlay(data.getData().getList().getId());
         }else if(data.getData().getList().getType().equals("文字")){
@@ -303,6 +304,11 @@ public class DetailsActivity extends BaseActivity {
             }
         });
     }
+
+    private void initAdd(String id) {
+
+    }
+
     private void initLook(String type) {
         HashMap<String, String> map = new HashMap<>();
         map.put("type",type);
@@ -335,6 +341,7 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.Detail_Comment, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 CommentData bean = GsonUtil.GsonToBean(result, CommentData.class);
 
                 list = bean.getData().getList();
@@ -413,6 +420,11 @@ public class DetailsActivity extends BaseActivity {
                         });
                         dialog.setContentView(view1);
                         dialog.show();
+                        break;
+                    case R.id.detail_head_cir:
+                        Intent intent = new Intent(DetailsActivity.this, UserDetailActivity.class);
+                        intent.putExtra("UserId",list.get(i).getUid());
+                        startActivity(intent);
                         break;
                 }
             }

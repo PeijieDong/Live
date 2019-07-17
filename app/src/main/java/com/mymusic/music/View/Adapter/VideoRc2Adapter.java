@@ -53,11 +53,13 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
     private RecyclerView Rc;
     private VideoViewHolder2 holder;
     private ViewHolderListener listener;
+    private int select;
 
-    public VideoRc2Adapter(Context context, List<FriendDetail.DataBean.ListBean> list) {
+    public VideoRc2Adapter(Context context, List<FriendDetail.DataBean.ListBean> list,int position) {
         super(list);
         this.context = context;
         this.list = list;
+        this.select = position;
     }
 
 
@@ -108,11 +110,33 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
         });
 //        listener.backViewHolder(holder);
         holder.mp_video.startVideo();
-        if(position == 0){
+        if(position == select){
             listener.holder(holder);
+            holder.mp_video.setId(list.get(0).getId());
         }
     }
 
+    private void initAdd(String id) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id",id);
+        map.put("client",AppUtil.getSerialNumber());
+        NetRequest.postFormHeadRequest(UrlManager.AddVideoNum, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void TokenFail() {
+
+            }
+        });
+    }
 
     private void initPlay(String position) {
         HashMap<String, String> map = new HashMap<>();

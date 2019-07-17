@@ -28,6 +28,6 @@ public class HistoryRcAdapter extends BaseQuickAdapter<History.DataBean.ListBean
         if(item.getTitle().equals("视频")){
             helper.setVisible(R.id.play_icon,true);
         }
-        Glide.with(mContext).load(item.getImage()).into((ImageView) helper.getView(R.id.image));
+        Glide.with(mContext).load(item.getImage()).error(R.drawable.fq_ic_placeholder).into((ImageView) helper.getView(R.id.image));
     }
 }

@@ -7,9 +7,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SeekBar;
 
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.base.UrlManager;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 import cn.jzvd.JZVideoPlayerStandard;
+import okhttp3.Request;
 
 
 /**
@@ -18,12 +24,18 @@ import cn.jzvd.JZVideoPlayerStandard;
  * Created by Nathen on 2017/7/2.
  */
 public class MyJzvdStd extends JZVideoPlayerStandard {
+
+    private Context context;
+    private String id;
+
     public MyJzvdStd(Context context) {
         super(context);
+        this.context = context;
     }
 
     public MyJzvdStd(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
     @Override
@@ -116,6 +128,7 @@ public class MyJzvdStd extends JZVideoPlayerStandard {
     @Override
     public void onStatePlaying() {
         super.onStatePlaying();
+        initPlay();
     }
 
     @Override
@@ -185,4 +198,29 @@ public class MyJzvdStd extends JZVideoPlayerStandard {
         super.onError(what, extra);
     }
 
+    public void setId(String id){
+        this.id = id;
+    }
+
+    private void initPlay() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id",id);
+        map.put("client",AppUtil.getSerialNumber());
+        NetRequest.postFormHeadRequest(UrlManager.AddVideoNum, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void TokenFail() {
+
+            }
+        });
+    }
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -24,6 +26,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.FileUtils;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.PicToBase64;
 import com.mymusic.music.View.Activity.FriendFoundActivity;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -119,6 +122,7 @@ public class PutVideoActivity extends BaseActivity {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("tag",tag.toString());
                 map.put("content",content.getText().toString());
+                map.put("images", getVideoImage(image.get(0)));
 //                Uri uri = image.get(0);
 //                String[] arr = {MediaStore.Images.Media.DATA};
 //                Cursor cursor = this.getContentResolver().query(uri, arr, null, null, null);
@@ -186,6 +190,31 @@ public class PutVideoActivity extends BaseActivity {
             Glide.with(this).load(image.get(0)).into(Video);
         }
     }
+
+    public String getVideoImage(Uri uri){
+        String videoPath = getRealPathFromURI(this,uri);
+        MediaMetadataRetriever media = new MediaMetadataRetriever();
+        media.setDataSource(videoPath);
+        Bitmap bitmap = media.getFrameAtTime();
+        String base64 = PicToBase64.bitmapToBase64(bitmap);
+        Log.e("33",base64);
+        return "data:image/jpeg;base64,"+base64;
+    }
+    public static String getRealPathFromURI(Context context, Uri contentURI) {
+        String result;
+        Cursor cursor = context.getContentResolver().query(contentURI,
+                new String[]{MediaStore.Video.VideoColumns.DATA},//
+                null, null, null);
+        if (cursor == null) result = contentURI.getPath();
+        else {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndex(MediaStore.Video.VideoColumns.DATA);
+            result = cursor.getString(index);
+            cursor.close();
+        }
+        return result;
+    }
+
     public static File getFileByUri(Uri uri,Context context) {
         String path = null;
         if ("file".equals(uri.getScheme())) {

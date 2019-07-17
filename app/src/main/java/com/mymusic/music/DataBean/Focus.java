@@ -9,14 +9,14 @@ import java.util.List;
 public class Focus {
 
     /**
-     * data : {"list":[{"uid":"19847","touid":"2","user_nick":"手机用户6590","avatar":"http://live.shuiqiao.net/default_thumb.jpg","signature":"这家伙很懒，什么都没留下","guanzhu":"关注"},{"uid":"19848","touid":"2","user_nick":"手机用户5706","avatar":"http://live.shuiqiao.net/default_thumb.jpg","signature":"这家伙很懒，什么都没留下","guanzhu":"关注"}]}
+     * data : {"list":[{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"9999","icon":null,"title":null,"description":null,"cid":"9999","guanzhu":"已关注"},{"uid":"100001","touid":"36297","icon":null,"title":null,"description":null,"cid":"36297","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"}],"total":"16"}
      * status : 1
      * referer :
      * state : 1
      */
 
     private DataBean data;
-    private int status;
+    private String status;
     private String referer;
     private String state;
 
@@ -28,11 +28,11 @@ public class Focus {
         this.data = data;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -53,7 +53,21 @@ public class Focus {
     }
 
     public static class DataBean {
+        /**
+         * list : [{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"9999","icon":null,"title":null,"description":null,"cid":"9999","guanzhu":"已关注"},{"uid":"100001","touid":"36297","icon":null,"title":null,"description":null,"cid":"36297","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"},{"uid":"100001","touid":"1","icon":"http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png","title":"测试分类33","description":"这里是描述","cid":"1","guanzhu":"已关注"}]
+         * total : 16
+         */
+
+        private String total;
         private List<ListBean> list;
+
+        public String getTotal() {
+            return total;
+        }
+
+        public void setTotal(String total) {
+            this.total = total;
+        }
 
         public List<ListBean> getList() {
             return list;
@@ -65,19 +79,21 @@ public class Focus {
 
         public static class ListBean {
             /**
-             * uid : 19847
-             * touid : 2
-             * user_nick : 手机用户6590
-             * avatar : http://live.shuiqiao.net/default_thumb.jpg
-             * signature : 这家伙很懒，什么都没留下
-             * guanzhu : 关注
+             * uid : 100001
+             * touid : 1
+             * icon : http://live.shuiqiao.net/data/upload/20190711/5d26c23415e3d.png
+             * title : 测试分类33
+             * description : 这里是描述
+             * cid : 1
+             * guanzhu : 已关注
              */
 
             private String uid;
             private String touid;
-            private String user_nick;
-            private String avatar;
-            private String signature;
+            private String icon;
+            private String title;
+            private String description;
+            private String cid;
             private String guanzhu;
 
             public String getUid() {
@@ -96,28 +112,36 @@ public class Focus {
                 this.touid = touid;
             }
 
-            public String getUser_nick() {
-                return user_nick;
+            public String getIcon() {
+                return icon;
             }
 
-            public void setUser_nick(String user_nick) {
-                this.user_nick = user_nick;
+            public void setIcon(String icon) {
+                this.icon = icon;
             }
 
-            public String getAvatar() {
-                return avatar;
+            public String getTitle() {
+                return title;
             }
 
-            public void setAvatar(String avatar) {
-                this.avatar = avatar;
+            public void setTitle(String title) {
+                this.title = title;
             }
 
-            public String getSignature() {
-                return signature;
+            public String getDescription() {
+                return description;
             }
 
-            public void setSignature(String signature) {
-                this.signature = signature;
+            public void setDescription(String description) {
+                this.description = description;
+            }
+
+            public String getCid() {
+                return cid;
+            }
+
+            public void setCid(String cid) {
+                this.cid = cid;
             }
 
             public String getGuanzhu() {

@@ -9,7 +9,7 @@
         android:id="@+id/found_head"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:padding="17dp"
+        android:padding="19dp"
         android:src="@drawable/ic_launcher_background"/>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

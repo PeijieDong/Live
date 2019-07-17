@@ -21,7 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Create By mr.mao in 2019/6/17 0:56
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class DetailCommentRcAdapter extends BaseQuickAdapter <CommentData.DataBean.ListBean,BaseViewHolder> implements View.OnClickListener {
+public class DetailCommentRcAdapter extends BaseQuickAdapter <CommentData.DataBean.ListBean,BaseViewHolder>{
     CommentData.DataBean.ListBean item;
     public DetailCommentRcAdapter(int layoutResId, @Nullable List<CommentData.DataBean.ListBean> data) {
         super(layoutResId, data);
@@ -36,20 +36,12 @@ public class DetailCommentRcAdapter extends BaseQuickAdapter <CommentData.DataBe
                 .setText(R.id.detail_like_num,item.getNum())
                 .addOnClickListener(R.id.detail_is_like)
                 .addOnClickListener(R.id.detail_no_like)
-                .addOnClickListener(R.id.detail_more);
+                .addOnClickListener(R.id.detail_more)
+                .addOnClickListener(R.id.detail_head_cir);
         CircleImageView head = helper.getView(R.id.detail_head_cir);
-        Glide.with(mContext).load(item.getAvatar()).into(head);
-        head.setOnClickListener(this);
+        Glide.with(mContext).load(item.getAvatar()).error(R.drawable.fq_ic_placeholder).into(head);
+
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.detail_head_cir:
-                Intent intent = new Intent(mContext, UserDetailActivity.class);
-                intent.putExtra("UserId",item.getUid());
-                mContext.startActivity(intent);
-                break;
-        }
-    }
+
 }
