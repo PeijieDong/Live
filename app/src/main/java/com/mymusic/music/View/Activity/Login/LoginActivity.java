@@ -1,14 +1,18 @@
 package com.mymusic.music.View.Activity.Login;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +45,11 @@ public class LoginActivity extends BaseActivity {
     TextView phoneLogin;
     @BindView(R.id.bt_login)
     Button Login;
+    @BindView(R.id.visible_pwd)
+    ImageView pwdState;
+    private int GONE = 0;
+    private int VISIBLE = 1;
+    private int STATE = GONE;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -93,7 +102,7 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.bt_login,R.id.phone_login,R.id.forget_pwd,R.id.register_fast,R.id.close})
+    @OnClick({R.id.bt_login,R.id.phone_login,R.id.forget_pwd,R.id.register_fast,R.id.close,R.id.clear_userName,R.id.visible_pwd})
     public void OnclickEvent(View view) {
         switch (view.getId()) {
             case R.id.close:
@@ -155,6 +164,20 @@ public class LoginActivity extends BaseActivity {
             case R.id.register_fast:
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.clear_userName:
+                userName.setText("");
+                break;
+            case R.id.visible_pwd:
+                if(STATE == GONE){
+                    STATE = VISIBLE;
+                    pwdState.setImageResource(R.drawable.visibility);
+                    userPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else{
+                    STATE = GONE;
+                    pwdState.setImageResource(R.drawable.visibility_off);
+                    userPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
                 break;
         }
     }

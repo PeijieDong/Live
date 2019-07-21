@@ -96,7 +96,7 @@ public class VideoPlayActivity extends BaseActivity {
                 public void holder(VideoViewHolder2 holder) {
                     viewHolder = holder;
                     initPlay(holder);
-                    holder.mp_video.setId(data.getData().getList().get(position).getId());
+                    holder.mp_video.setId(userVideo.get(position).getId());
                 }
             });
         }

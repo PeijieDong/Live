@@ -38,14 +38,25 @@
         android:layout_marginLeft="30dp"/>
     <EditText
         android:id="@+id/login_userName"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        app:layout_constraintRight_toLeftOf="@id/clear_userName"
         android:layout_height="45dp"
         android:background="@null"
         android:paddingLeft="20dp"
         android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_2"
         android:layout_marginTop="60dp"
         android:hint="@string/please_username"/>
+    <ImageView
+        android:id="@+id/clear_userName"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="15dp"
+        android:layout_marginTop="55dp"
+        app:layout_constraintTop_toBottomOf="@id/login_2"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/fq_ic_anchor_bottom_close"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -56,15 +67,26 @@
         android:layout_marginRight="10dp"/>
     <EditText
         android:id="@+id/login_userPwd"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="45dp"
         android:background="@null"
         android:layout_marginTop="20dp"
         android:paddingLeft="20dp"
         android:textSize="14sp"
         android:inputType="textPassword"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/visible_pwd"
         app:layout_constraintTop_toBottomOf="@id/login_userName"
         android:hint="@string/please_pwd"/>
+    <ImageView
+        android:id="@+id/visible_pwd"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_userName"
+        android:src="@drawable/visibility_off"/>
     <View
         android:id="@+id/login_3"
         android:layout_width="match_parent"
