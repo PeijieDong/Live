@@ -17,6 +17,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
 import com.mymusic.music.View.ChildFragment.ChoseFragment;
 import com.mymusic.music.base.BaseActivity;
@@ -101,7 +102,7 @@ public class SignActivity extends BaseActivity implements TagFlowListener {
     @Override
     public void Click(String list2) {
         if(list.size()>=6){
-            Toast.makeText(this,"最多选择6个标签",Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this,"最多选择6个标签",Toast.LENGTH_SHORT);
             return;
         }else {
             list.add(list2);

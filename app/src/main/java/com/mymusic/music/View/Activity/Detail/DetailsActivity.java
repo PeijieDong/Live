@@ -41,6 +41,7 @@ import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.MyGridView;
 import com.mymusic.music.Util.MyJzvdStd;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
@@ -439,7 +440,7 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.CommentLike, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT);
             }
 
             @Override
@@ -462,7 +463,7 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT);
             }
 
             @Override
@@ -518,7 +519,7 @@ public class DetailsActivity extends BaseActivity {
                 ClipboardManager clipboard = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clipData = ClipData.newPlainText(null, data.getData().getList().getContent());
                 clipboard.setPrimaryClip(clipData);
-                Toast.makeText(DetailsActivity.this,"复制成功,快去分享吧",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,"复制成功,快去分享吧",Toast.LENGTH_SHORT);
                 break;
             case R.id.detail_focus:
                 if(Live.getInstance().getUser(this) == null){
@@ -583,14 +584,14 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.Collection_Home, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(DetailsActivity.this,"收藏成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,"收藏成功",Toast.LENGTH_SHORT);
                 commentNum.setText(Integer.valueOf(commentNum.getText().toString())+1+"");
                 collectionBt.setClickable(false);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(DetailsActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,e.getMessage(),Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
@@ -643,12 +644,12 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(DetailsActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,"操作成功",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(DetailsActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,"操作失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
@@ -670,12 +671,12 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(DetailsActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,"操作成功",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(DetailsActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,"操作失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
@@ -693,7 +694,7 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,"点赞成功",Toast.LENGTH_SHORT);
                 likeicon.setImageDrawable(getResources().getDrawable(R.drawable.like_press));
                 likeicon.setClickable(false);
                 likenum.setText(Integer.valueOf(likenum.getText().toString())+1+"");
@@ -701,7 +702,7 @@ public class DetailsActivity extends BaseActivity {
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(DetailsActivity.this,"点赞失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(DetailsActivity.this,"点赞失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
@@ -718,7 +719,7 @@ public class DetailsActivity extends BaseActivity {
             return;
         }
         if(detailEt.getText().toString().trim().equals("")){
-            Toast.makeText(this,"内容不能为空",Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this,"内容不能为空",Toast.LENGTH_SHORT);
         }else{
             HashMap<String, String> map = new HashMap<>();
             map.put("vid",id);
@@ -728,13 +729,13 @@ public class DetailsActivity extends BaseActivity {
                 @Override
                 public void requestSuccess(String result) throws Exception {
                     Log.e("333",result);
-                    Toast.makeText(DetailsActivity.this,"提交评论成功",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(DetailsActivity.this,"提交评论成功",Toast.LENGTH_SHORT);
                     detailEt.setText("");
                 }
 
                 @Override
                 public void requestFailure(Request request, IOException e) {
-                    Toast.makeText(DetailsActivity.this,"提交评论失败",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(DetailsActivity.this,"提交评论失败",Toast.LENGTH_SHORT);
                 }
                 @Override
                 public void TokenFail() {

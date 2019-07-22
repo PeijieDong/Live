@@ -17,6 +17,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.ArRcAdpater;
@@ -117,13 +118,13 @@ public class CommentPPFragment extends BaseFragment {
         NetRequest.postFormHeadRequest(UrlManager.Delete, map,Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(getContext(),"删除成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"删除成功",Toast.LENGTH_SHORT);
                 initNet();
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(getContext(),"删除失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"删除失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {

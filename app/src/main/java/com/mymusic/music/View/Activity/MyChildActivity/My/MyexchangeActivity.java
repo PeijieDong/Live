@@ -15,6 +15,7 @@ import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
@@ -59,7 +60,7 @@ public class MyexchangeActivity extends BaseActivity {
                 break;
             case R.id.exchange:
                 if(code.getText().toString().equals("")){
-                    Toast.makeText(this,"请输入验证码",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(this,"请输入验证码",Toast.LENGTH_SHORT);
                     return;
                 }
                 initChange();
@@ -75,14 +76,14 @@ public class MyexchangeActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(MyexchangeActivity.this,"兑换成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(MyexchangeActivity.this,"兑换成功",Toast.LENGTH_SHORT);
                 finish();
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
                 Log.e("33",e.getMessage());
-                Toast.makeText(MyexchangeActivity.this,"兑换失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(MyexchangeActivity.this,"兑换失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {

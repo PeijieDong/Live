@@ -38,6 +38,7 @@ import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.PicToBase64;
 import com.mymusic.music.Util.PutBottomNavigation;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.Util.Uri2PathUtil;
 import com.mymusic.music.View.Activity.Community.CommunityAdviceActivity;
 import com.mymusic.music.View.Activity.FriendFoundActivity;
@@ -192,11 +193,11 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
 
     private void initNet() {
         if(title.getText().toString().equals("")){
-            Toast.makeText(this,"请输入标题",Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this,"请输入标题",Toast.LENGTH_SHORT);
             return;
         }
         if(cid.equals("")){
-            Toast.makeText(this,"请选择圈子",Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this,"请选择圈子",Toast.LENGTH_SHORT);
             return;
         }
         String url = UrlManager.Post_Video;
@@ -209,7 +210,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         if (navigation.getPosition() == 1) {
             map.put("content", title.getText().toString());
             if(image.size() == 0){
-                Toast.makeText(this,"请选择要上传的图片",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(this,"请选择要上传的图片",Toast.LENGTH_SHORT);
                 return;
             }
             showLoading();
@@ -222,7 +223,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 @Override
                 public void requestSuccess(String result) throws Exception {
                     Log.e("23",result);
-                    Toast.makeText(putContentActivity.this,"提交成功，等待管理员审核",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(putContentActivity.this,"提交成功，等待管理员审核",Toast.LENGTH_SHORT);
                     finish();
                     closeLoading();
                 }
@@ -244,7 +245,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         if (navigation.getPosition() == 0) {
             map.put("content", title.getText().toString());
             if(image.size() == 0){
-                Toast.makeText(this,"请选择要上传的视频",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(this,"请选择要上传的视频",Toast.LENGTH_SHORT);
                 return;
             }
             file = getFileByUri(image.get(0), this);
@@ -253,7 +254,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         }
         if(navigation.getPosition() == 2){
             if(text.getText().toString().equals("")){
-                Toast.makeText(this,"请输入内容",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(this,"请输入内容",Toast.LENGTH_SHORT);
                 return;
             }
             map.put("title",text.getText().toString());
@@ -265,7 +266,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             public void requestSuccess(String result) throws Exception {
                 Log.e("33", result);
                 closeLoading();
-                Toast.makeText(putContentActivity.this,"提交成功，等待管理员审核",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(putContentActivity.this,"提交成功，等待管理员审核",Toast.LENGTH_SHORT);
                 finish();
             }
 

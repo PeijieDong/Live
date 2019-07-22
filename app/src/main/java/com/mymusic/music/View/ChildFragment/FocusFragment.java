@@ -19,6 +19,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
@@ -198,12 +199,12 @@ public class FocusFragment extends BaseFragment {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(getContext(),"操作成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"操作成功",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(getContext(),"操作失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"操作失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
@@ -231,12 +232,12 @@ public class FocusFragment extends BaseFragment {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(getContext(),"操作成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"操作成功",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(getContext(),"操作失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"操作失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {

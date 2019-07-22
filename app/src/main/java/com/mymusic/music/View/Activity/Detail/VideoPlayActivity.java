@@ -18,6 +18,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
@@ -240,7 +241,7 @@ public class VideoPlayActivity extends BaseActivity {
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(VideoPlayActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(VideoPlayActivity.this,"请求失败",Toast.LENGTH_SHORT);
             }
 
             @Override
@@ -317,7 +318,7 @@ public class VideoPlayActivity extends BaseActivity {
             }
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(VideoPlayActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(VideoPlayActivity.this,"请求失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
@@ -341,7 +342,7 @@ public class VideoPlayActivity extends BaseActivity {
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(VideoPlayActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(VideoPlayActivity.this,"请求失败",Toast.LENGTH_SHORT);
             }
 
             @Override

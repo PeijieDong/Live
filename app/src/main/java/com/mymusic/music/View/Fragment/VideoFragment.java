@@ -21,6 +21,7 @@ import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
@@ -302,7 +303,7 @@ public class VideoFragment extends BaseFragment {
 //            @Override
 //            public void requestSuccess(String result) throws Exception {
 //                Log.e("33",result);
-//                Toast.makeText(getContext(),"收藏成功",Toast.LENGTH_SHORT).show();
+//                ToastUtil.show(getContext(),"收藏成功",Toast.LENGTH_SHORT).show();
 //            }
 //
 //            @Override
@@ -323,7 +324,7 @@ public class VideoFragment extends BaseFragment {
         NetRequest.postFormRequest(UrlManager.Video_Zan, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(getContext(),"点赞成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"点赞成功",Toast.LENGTH_SHORT);
                 holder.likeNum.setText(Integer.parseInt(holder.likeNum.getText().toString())+1+"");
                 holder.video_like.setImageResource(R.drawable.yp_video_like);
             }

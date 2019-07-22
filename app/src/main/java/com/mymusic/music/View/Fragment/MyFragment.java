@@ -207,7 +207,7 @@ public class MyFragment extends BaseFragment {
             case R.id.my_user_head:
                 if(Live.getInstance().getUser(getContext()) != null){
                     Intent intent = new Intent(getContext(), UserDetailActivity.class);
-                    intent.putExtra("UserId",bean.getData().getId());
+                    intent.putExtra("UserId",Live.getInstance().getUser(getContext()).getData().getId());
                     startActivity(intent);
                 }
                 break;

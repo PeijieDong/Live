@@ -20,6 +20,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Adapter.CommentDetailAdapter;
 import com.mymusic.music.View.Adapter.DetailCommentRcAdapter;
 import com.mymusic.music.base.BaseActivity;
@@ -106,7 +107,7 @@ public class CommentDetailActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.detail_post:
                 if(postEt.getText().toString().equals("")){
-                    Toast.makeText(CommentDetailActivity.this,"不可以是空的哦",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(CommentDetailActivity.this,"不可以是空的哦",Toast.LENGTH_SHORT);
                     return;
                 }
                 initPost();
@@ -126,13 +127,13 @@ public class CommentDetailActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("333",result);
-                Toast.makeText(CommentDetailActivity.this,"提交评论成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(CommentDetailActivity.this,"提交评论成功",Toast.LENGTH_SHORT);
                 postEt.setText("");
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(CommentDetailActivity.this,"提交评论失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(CommentDetailActivity.this,"提交评论失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {

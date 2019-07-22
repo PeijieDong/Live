@@ -13,6 +13,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -96,13 +97,13 @@ public class SettingActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(SettingActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(SettingActivity.this,"修改成功",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
                 Log.e("33",e.getMessage());
-                Toast.makeText(SettingActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(SettingActivity.this,"修改失败",Toast.LENGTH_SHORT);
                 if(state){
                     button.toogleOn();
                 }else{

@@ -15,6 +15,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
@@ -96,7 +97,7 @@ public class SetPasswordActivity extends BaseActivity {
                 break;
             case R.id.sure:
                 if(pwd.getText().toString().length()<6 && !pwd.getText().toString().equals(pwd2)){
-                    Toast.makeText(this,"密码不正确",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(this,"密码不正确",Toast.LENGTH_SHORT);
                 }else{
                     initNet();
                 }
@@ -119,13 +120,13 @@ public class SetPasswordActivity extends BaseActivity {
         NetRequest.postFormRequest(UrlManager.Register, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(SetPasswordActivity.this,"成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(SetPasswordActivity.this,"成功",Toast.LENGTH_SHORT);
                 finish();
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(SetPasswordActivity.this,"失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(SetPasswordActivity.this,"失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
@@ -144,13 +145,13 @@ public class SetPasswordActivity extends BaseActivity {
         NetRequest.postFormRequest(UrlManager.Forget, map1, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(SetPasswordActivity.this,"成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(SetPasswordActivity.this,"成功",Toast.LENGTH_SHORT);
                 finish();
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(SetPasswordActivity.this,"失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(SetPasswordActivity.this,"失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {

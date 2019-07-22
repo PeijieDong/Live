@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.mymusic.music.Util.BottomNavigation;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.LockScreenActivity;
 import com.mymusic.music.View.Fragment.FriendFragment;
 import com.mymusic.music.View.Fragment.HomeFragment;
@@ -125,7 +126,7 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
     @Override
     public void onBackPressed() {
         if(!mBackKeyPressed){
-            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this, "再按一次退出程序", Toast.LENGTH_SHORT);
             mBackKeyPressed = true;
             new Timer().schedule(new TimerTask() {
                 @Override

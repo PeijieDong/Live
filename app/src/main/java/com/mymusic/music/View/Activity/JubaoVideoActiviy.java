@@ -29,6 +29,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.PicToBase64;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -121,15 +122,15 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.post:
                 if(des.getText().toString().equals("")){
-                    Toast.makeText(this,"请输入举报内容",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(this,"请输入举报内容",Toast.LENGTH_SHORT);
                     return;
                 }
                 if(group.getCheckedRadioButtonId() == -1){
-                    Toast.makeText(this,"请选择举报类型",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(this,"请选择举报类型",Toast.LENGTH_SHORT);
                     return;
                 }
                 if(imageList.size() == 0){
-                    Toast.makeText(this,"请上传举报截图",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(this,"请上传举报截图",Toast.LENGTH_SHORT);
                     return;
                 }
                 initNet();
@@ -155,7 +156,7 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(JubaoVideoActiviy.this,"提交成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(JubaoVideoActiviy.this,"提交成功",Toast.LENGTH_SHORT);
                 finish();
             }
 

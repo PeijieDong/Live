@@ -19,6 +19,7 @@ import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
@@ -116,7 +117,7 @@ public class UserActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(et.getText().toString().equals("")){
-                            Toast.makeText(UserActivity.this,"不能为空",Toast.LENGTH_SHORT).show();
+                            ToastUtil.show(UserActivity.this,"不能为空",Toast.LENGTH_SHORT);
                             return;
                         }
                         initNet(et.getText().toString(), signtv.getText().toString(), sextv.getText().toString(),
@@ -142,7 +143,7 @@ public class UserActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(et2.getText().toString().equals("")){
-                            Toast.makeText(UserActivity.this,"不能为空",Toast.LENGTH_SHORT).show();
+                            ToastUtil.show(UserActivity.this,"不能为空",Toast.LENGTH_SHORT);
                             return;
                         }
                         initNet(nametv.getText().toString(), et2.getText().toString(), sextv.getText().toString(),
@@ -290,12 +291,12 @@ public class UserActivity extends BaseActivity {
                 sexTv.setText(choseSex);
                 marrayTv.setText(marray);
                 friendTv.setText(friendChose);
-                Toast.makeText(UserActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(UserActivity.this,"修改成功",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(UserActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(UserActivity.this,"修改失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {

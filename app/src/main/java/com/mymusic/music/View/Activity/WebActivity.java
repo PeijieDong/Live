@@ -28,6 +28,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.base.BaseActivity;
 
 import java.io.File;
@@ -88,7 +89,7 @@ public class WebActivity extends BaseActivity {
                 ClipboardManager clipboard = (ClipboardManager) WebActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clipData = ClipData.newPlainText(null, url);
                 clipboard.setPrimaryClip(clipData);
-                Toast.makeText(WebActivity.this,"复制成功，快去分享吧",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(WebActivity.this,"复制成功，快去分享吧",Toast.LENGTH_SHORT);
             }
         });
         close.setOnClickListener(new View.OnClickListener() {
@@ -148,9 +149,9 @@ public class WebActivity extends BaseActivity {
         boolean isSuccess = saveImageToGallery(this, image);
         image.recycle();
         if (isSuccess) {
-            Toast.makeText(this, "已保存到系统相册！", Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this, "已保存到系统相册！", Toast.LENGTH_SHORT);
         } else {
-            Toast.makeText(this, "保存到系统相册失败！", Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this, "保存到系统相册失败！", Toast.LENGTH_SHORT);
         }
     }
     public static int getActionBarHeight(Context context) {

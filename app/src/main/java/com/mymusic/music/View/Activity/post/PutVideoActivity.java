@@ -27,6 +27,7 @@ import com.mymusic.music.Util.FileUtils;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.PicToBase64;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.FriendFoundActivity;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -103,15 +104,15 @@ public class PutVideoActivity extends BaseActivity {
                 break;
             case R.id.post:
                 if(content.getText().toString().length()<4){
-                    Toast.makeText(this,"标题不可以少于4个字符",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(this,"标题不可以少于4个字符",Toast.LENGTH_SHORT);
                     return;
                 }
                 if(image.size() != 1){
-                    Toast.makeText(this,"请点击选择您要上传的短视频",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(this,"请点击选择您要上传的短视频",Toast.LENGTH_SHORT);
                     return;
                 }
                 if(list == null || list.size() == 0){
-                    Toast.makeText(this,"请选择对应的标签",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(this,"请选择对应的标签",Toast.LENGTH_SHORT);
                     return;
                 }
                 showLoading();
@@ -134,14 +135,14 @@ public class PutVideoActivity extends BaseActivity {
                     @Override
                     public void requestSuccess(String result) throws Exception {
                         closeLoading();
-                        Toast.makeText(PutVideoActivity.this,"提交成功，请等待管理员审核",Toast.LENGTH_SHORT).show();
+                        ToastUtil.show(PutVideoActivity.this,"提交成功，请等待管理员审核",Toast.LENGTH_SHORT);
                         finish();
                     }
 
                     @Override
                     public void requestFailure(Request request, IOException e) {
                         closeLoading();
-                        Toast.makeText(PutVideoActivity.this,"上传错误",Toast.LENGTH_SHORT).show();
+                        ToastUtil.show(PutVideoActivity.this,"上传错误",Toast.LENGTH_SHORT);
                         Log.e("23",e.getMessage());
                     }
                     @Override

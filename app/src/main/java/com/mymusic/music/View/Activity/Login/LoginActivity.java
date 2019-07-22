@@ -23,6 +23,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.message.NoticeActivity;
 import com.mymusic.music.base.ActivityCollector;
 import com.mymusic.music.base.BaseActivity;
@@ -110,7 +111,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.bt_login:
                 if (userName.getText().toString().equals("") || userPwd.getText().toString().equals("")) {
-                    Toast.makeText(LoginActivity.this, "请完善内容", Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(LoginActivity.this, "请完善内容", Toast.LENGTH_SHORT);
                 } else {
                     HashMap<String, String> map = new HashMap<>();
                     map.put("username", userName.getText().toString());
@@ -126,13 +127,13 @@ public class LoginActivity extends BaseActivity {
                                 startActivity(intent);
                                 finish();
                             }else{
-                                Toast.makeText(LoginActivity.this,user.getMsg(),Toast.LENGTH_SHORT).show();
+                                ToastUtil.show(LoginActivity.this,user.getMsg(),Toast.LENGTH_SHORT);
                             }
                         }
 
                         @Override
                         public void requestFailure(Request request, IOException e) {
-                            Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                            ToastUtil.show(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT);
                         }
                         @Override
                         public void TokenFail() {

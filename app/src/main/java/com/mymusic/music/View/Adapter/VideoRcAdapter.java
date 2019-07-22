@@ -26,6 +26,7 @@ import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.JubaoVideoActiviy;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
@@ -170,7 +171,7 @@ public class VideoRcAdapter  extends BaseRecAdapter<VideoData.DataBean.ListBean,
         NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(context,"收藏成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(context,"收藏成功",Toast.LENGTH_SHORT);
             }
 
             @Override

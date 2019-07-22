@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.Live;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.FoundActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.post.putContentActivity;
@@ -106,7 +107,7 @@ public class HomeFragment extends BaseFragment {
                     return;
                 }
                 if(Integer.parseInt(Live.getInstance().getUser(getContext()).getData().getLevel())<3){
-                    Toast.makeText(getContext(),"只有3级以上用户可以使用",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(getContext(),"只有3级以上用户可以使用",Toast.LENGTH_SHORT);
                     return ;
                 }
                 startActivity(new Intent(getContext(),putContentActivity.class));

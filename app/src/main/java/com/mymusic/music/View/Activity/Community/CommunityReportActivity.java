@@ -24,6 +24,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.PicToBase64;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Adapter.CommunityRcAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -87,11 +88,11 @@ public class CommunityReportActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.post:
                 if(Et.getText().toString().equals("")){
-                    Toast.makeText(this,"请输入举报内容",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(this,"请输入举报内容",Toast.LENGTH_SHORT);
                     return;
                 }
                 if(adress.getText().toString().equals("")){
-                    Toast.makeText(this,"请输入联系方式",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(this,"请输入联系方式",Toast.LENGTH_SHORT);
                     return;
                 }
                 initNet();
@@ -108,7 +109,7 @@ public class CommunityReportActivity extends BaseActivity implements View.OnClic
         NetRequest.postFormHeadRequest(UrlManager.FeedBack, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(CommunityReportActivity.this,"提交成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(CommunityReportActivity.this,"提交成功",Toast.LENGTH_SHORT);
                 finish();
             }
 

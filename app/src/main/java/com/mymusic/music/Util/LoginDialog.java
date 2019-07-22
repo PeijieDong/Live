@@ -50,7 +50,7 @@ public class LoginDialog {
 //        dialog.show();
 //    }
     public void Show(){
-        Toast.makeText(context,"登录失效",Toast.LENGTH_SHORT).show();
+        ToastUtil.show(context,"登录失效",Toast.LENGTH_SHORT);
         Live.getInstance().clear(context);
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);

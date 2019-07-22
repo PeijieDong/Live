@@ -18,6 +18,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.HistoryRcAdapter;
@@ -114,13 +115,13 @@ public class MyhistoryActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.Clear_History, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(MyhistoryActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(MyhistoryActivity.this,"操作成功",Toast.LENGTH_SHORT);
                 initNet();
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(MyhistoryActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(MyhistoryActivity.this,"操作失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {

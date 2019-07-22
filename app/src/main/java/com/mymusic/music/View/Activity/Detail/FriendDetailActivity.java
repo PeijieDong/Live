@@ -20,6 +20,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.post.PutVideoActivity;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
@@ -163,7 +164,7 @@ public class FriendDetailActivity extends BaseActivity {
                     return;
                 }
                 if(Integer.parseInt(Live.getInstance().getUser(FriendDetailActivity.this).getData().getLevel())<3){
-                    Toast.makeText(FriendDetailActivity.this,"只有3级以上用户可以使用",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(FriendDetailActivity.this,"只有3级以上用户可以使用",Toast.LENGTH_SHORT);
                     return ;
                 }
                 Intent intent = new Intent(FriendDetailActivity.this, PutVideoActivity.class);
@@ -233,12 +234,12 @@ public class FriendDetailActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(FriendDetailActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(FriendDetailActivity.this,"操作成功",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(FriendDetailActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(FriendDetailActivity.this,"操作失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {

@@ -24,6 +24,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.PicToBase64;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -93,7 +94,7 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
 
     private void initNet() {
         if(imageList.size() == 0){
-            Toast.makeText(JubaoActivity.this,"请上传图片",Toast.LENGTH_SHORT).show();
+            ToastUtil.show(JubaoActivity.this,"请上传图片",Toast.LENGTH_SHORT);
             return;
         }
         if(Live.getInstance().getToken(this) == null){
@@ -102,7 +103,7 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
             return;
         }
         if(group.getCheckedRadioButtonId() == -1){
-            Toast.makeText(JubaoActivity.this,"请选择举报类型",Toast.LENGTH_SHORT).show();
+            ToastUtil.show(JubaoActivity.this,"请选择举报类型",Toast.LENGTH_SHORT);
             return;
         }
         HashMap<String, String> map = new HashMap<>();
@@ -115,7 +116,7 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(JubaoActivity.this,"举报成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(JubaoActivity.this,"举报成功",Toast.LENGTH_SHORT);
                 finish();
             }
 

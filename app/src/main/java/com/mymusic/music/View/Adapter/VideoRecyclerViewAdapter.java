@@ -28,6 +28,7 @@ import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.JubaoVideoActiviy;
@@ -84,7 +85,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                     return;
                 }
                 if(Integer.parseInt(Live.getInstance().getUser(context).getData().getLevel())<3){
-                    Toast.makeText(context,"只有3级以上用户可以使用",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(context,"只有3级以上用户可以使用",Toast.LENGTH_SHORT);
                     return ;
                 }
                 Intent intent = new Intent(context, PutVideoActivity.class);
@@ -104,7 +105,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                 NetRequest.postFormHeadRequest(UrlManager.Focus_User, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
                     @Override
                     public void requestSuccess(String result) throws Exception {
-                        Toast.makeText(context,"关注成功",Toast.LENGTH_SHORT).show();
+                        ToastUtil.show(context,"关注成功",Toast.LENGTH_SHORT);
                         holder.focus.setVisibility(View.GONE);
                     }
 
@@ -140,7 +141,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                     @Override
                     public void onClick(View v) {
                         CopyText(list.get(position).getContent());
-                        Toast.makeText(context,"复制成功，快去分享吧！",Toast.LENGTH_SHORT).show();
+                        ToastUtil.show(context,"复制成功，快去分享吧！",Toast.LENGTH_SHORT);
                         bottomSheet.dismiss();
                     }
                 });
@@ -232,7 +233,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(context,"收藏成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(context,"收藏成功",Toast.LENGTH_SHORT);
             }
 
             @Override
@@ -260,7 +261,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         NetRequest.postFormRequest(UrlManager.Video_Zan, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(context,"点赞成功",Toast.LENGTH_SHORT);
                 holder.likeNum.setText(Integer.parseInt(holder.likeNum.getText().toString())+1+"");
                 holder.video_like.setImageResource(R.drawable.yp_video_like);
             }
@@ -302,7 +303,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                     return;
                 }
                 if(commentEt.getText().toString().equals("")){
-                    Toast.makeText(context,"不能为空哦",Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(context,"不能为空哦",Toast.LENGTH_SHORT);
                     return;
                 }
                 HashMap<String, String> map = new HashMap<>();
@@ -314,7 +315,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                     @Override
                     public void requestSuccess(String result) throws Exception {
                         Log.e("33",result);
-                        Toast.makeText(context,"提交成功",Toast.LENGTH_SHORT).show();
+                        ToastUtil.show(context,"提交成功",Toast.LENGTH_SHORT);
                         adapter.notifyDataSetChanged();
                         commentEt.setText("");
                         holder.commentNum.setText(Integer.parseInt(holder.commentNum.getText().toString())+1+"");
@@ -358,7 +359,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                         NetRequest.postFormRequest(UrlManager.Video_CommentLike, map, new NetRequest.DataCallBack() {
                             @Override
                             public void requestSuccess(String result) throws Exception {
-                                Toast.makeText(context,"点赞成功",Toast.LENGTH_SHORT).show();
+                                ToastUtil.show(context,"点赞成功",Toast.LENGTH_SHORT);
                                 likeNum.setText(Integer.parseInt(holder.likeNum.getText().toString())+1+"");
                                 likeIcon.setImageResource(R.drawable.video_favor_s);
                             }

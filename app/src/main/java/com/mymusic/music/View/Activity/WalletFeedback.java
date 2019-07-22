@@ -19,6 +19,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.PicToBase64;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.CommunityRcAdapter;
 import com.mymusic.music.base.BaseActivity;
@@ -97,15 +98,15 @@ public class WalletFeedback extends BaseActivity implements View.OnClickListener
             return;
         }
         if(list.size() == 0){
-            Toast.makeText(this,"请选择照片",Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this,"请选择照片",Toast.LENGTH_SHORT);
             return;
         }
         if(phone.getText().toString().equals("") || des.getText().toString().equals("")){
-            Toast.makeText(this,"请完善信息",Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this,"请完善信息",Toast.LENGTH_SHORT);
             return;
         }
         if(group.getCheckedRadioButtonId() == -1){
-            Toast.makeText(this,"请选择举报类型",Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this,"请选择举报类型",Toast.LENGTH_SHORT);
             return;
         }
         HashMap<String, String> map = new HashMap<>();
@@ -116,7 +117,7 @@ public class WalletFeedback extends BaseActivity implements View.OnClickListener
         NetRequest.postFormHeadRequest(UrlManager.Feedback_wallet, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(WalletFeedback.this,"提交成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(WalletFeedback.this,"提交成功",Toast.LENGTH_SHORT);
                 finish();
             }
 

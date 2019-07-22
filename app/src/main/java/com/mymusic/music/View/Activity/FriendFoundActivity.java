@@ -23,6 +23,7 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LeftNavigation;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Adapter.FriendFoundRcAdapter;
 import com.mymusic.music.base.BaseActivity;
@@ -83,7 +84,7 @@ public class FriendFoundActivity extends BaseActivity {
     private void initFind() {
         checkLogin();
         if(userFind.getText().toString().equals("")){
-            Toast.makeText(this,"不能为空",Toast.LENGTH_SHORT).show();
+            ToastUtil.show(this,"不能为空",Toast.LENGTH_SHORT);
             return;
         }
         HashMap<String, String> map = new HashMap<>();

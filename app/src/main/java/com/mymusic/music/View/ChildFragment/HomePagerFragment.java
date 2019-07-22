@@ -23,6 +23,7 @@ import com.mymusic.music.Live;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
@@ -239,12 +240,12 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(getContext(),"操作成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"操作成功",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),e.getMessage(),Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
@@ -272,14 +273,14 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
         NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(getContext(),"点赞成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"点赞成功",Toast.LENGTH_SHORT);
                 likeIcon.setImageResource(R.drawable.like_press);
                 likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(getContext(),"点赞失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"点赞失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {

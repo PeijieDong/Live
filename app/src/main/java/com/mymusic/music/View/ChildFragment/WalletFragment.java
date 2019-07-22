@@ -15,6 +15,7 @@ import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.OrderFindAvtivity;
 import com.mymusic.music.View.Adapter.WalletAdapter;
 import com.mymusic.music.base.BaseFragment;
@@ -79,7 +80,7 @@ public class WalletFragment extends BaseFragment {
         NetRequest.postFormHeadRequest(UrlManager.TopUp, null, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(getContext(),"下单成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(getContext(),"下单成功",Toast.LENGTH_SHORT);
             }
 
             @Override

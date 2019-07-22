@@ -14,6 +14,7 @@ import com.andrognito.patternlockview.utils.PatternLockUtils;
 import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -82,7 +83,7 @@ public class LockScreenActivity extends BaseActivity {
                 if (lockPassword.size() == 2 &&
                         !PatternLockUtils.patternToString(mPatternLockView, lockPassword.get(0))
                                 .equals(PatternLockUtils.patternToString(mPatternLockView, lockPassword.get(1)))) {
-                    Toast.makeText(LockScreenActivity.this, "两次绘制不一致", Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(LockScreenActivity.this, "两次绘制不一致", Toast.LENGTH_SHORT);
                     SharedPrefrenceUtils.clearn(LockScreenActivity.this, "Password");
                     lockPassword.clear();
                 } else if (lockPassword.size() == 2 &&
@@ -90,7 +91,7 @@ public class LockScreenActivity extends BaseActivity {
                                 .equals(PatternLockUtils.patternToString(mPatternLockView, lockPassword.get(1)))) {
                     SharedPrefrenceUtils.saveString(LockScreenActivity.this, "Password"
                             , PatternLockUtils.patternToString(mPatternLockView, pattern));
-                    Toast.makeText(LockScreenActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+                    ToastUtil.show(LockScreenActivity.this, "设置成功", Toast.LENGTH_SHORT);
                     finish();
                 }
 

@@ -24,6 +24,7 @@ import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
 import com.mymusic.music.View.Activity.JubaoVideoActiviy;
@@ -238,7 +239,7 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
             @Override
             public void onClick(View v) {
                 CopyText(list.get(position).getContent());
-                Toast.makeText(context,"复制成功，快去分享吧！",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(context,"复制成功，快去分享吧！",Toast.LENGTH_SHORT);
                 bottomSheet.dismiss();
             }
         });
@@ -279,7 +280,7 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
         NetRequest.postFormRequest(UrlManager.Focus_User, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(context,"关注成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(context,"关注成功",Toast.LENGTH_SHORT);
             }
 
             @Override
@@ -305,7 +306,7 @@ public class VideoRc2Adapter  extends BaseRecAdapter<FriendDetail.DataBean.ListB
         NetRequest.postFormHeadRequest(UrlManager.Vide_Collection, map, Live.getInstance().getToken(context), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Toast.makeText(context,"收藏成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(context,"收藏成功",Toast.LENGTH_SHORT);
             }
 
             @Override

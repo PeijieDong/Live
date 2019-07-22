@@ -27,6 +27,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.LogUtils;
 import com.mymusic.music.Util.MyGridView;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
@@ -262,7 +263,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clipData = ClipData.newPlainText(null, item.getContent());
         clipboard.setPrimaryClip(clipData);
-        Toast.makeText(mContext,"分享内容复制成功",Toast.LENGTH_SHORT).show();
+        ToastUtil.show(mContext,"分享内容复制成功",Toast.LENGTH_SHORT);
     }
 
 

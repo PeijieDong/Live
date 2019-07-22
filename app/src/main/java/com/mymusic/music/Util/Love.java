@@ -61,7 +61,7 @@ public class Love extends RelativeLayout {
         imageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "这里是点击爱心的动画，待展示", Toast.LENGTH_SHORT).show();
+                ToastUtil.show(mContext, "这里是点击爱心的动画，待展示", Toast.LENGTH_SHORT);
             }
         });
     }

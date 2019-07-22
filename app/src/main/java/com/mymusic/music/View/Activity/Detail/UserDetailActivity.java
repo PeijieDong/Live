@@ -26,6 +26,7 @@ import com.mymusic.music.Util.AppBarStateChangeListener;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.user.UserActivity;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
@@ -249,12 +250,12 @@ public class UserDetailActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(UserDetailActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(UserDetailActivity.this,"操作成功",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(UserDetailActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(UserDetailActivity.this,"操作失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
@@ -275,12 +276,12 @@ public class UserDetailActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
-                Toast.makeText(UserDetailActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(UserDetailActivity.this,"操作成功",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                Toast.makeText(UserDetailActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+                ToastUtil.show(UserDetailActivity.this,"操作失败",Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
