@@ -99,7 +99,7 @@ public class FriendDetailActivity extends BaseActivity {
                 title.setText(bean.getData().getList().getTitle());
                 fans.setText(bean.getData().getList().getGnum()+"粉丝");
                 art.setText(bean.getData().getList().getTiezi()+"帖子");
-                if(bean.getData().getList().getGonggao()!= null){
+                if(bean.getData().getList().getGonggao() != null){
                     gonggao.setVisibility(View.VISIBLE);
                     gonggao_content.setText(bean.getData().getList().getGonggao().getTitle());
                 }

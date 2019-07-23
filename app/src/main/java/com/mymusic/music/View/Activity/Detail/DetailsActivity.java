@@ -230,8 +230,8 @@ public class DetailsActivity extends BaseActivity {
         shareNum.setText(data.getData().getList().getShare());
         commentNum.setText(data.getData().getList().getCollect());
         likenum.setText(data.getData().getList().getZan());
-        Glide.with(this).load(data.getData().getList().getAvatar()).into(detail_head);
-        Glide.with(this).load(data.getData().getList().getAvatar()).into(head2);
+        Glide.with(this).load(data.getData().getList().getAvatar()).error(R.drawable.default_img_head).into(detail_head);
+        Glide.with(this).load(data.getData().getList().getAvatar()).error(R.drawable.default_img_head).into(head2);
         initComment("new","0");
     }
 

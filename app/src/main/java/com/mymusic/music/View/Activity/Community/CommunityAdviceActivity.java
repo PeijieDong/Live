@@ -191,4 +191,12 @@ public class CommunityAdviceActivity extends BaseActivity implements View.OnClic
         }
         return result;
     }
+    @OnClick({R.id.back})
+    public void Click(View view){
+        switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
+        }
+    }
 }

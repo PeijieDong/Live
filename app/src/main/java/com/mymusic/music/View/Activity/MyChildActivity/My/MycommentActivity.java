@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MycommentActivity extends BaseActivity {
 
@@ -49,5 +51,13 @@ public class MycommentActivity extends BaseActivity {
         list.add(new CommentPPFragment());
         viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager(),title,list));
         tab.setupWithViewPager(viewPager);
+    }
+    @OnClick({R.id.back})
+    public void Click(View view){
+        switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
+        }
     }
 }

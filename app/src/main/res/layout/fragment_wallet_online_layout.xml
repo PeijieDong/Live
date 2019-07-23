@@ -41,7 +41,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/recharge_select_alipay"/>
             <TextView
                 android:id="@+id/title1"
                 android:layout_width="wrap_content"
@@ -77,6 +78,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:background="@drawable/recharge_select_wechat"
                 android:layout_marginLeft="15dp"/>
             <TextView
                 android:id="@+id/title2"
@@ -110,6 +112,7 @@
                 android:id="@+id/sign3"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:background="@drawable/recharge_select_union"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"

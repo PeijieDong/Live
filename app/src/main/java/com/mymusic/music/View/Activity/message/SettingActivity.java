@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Request;
 
 public class SettingActivity extends BaseActivity {
@@ -158,5 +159,13 @@ public class SettingActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+    @OnClick({R.id.back})
+    public void Click(View view){
+        switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
+        }
     }
 }

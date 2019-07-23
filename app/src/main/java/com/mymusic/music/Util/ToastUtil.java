@@ -44,7 +44,7 @@ public class ToastUtil {
                 contentView.setTextColor(context.getResources().getColor(R.color.white));
                 contentView.setPadding(dp30, dp20, dp30, dp20);
                 toast = new Toast(context);
-                toast.setGravity(Gravity.BOTTOM, 0, 80);
+                toast.setGravity(Gravity.BOTTOM, 0, 180);
                 toast.setView(contentView);
                 toast.setDuration(duration);
             }

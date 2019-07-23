@@ -80,4 +80,12 @@ public class MymessageActivity extends BaseActivity {
         intent.putExtra("position",position);
         startActivity(intent);
     }
+    @OnClick({R.id.back})
+    public void Click(View view){
+        switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
+        }
+    }
 }

@@ -136,14 +136,13 @@ public class FocusFragment extends BaseFragment {
                 public void requestSuccess(String result) throws Exception {
                     Log.e("3333", result);
                     data = GsonUtil.GsonToBean(result, Focus.class);
-
+                    focusTv.setText("已关注"+data.getData().getTotal()+"个");
                     focusRc.setLayoutManager(new LinearLayoutManager(getContext()));
                     FocusRcAdaper adaper = new FocusRcAdaper(R.layout.focus_rc_layout, data.getData().getList());
                     adaper.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                         @Override
                         public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                             TextView focus = view.findViewById(R.id.focus_rc_focusbt);
-                            focusTv.setText("已关注"+bean.getData().getTotal()+"个");
                             if (focus.getText().toString().equals("+关注")) {
                                 focus.setText("取消关注");
                                 focus.setBackgroundResource(R.drawable.isfocus);

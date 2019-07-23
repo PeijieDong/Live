@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Request;
 
 public class MylikeActivity extends BaseActivity {
@@ -90,5 +91,13 @@ public class MylikeActivity extends BaseActivity {
             }
         });
         rc.setAdapter(adapter);
+    }
+    @OnClick({R.id.back})
+    public void Click(View view){
+        switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
+        }
     }
 }

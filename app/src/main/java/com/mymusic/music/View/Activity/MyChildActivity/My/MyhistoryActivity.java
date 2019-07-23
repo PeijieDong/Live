@@ -102,6 +102,7 @@ public class MyhistoryActivity extends BaseActivity {
                 }
                 break;
             case R.id.back:
+                finish();
                 break;
         }
     }

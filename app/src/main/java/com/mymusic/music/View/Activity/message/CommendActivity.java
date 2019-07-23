@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import com.mymusic.music.DataBean.Audit;
 import com.mymusic.music.Live;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Request;
 
 public class CommendActivity extends BaseActivity {
@@ -73,5 +75,13 @@ public class CommendActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+    @OnClick({R.id.back})
+    public void Click(View view){
+        switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
+        }
     }
 }
