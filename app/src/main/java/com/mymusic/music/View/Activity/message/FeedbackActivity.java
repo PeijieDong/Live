@@ -52,6 +52,7 @@ public class FeedbackActivity extends BaseActivity {
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
         map.put("type",position);
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.Notice_Mes, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -76,6 +77,7 @@ public class FeedbackActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+        hideloading();
     }
     @OnClick({R.id.back})
     public void Click(View view){

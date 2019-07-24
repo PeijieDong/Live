@@ -25,5 +25,6 @@ public class CommunityRcAdapter extends BaseQuickAdapter <Uri,BaseViewHolder>{
     @Override
     protected void convert(BaseViewHolder helper, Uri item) {
         Glide.with(mContext).load(item).error(R.drawable.fq_ic_placeholder).into((ImageView) helper.getView(R.id.community_select_image));
+        helper.addOnClickListener(R.id.clear_img);
     }
 }

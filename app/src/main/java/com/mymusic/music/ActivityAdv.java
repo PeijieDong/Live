@@ -55,6 +55,7 @@ public class ActivityAdv extends BaseActivity implements View.OnClickListener{
     }
 
     private void initNet() {
+        loading();
         NetRequest.postFormRequest(UrlManager.ADV, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -72,6 +73,7 @@ public class ActivityAdv extends BaseActivity implements View.OnClickListener{
 
             }
         });
+        hideloading();
     }
 
 

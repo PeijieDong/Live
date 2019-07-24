@@ -58,6 +58,7 @@ public class FriendListActivity extends BaseActivity {
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
         map.put("name",name);
+        loading();
         NetRequest.postFormRequest(UrlManager.FRIEND_ALL, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -75,6 +76,7 @@ public class FriendListActivity extends BaseActivity {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     private void initRc(List<FriendAllData.DataBean.ListBeanX> list) {
@@ -120,6 +122,7 @@ public class FriendListActivity extends BaseActivity {
             startActivity(intent);
             return;
         }
+        loading();
         NetRequest.postFormHeadRequest(url, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -137,6 +140,7 @@ public class FriendListActivity extends BaseActivity {
                 dialog.Show();
             }
         });
+        hideloading();
     }
     @OnClick({R.id.close})
     public void Click(View view){

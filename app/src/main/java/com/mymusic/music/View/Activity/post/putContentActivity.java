@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
@@ -103,6 +104,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     private String type ;
     private StringBuilder tag = new StringBuilder();
     private List<String> list = new ArrayList<>();
+    private View view = null;
     // Storage Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -219,6 +221,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 File file1 = getFileByUri(image.get(i),putContentActivity.this);
                 fileList.add(file1);
             }
+            loading();
             NetRequest.postmorePicRequest(url, this, map, fileList, new NetRequest.DataCallBack() {
                 @Override
                 public void requestSuccess(String result) throws Exception {
@@ -240,6 +243,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     dialog.Show();
                 }
             });
+            hideloading();
             return;
         }
         if (navigation.getPosition() == 0) {
@@ -282,6 +286,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
 
@@ -313,6 +318,14 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             image = Matisse.obtainResult(data);
             initRc();
+            if(image.size() > 0){
+                if(view != null){
+                    adapter.removeFooterView(view);
+                }
+            }else{
+                adapter.addFooterView(view);
+            }
+
         }
     }
 
@@ -330,7 +343,22 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
     private void initRc() {
         rc.setLayoutManager(new GridLayoutManager(putContentActivity.this,3));
         adapter = new CommunityRcAdapter(R.layout.community_advice_item,image);
-        View view = null;
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                getIcon();
+            }
+        });
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter2, View view2, int position) {
+                image.remove(position);
+                if(image.size() == 0){
+                    adapter.addFooterView(view);
+                }
+                adapter2.notifyDataSetChanged();
+            }
+        });
         if(isVideo){
             view = LayoutInflater.from(putContentActivity.this).inflate(R.layout.activity_community_advice_foot, null);
         }else{
@@ -343,6 +371,10 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+       getIcon();
+    }
+
+    private void getIcon() {
         if(isVideo){
             Matisse.from(this)
                     .choose(MimeType.ofVideo(), false) // 选择 mime 的类型
@@ -367,6 +399,7 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     .forResult(REQUEST_CODE_CHOOSE); // 设置作为标记的请求码
         }
     }
+
     //获取视频总时长
     private String getVideoDuration(Uri uri){
         String path = getRealPathFromURI(putContentActivity.this, uri);
@@ -375,29 +408,6 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         String duration = media.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
         return "30";
     }
-//    public String getRingDuring(Uri mUri){
-//        String uri = getRealPathFromURI(putContentActivity.this, mUri);
-//        String duration="30";
-//        android.media.MediaMetadataRetriever mmr = new android.media.MediaMetadataRetriever();
-//        try {
-//            if (mUri != null) {
-//                HashMap<String, String> headers=null;
-//                if (headers == null) {
-//                    headers = new HashMap<String, String>();
-//                    headers.put("User-Agent", "Mozilla/5.0 (Linux; U; Android 4.4.2; zh-CN; MW-KW-001 Build/JRO03C) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 UCBrowser/1.0.0.001 U4/0.8.0 Mobile Safari/533.1");
-//                }
-//                mmr.setDataSource(uri, headers);
-//            }
-//            duration = mmr.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION);
-//        } catch (Exception ex) {
-//
-//        } finally {
-//            mmr.release();
-//        }
-//        return duration;
-//    }
-
-
 
     public static void verifyStoragePermissions(Activity activity) {
             // Check if we have write permission

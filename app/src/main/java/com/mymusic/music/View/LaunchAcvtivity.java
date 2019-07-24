@@ -62,6 +62,7 @@ public class LaunchAcvtivity extends BaseActivity implements EasyPermissions.Per
     }
 
     private void initNet() {
+
         HashMap<String, String> map = new HashMap<>();
         map.put("uid",Live.getInstance().getUser(this).getData().getId());
         NetRequest.postFormHeadRequest(UrlManager.User_Detail, map, Live.getInstance().getToken(LaunchAcvtivity.this), new NetRequest.DataCallBack() {

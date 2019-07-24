@@ -26,6 +26,7 @@ import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
+import com.mymusic.music.View.Activity.MyChildActivity.My.MycollectionActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
@@ -82,6 +83,11 @@ public class FriendDetailFragment1 extends BaseFragment {
                     @Override
                     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                         switch (view.getId()){
+                            case R.id.icon_comment:
+                                Intent intentx = new Intent(getContext(), DetailsActivity.class);
+                                intentx.putExtra("id",data.getData().getList().get(position).getId());
+                                startActivity(intentx);
+                                break;
                             case R.id.user_go:
                                 Intent intent2 = new Intent(getContext(), UserDetailActivity.class);
                                 intent2.putExtra("UserId",list.get(position).getId());

@@ -8,6 +8,7 @@ import com.danikula.videocache.HttpProxyCacheServer;
 import com.mymusic.music.DataBean.User;
 import com.mymusic.music.DataBean.UserBean;
 import com.mymusic.music.DataBean.UserInfo;
+import com.mymusic.music.Util.ContextUtils;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.MyFileNameGenerator;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
@@ -62,6 +63,7 @@ public class Live extends Application {
     public void onCreate() {
         super.onCreate();
         LitePal.initialize(this);
+        ContextUtils.init(this);
 //        Locale _UserLocale=LocaleUtils.getUserLocale(this);
 //        LocaleUtils.updateLocale(this, _UserLocale);
     }

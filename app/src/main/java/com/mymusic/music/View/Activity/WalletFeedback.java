@@ -114,6 +114,7 @@ public class WalletFeedback extends BaseActivity implements View.OnClickListener
         map.put("content",des.getText().toString());
         map.put("contact",phone.getText().toString());
         map.put("type",group.getCheckedRadioButtonId()+"");
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.Feedback_wallet, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -131,6 +132,7 @@ public class WalletFeedback extends BaseActivity implements View.OnClickListener
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     private void initCamera() {

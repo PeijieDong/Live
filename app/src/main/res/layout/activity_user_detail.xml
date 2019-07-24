@@ -25,7 +25,7 @@
                 <LinearLayout
                     android:id="@+id/back_random"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="180dp"
                     android:orientation="vertical"
                     android:background="@drawable/my_home_page_member_default">
                     <ImageView
@@ -127,11 +127,12 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:layout_marginTop="3dp"
                         android:background="#F4F4F6"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="2dp"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
                         <TextView
@@ -139,26 +140,28 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#999999"
-                            android:textSize="14sp"
+                            android:textSize="15sp"
                             android:layout_marginLeft="15dp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#999999"
                             android:text="粉丝"
+                            android:textStyle="bold"
                             android:layout_marginLeft="4dp"/>
                         <TextView
                             android:id="@+id/focusNum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#999999"
-                            android:textSize="14sp"
+                            android:textSize="15sp"
                             android:layout_marginLeft="40dp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#999999"
                             android:text="关注"
+                            android:textStyle="bold"
                             android:layout_marginLeft="4dp"/>
                     </LinearLayout>
                     <View

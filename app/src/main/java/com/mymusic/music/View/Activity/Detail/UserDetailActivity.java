@@ -117,7 +117,6 @@ public class UserDetailActivity extends BaseActivity {
             }else{
                 focus.setVisibility(View.VISIBLE);
             }
-            focus.setVisibility(View.VISIBLE);
         }
         initNet();
         initView();

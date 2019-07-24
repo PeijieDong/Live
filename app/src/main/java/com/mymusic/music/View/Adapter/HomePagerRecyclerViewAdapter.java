@@ -105,6 +105,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         int type = helper.getItemViewType();
         helper.addOnClickListener(R.id.themeBt);
         helper.addOnClickListener(R.id.ll_home_like);
+        helper.addOnClickListener(R.id.icon_comment);
         switch (type){
             case PICTURE:
                 initListener(helper,item);
@@ -227,8 +228,6 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         like = helper.getView(R.id.icon_like);
 
         likeNum = helper.getView(R.id.likeNum);
-        ImageView comment = helper.getView(R.id.icon_comment);
-        comment.setOnClickListener(this);
         ImageView share = helper.getView(R.id.icon_share);
         share.setOnClickListener(this);
         LinearLayout userBt = helper.getView(R.id.userBt);
@@ -237,9 +236,6 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.icon_comment:
-                initComment();
-                break;
             case R.id.icon_share:
                 if(Live.getInstance().getUser(mContext) == null){
                     Intent intent = new Intent(mContext, LoginActivity.class);

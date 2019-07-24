@@ -67,6 +67,7 @@ public class CommentPPFragment extends BaseFragment {
             startActivity(intent);
             return;
         }
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.My_Comment, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -85,6 +86,7 @@ public class CommentPPFragment extends BaseFragment {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     private void initView(Art bean) {
@@ -115,6 +117,7 @@ public class CommentPPFragment extends BaseFragment {
     private void initClose(Art bean, int position) {
         HashMap<String, String> map = new HashMap<>();
         map.put("id",bean.getData().getList().get(position).getVid());
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.Delete, map,Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -132,5 +135,6 @@ public class CommentPPFragment extends BaseFragment {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 }

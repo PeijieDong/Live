@@ -152,6 +152,7 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
         }
         map.put("file",PicToBase64.imageToBase64(imageList.get(0).getPath()));
         File file = getFileByUri(imageList.get(0), this);
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.Jubao_Video, map ,Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -170,6 +171,7 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     public static File getFileByUri(Uri uri,Context context) {

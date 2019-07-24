@@ -63,6 +63,7 @@ public class SignActivity extends BaseActivity implements TagFlowListener {
     }
 
     private void initNet() {
+        loading();
         NetRequest.getFormRequest(UrlManager.GetTag, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -80,6 +81,7 @@ public class SignActivity extends BaseActivity implements TagFlowListener {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     private void initTab(List<SignTag.ListBeanX> list) {

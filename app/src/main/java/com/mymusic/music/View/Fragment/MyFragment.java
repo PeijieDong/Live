@@ -142,6 +142,7 @@ public class MyFragment extends BaseFragment {
     }
 
     private void initUserInfo() {
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.GetUserInfo, null,Live.getInstance().get(getContext()).getList().getToken(), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -186,6 +187,7 @@ public class MyFragment extends BaseFragment {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     @OnClick({R.id.my_setting,R.id.my_level,R.id.my_user_head,

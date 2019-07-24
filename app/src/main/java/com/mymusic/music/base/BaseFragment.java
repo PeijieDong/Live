@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mymusic.music.Live;
+import com.mymusic.music.Util.LoadingDialog;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 
 import butterknife.ButterKnife;
@@ -53,5 +54,18 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    LoadingDialog dialog;
+    public void loading(){
+        LoadingDialog.Builder builder = new LoadingDialog.Builder(getContext())
+                .setMessage("加载中...")
+                .setCancelable(false);
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    public void hideloading(){
+        dialog.dismiss();
     }
 }

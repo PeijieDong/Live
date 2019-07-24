@@ -112,6 +112,7 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
         map.put("nid",uid);
         map.put("touid",touid);
         map.put("file",PicToBase64.imageToBase64(imageList.get(0).getPath()));
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.JuBao, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -130,6 +131,7 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     @Override

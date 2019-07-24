@@ -96,6 +96,7 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
     }
 
     private void initHot() {
+        loading();
         NetRequest.getFormRequest(UrlManager.Home_Find, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -115,6 +116,7 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     private void initFlow() {

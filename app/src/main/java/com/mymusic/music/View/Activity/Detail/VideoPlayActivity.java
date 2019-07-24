@@ -158,6 +158,7 @@ public class VideoPlayActivity extends BaseActivity {
     private void initPlay2(VideoViewHolder3 viewHolder) {
         HashMap<String, String> map = new HashMap<>();
         map.put("client", AppUtil.getSerialNumber());
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.Play_Num, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) {
@@ -225,11 +226,13 @@ public class VideoPlayActivity extends BaseActivity {
             public void TokenFail() {
             }
         });
+        hideloading();
     }
 
     private void initLook2(String type, VideoViewHolder3 viewHolder) {
         HashMap<String, String> map = new HashMap<>();
         map.put("type",type);
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.GoMoney, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) {
@@ -250,11 +253,13 @@ public class VideoPlayActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+        hideloading();
     }
 
     private void initPlay(VideoViewHolder2 viewHolder) {
         HashMap<String, String> map = new HashMap<>();
         map.put("client", AppUtil.getSerialNumber());
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.Play_Num, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) {
@@ -326,11 +331,13 @@ public class VideoPlayActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+        hideloading();
     }
 
     private void initLook(String type,VideoViewHolder2 viewHolder) {
         HashMap<String, String> map = new HashMap<>();
         map.put("type",type);
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.GoMoney, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) {
@@ -351,6 +358,7 @@ public class VideoPlayActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+        hideloading();
     }
 
     @Override

@@ -167,7 +167,8 @@ public class NetRequest {
         final String doUrl = urlJoint(url, params);
         // 新建一个请求
         final Request request = new Request.Builder().url(doUrl)
-                .build();
+                .addHeader("udid",AppUtil.getSerialNumber())
+                .addHeader("token",Live.getInstance().getToken(ContextUtils.getContext())).build();
         //执行请求获得响应结果
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -293,7 +294,9 @@ public class NetRequest {
         //结果返回
         Request.Builder builder1 = new Request.Builder();
         final Request request = new Request.Builder().url(url)
-                .post(requestBody).build();
+                .post(requestBody)
+                .addHeader("udid",AppUtil.getSerialNumber())
+                .addHeader("token",Live.getInstance().getToken(ContextUtils.getContext())).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -349,7 +352,8 @@ public class NetRequest {
         Request.Builder builder1 = new Request.Builder();
         builder1.addHeader("token",head);
         final Request request = new Request.Builder().url(url)
-                .get().addHeader("token",head).build();
+                .get().addHeader("udid",AppUtil.getSerialNumber())
+                .addHeader("token",head).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -405,8 +409,11 @@ public class NetRequest {
         //结果返回
         Request.Builder builder1 = new Request.Builder();
         builder1.addHeader("token",head);
+        builder1.addHeader("udid",AppUtil.getSerialNumber());
         final Request request = new Request.Builder().url(url)
-                .post(requestBody).addHeader("token",head).build();
+                .post(requestBody)
+                .addHeader("udid",AppUtil.getSerialNumber())
+                .addHeader("token",head).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -442,7 +449,9 @@ public class NetRequest {
                 requestBody.addFormDataPart(valueOf(entry.getKey()), valueOf(entry.getValue()));
             }
         }
-        final Request request = new Request.Builder().url(url).addHeader("token",Live.getInstance().getToken(context)).post(requestBody.build()).build();
+        final Request request = new Request.Builder().url(url)
+                .addHeader("udid",AppUtil.getSerialNumber())
+                .addHeader("token",Live.getInstance().getToken(context)).post(requestBody.build()).build();
         // readTimeout("请求超时时间" , 时间单位);
         client.newBuilder().readTimeout(10000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
             @Override
@@ -482,7 +491,9 @@ public class NetRequest {
                 requestBody.addFormDataPart(valueOf(entry.getKey()), valueOf(entry.getValue()));
             }
         }
-        final Request request = new Request.Builder().url(url).addHeader("token", Live.getInstance().getToken(context)).post(requestBody.build()).build();
+        final Request request = new Request.Builder().url(url)
+                .addHeader("udid",AppUtil.getSerialNumber())
+                .addHeader("token", Live.getInstance().getToken(context)).post(requestBody.build()).build();
         // readTimeout("请求超时时间" , 时间单位);
         client.newBuilder().addInterceptor(new LoggerInterceptor(true)).readTimeout(10000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
             @Override

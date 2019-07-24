@@ -89,6 +89,7 @@ public class FriendFoundActivity extends BaseActivity {
         }
         HashMap<String, String> map = new HashMap<>();
         map.put("keywords",userFind.getText().toString());
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.Friend_Find, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -106,6 +107,7 @@ public class FriendFoundActivity extends BaseActivity {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     private void initFindRc(List<FriendAllData.DataBean.ListBeanX> list) {
@@ -132,6 +134,7 @@ public class FriendFoundActivity extends BaseActivity {
     }
 
     private void initTitle() {
+        loading();
         NetRequest.getFormRequest(UrlManager.FRIEND_ALL, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -154,6 +157,7 @@ public class FriendFoundActivity extends BaseActivity {
                 dialog.Show();
             }
         });
+        hideloading();
         navigation.setOnTabChechListener(new LeftNavigation.OnTabCheckListener() {
             @Override
             public void onTabSelected(View v, int position) {
@@ -165,6 +169,7 @@ public class FriendFoundActivity extends BaseActivity {
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
         map.put("name",title.getData().getList().get(navigation.getPosition()));
+        loading();
         NetRequest.postFormRequest(UrlManager.FRIEND_ALL, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -182,6 +187,7 @@ public class FriendFoundActivity extends BaseActivity {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     private void initRc(List<FriendAllData.DataBean.ListBeanX> list) {

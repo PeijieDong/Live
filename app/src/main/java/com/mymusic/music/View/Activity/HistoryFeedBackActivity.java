@@ -50,6 +50,7 @@ public class HistoryFeedBackActivity extends BaseActivity {
     }
 
     private void initNet() {
+        loading();
         HashMap<String, String> map = new HashMap<>();
         map.put("page","1");
         NetRequest.postFormHeadRequest(UrlManager.History_FeedBack, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {

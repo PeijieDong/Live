@@ -70,6 +70,7 @@ public class MoneyDetailActivity extends BaseActivity {
         HashMap<String, String> map = new HashMap<>();
         map.put("type",type);
         map.put("page","1");
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.Money_Detail, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -88,6 +89,7 @@ public class MoneyDetailActivity extends BaseActivity {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     private void initRc() {

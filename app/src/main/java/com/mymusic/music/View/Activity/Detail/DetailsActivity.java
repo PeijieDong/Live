@@ -195,8 +195,11 @@ public class DetailsActivity extends BaseActivity {
             initPlay(data.getData().getList().getId());
         }else if(data.getData().getList().getType().equals("文字")){
             title.setText("短文详情");
-            TextView view = (TextView) LayoutInflater.from(this).inflate(R.layout.detail_text_item, null);
-            view.setText(data.getData().getList().getContent());
+            View view = (View) LayoutInflater.from(this).inflate(R.layout.detail_text_item, null);
+            TextView textTitle = view.findViewById(R.id.text_title);
+            TextView textContext = view.findViewById(R.id.detail_content_text);
+            textContext.setText(data.getData().getList().getContent());
+            textTitle.setText(data.getData().getList().getTitle());
             detail_ll.addView(view);
         }else if(data.getData().getList().getType().equals("图片")){
             title.setText("图片详情");

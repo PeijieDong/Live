@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mymusic.music.DataBean.Play;
@@ -25,6 +26,7 @@ import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
+import com.mymusic.music.View.Activity.post.PutVideoActivity;
 import com.mymusic.music.View.Adapter.VideoRecyclerViewAdapter;
 import com.mymusic.music.View.Adapter.VideoViewHolder;
 import com.mymusic.music.base.BaseFragment;
@@ -35,6 +37,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
 import okhttp3.Request;
 
@@ -46,6 +49,10 @@ public class VideoFragment extends BaseFragment {
 
     @BindView(R.id.video_Rc)
     RecyclerView videoRc;
+    @BindView(R.id.empty_image)
+    ImageView empty;
+    @BindView(R.id.post_video)
+    ImageView putVideo;
     private PagerSnapHelper helper;
     private LinearLayoutManager layoutManager;
     private RecyclerView.ViewHolder viewHolder;
@@ -109,12 +116,20 @@ public class VideoFragment extends BaseFragment {
     }
 
     private void initNet() {
+        loading();
         NetRequest.postFormRequest(UrlManager.Video_List, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
                 bean = GsonUtil.GsonToBean(result, VideoData.class);
-                initView(bean);
+                if(bean.getData().getList() != null && bean.getData().getList().size() != 0){
+                    initView(bean);
+                    videoRc.setVisibility(View.VISIBLE);
+                }else{
+                    empty.setVisibility(View.VISIBLE);
+                    putVideo.setVisibility(View.VISIBLE);
+                }
+
             }
 
             @Override
@@ -127,6 +142,7 @@ public class VideoFragment extends BaseFragment {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 
     private void initView(VideoData bean) {
@@ -196,6 +212,7 @@ public class VideoFragment extends BaseFragment {
     private void initPlay() {
         HashMap<String, String> map = new HashMap<>();
         map.put("client", AppUtil.getSerialNumber());
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.Play_Num, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -265,11 +282,13 @@ public class VideoFragment extends BaseFragment {
             public void TokenFail() {
             }
         });
+        hideloading();
     }
 
     private void initLook(String type) {
         HashMap<String, String> map = new HashMap<>();
         map.put("type",type);
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.GoMoney, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -289,6 +308,7 @@ public class VideoFragment extends BaseFragment {
 
             }
         });
+        hideloading();
     }
 
     //    private void initCollection() {
@@ -321,6 +341,7 @@ public class VideoFragment extends BaseFragment {
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
         map.put("id",bean.getData().getList().get(selectPosition).getVid());
+        loading();
         NetRequest.postFormRequest(UrlManager.Video_Zan, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -339,6 +360,7 @@ public class VideoFragment extends BaseFragment {
                 dialog.Show();
             }
         });
+        hideloading();
     }
     @Override
     public void onPause() {
@@ -355,6 +377,23 @@ public class VideoFragment extends BaseFragment {
             if(viewHolder != null){
                 ((VideoViewHolder) viewHolder).mp_video.startVideo();
             }
+        }
+    }
+    @OnClick({R.id.put_video})
+    public void OnClick(View view){
+        switch (view.getId()){
+            case R.id.put_video:
+                if(Live.getInstance().getUser(getContext()) == null ){
+                    getContext().startActivity(new Intent(getContext(), LoginActivity.class));
+                    return;
+                }
+                if(Integer.parseInt(Live.getInstance().getUser(getContext()).getData().getLevel())<3){
+                    ToastUtil.show(getContext(),"只有3级以上用户可以使用",Toast.LENGTH_SHORT);
+                    return ;
+                }
+                Intent intent = new Intent(getContext(), PutVideoActivity.class);
+                getContext().startActivity(intent);
+                break;
         }
     }
 }

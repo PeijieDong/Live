@@ -134,6 +134,11 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()){
+                    case R.id.icon_comment:
+                        Intent intentx = new Intent(getContext(), DetailsActivity.class);
+                        intentx.putExtra("id",list.get(position).getId());
+                        startActivity(intentx);
+                        break;
                     case R.id.user_go:
                         Intent intent2 = new Intent(getContext(), UserDetailActivity.class);
                         intent2.putExtra("UserId",list.get(position).getId());
@@ -223,6 +228,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                         intent1.putExtra("UserId",1);
                         startActivity(intent1);
                         break;
+
                 }
 
             }

@@ -23,6 +23,7 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.post.PutVideoActivity;
+import com.mymusic.music.View.Activity.post.putContentActivity;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
 import com.mymusic.music.View.ChildFragment.FriendDetailFragment1;
 import com.mymusic.music.View.ChildFragment.FriendDetailFragment2;
@@ -66,7 +67,7 @@ public class FriendDetailActivity extends BaseActivity {
     @BindView(R.id.floatBt)
     FloatingActionButton floatingActionButton;
     @BindView(R.id.back_random)
-    LinearLayout backRandom;
+    ImageView backRandom;
     private String id;
     private FriendDetailTOP bean;
     private Boolean focuslogo = true;
@@ -167,7 +168,7 @@ public class FriendDetailActivity extends BaseActivity {
                     ToastUtil.show(FriendDetailActivity.this,"只有3级以上用户可以使用",Toast.LENGTH_SHORT);
                     return ;
                 }
-                Intent intent = new Intent(FriendDetailActivity.this, PutVideoActivity.class);
+                Intent intent = new Intent(FriendDetailActivity.this, putContentActivity.class);
                 startActivity(intent);
             }
         });

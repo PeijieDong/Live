@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.LoadingDialog;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.LockScreenActivity;
@@ -60,25 +61,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    public void goLogin(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("您还未登录，无法使用该功能，现在登录？");
-        builder.setNegativeButton("不了", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.setPositiveButton("好的", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-        builder.create();
-        builder.show();
-    }
     ProgressDialog progressDialog;
     public void showLoading(){
         progressDialog = new ProgressDialog(this);
@@ -88,6 +70,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+    }
+    LoadingDialog dialog;
+    public void loading(){
+        LoadingDialog.Builder builder = new LoadingDialog.Builder(this)
+                .setMessage("加载中...")
+                .setCancelable(false);
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    public void hideloading(){
+        if(dialog != null){
+            dialog.dismiss();
+        }
     }
 
     public void closeLoading(){

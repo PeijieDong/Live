@@ -131,6 +131,7 @@ public class PutVideoActivity extends BaseActivity {
 //                cursor.moveToFirst();
 //                String img_path = cursor.getString(img_index);
                 File file = getFileByUri(image.get(0),PutVideoActivity.this);
+                loading();
                 NetRequest.postmoreRequest(UrlManager.Put_Video,this, map, file, new NetRequest.DataCallBack() {
                     @Override
                     public void requestSuccess(String result) throws Exception {
@@ -151,6 +152,7 @@ public class PutVideoActivity extends BaseActivity {
                         dialog.Show();
                     }
                 });
+                hideloading();
                 break;
             case R.id.close:
                 finish();

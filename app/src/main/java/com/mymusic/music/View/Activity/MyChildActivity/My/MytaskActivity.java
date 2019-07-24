@@ -120,12 +120,16 @@ public class MytaskActivity extends BaseActivity {
                 break;
             case R.id.intergal:
                 Intent intent = new Intent(this, IntegalActivity.class);
-                intent.putExtra("integal",bean.getData().getList().get(0).getScore());
+                if(bean != null && bean.getData().getList() != null){
+                    intent.putExtra("integal",bean.getData().getList().get(0).getScore());
+                }
                 startActivity(intent);
                 break;
             case R.id.expScore:
                 Intent intent2 = new Intent(this, ExpActivity.class);
-                intent2.putExtra("exp",bean.getData().getList().get(0).getConsumption());
+                if(bean != null && bean.getData().getList() != null){
+                    intent2.putExtra("exp",bean.getData().getList().get(0).getConsumption());
+                }
                 startActivity(intent2);
                 break;
         }

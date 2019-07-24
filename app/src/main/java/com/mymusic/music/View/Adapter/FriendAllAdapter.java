@@ -2,6 +2,7 @@ package com.mymusic.music.View.Adapter;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,7 +42,8 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
                 .addOnClickListener(R.id.friend_all_image2)
                 .addOnClickListener(R.id.friend_all_image3);
         open = helper.getView(R.id.friend_all_down);
-        if(item.getList() != null){
+        if(item.getList() != null && item.getList().size() != 0){
+            Log.d("33",item.getList().size()+"");
             helper.setText(R.id.friend_all_num1,item.getList().get(0).getCate()+"张")
                     .setText(R.id.friend_all_num2,item.getList().get(1).getCate()+"张")
                     .setText(R.id.friend_all_num3,item.getList().get(2).getCate()+"张")

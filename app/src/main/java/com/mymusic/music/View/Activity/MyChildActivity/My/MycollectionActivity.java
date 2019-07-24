@@ -89,6 +89,18 @@ public class MycollectionActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.icon_comment:
+                        Intent intentx = new Intent(MycollectionActivity.this, DetailsActivity.class);
+                        intentx.putExtra("id",list.get(position).getId());
+                        startActivity(intentx);
+                        break;
+                }
+            }
+        });
         rc.setAdapter(adapter);
     }
     @OnClick({R.id.back})
