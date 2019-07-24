@@ -72,7 +72,7 @@ public class UserDetailActivity extends BaseActivity {
     @BindView(R.id.userDetail_focus)
     TextView focus;
     @BindView(R.id.back_random)
-    LinearLayout backRandom;
+    ImageView backRandom;
     @BindView(R.id.level_back)
     LinearLayout levelBack;
     @BindView(R.id.level_image)

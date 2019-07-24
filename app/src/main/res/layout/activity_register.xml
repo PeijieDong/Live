@@ -43,6 +43,7 @@
         android:background="@null"
         android:paddingLeft="20dp"
         android:textSize="14sp"
+        android:inputType="phone"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_2"
         android:layout_marginTop="60dp"
@@ -55,26 +56,26 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
-    <!--<EditText-->
-        <!--android:id="@+id/register_userPwd"-->
-        <!--android:layout_width="250dp"-->
-        <!--android:layout_height="45dp"-->
-        <!--android:background="@null"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:paddingLeft="20dp"-->
-        <!--android:textSize="14sp"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/register_userName"-->
-        <!--android:hint="@string/please_code"/>-->
-    <!--<TextView-->
-        <!--android:id="@+id/get_code"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="45dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:gravity="center"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/register_userName"-->
-        <!--app:layout_constraintLeft_toRightOf="@id/register_userPwd"-->
-        <!--android:text="@string/get_code"/>-->
+    <EditText
+        android:id="@+id/register_userPwd"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:background="@null"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/register_userName"
+        android:hint="@string/please_code"/>
+    <TextView
+        android:id="@+id/getCode"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_userName"
+        app:layout_constraintLeft_toRightOf="@id/register_userPwd"
+        android:text="@string/get_code"/>
     <View
         android:id="@+id/login_3"
         android:layout_width="match_parent"
@@ -94,7 +95,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:background="@drawable/login_normal"
-        app:layout_constraintTop_toBottomOf="@id/login_3"
+        app:layout_constraintTop_toBottomOf="@id/register_userPwd"
         android:text="@string/RegisterBt"/>
 
     <LinearLayout

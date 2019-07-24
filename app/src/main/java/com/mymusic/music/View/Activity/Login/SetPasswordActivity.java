@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.mymusic.music.DataBean.BackCode;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
@@ -36,11 +38,13 @@ public class SetPasswordActivity extends BaseActivity {
     @BindView(R.id.sure)
     Button go;
     boolean isregister = false;
+    private String code;
 
     @Override
     protected void initVariables(Intent intent) {
         phone = intent.getStringExtra("phone");
         isregister = intent.getBooleanExtra("isregister", false);
+        code = intent.getStringExtra("code");
     }
 
     @Override
@@ -96,8 +100,8 @@ public class SetPasswordActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.sure:
-                if(pwd.getText().toString().length()<6 && !pwd.getText().toString().equals(pwd2)){
-                    ToastUtil.show(this,"密码不正确",Toast.LENGTH_SHORT);
+                if(pwd.getText().toString().length()< 6 && !pwd.getText().toString().equals(pwd2)){
+                    ToastUtil.show(this,"密码不一致且密码不可以小于6位",Toast.LENGTH_SHORT);
                 }else{
                     initNet();
                 }
@@ -109,6 +113,8 @@ public class SetPasswordActivity extends BaseActivity {
         map = new HashMap<>();
         map.put("username",phone);
         map.put("password",pwd.getText().toString());
+        map.put("code",code);
+        map.put("invitacode","");
         if(isregister){
             initRegister();
         }else{
@@ -120,13 +126,18 @@ public class SetPasswordActivity extends BaseActivity {
         NetRequest.postFormRequest(UrlManager.Register, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                ToastUtil.show(SetPasswordActivity.this,"成功",Toast.LENGTH_SHORT);
-                finish();
+                BackCode backCode = GsonUtil.GsonToBean(result, BackCode.class);
+                if(backCode.getStatus().equals("1")){
+                    ToastUtil.show(SetPasswordActivity.this,"注册成功",Toast.LENGTH_SHORT);
+                    finish();
+                }else{
+                    ToastUtil.show(SetPasswordActivity.this,backCode.getMsg(),Toast.LENGTH_SHORT);
+                }
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                ToastUtil.show(SetPasswordActivity.this,"失败",Toast.LENGTH_SHORT);
+                ToastUtil.show(SetPasswordActivity.this,e.getMessage(),Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {
@@ -141,17 +152,22 @@ public class SetPasswordActivity extends BaseActivity {
         map1.put("username",phone);
         map1.put("user_pass",pwd.getText().toString());
         map1.put("user_pass2",pwd2.getText().toString());
-        map1.put("code","1234");
+        map1.put("code",code);
         NetRequest.postFormRequest(UrlManager.Forget, map1, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                ToastUtil.show(SetPasswordActivity.this,"成功",Toast.LENGTH_SHORT);
-                finish();
+                BackCode backCode = GsonUtil.GsonToBean(result, BackCode.class);
+                if(backCode.getStatus().equals("1")){
+                    ToastUtil.show(SetPasswordActivity.this,"修改成功",Toast.LENGTH_SHORT);
+                    finish();
+                }else{
+                    ToastUtil.show(SetPasswordActivity.this,backCode.getMsg(),Toast.LENGTH_SHORT);
+                }
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-                ToastUtil.show(SetPasswordActivity.this,"失败",Toast.LENGTH_SHORT);
+                ToastUtil.show(SetPasswordActivity.this,e.getMessage(),Toast.LENGTH_SHORT);
             }
             @Override
             public void TokenFail() {

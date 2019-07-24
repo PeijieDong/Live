@@ -156,4 +156,9 @@ public class UrlManager {
     public static final String Get_Message = BaseUrl +"users/noticeset";
 
     public static final String Notice_Mes = BaseUrl +"users/notice";
+
+    public static final String GET_CODE = BaseUrl+"index/sendSms";
+
+    public static final String CHECK_CODE = BaseUrl+"";
+
 }

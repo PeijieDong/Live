@@ -1,6 +1,7 @@
 package com.mymusic.music.View.Adapter;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -31,5 +32,6 @@ public class VideoFragmentRcAdapter extends BaseQuickAdapter<CommentBean.DataBea
                 .setText(R.id.comment_likeNum,item.getNum())
                 .addOnClickListener(R.id.comment_like)
                 .addOnClickListener(R.id.detail_head_cir);
+        Log.e("33",item.getNum());
     }
 }

@@ -359,8 +359,9 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                         NetRequest.postFormRequest(UrlManager.Video_CommentLike, map, new NetRequest.DataCallBack() {
                             @Override
                             public void requestSuccess(String result) throws Exception {
+                                Log.e("33",result);
                                 ToastUtil.show(context,"点赞成功",Toast.LENGTH_SHORT);
-                                likeNum.setText(Integer.parseInt(holder.likeNum.getText().toString())+1+"");
+                                likeNum.setText(Integer.parseInt(likeNum.getText().toString())+1+"");
                                 likeIcon.setImageResource(R.drawable.video_favor_s);
                             }
 

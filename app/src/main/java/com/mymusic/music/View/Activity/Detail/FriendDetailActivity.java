@@ -125,22 +125,13 @@ public class FriendDetailActivity extends BaseActivity {
 
     private void initView() {
         Random random = new Random();
-        int i = random.nextInt(4);
+        int i = random.nextInt(1);
         switch (i){
             case 0:
-                backRandom.setBackgroundResource(R.drawable.circle_single_bg_1);
+                backRandom.setBackgroundResource(R.drawable.my_home_page_default);
                 break;
             case 1:
-                backRandom.setBackgroundResource(R.drawable.circle_single_bg_2);
-                break;
-            case 2:
-                backRandom.setBackgroundResource(R.drawable.circle_single_bg_3);
-                break;
-            case 3:
-                backRandom.setBackgroundResource(R.drawable.circle_single_bg_4);
-                break;
-            case 4:
-                backRandom.setBackgroundResource(R.drawable.circle_single_bg_1);
+                backRandom.setBackgroundResource(R.drawable.my_home_page_member_default);
                 break;
         }
         List<String> title = new ArrayList<>();

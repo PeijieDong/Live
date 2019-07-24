@@ -379,10 +379,10 @@ public class VideoFragment extends BaseFragment {
             }
         }
     }
-    @OnClick({R.id.put_video})
-    public void OnClick(View view){
+    @OnClick({R.id.post_video})
+    public void ClickEvent(View view){
         switch (view.getId()){
-            case R.id.put_video:
+            case R.id.post_video:
                 if(Live.getInstance().getUser(getContext()) == null ){
                     getContext().startActivity(new Intent(getContext(), LoginActivity.class));
                     return;
