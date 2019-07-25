@@ -47,7 +47,7 @@ import okhttp3.Request;
  * Create By mr.mao in 2019/5/29 22:22
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
-public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.DataBean.ListBean,BaseViewHolder> implements View.OnClickListener {
+public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.DataBean.ListBean,BaseViewHolder>{
 
     private final int PICTURE = 1;
     private final int ARTICLE = 2;
@@ -103,9 +103,11 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     protected void convert(BaseViewHolder helper, HomeData.DataBean.ListBean item) {
         this.item = item;
         int type = helper.getItemViewType();
-        helper.addOnClickListener(R.id.themeBt);
-        helper.addOnClickListener(R.id.ll_home_like);
-        helper.addOnClickListener(R.id.icon_comment);
+        helper.addOnClickListener(R.id.themeBt)
+                .addOnClickListener(R.id.ll_home_like)
+                .addOnClickListener(R.id.icon_comment)
+                .addOnClickListener(R.id.userBt)
+                .addOnClickListener(R.id.icon_share);
         switch (type){
             case PICTURE:
                 initListener(helper,item);
@@ -226,41 +228,9 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
     TextView likeNum;
     public void initListener(BaseViewHolder helper, HomeData.DataBean.ListBean item){
         like = helper.getView(R.id.icon_like);
-
         likeNum = helper.getView(R.id.likeNum);
-        ImageView share = helper.getView(R.id.icon_share);
-        share.setOnClickListener(this);
-        LinearLayout userBt = helper.getView(R.id.userBt);
-        userBt.setOnClickListener(this);
-    }
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.icon_share:
-                if(Live.getInstance().getUser(mContext) == null){
-                    Intent intent = new Intent(mContext, LoginActivity.class);
-                    mContext.startActivity(intent);
-                    return;
-                }
-                initShare();
-                break;
-            case R.id.userBt:
-                Intent intent1 = new Intent(mContext, UserDetailActivity.class);
-                intent1.putExtra("UserId", item.getUid());
-                mContext.startActivity(intent1);
-                break;
-        }
     }
 
-    private void initComment() {
-
-    }
-    private void initShare() {
-        ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText(null, item.getContent());
-        clipboard.setPrimaryClip(clipData);
-        ToastUtil.show(mContext,"分享内容复制成功",Toast.LENGTH_SHORT);
-    }
 
 
 

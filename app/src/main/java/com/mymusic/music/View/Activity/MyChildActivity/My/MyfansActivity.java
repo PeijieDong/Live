@@ -2,6 +2,7 @@ package com.mymusic.music.View.Activity.MyChildActivity.My;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -98,12 +99,14 @@ public class MyfansActivity extends BaseActivity {
             public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                 TextView focus = view.findViewById(R.id.focus_rc_focusbt);
                 if(focus.getText().toString().equals("+关注")){
-                    focus.setText("取消关注");
-                    focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus);
+                    focus.setText("已关注");
+                    focus.setBackgroundResource(R.drawable.back_friend_detail_cencelfocus_white);
+                    focus.setTextColor(ContextCompat.getColor(MyfansActivity.this,R.color.text_gray_66));
                     initFocus(true,i);
                 }else{
                     focus.setText("+关注");
                     focus.setBackgroundResource(R.drawable.back_friend_detail_focus);
+                    focus.setTextColor(ContextCompat.getColor(MyfansActivity.this,R.color.white));
                     initFocus(false,i);
                 }
 

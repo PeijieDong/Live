@@ -161,4 +161,6 @@ public class UrlManager {
 
     public static final String CHECK_CODE = BaseUrl+"";
 
+    public static final String ShareFriend = BaseUrl+"index/website";
+
 }

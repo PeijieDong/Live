@@ -284,7 +284,7 @@ public class MyFragment extends BaseFragment {
             case R.id.my_community:
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.VIEW");
-                Uri uri = Uri.parse("https://www.baidu.com");
+                Uri uri = Uri.parse(UrlManager.ShareFriend);
 //                Uri uri = Uri.parse("https://potato.im/joinchat/202cb962ac59075b964b07152d234b70");
                 intent.setData(uri);
                 startActivity(intent);

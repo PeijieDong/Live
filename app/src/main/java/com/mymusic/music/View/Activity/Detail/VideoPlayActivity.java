@@ -58,7 +58,7 @@ public class VideoPlayActivity extends BaseActivity {
         userVideo = (List<FriendDetail.DataBean.ListBean>) intent.getSerializableExtra("userVideo");
         playData = (List<HomeData.DataBean.ListBean.ObjsBean>) intent.getSerializableExtra("playData");
         data = (FriendDetail) intent.getSerializableExtra("video");
-        if(data != null){
+        if(data != null && data.getData() != null){
             userVideo = data.getData().getList();
         }
         position = intent.getIntExtra("position", 0);
@@ -114,7 +114,7 @@ public class VideoPlayActivity extends BaseActivity {
                 public void holder(VideoViewHolder3 holder) {
                     viewHolder = holder;
                     initPlay2(holder);
-                    holder.mp_video.setId(data.getData().getList().get(position).getId());
+                    holder.mp_video.setId(playData.get(position).getVid());
                 }
             });
         }

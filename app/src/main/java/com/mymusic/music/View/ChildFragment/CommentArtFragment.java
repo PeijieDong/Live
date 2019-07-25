@@ -19,6 +19,7 @@ import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
+import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.ArRcAdpater;
 import com.mymusic.music.base.BaseFragment;
@@ -97,7 +98,7 @@ public class CommentArtFragment extends BaseFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra("id",bean.getData().getList().get(position).getCid());
+                intent.putExtra("id",bean.getData().getList().get(position).getId());
                 startActivity(intent);
             }
         });
@@ -107,6 +108,11 @@ public class CommentArtFragment extends BaseFragment {
                 switch (view.getId()){
                     case R.id.close:
                         initClose(bean,position);
+                        break;
+                    case R.id.head:
+                        Intent intent2 = new Intent(getContext(), UserDetailActivity.class);
+                        intent2.putExtra("UserId",bean.getData().getList().get(position).getId());
+                        startActivity(intent2);
                         break;
                 }
             }

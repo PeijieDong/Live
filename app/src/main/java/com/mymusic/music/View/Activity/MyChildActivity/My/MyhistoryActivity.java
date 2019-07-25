@@ -87,7 +87,7 @@ public class MyhistoryActivity extends BaseActivity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(MyhistoryActivity.this, DetailsActivity.class);
-                intent.putExtra("id",bean.getData().getList().get(position).getHid());
+                intent.putExtra("id",bean.getData().getList().get(position).getVid());
                 startActivity(intent);
             }
         });
@@ -113,6 +113,7 @@ public class MyhistoryActivity extends BaseActivity {
             startActivity(intent);
             return;
         }
+        loading();
         NetRequest.postFormHeadRequest(UrlManager.Clear_History, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -130,5 +131,6 @@ public class MyhistoryActivity extends BaseActivity {
                 dialog.Show();
             }
         });
+        hideloading();
     }
 }

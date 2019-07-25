@@ -71,6 +71,8 @@
             android:padding="10dp"
             android:textSize="16sp"
             android:textColor="#000"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:text="你听过七月的风八月的雨吗？"/>
     </LinearLayout>
     <TextView
