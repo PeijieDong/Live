@@ -95,6 +95,7 @@ public class PutVideoActivity extends BaseActivity {
                         .choose(MimeType.ofVideo(), false) // 选择 mime 的类型
                         .countable(true)
                         .theme(R.style.Matisse_Zhihu)
+                        .showSingleMediaType(true)
                         .maxSelectable(1) // 图片选择的最多数量
                         .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                         .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)

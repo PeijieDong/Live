@@ -141,6 +141,7 @@ public class WalletFeedback extends BaseActivity implements View.OnClickListener
                 .countable(true)
                 .theme(R.style.Matisse_Zhihu )
                 .maxSelectable(9) // 图片选择的最多数量
+                .showSingleMediaType(true)
                 .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                 .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                 .thumbnailScale(0.85f) // 缩略图的比例
