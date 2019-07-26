@@ -141,7 +141,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                         break;
                     case R.id.user_go:
                         Intent intent2 = new Intent(getContext(), UserDetailActivity.class);
-                        intent2.putExtra("UserId",list.get(position).getId());
+                        intent2.putExtra("UserId",list.get(position).getUid());
                         startActivity(intent2);
                         break;
                     case R.id.themeBt:
@@ -228,7 +228,16 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                         intent1.putExtra("UserId",1);
                         startActivity(intent1);
                         break;
-
+                    case R.id.userBt:
+                        Intent intentU = new Intent(getContext(), UserDetailActivity.class);
+                        intentU.putExtra("UserId", list.get(position).getUid());
+                        startActivity(intentU);
+                        break;
+                    case R.id.icon_share:
+                        Intent intentS = new Intent(getContext(), UserDetailActivity.class);
+                        intentS.putExtra("UserId", list.get(position).getUid());
+                        startActivity(intentS);
+                        break;
                 }
 
             }

@@ -20,12 +20,15 @@ import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
+import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
+import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,7 +43,7 @@ public class PutFragment extends BaseFragment {
 
     @BindView(R.id.Rc)
     RecyclerView Rc;
-    int position;
+    int id;
     private List<HomeData.DataBean.ListBean> list;
 
     @Override
@@ -50,7 +53,7 @@ public class PutFragment extends BaseFragment {
 
     @Override
     protected void initVariables(Bundle bundle) {
-        position = bundle.getInt("position");
+        id = bundle.getInt("position");
     }
 
     @Override
@@ -67,7 +70,7 @@ public class PutFragment extends BaseFragment {
         checkLogin();
         HashMap<String, String> map = new HashMap<>();
         map.put("page","1");
-        map.put("type",position+"");
+        map.put("type",id+"");
         NetRequest.postFormHeadRequest(UrlManager.Publish, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -97,9 +100,18 @@ public class PutFragment extends BaseFragment {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra("id",list.get(position).getId());
-                startActivity(intent);
+                if(id == 1){
+                    if(list.get(position).getType().equals("小视频")){
+                        Intent intent = new Intent(getContext(), VideoPlayActivity.class);
+                        intent.putExtra("playData",(Serializable) list.get(position).getObjs());
+                        intent.putExtra("position",position);
+                        getContext().startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(getContext(), DetailsActivity.class);
+                        intent.putExtra("id", list.get(position).getId());
+                        startActivity(intent);
+                    }
+                }
             }
         });
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -108,8 +120,13 @@ public class PutFragment extends BaseFragment {
                 switch (view.getId()){
                     case R.id.themeBt:
                         Intent intent = new Intent(getActivity(), FriendDetailActivity.class);
-                        intent.putExtra("id",list.get(position).getUid());
+                        intent.putExtra("id",list.get(position).getCate());
                         getContext().startActivity(intent);
+                        break;
+                    case R.id.userBt:
+                        Intent intentU = new Intent(getContext(), UserDetailActivity.class);
+                        intentU.putExtra("UserId", list.get(position).getUid());
+                        startActivity(intentU);
                         break;
                 }
 

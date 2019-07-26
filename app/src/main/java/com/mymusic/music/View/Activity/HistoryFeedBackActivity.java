@@ -69,19 +69,22 @@ public class HistoryFeedBackActivity extends BaseActivity {
                     }
                 });
                 Rc.setAdapter(adapter);
+                hideloading();
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-
+                hideloading();
             }
 
             @Override
             public void TokenFail() {
                 LoginDialog dialog = new LoginDialog(HistoryFeedBackActivity.this);
                 dialog.Show();
+                hideloading();
             }
         });
+
     }
 
     @OnClick({R.id.back})

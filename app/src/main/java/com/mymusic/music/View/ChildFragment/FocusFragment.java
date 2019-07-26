@@ -182,13 +182,14 @@ public class FocusFragment extends BaseFragment {
 
     private void initFocus(boolean isFocus, int i) {
         String url = "";
+        HashMap<String, String> map = new HashMap<>();
         if(isFocus){
             url = UrlManager.Focus_User;
+            map.put("touid",bean.getData().getList().get(i).getUid());
         }else{
             url = UrlManager.NoFocus_User;
+            map.put("touid",bean.getData().getList().get(i).getTouid());
         }
-        HashMap<String, String> map = new HashMap<>();
-        map.put("touid",bean.getData().getList().get(i).getUid());
         if(Live.getInstance().getToken(getContext()) == null){
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);
