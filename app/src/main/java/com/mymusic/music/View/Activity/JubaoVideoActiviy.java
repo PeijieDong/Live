@@ -140,6 +140,7 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
     }
 
     private void initNet() {
+        showLoading();
         HashMap<String, String> map = new HashMap<>();
         map.put("type",group.getCheckedRadioButtonId()+"");
         map.put("content",des.getText().toString());
@@ -153,11 +154,11 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
         }
         map.put("file",PicToBase64.imageToBase64(imageList.get(0).getPath()));
         File file = getFileByUri(imageList.get(0), this);
-        loading();
         NetRequest.postFormHeadRequest(UrlManager.Jubao_Video, map ,Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
+                closeLoading();
                 ToastUtil.show(JubaoVideoActiviy.this,"提交成功",Toast.LENGTH_SHORT);
                 finish();
             }
@@ -165,14 +166,15 @@ public class JubaoVideoActiviy extends BaseActivity implements View.OnClickListe
             @Override
             public void requestFailure(Request request, IOException e) {
                 Log.e("33",e.getMessage());
+                closeLoading();
             }
             @Override
             public void TokenFail() {
+                closeLoading();
                 LoginDialog dialog = new LoginDialog(getActivity());
                 dialog.Show();
             }
         });
-        hideloading();
     }
 
     public static File getFileByUri(Uri uri,Context context) {

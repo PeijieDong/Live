@@ -81,7 +81,45 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#E3E3E3"
-        app:layout_constraintTop_toBottomOf="@id/register_userName"
+        app:layout_constraintTop_toBottomOf="@id/getCode"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+    <TextView
+        android:id="@+id/yaoqing"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:background="@null"
+        android:paddingLeft="20dp"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:inputType="phone"
+        android:textColor="#000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_3"
+        android:layout_marginTop="15dp"
+        android:text="邀请码"/>
+    <EditText
+        android:id="@+id/et_yaoqing"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:background="@null"
+        android:paddingLeft="20dp"
+        android:textSize="14sp"
+        android:textColor="#000"
+        android:paddingRight="15dp"
+        android:gravity="right|center"
+        android:hint="请输入邀请码（非必填）"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/yaoqing"
+        app:layout_constraintTop_toBottomOf="@id/login_3"
+        android:layout_marginTop="15dp" />
+    <View
+        android:id="@+id/login_4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3E3E3"
+        app:layout_constraintTop_toBottomOf="@id/et_yaoqing"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
@@ -95,7 +133,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:background="@drawable/login_normal"
-        app:layout_constraintTop_toBottomOf="@id/register_userPwd"
+        app:layout_constraintTop_toBottomOf="@id/yaoqing"
         android:text="@string/RegisterBt"/>
 
     <LinearLayout

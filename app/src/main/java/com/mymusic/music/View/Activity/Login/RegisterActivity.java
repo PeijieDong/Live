@@ -38,6 +38,8 @@ public class RegisterActivity extends BaseActivity {
     TextView getCode;
     @BindView(R.id.bt_login)
     Button go;
+    @BindView(R.id.et_yaoqing)
+    EditText yaoqingma;
     private String number ="";
     @Override
     protected void initVariables(Intent intent) {
@@ -168,6 +170,7 @@ public class RegisterActivity extends BaseActivity {
             Intent intent = new Intent(RegisterActivity.this, SetPasswordActivity.class);
             intent.putExtra("phone",number);
             intent.putExtra("code",code.getText().toString());
+            intent.putExtra("yaoqingma",yaoqingma.getText().toString());
             intent.putExtra("isregister",true);
             startActivity(intent);
             finish();

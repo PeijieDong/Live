@@ -29,6 +29,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.ToastUtil;
+import com.mymusic.music.View.Activity.MyChildActivity.My.MyshareActivity;
 import com.mymusic.music.base.BaseActivity;
 
 import java.io.File;
@@ -38,6 +39,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class WebActivity extends BaseActivity {
 
@@ -55,12 +57,16 @@ public class WebActivity extends BaseActivity {
     ImageView ewCode;
     @BindView(R.id.close)
     ImageView close;
+    @BindView(R.id.web_title)
+    TextView tv_title;
     String url;
     Boolean isshare = false;
+    String title = "";
 
     @Override
     protected void initVariables(Intent intent) {
         url = intent.getStringExtra("url");
+        title = intent.getStringExtra("title");
         isshare = intent.getBooleanExtra("share",false);
     }
 
@@ -71,6 +77,7 @@ public class WebActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
+        tv_title.setText(title);
         ewCode.setImageBitmap(setCode(url,600,600));
         if(isshare){
             share.setVisibility(View.VISIBLE);
@@ -236,5 +243,17 @@ public class WebActivity extends BaseActivity {
 
         }
         return isSuccess;
+    }
+    @OnClick({R.id.my_share,R.id.back})
+    public void ClickEvent(View view){
+        switch (view.getId()){
+            case R.id.my_share:
+                Intent intent = new Intent(this, MyshareActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.back:
+                finish();
+                break;
+        }
     }
 }

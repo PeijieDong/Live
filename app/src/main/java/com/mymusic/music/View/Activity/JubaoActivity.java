@@ -106,32 +106,33 @@ public class JubaoActivity extends BaseActivity implements View.OnClickListener 
             ToastUtil.show(JubaoActivity.this,"请选择举报类型",Toast.LENGTH_SHORT);
             return;
         }
+        showLoading();
         HashMap<String, String> map = new HashMap<>();
         map.put("type",group.getCheckedRadioButtonId()+"");
         map.put("content",des.getText().toString());
         map.put("nid",uid);
         map.put("touid",touid);
         map.put("file",PicToBase64.imageToBase64(imageList.get(0).getPath()));
-        loading();
         NetRequest.postFormHeadRequest(UrlManager.JuBao, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
+                closeLoading();
                 ToastUtil.show(JubaoActivity.this,"举报成功",Toast.LENGTH_SHORT);
                 finish();
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-
+                closeLoading();
             }
             @Override
             public void TokenFail() {
+                closeLoading();
                 LoginDialog dialog = new LoginDialog(getActivity());
                 dialog.Show();
             }
         });
-        hideloading();
     }
 
     @Override

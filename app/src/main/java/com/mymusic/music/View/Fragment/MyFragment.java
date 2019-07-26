@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.mymusic.music.DataBean.ShareFriend;
 import com.mymusic.music.DataBean.User;
 import com.mymusic.music.DataBean.UserBean;
 import com.mymusic.music.Live;
@@ -23,6 +25,7 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
@@ -282,12 +285,9 @@ public class MyFragment extends BaseFragment {
                 goActivity(MyaboutActivity.class);
                 break;
             case R.id.my_community:
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri uri = Uri.parse(UrlManager.ShareFriend);
-//                Uri uri = Uri.parse("https://potato.im/joinchat/202cb962ac59075b964b07152d234b70");
-                intent.setData(uri);
-                startActivity(intent);
+                loading();
+                getShare();
+                hideloading();
                 break;
             case R.id.my_share:
                 Intent intent1 = new Intent(getContext(), WebActivity.class);
@@ -296,6 +296,30 @@ public class MyFragment extends BaseFragment {
                 startActivity(intent1);
                 break;
         }
+    }
+
+    private void getShare() {
+        NetRequest.postFormRequest(UrlManager.ShareFriend, null, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                ShareFriend bean = GsonUtil.GsonToBean(result, ShareFriend.class);
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri uri = Uri.parse(bean.getData().getList());
+                intent.setData(uri);
+                startActivity(intent);
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void TokenFail() {
+                ToastUtil.show(getContext(),"网络请求失败",1);
+            }
+        });
     }
 
     /**

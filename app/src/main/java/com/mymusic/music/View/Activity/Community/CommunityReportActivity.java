@@ -95,6 +95,7 @@ public class CommunityReportActivity extends BaseActivity implements View.OnClic
                     ToastUtil.show(this,"请输入联系方式",Toast.LENGTH_SHORT);
                     return;
                 }
+                showLoading();
                 initNet();
                 break;
         }
@@ -110,16 +111,18 @@ public class CommunityReportActivity extends BaseActivity implements View.OnClic
             @Override
             public void requestSuccess(String result) throws Exception {
                 ToastUtil.show(CommunityReportActivity.this,"提交成功",Toast.LENGTH_SHORT);
+                closeLoading();
                 finish();
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-
+                closeLoading();
             }
 
             @Override
             public void TokenFail() {
+                closeLoading();
                 LoginDialog dialog = new LoginDialog(CommunityReportActivity.this);
                 dialog.Show();
             }

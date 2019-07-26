@@ -39,10 +39,12 @@ public class SetPasswordActivity extends BaseActivity {
     Button go;
     boolean isregister = false;
     private String code;
+    private String yaoqingma;
 
     @Override
     protected void initVariables(Intent intent) {
         phone = intent.getStringExtra("phone");
+        yaoqingma = intent.getStringExtra("yaoqingma");
         isregister = intent.getBooleanExtra("isregister", false);
         code = intent.getStringExtra("code");
     }
@@ -114,7 +116,7 @@ public class SetPasswordActivity extends BaseActivity {
         map.put("username",phone);
         map.put("password",pwd.getText().toString());
         map.put("code",code);
-        map.put("invitacode","");
+        map.put("invitacode",yaoqingma);
         if(isregister){
             initRegister();
         }else{
