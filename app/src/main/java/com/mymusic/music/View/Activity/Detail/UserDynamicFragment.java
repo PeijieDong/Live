@@ -42,6 +42,7 @@ public class UserDynamicFragment extends BaseFragment {
     @BindView(R.id.Rc)
     RecyclerView Rc;
     String id;
+    private boolean isSelect = false;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_user_dynamic,container,false);
@@ -173,7 +174,9 @@ public class UserDynamicFragment extends BaseFragment {
                                 }
                                 likeNum = view.findViewById(R.id.likeNum);
                                 likeIcon = view.findViewById(R.id.icon_like);
-                                initLike(list,position);
+                                if(isSelect){
+                                    initLike(list,position);
+                                }
                                 break;
                             case R.id.found_head:
                                 Intent intent1 = new Intent(getContext(), UserDetailActivity.class);
@@ -242,6 +245,7 @@ public class UserDynamicFragment extends BaseFragment {
         NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                isSelect = false;
                 ToastUtil.show(getContext(),"点赞成功",Toast.LENGTH_SHORT);
                 likeIcon.setImageResource(R.drawable.like_press);
                 likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");

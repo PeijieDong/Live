@@ -55,6 +55,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
     RecyclerView homePagerRecyclerview;
     @BindView(R.id.refresh)
     SmartRefreshLayout refresh;
+    private boolean isSelect = true;
     private int position;
     private List<HomeData.DataBean.ListBean> list;
 
@@ -131,9 +132,9 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
             }
         });
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()){
+                    @Override
+                    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                        switch (view.getId()){
                     case R.id.icon_comment:
                         Intent intentx = new Intent(getContext(), DetailsActivity.class);
                         intentx.putExtra("id",list.get(position).getId());
@@ -221,7 +222,9 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
                         }
                         likeNum = view.findViewById(R.id.likeNum);
                         likeIcon = view.findViewById(R.id.icon_like);
-                        initLike(list,position);
+                        if(isSelect){
+                            initLike(list,position);
+                        }
                         break;
                     case R.id.found_head:
                         Intent intent1 = new Intent(getContext(), UserDetailActivity.class);
@@ -288,6 +291,7 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
         NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                isSelect = false;
                 ToastUtil.show(getContext(),"点赞成功",Toast.LENGTH_SHORT);
                 likeIcon.setImageResource(R.drawable.like_press);
                 likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");

@@ -116,6 +116,7 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
                             return;
                         }
                         TextView focus = view.findViewById(R.id.find_item_focus);
+
                         if(focus.getText().toString().equals("取消关注")){
                             focus.setText("+关注");
                             focus.setBackgroundResource(R.drawable.focus);

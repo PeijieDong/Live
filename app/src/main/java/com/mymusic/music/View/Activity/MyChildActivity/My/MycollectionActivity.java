@@ -88,6 +88,7 @@ public class MycollectionActivity extends BaseActivity {
     }
     TextView likeNum;
     ImageView likeIcon;
+    private boolean isSelect = true;
     private void initRc(List<HomeData.DataBean.ListBean> list) {
         rc.setLayoutManager(new LinearLayoutManager(this));
         HomePagerRecyclerViewAdapter adapter = new HomePagerRecyclerViewAdapter(list);
@@ -102,7 +103,7 @@ public class MycollectionActivity extends BaseActivity {
                     startActivity(intent);
                 }else {
                     Intent intent = new Intent(MycollectionActivity.this, DetailsActivity.class);
-                    intent.putExtra("id", list.get(position).getId());
+                    intent.putExtra("id", list.get(position).getNewsid());
                     startActivity(intent);
                 }
             }
@@ -198,7 +199,9 @@ public class MycollectionActivity extends BaseActivity {
                         }
                         likeNum = view.findViewById(R.id.likeNum);
                         likeIcon = view.findViewById(R.id.icon_like);
-                        initLike(list,position);
+                        if(isSelect){
+                            initLike(list,position);
+                        }
                         break;
                     case R.id.found_head:
                         Intent intent1 = new Intent(MycollectionActivity.this, UserDetailActivity.class);
@@ -254,6 +257,7 @@ public class MycollectionActivity extends BaseActivity {
         NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                isSelect = false;
                 ToastUtil.show(MycollectionActivity.this,"点赞成功",Toast.LENGTH_SHORT);
                 likeIcon.setImageResource(R.drawable.like_press);
                 likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");

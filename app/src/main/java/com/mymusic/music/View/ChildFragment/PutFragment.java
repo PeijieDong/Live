@@ -92,6 +92,7 @@ public class PutFragment extends BaseFragment {
 
     TextView likeNum;
     ImageView likeIcon;
+    private boolean isSelect = true;
     private void initRc(List<HomeData.DataBean.ListBean> list) {
         this.list = list;
         Rc.setLayoutManager(new LinearLayoutManager(getContext()));

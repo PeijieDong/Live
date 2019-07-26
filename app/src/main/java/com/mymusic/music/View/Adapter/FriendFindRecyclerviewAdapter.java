@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mymusic.music.DataBean.FriendFindData;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.user.ListUserActivity;
@@ -53,12 +54,17 @@ public class FriendFindRecyclerviewAdapter extends BaseQuickAdapter<FriendFindDa
                 .addOnClickListener(R.id.image_Container4)
                 .addOnClickListener(R.id.image_Container5)
                 .addOnClickListener(R.id.image_Container6);
-        if(item.getIsguanzhu().equals("已关注")){
-            helper.setText(R.id.find_item_focus,"取消关注");
-            helper.setBackgroundRes(R.id.find_item_focus,R.drawable.isfocus);
-        }else{
+        if(!Live.getInstance().getToken(mContext).equals("")){
             helper.setText(R.id.find_item_focus,"+关注");
             helper.setBackgroundRes(R.id.find_item_focus,R.drawable.focus);
+        }else {
+            if (item.getIsguanzhu().equals("已关注")) {
+                helper.setText(R.id.find_item_focus, "取消关注");
+                helper.setBackgroundRes(R.id.find_item_focus, R.drawable.isfocus);
+            } else {
+                helper.setText(R.id.find_item_focus, "+关注");
+                helper.setBackgroundRes(R.id.find_item_focus, R.drawable.focus);
+            }
         }
         ImageView head = helper.getView(R.id.friend_find_head);
         ImageView one = helper.getView(R.id.friend_find_one);

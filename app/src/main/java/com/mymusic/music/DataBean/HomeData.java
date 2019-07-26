@@ -96,6 +96,7 @@ public class HomeData implements Serializable {
 
             private String id;
             private String uid;
+            private String newsid;
             private String cate;
             private String type;
             private String content;
@@ -338,6 +339,14 @@ public class HomeData implements Serializable {
 
             public void setImages(List<String> images) {
                 this.images = images;
+            }
+
+            public String getNewsid() {
+                return newsid;
+            }
+
+            public void setNewsid(String newsid) {
+                this.newsid = newsid;
             }
 
             public List<ObjsBean> getObjs() {

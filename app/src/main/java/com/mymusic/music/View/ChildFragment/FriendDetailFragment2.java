@@ -42,7 +42,7 @@ public class FriendDetailFragment2 extends BaseFragment {
     @BindView(R.id.Rc)
     RecyclerView rc;
     private String id;
-
+    private boolean isSelect = true;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.friend_detail_fragment2,container,false);

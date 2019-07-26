@@ -45,6 +45,7 @@ public class MylikeActivity extends BaseActivity {
 
     @BindView(R.id.like_Rc)
     RecyclerView rc;
+    private boolean isSelect = true;
     @Override
     protected void initVariables(Intent intent) {
 
@@ -200,7 +201,9 @@ public class MylikeActivity extends BaseActivity {
                         }
                         likeNum = view.findViewById(R.id.likeNum);
                         likeIcon = view.findViewById(R.id.icon_like);
-                        initLike(bean.getData().getList(),position);
+                        if(isSelect){
+                            initLike(bean.getData().getList(),position);
+                        }
                         break;
                     case R.id.found_head:
                         Intent intent1 = new Intent(MylikeActivity.this, UserDetailActivity.class);
@@ -232,6 +235,7 @@ public class MylikeActivity extends BaseActivity {
         NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                isSelect = false;
                 ToastUtil.show(MylikeActivity.this,"点赞成功",Toast.LENGTH_SHORT);
                 likeIcon.setImageResource(R.drawable.like_press);
                 likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");

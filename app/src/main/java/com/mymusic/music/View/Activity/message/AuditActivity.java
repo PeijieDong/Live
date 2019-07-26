@@ -55,7 +55,7 @@ public class AuditActivity extends BaseActivity {
             public void requestSuccess(String result) throws Exception {
                 Audit bean = GsonUtil.GsonToBean(result, Audit.class);
                 Rc.setLayoutManager(new LinearLayoutManager(AuditActivity.this));
-                AuditRcAdapter adapter = new AuditRcAdapter(R.layout.audit_item_layout,null);
+                AuditRcAdapter adapter = new AuditRcAdapter(R.layout.audit_item_layout,bean.getData().getList());
                 adapter.setEmptyView(LayoutInflater.from(AuditActivity.this).inflate(R.layout.empty_layout,null));
                 Rc.setAdapter(adapter);
             }

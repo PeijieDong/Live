@@ -60,6 +60,7 @@ public class FriendDetailFragment1 extends BaseFragment {
     }
     TextView likeNum;
     ImageView likeIcon;
+    private boolean isSelect = true;
     private void initNet() {
         HashMap<String, String> map = new HashMap<>();
         map.put("id",id);
@@ -170,7 +171,9 @@ public class FriendDetailFragment1 extends BaseFragment {
                                 }
                                 likeNum = view.findViewById(R.id.likeNum);
                                 likeIcon = view.findViewById(R.id.icon_like);
-                                initLike(list,position);
+                                if(isSelect){
+                                    initLike(list,position);
+                                }
                                 break;
                             case R.id.found_head:
                                 Intent intent1 = new Intent(getContext(), UserDetailActivity.class);
@@ -237,6 +240,7 @@ public class FriendDetailFragment1 extends BaseFragment {
         NetRequest.postFormRequest(UrlManager.Like, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                isSelect = false;
                 ToastUtil.show(getContext(),"点赞成功",Toast.LENGTH_SHORT);
                 likeIcon.setImageResource(R.drawable.like_press);
                 likeNum.setText(Integer.valueOf(likeNum.getText().toString())+1+"");

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fillViewport="true"
+    android:background="@color/white"
     tools:context=".View.Activity.user.ExpActivity">
     <LinearLayout
         android:layout_width="match_parent"
