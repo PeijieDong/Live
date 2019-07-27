@@ -1,6 +1,7 @@
 package com.mymusic.music.View.Activity.MyChildActivity.My;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
+import com.mymusic.music.View.Activity.Detail.VideoSingleActivity;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
@@ -33,6 +35,7 @@ import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -97,8 +100,8 @@ public class MycollectionActivity extends BaseActivity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if(list.get(position).getType().equals("小视频")){
-                    Intent intent = new Intent(MycollectionActivity.this, VideoPlayActivity.class);
-                    intent.putExtra("playData",(Serializable) list.get(position).getObjs());
+                    Intent intent = new Intent(MycollectionActivity.this, VideoSingleActivity.class);
+                    intent.putExtra("playData", (Serializable) list.get(position));
                     intent.putExtra("position",position);
                     startActivity(intent);
                 }else {
@@ -224,6 +227,7 @@ public class MycollectionActivity extends BaseActivity {
         });
         rc.setAdapter(adapter);
     }
+
 
     private void initBt(String url,int position,HashMap<String,String> map) {
         if(Live.getInstance().getToken(MycollectionActivity.this) == null){

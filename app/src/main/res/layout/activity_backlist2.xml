@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".View.Activity.message.AuditActivity">
+    android:background="@color/white"
+    tools:context=".View.Activity.Backlist2Activity">
+
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/white">
+
         <ImageView
             android:id="@+id/back"
             android:layout_width="45dp"
@@ -23,17 +26,12 @@
             android:layout_centerInParent="true"
             android:textSize="18sp"
             android:textColor="#030303"
-            android:text="帖子审核"/>
-        <!--<TextView-->
-            <!--android:id="@+id/clear_history"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:textColor="#777"-->
-            <!--android:text="@string/history_clear"/>-->
+            android:text="黑名单"/>
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/Rc"
         android:layout_width="match_parent"

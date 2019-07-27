@@ -22,6 +22,7 @@ import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
+import com.mymusic.music.View.Activity.Detail.VideoSingleActivity;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
 import com.mymusic.music.base.BaseFragment;
@@ -103,8 +104,8 @@ public class PutFragment extends BaseFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if(id == 1){
                     if(list.get(position).getType().equals("小视频")){
-                        Intent intent = new Intent(getContext(), VideoPlayActivity.class);
-                        intent.putExtra("playData",(Serializable) list.get(position).getObjs());
+                        Intent intent = new Intent(getContext(), VideoSingleActivity.class);
+                        intent.putExtra("playData",(Serializable) list.get(position));
                         intent.putExtra("position",position);
                         getContext().startActivity(intent);
                     }else {

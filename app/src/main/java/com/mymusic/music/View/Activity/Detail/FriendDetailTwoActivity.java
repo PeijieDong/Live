@@ -59,13 +59,16 @@ public class FriendDetailTwoActivity extends BaseActivity {
         Glide.with(this).load(detail.getData().getList().getUlist().getHead3()).into(head3);
         Glide.with(this).load(detail.getData().getList().getUlist().getHead4()).into(head4);
     }
-    @OnClick({R.id.friend_detail_user})
+    @OnClick({R.id.friend_detail_user,R.id.back})
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.friend_detail_user:
                 Intent intent = new Intent(FriendDetailTwoActivity.this,ListUserActivity.class);
                 intent.putExtra("FriendId",id);
                 startActivity(intent);
+                break;
+            case R.id.back:
+                finish();
                 break;
         }
     }

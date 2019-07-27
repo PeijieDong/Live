@@ -22,11 +22,19 @@ public class AuditRcAdapter extends BaseQuickAdapter<Audit.DataBean.ListBean,Bas
 
     @Override
     protected void convert(BaseViewHolder helper, Audit.DataBean.ListBean item) {
-        helper.setText(R.id.title,item.getTitle())
-                .setText(R.id.time,item.getCreatetime())
-                .setText(R.id.state,item.getContent())
+        helper.setText(R.id.time,item.getCreatetime())
                 .setText(R.id.content,item.getContent())
-                .setText(R.id.content_title,item.getType());
-        Glide.with(mContext).load(item.getImages()).into((ImageView) helper.getView(R.id.image));
+                .setText(R.id.content_title,item.getTitle());
+        if(item.getNtype().equals("视频")){
+            helper.setVisible(R.id.video_icon,true);
+        }
+
+        if(item.getShenhe().equals("1")){
+            helper.setText(R.id.state,"已通过");
+            Glide.with(mContext).load(R.drawable.icon_post_review_sucess).into((ImageView) helper.getView(R.id.state_state));
+        }else{
+            helper.setText(R.id.state,"被驳回");
+        }
+        Glide.with(mContext).load(item.getImages()).error(R.drawable.icon_post_review_duanwe).into((ImageView) helper.getView(R.id.image));
     }
 }

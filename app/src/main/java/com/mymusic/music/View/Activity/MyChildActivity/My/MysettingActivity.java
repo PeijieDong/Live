@@ -16,6 +16,7 @@ import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.LocaleUtils;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.Util.cacheManager;
+import com.mymusic.music.View.Activity.Backlist2Activity;
 import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.AccountActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.BacklistActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.LockScreenActivity;
@@ -126,7 +127,7 @@ public class MysettingActivity extends BaseActivity {
 
                 break;
             case R.id.setting_backlist:
-//                goActivity(BacklistActivity.class);
+                goActivity(Backlist2Activity.class);
                 break;
             case R.id.setting_aboutOur:
                 goActivity(MyaboutActivity.class);

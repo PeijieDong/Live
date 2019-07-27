@@ -84,6 +84,13 @@ public class History {
             private String uid;
             private String title;
             private String image;
+            private String cid;
+            private String content;
+            private String num;
+            private String pid;
+            private String id;
+            private String catename;
+
 
             public String getHid() {
                 return hid;

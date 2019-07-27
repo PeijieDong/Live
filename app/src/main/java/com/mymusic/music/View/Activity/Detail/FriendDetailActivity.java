@@ -68,6 +68,8 @@ public class FriendDetailActivity extends BaseActivity {
     FloatingActionButton floatingActionButton;
     @BindView(R.id.back_random)
     ImageView backRandom;
+    @BindView(R.id.guanfang)
+    TextView guanfang;
     private String id;
     private FriendDetailTOP bean;
     private Boolean focuslogo = true;
@@ -100,6 +102,9 @@ public class FriendDetailActivity extends BaseActivity {
                 title.setText(bean.getData().getList().getTitle());
                 fans.setText(bean.getData().getList().getGnum()+"粉丝");
                 art.setText(bean.getData().getList().getTiezi()+"帖子");
+                if(bean.getData().getList().getOfficial().equals("1")){
+                    guanfang.setVisibility(View.VISIBLE);
+                }
                 if(bean.getData().getList().getGonggao() != null){
                     gonggao.setVisibility(View.VISIBLE);
                     gonggao_content.setText(bean.getData().getList().getGonggao().getTitle());

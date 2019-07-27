@@ -293,6 +293,7 @@ public class MyFragment extends BaseFragment {
                 Intent intent1 = new Intent(getContext(), WebActivity.class);
                 intent1.putExtra("url","http://live.shuiqiao.net/users/share");
                 intent1.putExtra("share",true);
+                intent1.putExtra("title","推广分享");
                 startActivity(intent1);
                 break;
         }

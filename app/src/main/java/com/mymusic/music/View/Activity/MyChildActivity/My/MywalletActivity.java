@@ -116,6 +116,7 @@ public class MywalletActivity extends BaseActivity {
             case R.id.helper:
                 Intent intent1 = new Intent(this, WebActivity.class);
                 intent1.putExtra("url","http://live.shuiqiao.net/users/share");
+                intent1.putExtra("title","推广分享");
                 startActivity(intent1);
                 break;
             case R.id.fankui:
@@ -139,6 +140,7 @@ public class MywalletActivity extends BaseActivity {
                 Money money = GsonUtil.GsonToBean(result, Money.class);
                 Intent intent1 = new Intent(MywalletActivity.this, WebActivity.class);
                 intent1.putExtra("url",money.getData().getUrl());
+                intent1.putExtra("title","充值");
                 startActivity(intent1);
             }
 

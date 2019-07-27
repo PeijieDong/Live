@@ -91,6 +91,7 @@ public class ExpActivity extends BaseActivity {
             case R.id.get_exp:
                 Intent intent = new Intent(this,WebActivity.class);
                 intent.putExtra("url","http://live.shuiqiao.net/users/level");
+                intent.putExtra("title","等级说明");
                 startActivity(intent);
                 break;
         }

@@ -121,9 +121,27 @@ public class HomeData implements Serializable {
             private String signature;
             private String sex;
             private String user_nicename;
+            private String filepath;
+            private String Vid;
             private List<String> images;
             private List<ObjsBean> objs;
 
+
+            public String getVid() {
+                return Vid;
+            }
+
+            public void setVid(String vid) {
+                Vid = vid;
+            }
+
+            public String getFilepath() {
+                return filepath;
+            }
+
+            public void setFilepath(String filepath) {
+                this.filepath = filepath;
+            }
 
             public String getUser_nicename() {
                 return user_nicename;
@@ -372,26 +390,26 @@ public class HomeData implements Serializable {
                  * image : /image2.jpg
                  */
 
-                private String vid;
+                public String vid;
                 @SerializedName("uid")
-                private String uidX;
+                public String uidX;
                 @SerializedName("content")
-                private String contentX;
+                public String contentX;
                 @SerializedName("zan")
-                private String zanX;
+                public String zanX;
                 @SerializedName("comment")
-                private String commentX;
+                public String commentX;
                 @SerializedName("share")
-                private String shareX;
+                public String shareX;
                 @SerializedName("status")
-                private String statusX;
+                public String statusX;
                 @SerializedName("createtime")
-                private String createtimeX;
-                private String filepath;
+                public String createtimeX;
+                public String filepath;
                 @SerializedName("tag")
-                private String tagX;
+                public String tagX;
                 @SerializedName("image")
-                private String imageX;
+                public String imageX;
 
                 public String getVid() {
                     return vid;

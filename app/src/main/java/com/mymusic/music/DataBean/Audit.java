@@ -8,8 +8,9 @@ import java.util.List;
  **/
 public class Audit {
 
+
     /**
-     * data : {"list":[{"id":"4","type":"1","touid":"100020","content":"您发布的圈子由于违反社区公约，已被驳回，请修改后再次提交","status":"0","createtime":"1564132199","title":"测试审核中","newsid":"11","images":"","ntype":"文字"},{"id":"5","type":"1","touid":"100020","content":"您发布的圈子由于违反社区公约，已被驳回，请修改后再次提交","status":"0","createtime":"1564132306","title":"这是要被拒绝的","newsid":"10","images":"","ntype":"文字"},{"id":"6","type":"1","touid":"100020","content":"您发布的圈子已通过审核","status":"0","createtime":"1564133278","title":"这是要被拒绝的","newsid":"10","images":"","ntype":"文字"},{"id":"7","type":"1","touid":"100020","content":"您发布的圈子已通过审核","status":"0","createtime":"1564133333","title":"","newsid":"4","images":"http://live.shuiqiao.net/data/upload/video/156390195328.jpg","ntype":"视频"},{"id":"8","type":"1","touid":"100020","content":"您发布的圈子由于违反社区公约，已被驳回，请修改后再次提交","status":"0","createtime":"1564133339","title":"","newsid":"4","images":"http://live.shuiqiao.net/data/upload/video/156390195328.jpg","ntype":"视频"},{"id":"9","type":"1","touid":"100020","content":"您发布的圈子已通过审核","status":"0","createtime":"1564133345","title":"","newsid":"4","images":"http://live.shuiqiao.net/data/upload/video/156390195328.jpg","ntype":"视频"},{"id":"10","type":"1","touid":"100020","content":"您发布的圈子已通过审核","status":"0","createtime":"1564133359","title":"","newsid":"5","images":"http://live.shuiqiao.net/data/upload/video/156390394814.jpg","ntype":"视频"}]}
+     * data : {"list":[{"id":"4","type":"1","touid":"100020","content":"您发布的圈子由于违反社区公约，已被驳回，请修改后再次提交","status":"0","createtime":"2019-07-26 17:09:59","title":"测试审核中","newsid":"11","ntype":"文字","isvideo":"0","images":"","shenhe":"0"},{"id":"5","type":"1","touid":"100020","content":"您发布的圈子由于违反社区公约，已被驳回，请修改后再次提交","status":"0","createtime":"2019-07-26 17:11:46","title":"这是要被拒绝的","newsid":"10","ntype":"文字","isvideo":"0","images":"","shenhe":"0"},{"id":"6","type":"1","touid":"100020","content":"您发布的圈子已通过审核","status":"0","createtime":"2019-07-26 17:27:58","title":"这是要被拒绝的","newsid":"10","ntype":"文字","isvideo":"0","images":"","shenhe":"0"},{"id":"7","type":"1","touid":"100020","content":"您发布的圈子已通过审核","status":"0","createtime":"2019-07-26 17:28:53","title":"","newsid":"4","ntype":"视频","isvideo":"0","images":"http://live.shuiqiao.net/data/upload/video/156390195328.jpg","shenhe":"0"},{"id":"8","type":"1","touid":"100020","content":"您发布的圈子由于违反社区公约，已被驳回，请修改后再次提交","status":"0","createtime":"2019-07-26 17:28:59","title":"","newsid":"4","ntype":"视频","isvideo":"0","images":"http://live.shuiqiao.net/data/upload/video/156390195328.jpg","shenhe":"0"},{"id":"9","type":"1","touid":"100020","content":"您发布的圈子已通过审核","status":"0","createtime":"2019-07-26 17:29:05","title":"","newsid":"4","ntype":"视频","isvideo":"0","images":"http://live.shuiqiao.net/data/upload/video/156390195328.jpg","shenhe":"0"},{"id":"10","type":"1","touid":"100020","content":"您发布的圈子已通过审核","status":"0","createtime":"2019-07-26 17:29:19","title":"","newsid":"5","ntype":"视频","isvideo":"0","images":"http://live.shuiqiao.net/data/upload/video/156390394814.jpg","shenhe":"0"}]}
      * status : 1
      * referer :
      * state : 1
@@ -70,11 +71,13 @@ public class Audit {
              * touid : 100020
              * content : 您发布的圈子由于违反社区公约，已被驳回，请修改后再次提交
              * status : 0
-             * createtime : 1564132199
+             * createtime : 2019-07-26 17:09:59
              * title : 测试审核中
              * newsid : 11
-             * images :
              * ntype : 文字
+             * isvideo : 0
+             * images :
+             * shenhe : 0
              */
 
             private String id;
@@ -85,8 +88,10 @@ public class Audit {
             private String createtime;
             private String title;
             private String newsid;
-            private String images;
             private String ntype;
+            private String isvideo;
+            private String images;
+            private String shenhe;
 
             public String getId() {
                 return id;
@@ -152,6 +157,22 @@ public class Audit {
                 this.newsid = newsid;
             }
 
+            public String getNtype() {
+                return ntype;
+            }
+
+            public void setNtype(String ntype) {
+                this.ntype = ntype;
+            }
+
+            public String getIsvideo() {
+                return isvideo;
+            }
+
+            public void setIsvideo(String isvideo) {
+                this.isvideo = isvideo;
+            }
+
             public String getImages() {
                 return images;
             }
@@ -160,12 +181,12 @@ public class Audit {
                 this.images = images;
             }
 
-            public String getNtype() {
-                return ntype;
+            public String getShenhe() {
+                return shenhe;
             }
 
-            public void setNtype(String ntype) {
-                this.ntype = ntype;
+            public void setShenhe(String shenhe) {
+                this.shenhe = shenhe;
             }
         }
     }

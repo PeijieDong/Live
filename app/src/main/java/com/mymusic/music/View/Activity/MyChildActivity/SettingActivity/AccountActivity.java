@@ -38,12 +38,19 @@ public class AccountActivity extends BaseActivity {
         phone.setText(user.getList().getUser_login());
     }
 
-    @OnClick({R.id.setting_aboutOur})
+    @OnClick({R.id.setting_aboutOur,R.id.back,R.id.setting_backlist})
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.setting_aboutOur:
                 Intent intent = new Intent(this, ForgetPwdActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.back:
+                finish();
+                break;
+            case R.id.setting_backlist:
+                Intent intent2 = new Intent(this, BacklistActivity.class);
+                startActivity(intent2);
                 break;
         }
     }

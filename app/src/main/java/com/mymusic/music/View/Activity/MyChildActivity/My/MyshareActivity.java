@@ -51,8 +51,13 @@ public class MyshareActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 MyShare bean= GsonUtil.GsonToBean(result, MyShare.class);
+                if(bean.getData().getList() != null){
+                    shareNum.setText("我总共推广"+bean.getData().getList().size()+"人");
+                }else{
+                    shareNum.setText("我总共推广0人");
+                }
                 rc.setLayoutManager(new LinearLayoutManager(MyshareActivity.this));
-                rc.setAdapter(new MyShareRcAdapter(R.layout.my_share_item_layout,null));
+                rc.setAdapter(new MyShareRcAdapter(R.layout.my_share_item_layout,bean.getData().getList()));
             }
 
             @Override

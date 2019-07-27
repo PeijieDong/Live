@@ -81,18 +81,20 @@ public class FriendFindFragment extends BaseFragment implements OnRefreshListene
         NetRequest.postFormRequest(UrlManager.FRIEND_FIND, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                refreshLayout.finishRefresh();
                 Log.e("33",result);
                 FriendFindData data = GsonUtil.GsonToBean(result, FriendFindData.class);
                 initRc(data);
-                refreshLayout.finishRefresh();
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-
+                refreshLayout.finishRefresh();
+                Log.d("33",e.getMessage());
             }
             @Override
             public void TokenFail() {
+                refreshLayout.finishRefresh();
                 LoginDialog dialog = new LoginDialog(getActivity());
                 dialog.Show();
             }

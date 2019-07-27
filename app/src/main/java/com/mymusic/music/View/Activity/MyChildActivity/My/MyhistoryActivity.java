@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.mymusic.music.DataBean.History;
+import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
@@ -86,13 +87,32 @@ public class MyhistoryActivity extends BaseActivity {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(MyhistoryActivity.this, DetailsActivity.class);
-                intent.putExtra("id",bean.getData().getList().get(position).getVid());
-                startActivity(intent);
+                if(bean.getData().getList().get(position).getType().equals("小视频")){
+                    changeData(bean.getData().getList().get(position));
+                    Intent intent = new Intent(MyhistoryActivity.this, DetailsActivity.class);
+//                    intent.putExtra("playData",);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(MyhistoryActivity.this, DetailsActivity.class);
+                    intent.putExtra("id", bean.getData().getList().get(position).getVid());
+                    startActivity(intent);
+                }
             }
         });
         historyRc.setAdapter(adapter);
     }
+
+    private HomeData.DataBean.ListBean changeData(History.DataBean.ListBean listBean) {
+        HomeData.DataBean.ListBean data = new HomeData.DataBean.ListBean();
+        data.setVid(listBean.getVid());
+        data.setFilepath("");
+        data.setUid(listBean.getUid());
+//        data.setContent(listBean.getContent());
+        data.setImage(listBean.getImage());
+        data.setCreatetime(listBean.getCreatetime());
+        return data;
+    }
+
     @OnClick({R.id.clear_history,R.id.back})
     public void ClickEvent(View view){
         switch (view.getId()) {

@@ -5,6 +5,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -80,11 +81,12 @@ public class MylevelActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.Level, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 LevelDate bean = GsonUtil.GsonToBean(result, LevelDate.class);
                 levelNum.setText("LV "+bean.getData().getList().getNowlevel());
                 level_num.setText("Lv."+bean.getData().getList().getNowlevel());
                 level_num2.setText("Lv."+bean.getData().getList().getNextlevel());
-                expNum.setText(bean.getData().getList().getNowscore()+"/"+bean.getData().getList().getTonext());
+                expNum.setText(bean.getData().getList().getTonext()+"/"+bean.getData().getList().getNextscore());
                 residue.setText("还差"+bean.getData().getList().getTonext()+"点经验值升级到下一等级");
                 if(bean.getData().getList().getView() == 1){
                     clock1.setVisibility(View.GONE);
@@ -140,6 +142,7 @@ public class MylevelActivity extends BaseActivity {
             case R.id.levelDes:
                 Intent intent = new Intent(this,WebActivity.class);
                 intent.putExtra("url","http://live.shuiqiao.net/users/level");
+                intent.putExtra("title","等级说明");
                 startActivity(intent);
                 break;
         }

@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".View.Activity.MyChildActivity.SettingActivity.BacklistActivity">
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white">
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:src="@drawable/icon_back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textColor="#030303"
+            android:text="已绑定手机号"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"/>
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#888"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="您已绑定手机号"/>
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000"/>
+    <Button
+        android:id="@+id/change_phone"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:text="更换绑定的手机号"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:textSize="16sp"
+        android:background="@drawable/change_phone_back"/>
+</LinearLayout>

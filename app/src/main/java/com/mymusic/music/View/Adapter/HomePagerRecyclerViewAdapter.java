@@ -83,7 +83,11 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                     case "关注":
                         return ADV;
                     case "小视频":
-                        return PAPA;
+                        if(s.getObjs() != null){
+                            return PAPA;
+                        }else{
+                            return VIDEO;
+                        }
                     case "用户":
                         return USER;
                 }
@@ -143,7 +147,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .setText(R.id.home_rc_type,item.getCatename())
                         .setText(R.id.tv_content_text,item.getContent())
                         .setText(R.id.tv_content,item.getTitle());
-                if(item.getTitle().equals("")){
+                if(item.getTitle()== null || item.getTitle().equals("")){
                     helper.setText(R.id.tv_content,"暂无标题");
                 }
                 helper.addOnClickListener(R.id.icon_more);

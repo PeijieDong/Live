@@ -68,7 +68,10 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         this.context = context;
         this.list = list;
     }
-
+    BottomSheetDialog bottomSheet;//实例化
+    TextView post;
+    EditText commentEt;
+    View view;
     @Override
     public void onHolder(VideoViewHolder holder, VideoData.DataBean.ListBean bean, int position) {
         //设置视频大小
@@ -189,6 +192,11 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         holder.video_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bottomSheet = new BottomSheetDialog(context);
+                bottomSheet.setCancelable(true);//设置点击外部是否可以取消
+                view = LayoutInflater.from(context).inflate(R.layout.dialog_comment_layout, null);
+                post = view.findViewById(R.id.detail_post);
+                commentEt = view.findViewById(R.id.comment_et);
                 initNet();
             }
         });
@@ -289,11 +297,6 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
     }
 
     void showBottomSheetDialog(List<CommentBean.DataBean.ListBean> listbean){
-        BottomSheetDialog bottomSheet = new BottomSheetDialog(context);//实例化
-        bottomSheet.setCancelable(true);//设置点击外部是否可以取消
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_comment_layout, null);
-        TextView post = view.findViewById(R.id.detail_post);
-        EditText commentEt = view.findViewById(R.id.comment_et);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -316,6 +319,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
                     public void requestSuccess(String result) throws Exception {
                         Log.e("33",result);
                         ToastUtil.show(context,"提交成功",Toast.LENGTH_SHORT);
+                        initNet();
                         adapter.notifyDataSetChanged();
                         commentEt.setText("");
                         holder.commentNum.setText(Integer.parseInt(holder.commentNum.getText().toString())+1+"");

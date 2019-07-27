@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.Art;
 import com.mymusic.music.DataBean.FriendDetail;
+import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
@@ -21,6 +22,7 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
+import com.mymusic.music.View.Activity.Detail.VideoSingleActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.ArRcAdpater;
 import com.mymusic.music.base.BaseFragment;
@@ -100,9 +102,16 @@ public class CommentPPFragment extends BaseFragment {
         adpater.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra("id",bean.getData().getList().get(position).getId());
-                startActivity(intent);
+                if(bean.getData().getList().get(position).getType().equals("小视频")){
+                    HomeData.DataBean.ListBean listBean = changeType(bean.getData().getList().get(position));
+                    Intent intent = new Intent(getContext(), VideoSingleActivity.class);
+                    intent.putExtra("playData",listBean);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getContext(), DetailsActivity.class);
+                    intent.putExtra("id", bean.getData().getList().get(position).getId());
+                    startActivity(intent);
+                }
             }
         });
         adpater.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -146,5 +155,14 @@ public class CommentPPFragment extends BaseFragment {
         });
         hideloading();
     }
-
+    private HomeData.DataBean.ListBean changeType(Art.DataBean.ListBean listBean) {
+        HomeData.DataBean.ListBean art = new HomeData.DataBean.ListBean();
+        art.setVid(listBean.getVid());
+        art.setFilepath("");
+        art.setUid(listBean.getUid());
+        art.setContent(listBean.getContent());
+        art.setImage(listBean.getImage());
+        art.setCreatetime(listBean.getCreatetime());
+        return art;
+    }
 }

@@ -84,6 +84,10 @@ public class ForgetPwdActivity extends BaseActivity {
                 initForget();
                 break;
             case R.id.get_code:
+                if(phone.getText().toString().trim().equals("")){
+                    ToastUtil.show(this,"请输入手机号",1);
+                    return;
+                }
                 initCode();
                 CountDownTimer timer = new CountDownTimer(60000, 1000) {
                     @Override

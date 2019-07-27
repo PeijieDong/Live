@@ -26,6 +26,7 @@ import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
+import com.mymusic.music.View.Activity.Detail.VideoSingleActivity;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.HomePagerRecyclerViewAdapter;
@@ -99,8 +100,8 @@ public class MylikeActivity extends BaseActivity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if(bean.getData().getList().get(position).getType().equals("小视频")){
-                    Intent intent = new Intent(MylikeActivity.this, VideoPlayActivity.class);
-                    intent.putExtra("playData",(Serializable) bean.getData().getList().get(position).getObjs());
+                    Intent intent = new Intent(MylikeActivity.this, VideoSingleActivity.class);
+                    intent.putExtra("playData",(Serializable) bean.getData().getList().get(position));
                     intent.putExtra("position",position);
                     startActivity(intent);
                 }else {

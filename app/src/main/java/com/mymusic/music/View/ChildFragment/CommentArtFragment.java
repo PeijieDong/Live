@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.Art;
+import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
@@ -20,6 +21,7 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
+import com.mymusic.music.View.Activity.Detail.VideoSingleActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.ArRcAdpater;
 import com.mymusic.music.base.BaseFragment;
@@ -119,6 +121,8 @@ public class CommentArtFragment extends BaseFragment {
         });
         rc.setAdapter(adpater);
     }
+
+
 
     private void initClose(Art bean, int position) {
         HashMap<String, String> map = new HashMap<>();

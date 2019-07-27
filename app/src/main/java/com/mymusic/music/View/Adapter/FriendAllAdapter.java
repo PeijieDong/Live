@@ -66,6 +66,9 @@ public class FriendAllAdapter extends BaseQuickAdapter<FriendAllData.DataBean.Li
             helper.setText(R.id.friend_all_bt,"+关注");
             helper.setBackgroundRes(R.id.friend_all_bt,R.drawable.focus);
         }
+        if(item.getOfficial().equals("1")){
+            helper.setVisible(R.id.guanfang,true);
+        }
         ImageView head = helper.getView(R.id.friend_item_head);
         Glide.with(mContext).load(item.getIcon()).error(R.drawable.fq_ic_placeholder).into(head);
         ImageView down = helper.getView(R.id.friend_all_down);

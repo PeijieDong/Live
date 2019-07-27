@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -53,6 +54,7 @@ public class AuditActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.Notice_Mes, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 Audit bean = GsonUtil.GsonToBean(result, Audit.class);
                 Rc.setLayoutManager(new LinearLayoutManager(AuditActivity.this));
                 AuditRcAdapter adapter = new AuditRcAdapter(R.layout.audit_item_layout,bean.getData().getList());
