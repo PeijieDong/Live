@@ -70,8 +70,8 @@ public class IntegalActivity extends BaseActivity {
                 break;
             case R.id.get_Score:
                 Intent intent = new Intent(this, WebActivity.class);
-                intent.putExtra("url","http://live.shuiqiao.net/users/level");
-                intent.putExtra("title","等级说明");
+                intent.putExtra("url","http://live.shuiqiao.net/users/jifen");
+                intent.putExtra("title","获取攻略");
                 startActivity(intent);
                 break;
         }

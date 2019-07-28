@@ -72,4 +72,8 @@ public class MyshareActivity extends BaseActivity {
             }
         });
     }
+    @OnClick(R.id.back)
+    public void ClickEvent(){
+        finish();
+    }
 }

@@ -115,8 +115,8 @@ public class MywalletActivity extends BaseActivity {
                 break;
             case R.id.helper:
                 Intent intent1 = new Intent(this, WebActivity.class);
-                intent1.putExtra("url","http://live.shuiqiao.net/users/share");
-                intent1.putExtra("title","推广分享");
+                intent1.putExtra("url","http://live.shuiqiao.net/users/help");
+                intent1.putExtra("title","充值帮助");
                 startActivity(intent1);
                 break;
             case R.id.fankui:

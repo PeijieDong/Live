@@ -269,6 +269,7 @@ public class VideoRecyclerViewAdapter extends BaseRecAdapter<VideoData.DataBean.
         NetRequest.postFormRequest(UrlManager.Video_Zan, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
                 ToastUtil.show(context,"点赞成功",Toast.LENGTH_SHORT);
                 holder.likeNum.setText(Integer.parseInt(holder.likeNum.getText().toString())+1+"");
                 holder.video_like.setImageResource(R.drawable.yp_video_like);

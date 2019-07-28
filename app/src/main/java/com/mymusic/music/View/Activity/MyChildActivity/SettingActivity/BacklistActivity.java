@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.View.Activity.ChangePhoneActivity;
 import com.mymusic.music.base.BaseActivity;
@@ -33,7 +34,7 @@ public class BacklistActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
-
+        phone.setText(Live.getInstance().getUser(this).getData().getUser_login());
     }
     @OnClick({R.id.back,R.id.change_phone})
     public void ClickEvent(View view){

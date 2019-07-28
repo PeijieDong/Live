@@ -3,6 +3,7 @@ package com.mymusic.music;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.support.multidex.MultiDex;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.mymusic.music.DataBean.User;
@@ -64,6 +65,7 @@ public class Live extends Application {
         super.onCreate();
         LitePal.initialize(this);
         ContextUtils.init(this);
+        MultiDex.install(this);
 //        Locale _UserLocale=LocaleUtils.getUserLocale(this);
 //        LocaleUtils.updateLocale(this, _UserLocale);
     }

@@ -86,7 +86,7 @@ public class MylevelActivity extends BaseActivity {
                 levelNum.setText("LV "+bean.getData().getList().getNowlevel());
                 level_num.setText("Lv."+bean.getData().getList().getNowlevel());
                 level_num2.setText("Lv."+bean.getData().getList().getNextlevel());
-                expNum.setText(bean.getData().getList().getTonext()+"/"+bean.getData().getList().getNextscore());
+                expNum.setText(bean.getData().getList().getNowscore()+"/"+bean.getData().getList().getNextscore());
                 residue.setText("还差"+bean.getData().getList().getTonext()+"点经验值升级到下一等级");
                 if(bean.getData().getList().getView() == 1){
                     clock1.setVisibility(View.GONE);

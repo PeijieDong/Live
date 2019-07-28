@@ -156,7 +156,7 @@ public class MyFragment extends BaseFragment {
                 fansNum.setText(bean.getData().getFans());
                 fabuNum.setText(bean.getData().getFabu());
                 collectionNum.setText(bean.getData().getShoucang());
-                level.setText("LV"+bean.getData().getLevel()+"经验值"+bean.getData().getLevel_anchor()+" >");
+                level.setText("LV"+bean.getData().getLevel()+"经验值"+bean.getData().getConsumption()+" >");
                 name.setText(bean.getData().getUser_nicename());
                 Glide.with(getContext()).load(bean.getData().getAvatar()).into(head);
                 String guanying = bean.getData().getGuanying();
@@ -248,7 +248,8 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.my_live:
                 if(Live.getInstance().getUser(getContext()) != null){
-                    goActivity(MyLiveActivity.class);
+                    ToastUtil.show(getContext(),"该功能暂未开放",1);
+//                    goActivity(MyLiveActivity.class);
                 }
                 break;
             case R.id.my_exchange:
