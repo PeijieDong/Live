@@ -107,7 +107,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void LoadData() {
-        test();
+//        test();
         title = new ArrayList<>();
         title.add("推荐"); title.add("关注"); title.add("文字"); title.add("图片"); title.add("视频");
         HomePagerAdapter adapter = new HomePagerAdapter(getChildFragmentManager());
