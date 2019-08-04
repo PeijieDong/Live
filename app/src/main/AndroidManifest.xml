@@ -112,7 +112,7 @@
         <activity android:name=".View.Activity.ChangePhoneActivity" />
         <activity android:name=".View.Activity.BindPhoneActivity" />
         <activity android:name=".View.Activity.Backlist2Activity" />
-        <activity android:name=".View.Activity.Detail.VideoSingleActivity"></activity>
+        <activity android:name=".View.Activity.Detail.VideoSingleActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -123,6 +123,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".View.Activity.FindActivity" />
+        <activity android:name=".View.Activity.FindDetailActivity" />
+        <activity android:name=".View.Activity.MorePindaoActivity"></activity>
     </application>
 
 </manifest>

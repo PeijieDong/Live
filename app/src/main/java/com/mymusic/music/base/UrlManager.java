@@ -175,4 +175,7 @@ public class UrlManager {
 
     public static final String APP_UPDATE = BaseUrl + "index/checkupdate";
 
+    public static final String GET_PINDAO =BaseUrl+ "video/cate";
+
+    public static final String GET_PINDAO_DETAIL = BaseUrl+"video/jingxuan";
 }

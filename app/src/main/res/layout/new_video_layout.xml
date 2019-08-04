@@ -4,10 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <com.mymusic.music.DiyTab.TabLayout
-        android:id="@+id/tab"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"/>
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+        <com.mymusic.music.DiyTab.TabLayout
+            android:id="@+id/tab"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="45dp"/>
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="45dp"
+            android:padding="7dp"
+            android:src="@drawable/ic_launcher_background"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical">
+        <LinearLayout
+            android:id="@+id/Find"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_bc"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:layout_marginStart="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="搜你想搜看你想看"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_launcher_background"/>
+        </LinearLayout>
+    </LinearLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"

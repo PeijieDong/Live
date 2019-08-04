@@ -1,5 +1,6 @@
 package com.mymusic.music.View.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,16 +11,28 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
+import com.mymusic.music.DataBean.PinDao;
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
+import com.mymusic.music.View.Activity.FindActivity;
+import com.mymusic.music.View.Activity.MorePindaoActivity;
 import com.mymusic.music.View.ChildFragment.VideoItemFragment;
 import com.mymusic.music.base.BaseFragment;
+import com.mymusic.music.base.UrlManager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import okhttp3.Request;
 
 /**
  * Create By mr.mao in 2019/7/31 12:59
@@ -31,6 +44,8 @@ public class NewVideoFragment extends BaseFragment {
     TabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
+    @BindView(R.id.Find)
+    LinearLayout find;
     private List<String> tabs;
     private List<Fragment> fragments;
 
@@ -46,14 +61,39 @@ public class NewVideoFragment extends BaseFragment {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-        tabs = new ArrayList<>();
-        fragments = new ArrayList<>();
-        tabs.add("精选");
-        VideoItemFragment fragment = new VideoItemFragment();
-        fragments.add(fragment);
-        TabPagerAdapter adapter = new TabPagerAdapter(getChildFragmentManager());
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        initTab();
+    }
+
+    private void initTab() {
+        NetRequest.getFormRequest(UrlManager.GET_PINDAO, null, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                PinDao bean = GsonUtil.GsonToBean(result, PinDao.class);
+                tabs = new ArrayList<>();
+                fragments = new ArrayList<>();
+                for (int i = 0 ; i<bean.getData().getList().size();i++){
+                    tabs.add(bean.getData().getList().get(i).getTitle());
+                    VideoItemFragment fragment = new VideoItemFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("pid",bean.getData().getList().get(i).getPid());
+                    fragment.setArguments(bundle);
+                    fragments.add(fragment);
+                }
+                TabPagerAdapter adapter = new TabPagerAdapter(getChildFragmentManager());
+                viewPager.setAdapter(adapter);
+                tabLayout.setupWithViewPager(viewPager);
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void TokenFail() {
+
+            }
+        });
     }
 
     @Override
@@ -82,6 +122,20 @@ public class NewVideoFragment extends BaseFragment {
         @Override
         public CharSequence getPageTitle(int position) {
             return tabs.get(position);
+        }
+    }
+
+    @OnClick({R.id.Find,R.id.more})
+    public void ClickEvent(View view){
+        switch (view.getId()){
+            case R.id.Find:
+                Intent intent = new Intent(getContext(), FindActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.more:
+                Intent intent1 = new Intent(getContext(), MorePindaoActivity.class);
+                startActivity(intent1);
+                break;
         }
     }
 }
