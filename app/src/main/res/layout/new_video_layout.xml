@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal">
-        <com.mymusic.music.DiyTab.TabLayout
+        <android.support.design.widget.TabLayout
             android:id="@+id/tab"
             android:layout_width="0dp"
             android:layout_weight="4"
+            app:tabTextColor="@color/text_gray_66"
+            app:tabSelectedTextColor="@color/blank"
+            app:tabIndicatorColor="@color/yellow"
             android:layout_height="45dp"/>
         <ImageView
             android:id="@+id/more"

@@ -25,6 +25,7 @@ import com.mymusic.music.View.Fragment.FriendFragment;
 import com.mymusic.music.View.Fragment.HomeFragment;
 import com.mymusic.music.View.Fragment.LiveFragment;
 import com.mymusic.music.View.Fragment.MyFragment;
+import com.mymusic.music.View.Fragment.NewVideoFragment;
 import com.mymusic.music.View.Fragment.VideoFragment;
 import com.mymusic.music.base.ActivityCollector;
 import com.mymusic.music.base.BaseActivity;
@@ -67,7 +68,7 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
     protected void LoadData() {
         list = new ArrayList<>();
         list.add(new HomeFragment());
-        list.add(new VideoFragment());
+        list.add(new NewVideoFragment());
         list.add(new LiveFragment());
         list.add(new FriendFragment());
         list.add(new MyFragment());
@@ -98,15 +99,15 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) containter.getLayoutParams();
         for(int i = 0;i<list.size();i++){
             if(i == position){
-                if(position == 1){
-                    params.removeRule(RelativeLayout.ABOVE);
-                    bottomNavigation.setBackgroundColor(getResources().getColor(R.color.transparent));
-                    cardView.setBackgroundColor(getResources().getColor(R.color.transparent));
-                }else {
-                    params.addRule(RelativeLayout.ABOVE, R.id.card_view);
-                    bottomNavigation.setBackgroundColor(getResources().getColor(R.color.white));
-                    cardView.setBackgroundColor(getResources().getColor(R.color.white));
-                }
+//                if(position == 1){
+//                    params.removeRule(RelativeLayout.ABOVE);
+//                    bottomNavigation.setBackgroundColor(getResources().getColor(R.color.transparent));
+//                    cardView.setBackgroundColor(getResources().getColor(R.color.transparent));
+//                }else {
+//                    params.addRule(RelativeLayout.ABOVE, R.id.card_view);
+//                    bottomNavigation.setBackgroundColor(getResources().getColor(R.color.white));
+//                    cardView.setBackgroundColor(getResources().getColor(R.color.white));
+//                }
                 transaction.show(list.get(i));
             }else{
                 transaction.hide(list.get(i));

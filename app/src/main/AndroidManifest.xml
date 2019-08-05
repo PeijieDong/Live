@@ -126,7 +126,8 @@
 
         <activity android:name=".View.Activity.FindActivity" />
         <activity android:name=".View.Activity.FindDetailActivity" />
-        <activity android:name=".View.Activity.MorePindaoActivity"></activity>
+        <activity android:name=".View.Activity.MorePindaoActivity" />
+        <activity android:name=".View.Activity.VideoPindaoActivity"></activity>
     </application>
 
 </manifest>

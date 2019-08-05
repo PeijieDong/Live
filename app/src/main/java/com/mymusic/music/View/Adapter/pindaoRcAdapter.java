@@ -1,6 +1,8 @@
 package com.mymusic.music.View.Adapter;
 
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -16,6 +18,8 @@ import java.util.List;
  **/
 public class pindaoRcAdapter extends BaseQuickAdapter<PinDao.DataBean.ListBeanX,BaseViewHolder> {
 
+    ClickItemListener listener;
+
     public pindaoRcAdapter(int layoutResId, @Nullable List<PinDao.DataBean.ListBeanX> data) {
         super(layoutResId, data);
     }
@@ -23,7 +27,35 @@ public class pindaoRcAdapter extends BaseQuickAdapter<PinDao.DataBean.ListBeanX,
     @Override
     protected void convert(BaseViewHolder helper, PinDao.DataBean.ListBeanX s) {
         MyGridView grid = helper.getView(R.id.grid);
-        grid.setAdapter(new GridAdapter(mContext,s.getList()));
+        helper.addOnClickListener(R.id.grid);
+        GridAdapter adapter = new GridAdapter(mContext, s.getList());
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.setSelect(position);
+                adapter.setListener(new GridAdapter.ItemListener() {
+                    @Override
+                    public boolean click(String title) {
+                        return listener.ClickEvent(title);
+                    }
+
+                    @Override
+                    public void remove(String title) {
+                        listener.Remove(title);
+                    }
+                });
+            }
+        });
+        grid.setAdapter(adapter);
         helper.setText(R.id.title,s.getTitle());
+    }
+
+    public interface ClickItemListener{
+        boolean ClickEvent(String title);
+
+        void Remove(String title);
+    }
+    public void setOnClickListener(ClickItemListener listener){
+        this.listener = listener;
     }
 }

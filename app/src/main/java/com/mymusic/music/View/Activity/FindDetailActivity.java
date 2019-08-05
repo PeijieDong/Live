@@ -50,9 +50,11 @@ public class FindDetailActivity extends BaseActivity {
     }
 
     private void initTitle() {
+        loading();
         NetRequest.getFormRequest(UrlManager.GET_PINDAO, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                hideloading();
                 PinDao bean = GsonUtil.GsonToBean(result, PinDao.class);
                 List<Fragment> list = new ArrayList<>();
                 List<String> title = new ArrayList<>();
@@ -70,12 +72,12 @@ public class FindDetailActivity extends BaseActivity {
 
             @Override
             public void requestFailure(Request request, IOException e) {
-
+                hideloading();
             }
 
             @Override
             public void TokenFail() {
-
+                hideloading();
             }
         });
     }

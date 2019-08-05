@@ -46,9 +46,11 @@ public class MorePindaoActivity extends BaseActivity {
     }
 
     private void initTab() {
+        loading();
         NetRequest.getFormRequest(UrlManager.GET_PINDAO, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                hideloading();
                 PinDao bean = GsonUtil.GsonToBean(result, PinDao.class);
                 for (int i= 0 ;i<bean.getData().getList().size();i++){
                     tab.addTab(new TabLayout.Tab().setText(bean.getData().getList().get(i).getTitle()));
@@ -58,12 +60,12 @@ public class MorePindaoActivity extends BaseActivity {
 
             @Override
             public void requestFailure(Request request, IOException e) {
-
+                hideloading();
             }
 
             @Override
             public void TokenFail() {
-
+                hideloading();
             }
         });
     }
@@ -74,7 +76,8 @@ public class MorePindaoActivity extends BaseActivity {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-
+                Intent intent = new Intent(MorePindaoActivity.this, VideoPindaoActivity.class);
+                startActivity(intent);
             }
         });
         RC.setAdapter(adapter);

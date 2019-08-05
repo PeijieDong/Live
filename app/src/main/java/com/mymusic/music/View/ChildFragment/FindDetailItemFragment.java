@@ -55,6 +55,7 @@ public class FindDetailItemFragment extends BaseFragment {
     }
 
     private void initNet() {
+        loading();
         HashMap<String, String> map = new HashMap<>();
         map.put("id",id);
         NetRequest.getFormRequest(UrlManager.GET_PINDAO_DETAIL, map, new NetRequest.DataCallBack() {
@@ -71,16 +72,17 @@ public class FindDetailItemFragment extends BaseFragment {
                     }
                 });
                 rc.setAdapter(adapter);
+                hideloading();
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
-
+                hideloading();
             }
 
             @Override
             public void TokenFail() {
-
+                hideloading();
             }
         });
     }

@@ -12,6 +12,11 @@
         <item name="android:textColor">@color/text_gray</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="TabLayoutTextStyle2" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_gray</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="FoundTabLayoutTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
         <item name="android:textSize">@dimen/pickerview_topbar_btn_textsize</item>
         <item name="android:textColor">@color/text_gray_33</item>

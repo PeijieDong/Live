@@ -3,6 +3,7 @@ package com.mymusic.music.View.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -15,7 +16,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.mymusic.music.DataBean.PinDao;
-import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
