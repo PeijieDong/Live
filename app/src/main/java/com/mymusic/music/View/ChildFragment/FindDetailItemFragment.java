@@ -51,39 +51,39 @@ public class FindDetailItemFragment extends BaseFragment {
 
     @Override
     protected void LoadData() {
-        initNet();
+//        initNet();
     }
 
-    private void initNet() {
-        loading();
-        HashMap<String, String> map = new HashMap<>();
-        map.put("id",id);
-        NetRequest.getFormRequest(UrlManager.GET_PINDAO_DETAIL, map, new NetRequest.DataCallBack() {
-            @Override
-            public void requestSuccess(String result) throws Exception {
-                VideoItem item = GsonUtil.GsonToBean(result, VideoItem.class);
-                FindRcAdapter adapter = new FindRcAdapter(R.layout.found_rc_layout,item.getData().getList().get(0).getList());
-                adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                        Intent intent = new Intent(getContext(), DetailsActivity.class);
-                        intent.putExtra("id",item.getData().getList().get(0).getList().get(0).getId());
-                        startActivity(intent);
-                    }
-                });
-                rc.setAdapter(adapter);
-                hideloading();
-            }
-
-            @Override
-            public void requestFailure(Request request, IOException e) {
-                hideloading();
-            }
-
-            @Override
-            public void TokenFail() {
-                hideloading();
-            }
-        });
-    }
+//    private void initNet() {
+//        loading();
+//        HashMap<String, String> map = new HashMap<>();
+//        map.put("id",id);
+//        NetRequest.getFormRequest(UrlManager.GET_PINDAO_DETAIL, map, new NetRequest.DataCallBack() {
+//            @Override
+//            public void requestSuccess(String result) throws Exception {
+//                VideoItem item = GsonUtil.GsonToBean(result, VideoItem.class);
+//                FindRcAdapter adapter = new FindRcAdapter(R.layout.found_rc_layout,item.getData().getList().get(0).getList());
+//                adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+//                        Intent intent = new Intent(getContext(), DetailsActivity.class);
+//                        intent.putExtra("id",item.getData().getList().get(0).getList().get(0).getId());
+//                        startActivity(intent);
+//                    }
+//                });
+//                rc.setAdapter(adapter);
+//                hideloading();
+//            }
+//
+//            @Override
+//            public void requestFailure(Request request, IOException e) {
+//                hideloading();
+//            }
+//
+//            @Override
+//            public void TokenFail() {
+//                hideloading();
+//            }
+//        });
+//    }
 }

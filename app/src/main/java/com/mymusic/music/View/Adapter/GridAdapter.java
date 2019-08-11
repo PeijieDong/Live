@@ -1,6 +1,7 @@
 package com.mymusic.music.View.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.mymusic.music.DataBean.PinDao;
 import com.mymusic.music.R;
+import com.mymusic.music.View.Activity.MorePindaoActivity;
+import com.mymusic.music.View.Activity.VideoPindaoActivity;
 
 import java.util.List;
 
@@ -22,8 +25,8 @@ public class GridAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context context;
     private List<PinDao.DataBean.ListBeanX.ListBean> list;
-    private int select;
-    private ItemListener listener;
+//    private int select;
+//    private ItemListener listener;
 
     public GridAdapter(Context mContext, List<PinDao.DataBean.ListBeanX.ListBean> list) {
         this.context = mContext;
@@ -34,7 +37,7 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list.size();
+        return list == null ? 0 : list.size();
     }
 
     @Override
@@ -55,33 +58,40 @@ public class GridAdapter extends BaseAdapter {
             v = view;
         }
         TextView title = v.findViewById(R.id.title);
-        ImageView hook = v.findViewById(R.id.hook);
+//        ImageView hook = v.findViewById(R.id.hook);
         title.setText(list.get(i).getTitle());
-        if(select == i){
-            if(hook.getVisibility() == View.GONE){
-                if(listener.click(list.get(i).getTitle())){
-                    hook.setVisibility(View.VISIBLE);
-                    title.setBackgroundResource(R.drawable.grid_press_back);
-                }
-            }else{
-                listener.remove(list.get(i).getTitle());
-                hook.setVisibility(View.GONE);
-                title.setBackgroundResource(R.drawable.grid_normal_back);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context , VideoPindaoActivity.class);
+                context.startActivity(intent);
             }
-        }
+        });
+//        if(select == i){
+//            if(hook.getVisibility() == View.GONE){
+//                if(listener != null && listener.click(list.get(i).getTitle())){
+//                    hook.setVisibility(View.VISIBLE);
+//                    title.setBackgroundResource(R.drawable.grid_press_back);
+//                }
+//            }else{
+//                listener.remove(list.get(i).getTitle());
+//                hook.setVisibility(View.GONE);
+//                title.setBackgroundResource(R.drawable.grid_normal_back);
+//            }
+//        }
         return v;
 
     }
 
-    public void setSelect(int position){
-        this.select = position;
-        notifyDataSetChanged();
-    }
-    public interface ItemListener{
-        boolean click(String title);
-        void remove(String title);
-    }
-    public void setListener(ItemListener listener){
-        this.listener = listener;
-    }
+//    public void setSelect(int position){
+//        this.select = position;
+//        notifyDataSetChanged();
+//    }
+//    public interface ItemListener{
+//        boolean click(String title);
+//        void remove(String title);
+//    }
+//    public void setListener(ItemListener listener){
+//        this.listener = listener;
+//    }
 }

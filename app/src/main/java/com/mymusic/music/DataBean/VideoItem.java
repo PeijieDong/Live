@@ -9,7 +9,7 @@ import java.util.List;
 public class VideoItem {
 
     /**
-     * data : {"list":[{"title":"分类一","type":"typeTwo","list":[{"id":"1","img":"img.jpg","title":"哈哈","playtime":"00:01:05"},{"id":"1","img":"img.jpg","title":"哈哈","playtime":"00:01:05"}]},{"title":"分类二","type":"typeThree","list":[{"id":"1","img":"img.jpg","title":"哈哈"},{"id":"1","img":"img.jpg","title":"哈哈","playtime":"00:01:05"}]}],"ad":[{"url":"http://www.baidu.com","img":"image.jpg"},{"url":"http://www.baidu.com","img":"image.jpg"}]}
+     * data : {"list":[{"title":"分类一","type":"typeTwo","pid":"5","list":[{"id":"4","title":"","playtime":"00:01:05","image":"http://live.shuiqiao.net/data/upload/video/156390195328.jpg"}]},{"title":"分类二","type":"typeThree","pid":"6","list":[{"id":"5","title":"","playtime":"00:01:05","image":"http://live.shuiqiao.net/data/upload/video/156390394814.jpg"}]}],"ad":[{"url":"http://www.baidu.com","img":"image.jpg"},{"url":"http://www.baidu.com","img":"image.jpg"}]}
      * status : 1
      * referer :
      * state : 1
@@ -76,11 +76,13 @@ public class VideoItem {
             /**
              * title : 分类一
              * type : typeTwo
-             * list : [{"id":"1","img":"img.jpg","title":"哈哈"},{"id":"1","img":"img.jpg","title":"哈哈","playtime":"00:01:05"}]
+             * pid : 5
+             * list : [{"id":"4","title":"","playtime":"00:01:05","image":"http://live.shuiqiao.net/data/upload/video/156390195328.jpg"}]
              */
 
             private String title;
             private String type;
+            private String pid;
             private List<ListBean> list;
 
             public String getTitle() {
@@ -99,6 +101,14 @@ public class VideoItem {
                 this.type = type;
             }
 
+            public String getPid() {
+                return pid;
+            }
+
+            public void setPid(String pid) {
+                this.pid = pid;
+            }
+
             public List<ListBean> getList() {
                 return list;
             }
@@ -109,16 +119,16 @@ public class VideoItem {
 
             public static class ListBean {
                 /**
-                 * id : 1
-                 * img : img.jpg
-                 * title : 哈哈
+                 * id : 4
+                 * title :
                  * playtime : 00:01:05
+                 * image : http://live.shuiqiao.net/data/upload/video/156390195328.jpg
                  */
 
                 private String id;
-                private String img;
                 private String title;
                 private String playtime;
+                private String image;
 
                 public String getId() {
                     return id;
@@ -126,14 +136,6 @@ public class VideoItem {
 
                 public void setId(String id) {
                     this.id = id;
-                }
-
-                public String getImg() {
-                    return img;
-                }
-
-                public void setImg(String img) {
-                    this.img = img;
                 }
 
                 public String getTitle() {
@@ -150,6 +152,14 @@ public class VideoItem {
 
                 public void setPlaytime(String playtime) {
                     this.playtime = playtime;
+                }
+
+                public String getImage() {
+                    return image;
+                }
+
+                public void setImage(String image) {
+                    this.image = image;
                 }
             }
         }

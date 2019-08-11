@@ -2,15 +2,13 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="35dp"
-    android:layout_margin="1dp"
     android:background="@drawable/biaoqian_back"
     android:gravity="center">
     <ImageView
         android:id="@+id/hook"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:visibility="gone"
-        android:layout_marginRight="5dp"/>
+        android:visibility="gone" />
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"

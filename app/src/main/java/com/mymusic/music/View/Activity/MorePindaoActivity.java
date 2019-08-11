@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -21,14 +22,14 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Request;
 
 public class MorePindaoActivity extends BaseActivity {
 
     @BindView(R.id.rc)
     RecyclerView RC;
-    @BindView(R.id.tab)
-    TabLayout tab;
+
 
     @Override
     protected void initVariables(Intent intent) {
@@ -52,9 +53,6 @@ public class MorePindaoActivity extends BaseActivity {
             public void requestSuccess(String result) throws Exception {
                 hideloading();
                 PinDao bean = GsonUtil.GsonToBean(result, PinDao.class);
-                for (int i= 0 ;i<bean.getData().getList().size();i++){
-                    tab.addTab(new TabLayout.Tab().setText(bean.getData().getList().get(i).getTitle()));
-                }
                 initRc(bean);
             }
 
@@ -73,13 +71,10 @@ public class MorePindaoActivity extends BaseActivity {
     private void initRc(PinDao bean) {
         RC.setLayoutManager(new LinearLayoutManager(this));
         MoreRcAdapter adapter = new MoreRcAdapter(R.layout.grid_item_layout,bean.getData().getList());
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                Intent intent = new Intent(MorePindaoActivity.this, VideoPindaoActivity.class);
-                startActivity(intent);
-            }
-        });
         RC.setAdapter(adapter);
+    }
+    @OnClick(R.id.close)
+    public void ClickEvent(View view){
+        finish();
     }
 }

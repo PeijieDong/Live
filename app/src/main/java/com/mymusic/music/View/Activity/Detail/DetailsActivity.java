@@ -156,10 +156,17 @@ public class DetailsActivity extends BaseActivity {
     }
     @Override
     protected void initVariables(Intent intent) {
+        boolean aNew = intent.getBooleanExtra("new", false);
         id = intent.getStringExtra("id");
+        String url = "";
+        if(aNew){
+            url = UrlManager.HOME_DETAILS_TWO;
+        }else {
+            url = UrlManager.HOME_DETAILS;
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("id",id);
-        NetRequest.getFormRequest(UrlManager.HOME_DETAILS, map, new NetRequest.DataCallBack() {
+        NetRequest.getFormRequest(url, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);

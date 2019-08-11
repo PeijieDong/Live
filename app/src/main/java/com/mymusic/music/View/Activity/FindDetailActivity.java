@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mymusic.music.DataBean.PinDao;
+import com.mymusic.music.DataBean.VideoFind;
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
@@ -51,17 +52,19 @@ public class FindDetailActivity extends BaseActivity {
 
     private void initTitle() {
         loading();
-        NetRequest.getFormRequest(UrlManager.GET_PINDAO, null, new NetRequest.DataCallBack() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("keyword",find);
+        NetRequest.getFormRequest(UrlManager.GET_FIND, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 hideloading();
-                PinDao bean = GsonUtil.GsonToBean(result, PinDao.class);
+                VideoFind bean = GsonUtil.GsonToBean(result, VideoFind.class);
                 List<Fragment> list = new ArrayList<>();
                 List<String> title = new ArrayList<>();
                 for (int i = 0 ;i <bean.getData().getList().size();i++){
                     FindDetailItemFragment fragment = new FindDetailItemFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putString("id",bean.getData().getList().get(i).getPid());
+//                    bundle.putString("id",bean.getData().getList().get(i));
                     fragment.setArguments(bundle);
                     list.add(fragment);
                     title.add(bean.getData().getList().get(i).getTitle());

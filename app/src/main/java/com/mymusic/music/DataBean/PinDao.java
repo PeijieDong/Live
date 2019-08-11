@@ -7,6 +7,7 @@ import java.util.List;
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
 public class PinDao {
+
     /**
      * data : {"list":[{"title":"精选","pid":"1","list":[{"id":"5","pid":"1","title":"分类一","otype":"typeTwo"},{"id":"6","pid":"1","title":"分类二","otype":"typeThree"}]},{"title":"男歌手","pid":"2","list":[{"id":"7","pid":"2","title":"typeTwo","otype":"分类三"},{"id":"8","pid":"2","title":"分类四","otype":"typeThree"}]},{"title":"女歌手","pid":"3","list":[{"id":"9","pid":"3","title":"分类五","otype":"typeTwo"},{"id":"10","pid":"3","title":"分类六","otype":"typeThree"}]},{"title":"内地歌手","pid":"4"}]}
      * status : 1

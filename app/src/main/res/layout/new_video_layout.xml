@@ -8,13 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal">
-        <android.support.design.widget.TabLayout
+        <com.mymusic.music.DiyTab.TabLayout
             android:id="@+id/tab"
             android:layout_width="0dp"
             android:layout_weight="4"
-            app:tabTextColor="@color/text_gray_66"
+            app:tabMode="scrollable"
+            app:tabTextColor="#8C866B"
+            app:tabIndicatorHeight="2dp"
+            android:padding="5dp"
+            app:tabIndicatorColor="@color/navi_title_color"
             app:tabSelectedTextColor="@color/blank"
-            app:tabIndicatorColor="@color/yellow"
             android:layout_height="45dp"/>
         <ImageView
             android:id="@+id/more"
@@ -43,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:text="搜你想搜看你想看"
                 android:layout_marginStart="10dp"
+                android:textSize="13sp"
                 android:layout_gravity="center_vertical"/>
             <ImageView
                 android:layout_width="20dp"

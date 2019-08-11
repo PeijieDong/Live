@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#F5F7FA"
     tools:context=".View.Activity.MorePindaoActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,10 +25,6 @@
             android:textColor="#030303"
             android:text="频道"/>
     </RelativeLayout>
-    <com.mymusic.music.DiyTab.TabLayout
-        android:id="@+id/tab"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rc"
         android:layout_width="match_parent"

@@ -45,12 +45,13 @@
             android:text="搜索"/>
     </LinearLayout>
 
-    <com.mymusic.music.DiyTab.TabLayout
-        android:id="@+id/tab"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"/>
+    <!--<com.mymusic.music.DiyTab.TabLayout-->
+        <!--android:id="@+id/tab"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"/>-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/titleRc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:padding="10dp"/>
 </LinearLayout>

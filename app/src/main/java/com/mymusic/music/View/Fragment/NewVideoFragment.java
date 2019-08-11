@@ -3,7 +3,6 @@ package com.mymusic.music.View.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -16,6 +15,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.mymusic.music.DataBean.PinDao;
+import com.mymusic.music.DataBean.TopType;
+import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
@@ -65,17 +66,17 @@ public class NewVideoFragment extends BaseFragment {
     }
 
     private void initTab() {
-        NetRequest.getFormRequest(UrlManager.GET_PINDAO, null, new NetRequest.DataCallBack() {
+        NetRequest.getFormRequest(UrlManager.GET_TOP, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                PinDao bean = GsonUtil.GsonToBean(result, PinDao.class);
+                TopType bean = GsonUtil.GsonToBean(result, TopType.class);
                 tabs = new ArrayList<>();
                 fragments = new ArrayList<>();
                 for (int i = 0 ; i<bean.getData().getList().size();i++){
                     tabs.add(bean.getData().getList().get(i).getTitle());
                     VideoItemFragment fragment = new VideoItemFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putString("pid",bean.getData().getList().get(i).getPid());
+                    bundle.putString("pid",bean.getData().getList().get(i).getId());
                     fragment.setArguments(bundle);
                     fragments.add(fragment);
                 }

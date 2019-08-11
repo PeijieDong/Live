@@ -29,23 +29,23 @@ public class pindaoRcAdapter extends BaseQuickAdapter<PinDao.DataBean.ListBeanX,
         MyGridView grid = helper.getView(R.id.grid);
         helper.addOnClickListener(R.id.grid);
         GridAdapter adapter = new GridAdapter(mContext, s.getList());
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                adapter.setSelect(position);
-                adapter.setListener(new GridAdapter.ItemListener() {
-                    @Override
-                    public boolean click(String title) {
-                        return listener.ClickEvent(title);
-                    }
-
-                    @Override
-                    public void remove(String title) {
-                        listener.Remove(title);
-                    }
-                });
-            }
-        });
+//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+////                adapter.setSelect(position);
+////                adapter.setListener(new GridAdapter.ItemListener() {
+////                    @Override
+////                    public boolean click(String title) {
+////                        return listener.ClickEvent(title);
+////                    }
+////
+////                    @Override
+////                    public void remove(String title) {
+////                        listener.Remove(title);
+////                    }
+////                });
+//            }
+//        });
         grid.setAdapter(adapter);
         helper.setText(R.id.title,s.getTitle());
     }

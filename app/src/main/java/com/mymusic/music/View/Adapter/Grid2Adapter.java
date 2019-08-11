@@ -65,13 +65,14 @@ public class Grid2Adapter extends BaseAdapter {
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailsActivity.class);
                 intent.putExtra("id",list.get(i).getId());
+                intent.putExtra("new",true);
                 context.startActivity(intent);
             }
         });
         ImageView typeImage = v.findViewById(R.id.typeImage);
         TextView typename = v.findViewById(R.id.name);
         TextView time = v.findViewById(R.id.time);
-        Glide.with(context).load(list.get(i).getImg()).into(typeImage);
+        Glide.with(context).load(list.get(i).getImage()).into(typeImage);
         typename.setText(list.get(i).getTitle());
         time.setText(list.get(i).getPlaytime());
         return v;
