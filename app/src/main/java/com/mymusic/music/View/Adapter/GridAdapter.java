@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.mymusic.music.DataBean.PinDao;
 import com.mymusic.music.R;
-import com.mymusic.music.View.Activity.MorePindaoActivity;
 import com.mymusic.music.View.Activity.VideoPindaoActivity;
 
 import java.util.List;
@@ -24,11 +23,11 @@ public class GridAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
     private Context context;
-    private List<PinDao.DataBean.ListBeanX.ListBean> list;
-//    private int select;
-//    private ItemListener listener;
+    private List<String> list;
+    private int select;
+    private ItemListener listener;
 
-    public GridAdapter(Context mContext, List<PinDao.DataBean.ListBeanX.ListBean> list) {
+    public GridAdapter(Context mContext, List<String> list) {
         this.context = mContext;
         this.list = list;
         inflater = LayoutInflater.from(context);
@@ -58,8 +57,8 @@ public class GridAdapter extends BaseAdapter {
             v = view;
         }
         TextView title = v.findViewById(R.id.title);
-//        ImageView hook = v.findViewById(R.id.hook);
-        title.setText(list.get(i).getTitle());
+        ImageView hook = v.findViewById(R.id.hook);
+        title.setText(list.get(i));
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,31 +66,31 @@ public class GridAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
-//        if(select == i){
-//            if(hook.getVisibility() == View.GONE){
-//                if(listener != null && listener.click(list.get(i).getTitle())){
-//                    hook.setVisibility(View.VISIBLE);
-//                    title.setBackgroundResource(R.drawable.grid_press_back);
-//                }
-//            }else{
-//                listener.remove(list.get(i).getTitle());
-//                hook.setVisibility(View.GONE);
-//                title.setBackgroundResource(R.drawable.grid_normal_back);
-//            }
-//        }
+        if(select == i){
+            if(hook.getVisibility() == View.GONE){
+                if(listener != null && listener.click(list.get(i))){
+                    hook.setVisibility(View.VISIBLE);
+                    title.setBackgroundResource(R.drawable.grid_press_back);
+                }
+            }else{
+                listener.remove(list.get(i));
+                hook.setVisibility(View.GONE);
+                title.setBackgroundResource(R.drawable.grid_normal_back);
+            }
+        }
         return v;
 
     }
 
-//    public void setSelect(int position){
-//        this.select = position;
-//        notifyDataSetChanged();
-//    }
-//    public interface ItemListener{
-//        boolean click(String title);
-//        void remove(String title);
-//    }
-//    public void setListener(ItemListener listener){
-//        this.listener = listener;
-//    }
+    public void setSelect(int position){
+        this.select = position;
+        notifyDataSetChanged();
+    }
+    public interface ItemListener{
+        boolean click(String title);
+        void remove(String title);
+    }
+    public void setListener(ItemListener listener){
+        this.listener = listener;
+    }
 }

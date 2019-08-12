@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import okhttp3.Request;
@@ -42,6 +43,11 @@ public class VideoPindaoActivity extends BaseActivity {
     RecyclerView rc;
     @BindView(R.id.tab_Collection)
     LinearLayout tab_Collection;
+    private static String title1 ="";
+    private static String title2 ="";
+    private static String title3 ="";
+    private static String title4 ="";
+    private static String title5 ="";
 
     @Override
     protected void initVariables(Intent intent) {
@@ -63,27 +69,44 @@ public class VideoPindaoActivity extends BaseActivity {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Title bean = GsonUtil.GsonToBean(result, Title.class);
-                List<String> list = bean.getData().getList().get全部发布();
+                List<Title.DataBean.ListBean> list = bean.getData().getList();
                 for (int i = 0;i<list.size();i++){
-                    TabNavigation navigation = new TabNavigation(VideoPindaoActivity.this);
-                    LinearLayout.LayoutParams layoutParams =
-                            new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    layoutParams.setMargins(DpPxUtils.dip2px(VideoPindaoActivity.this,10)
-                    ,DpPxUtils.dip2px(VideoPindaoActivity.this,5),
-                            DpPxUtils.dip2px(VideoPindaoActivity.this,10),
-                            DpPxUtils.dip2px(VideoPindaoActivity.this,5));
-                    navigation.setLayoutParams(layoutParams);
-                    navigation.addTab(new TabNavigation.Tab().setText(list.get(0))
-                            .setPressedIcon(R.drawable.tab_back)
-                            .setNormalIcon(R.drawable.tab_back_normal));
-                    tab_Collection.addView(navigation);
-                    int finalI = i;
-                    navigation.setOnTabChechListener(new TabNavigation.OnTabCheckListener() {
-                        @Override
-                        public void onTabSelected(View v, int position) {
-                            ToastUtil.show(VideoPindaoActivity.this,"点击了"+ finalI +"个",1);
-                        }
-                    });
+                    for(int a = 0 ;a<list.get(i).getList().size();i++){
+                        TabNavigation navigation = new TabNavigation(VideoPindaoActivity.this);
+                        LinearLayout.LayoutParams layoutParams =
+                                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        layoutParams.setMargins(DpPxUtils.dip2px(VideoPindaoActivity.this,10)
+                                ,DpPxUtils.dip2px(VideoPindaoActivity.this,5),
+                                DpPxUtils.dip2px(VideoPindaoActivity.this,10),
+                                DpPxUtils.dip2px(VideoPindaoActivity.this,5));
+                        navigation.setLayoutParams(layoutParams);
+                        navigation.addTab(new TabNavigation.Tab().setText(list.get(i).getList().get(a))
+                                .setPressedIcon(R.drawable.tab_back)
+                                .setNormalIcon(R.drawable.tab_back_normal));
+                        tab_Collection.addView(navigation);
+                        int finalI = i;
+                        navigation.setOnTabChechListener(new TabNavigation.OnTabCheckListener() {
+                            @Override
+                            public void onTabSelected(View v, int position) {
+                                if(finalI == 0){
+                                    title1 = list.get(finalI).getList().get(position);
+                                }
+                                if(finalI == 1){
+                                    title2 = list.get(finalI).getList().get(position);
+                                }
+                                if(finalI == 2){
+                                    title3 = list.get(finalI).getList().get(position);
+                                }
+                                if(finalI == 3){
+                                    title4 = list.get(finalI).getList().get(position);
+                                }
+                                if(finalI == 4){
+                                    title5 = list.get(finalI).getList().get(position);
+                                }
+                                initRc();
+                            }
+                        });
+                    }
                 }
                 initRc();
             }
@@ -103,6 +126,12 @@ public class VideoPindaoActivity extends BaseActivity {
     private void initRc() {
         loading();
         HashMap<String, String> map = new HashMap<>();
+        map.put("cate1",title1);
+        map.put("cate2",title2);
+        map.put("cate3",title3);
+        map.put("cate4",title4);
+        map.put("cate5",title5);
+        map.put("page","0");
         NetRequest.getFormRequest(UrlManager.GET_VIDEO, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
