@@ -7,6 +7,7 @@ import java.util.Collection;
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
  **/
 public class UrlManager {
+
     private static final String BaseUrl = "http://live.shuiqiao.net/";
     //home页
     public static final String HOME_DATA = BaseUrl+"index/homepage";
@@ -187,4 +188,6 @@ public class UrlManager {
     public static final String GET_VIDEO = BaseUrl+"video/vlist";
 
     public static final String HOME_DETAILS_TWO = BaseUrl + "video/vinfo";
+
+    public static final String GET_FIND_HOT = BaseUrl+"video/hotsearch";
 }

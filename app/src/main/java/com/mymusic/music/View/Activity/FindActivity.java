@@ -63,7 +63,7 @@ public class FindActivity extends BaseActivity {
 
     private void initTitle() {
         loading();
-        NetRequest.getFormRequest(UrlManager.GET_PINDAO, null, new NetRequest.DataCallBack() {
+        NetRequest.getFormRequest(UrlManager.GET_FIND_HOT, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 hideloading();
