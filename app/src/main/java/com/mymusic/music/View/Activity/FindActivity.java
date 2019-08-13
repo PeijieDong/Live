@@ -8,7 +8,10 @@ import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ListAdapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.Find;
@@ -18,6 +21,7 @@ import com.mymusic.music.DataBean.VideoItem;
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.MyGridView;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
@@ -37,8 +41,6 @@ import okhttp3.Request;
 
 public class FindActivity extends BaseActivity {
 
-    @BindView(R.id.tab)
-    TabLayout tabLayout;
     @BindView(R.id.titleRc)
     RecyclerView rc;
     @BindView(R.id.rc)
@@ -66,13 +68,11 @@ public class FindActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.GET_FIND_HOT, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.d("33",result);
                 hideloading();
                 Find bean = GsonUtil.GsonToBean(result, Find.class);
-                for (int i = 0 ;i<bean.getData().getList().size();i++){
-                    tabLayout.addTab(new TabLayout.Tab().setText(bean.getData().getList().get(i).getTitle()));
-                }
                 pindaoRcAdapter adapter = new pindaoRcAdapter(R.layout.find_item_layout,bean.getData().getList());
-                adapter.setOnClickListener(new pindaoRcAdapter.ClickItemListener() {
+                adapter.setClickListener(new pindaoRcAdapter.ClickItemListener() {
                     @Override
                     public boolean ClickEvent(String title) {
                         if(titles.size() < 5){
@@ -80,9 +80,9 @@ public class FindActivity extends BaseActivity {
                             StringBuilder builder = new StringBuilder();
                             for (int i=0;i<titles.size();i++){
                                 if(i == titles.size()-1){
-                                    builder.append(titles.get(i)).append("/");
-                                }else{
                                     builder.append(titles.get(i));
+                                }else{
+                                    builder.append(titles.get(i)).append("/");
                                 }
                             }
                             findtv.setText(builder.toString());
@@ -97,7 +97,7 @@ public class FindActivity extends BaseActivity {
                     public void Remove(String title) {
                         titles.remove(title);
                         StringBuilder builder = new StringBuilder();
-                        for (int i=0;i<titles.size();i++){
+                        for (int i=0 ;i<titles.size();i++){
                             if(i == titles.size()-1){
                                 builder.append(titles.get(i)).append("/");
                             }else{
@@ -107,6 +107,7 @@ public class FindActivity extends BaseActivity {
                         findtv.setText(builder.toString());
                     }
                 });
+                rc.setLayoutManager(new LinearLayoutManager(FindActivity.this));
                 rc.setAdapter(adapter);
 
             }
@@ -144,7 +145,6 @@ public class FindActivity extends BaseActivity {
 
     private void initNet(String s) {
         rc.setVisibility(View.GONE);
-        tabLayout.setVisibility(View.GONE);
         findRc.setVisibility(View.VISIBLE);
         loading();
         HashMap<String, String> map = new HashMap<>();

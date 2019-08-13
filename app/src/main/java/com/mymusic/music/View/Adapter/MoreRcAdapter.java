@@ -23,7 +23,7 @@ public class MoreRcAdapter extends BaseQuickAdapter<PinDao.DataBean.ListBeanX,Ba
     @Override
     protected void convert(BaseViewHolder helper, PinDao.DataBean.ListBeanX s) {
         MyGridView grid = helper.getView(R.id.grid);
-        grid.setAdapter(new GridAdapter(mContext,s.getList()));
+        grid.setAdapter(new GridAdapter2(mContext,s.getList()));
         helper.setText(R.id.title,s.getTitle());
     }
 }

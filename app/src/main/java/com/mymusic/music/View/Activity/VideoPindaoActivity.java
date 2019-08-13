@@ -83,6 +83,7 @@ public class VideoPindaoActivity extends BaseActivity {
                         navigation.addTab(new TabNavigation.Tab().setText(list.get(i).getList().get(a))
                                 .setPressedIcon(R.drawable.tab_back)
                                 .setNormalIcon(R.drawable.tab_back_normal));
+                        navigation.setCurrentItem(0);
                         tab_Collection.addView(navigation);
                         int finalI = i;
                         navigation.setOnTabChechListener(new TabNavigation.OnTabCheckListener() {

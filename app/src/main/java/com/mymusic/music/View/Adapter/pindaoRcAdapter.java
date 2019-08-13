@@ -1,6 +1,7 @@
 package com.mymusic.music.View.Adapter;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -28,23 +29,22 @@ public class pindaoRcAdapter extends BaseQuickAdapter<Find.DataBean.ListBean,Bas
     @Override
     protected void convert(BaseViewHolder helper, Find.DataBean.ListBean s) {
         MyGridView grid = helper.getView(R.id.grid);
-        helper.addOnClickListener(R.id.grid);
         GridAdapter adapter = new GridAdapter(mContext, s.getList());
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 adapter.setSelect(position);
-                adapter.setListener(new GridAdapter.ItemListener() {
-                    @Override
-                    public boolean click(String title) {
-                        return listener.ClickEvent(title);
-                    }
+            }
+        });
+        adapter.setListener(new GridAdapter.ItemListener() {
+            @Override
+            public void click(String title) {
+                listener.ClickEvent(title);
+            }
 
-                    @Override
-                    public void remove(String title) {
-                        listener.Remove(title);
-                    }
-                });
+            @Override
+            public void remove(String title) {
+                listener.Remove(title);
             }
         });
         grid.setAdapter(adapter);
@@ -56,7 +56,7 @@ public class pindaoRcAdapter extends BaseQuickAdapter<Find.DataBean.ListBean,Bas
 
         void Remove(String title);
     }
-    public void setOnClickListener(ClickItemListener listener){
+    public void setClickListener(ClickItemListener listener){
         this.listener = listener;
     }
 }
