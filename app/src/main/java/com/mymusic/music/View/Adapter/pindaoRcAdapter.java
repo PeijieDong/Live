@@ -4,11 +4,13 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mymusic.music.DataBean.Find;
 import com.mymusic.music.DataBean.PinDao;
+import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.MyGridView;
 
@@ -21,7 +23,6 @@ import java.util.List;
 public class pindaoRcAdapter extends BaseQuickAdapter<Find.DataBean.ListBean,BaseViewHolder> {
 
     ClickItemListener listener;
-
     public pindaoRcAdapter(int layoutResId, @Nullable List<Find.DataBean.ListBean> data) {
         super(layoutResId, data);
     }
@@ -29,17 +30,18 @@ public class pindaoRcAdapter extends BaseQuickAdapter<Find.DataBean.ListBean,Bas
     @Override
     protected void convert(BaseViewHolder helper, Find.DataBean.ListBean s) {
         MyGridView grid = helper.getView(R.id.grid);
-        GridAdapter adapter = new GridAdapter(mContext, s.getList());
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        GridAdapter gridAdapter = new GridAdapter(mContext, s.getList());
+//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                gridAdapter.setSelect(position);
+////                gridAdapter.notifyDataSetChanged();
+//            }
+//        });
+        gridAdapter.setListener(new GridAdapter.ItemListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                adapter.setSelect(position);
-            }
-        });
-        adapter.setListener(new GridAdapter.ItemListener() {
-            @Override
-            public void click(String title) {
-                listener.ClickEvent(title);
+            public boolean click(String title) {
+                return listener.ClickEvent(title);
             }
 
             @Override
@@ -47,7 +49,7 @@ public class pindaoRcAdapter extends BaseQuickAdapter<Find.DataBean.ListBean,Bas
                 listener.Remove(title);
             }
         });
-        grid.setAdapter(adapter);
+        grid.setAdapter(gridAdapter);
         helper.setText(R.id.title,s.getTitle());
     }
 
@@ -59,4 +61,5 @@ public class pindaoRcAdapter extends BaseQuickAdapter<Find.DataBean.ListBean,Bas
     public void setClickListener(ClickItemListener listener){
         this.listener = listener;
     }
+
 }

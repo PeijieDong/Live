@@ -38,7 +38,7 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list == null ? 0 : list.size();
+        return list.size();
     }
 
     @Override
@@ -48,46 +48,58 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return i;
+        return -1;
     }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View v;
+        Log.d("33","刷新一次");
+        ViewHolder holder = null;
         if(view == null){
-            v = inflater.inflate(R.layout.grid_layout, viewGroup,false);
+            view = inflater.inflate(R.layout.grid_layout, viewGroup,false);
+            holder = new ViewHolder();
+            holder.title = view.findViewById(R.id.title);
+            holder.hook = view.findViewById(R.id.hook);
+            holder.back = view.findViewById(R.id.back);
+            view.setTag(holder);
         }else{
-            v = view;
+            holder = (ViewHolder) view.getTag();
         }
-        TextView title = v.findViewById(R.id.title);
-        ImageView hook = v.findViewById(R.id.hook);
-        LinearLayout back = v.findViewById(R.id.back);
-        title.setText(list.get(i));
-        Log.d("33","GR："+"select="+select);
-        if(select == i){
-            Log.d("33","GR："+"i="+i);
-            if(hook.getVisibility() == View.GONE){
-                if(listener != null){
-                    Log.d("33","GR："+list.get(i));
-                    hook.setVisibility(View.VISIBLE);
-                    back.setBackgroundResource(R.drawable.grid_press_back);
-                    listener.click(list.get(select));
+        holder.title.setText(list.get(i));
+        ViewHolder finalHolder = holder;
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(finalHolder.hook.getVisibility() == View.GONE){
+                    if(listener != null && listener.click(list.get(i))){
+                        Log.d("33","更换背景一次");
+                        finalHolder.hook.setVisibility(View.VISIBLE);
+                        finalHolder.back.setBackgroundResource(R.drawable.grid_press_back);
+                    }
+                }else{
+                    finalHolder.hook.setVisibility(View.GONE);
+                    finalHolder.back.setBackgroundResource(R.drawable.grid_normal_back);
+                    listener.remove(list.get(i));
                 }
-            }else{
-                hook.setVisibility(View.GONE);
-                back.setBackgroundResource(R.drawable.grid_normal_back);
-                listener.remove(list.get(select));
+                notifyDataSetChanged();
             }
-        }
-        return v;
+        });
+        return view;
 
+    }
+
+    class ViewHolder{
+        TextView title;
+        ImageView hook;
+        LinearLayout back;
     }
 
     public void setSelect(int position){
+        Log.d("33","调用刷新一次");
         this.select = position;
-        notifyDataSetInvalidated();
     }
     public interface ItemListener{
-        void click(String title);
+        boolean click(String title);
         void remove(String title);
     }
     public void setListener(ItemListener listener){

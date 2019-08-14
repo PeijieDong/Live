@@ -26,6 +26,7 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Adapter.FindRcAdapter;
+import com.mymusic.music.View.Adapter.GridAdapter;
 import com.mymusic.music.View.Adapter.pindaoRcAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -76,6 +77,10 @@ public class FindActivity extends BaseActivity {
                     @Override
                     public boolean ClickEvent(String title) {
                         if(titles.size() < 5){
+                            if(titles.contains(title)){
+                                ToastUtil.show(FindActivity.this,"已经存在了",1);
+                                return false;
+                            }
                             titles.add(title);
                             StringBuilder builder = new StringBuilder();
                             for (int i=0;i<titles.size();i++){
@@ -99,9 +104,9 @@ public class FindActivity extends BaseActivity {
                         StringBuilder builder = new StringBuilder();
                         for (int i=0 ;i<titles.size();i++){
                             if(i == titles.size()-1){
-                                builder.append(titles.get(i)).append("/");
-                            }else{
                                 builder.append(titles.get(i));
+                            }else{
+                                builder.append(titles.get(i)).append("/");
                             }
                         }
                         findtv.setText(builder.toString());
