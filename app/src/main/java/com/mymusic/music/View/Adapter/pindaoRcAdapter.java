@@ -31,13 +31,6 @@ public class pindaoRcAdapter extends BaseQuickAdapter<Find.DataBean.ListBean,Bas
     protected void convert(BaseViewHolder helper, Find.DataBean.ListBean s) {
         MyGridView grid = helper.getView(R.id.grid);
         GridAdapter gridAdapter = new GridAdapter(mContext, s.getList());
-//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                gridAdapter.setSelect(position);
-////                gridAdapter.notifyDataSetChanged();
-//            }
-//        });
         gridAdapter.setListener(new GridAdapter.ItemListener() {
             @Override
             public boolean click(String title) {

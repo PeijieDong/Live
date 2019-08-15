@@ -28,6 +28,7 @@ public class TabNavigation extends LinearLayout implements View.OnClickListener 
     private List<Tab> Tabs;//保存tab
     private Context context;
     private OnTabCheckListener tabCheckListener;
+    private int currentPosition=0;
 
     public TabNavigation(Context context) {
         super(context);
@@ -102,6 +103,13 @@ public class TabNavigation extends LinearLayout implements View.OnClickListener 
         }
         TabView.get(position).performClick();
         updateState(position);
+    }
+    public void setCurrentPosition(int position){
+        this.currentPosition = position;
+    }
+
+    public int getCurrtPosition(){
+        return currentPosition;
     }
     //更新状态
     public void updateState(int position){

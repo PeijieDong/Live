@@ -72,7 +72,6 @@ public class GridAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if(finalHolder.hook.getVisibility() == View.GONE){
                     if(listener != null && listener.click(list.get(i))){
-                        Log.d("33","更换背景一次");
                         finalHolder.hook.setVisibility(View.VISIBLE);
                         finalHolder.back.setBackgroundResource(R.drawable.grid_press_back);
                     }
