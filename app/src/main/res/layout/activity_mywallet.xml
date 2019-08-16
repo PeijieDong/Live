@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/back_gradient">
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:padding="5dp"
-            android:src="@drawable/icon_back_white"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/back"-->
+            <!--android:layout_width="45dp"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:padding="5dp"-->
+            <!--android:src="@drawable/icon_back_white"/>-->
         <TextView
             android:id="@+id/money_detail"
             android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
             android:orientation="vertical">
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="180dp"
                 android:background="@drawable/back_gradient">
                 <TextView
                     android:id="@+id/wallet_balance"

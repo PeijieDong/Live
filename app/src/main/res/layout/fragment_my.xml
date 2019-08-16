@@ -330,13 +330,13 @@
                     app:layout_constraintLeft_toRightOf="@id/my_icon1"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="@string/my_wallet"/>
+                    android:text="成为贵族"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:textColor="@color/navi_title_color"
-                    android:text="去充值"
+                    android:text="敬请期待"
                     app:layout_constraintRight_toLeftOf="@id/next_icon"/>
                 <ImageView
                     android:id="@+id/next_icon"
@@ -639,7 +639,7 @@
                     app:layout_constraintLeft_toRightOf="@id/my_icon10"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="@string/my_share"/>
+                    android:text="App下载地址推广"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"

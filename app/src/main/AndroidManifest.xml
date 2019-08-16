@@ -20,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".View.Activity.ShareActivity"></activity>
         <activity android:name=".ActivityAdv" />
         <activity android:name=".View.Activity.Detail.CommentDetailActivity" />
         <activity
@@ -127,7 +128,7 @@
         <activity android:name=".View.Activity.FindActivity" />
         <activity android:name=".View.Activity.FindDetailActivity" />
         <activity android:name=".View.Activity.MorePindaoActivity" />
-        <activity android:name=".View.Activity.VideoPindaoActivity"></activity>
+        <activity android:name=".View.Activity.VideoPindaoActivity" />
     </application>
 
 </manifest>

@@ -47,6 +47,7 @@ import com.mymusic.music.View.Activity.MyChildActivity.My.MysettingActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyshareActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
+import com.mymusic.music.View.Activity.ShareActivity;
 import com.mymusic.music.View.Activity.WebActivity;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.R;
@@ -242,9 +243,10 @@ public class MyFragment extends BaseFragment {
                 }
                 break;
             case R.id.my_wallet:
-                if(Live.getInstance().getUser(getContext()) != null){
-                    goActivity(MywalletActivity.class);
-                }
+                ToastUtil.show(getContext(),"敬请期待",1);
+//                if(Live.getInstance().getUser(getContext()) != null){
+//                    goActivity(MywalletActivity.class);
+//                }
                 break;
             case R.id.my_live:
                 if(Live.getInstance().getUser(getContext()) != null){
@@ -291,11 +293,13 @@ public class MyFragment extends BaseFragment {
                 hideloading();
                 break;
             case R.id.my_share:
-                Intent intent1 = new Intent(getContext(), WebActivity.class);
-                intent1.putExtra("url","http://live.shuiqiao.net/users/share");
-                intent1.putExtra("share",true);
-                intent1.putExtra("title","推广分享");
-                startActivity(intent1);
+                Intent intent = new Intent(getContext(), ShareActivity.class);
+                startActivity(intent);
+//                Intent intent1 = new Intent(getContext(), WebActivity.class);
+//                intent1.putExtra("url","http://live.shuiqiao.net/users/share");
+//                intent1.putExtra("share",true);
+//                intent1.putExtra("title","推广分享");
+//                startActivity(intent1);
                 break;
         }
     }
