@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
         list.add(new HomeFragment());
         list.add(new NewVideoFragment());
         list.add(new LiveFragment());
-        list.add(new FriendFragment());
+//        list.add(new FriendFragment());
         list.add(new MyFragment());
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         for(int i=0;i<list.size();i++){
@@ -83,8 +83,8 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
                 .setPressedIcon(R.drawable.icon_video_pressed).setText("视频"));
         bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_live_normal)
                 .setPressedIcon(R.drawable.icon_live_pressed).setText("直播"));
-        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_friend_normal)
-                .setPressedIcon(R.drawable.icon_friend_pressed).setText("圈子"));
+//        bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_friend_normal)
+//                .setPressedIcon(R.drawable.icon_friend_pressed).setText("圈子"));
         bottomNavigation.addTab(new BottomNavigation.Tab().setNormalIcon(R.drawable.icon_my_normal)
                 .setPressedIcon(R.drawable.icon_my_pressed).setText("我的"));
         bottomNavigation.setOnTabChechListener(this);
