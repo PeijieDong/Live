@@ -3,6 +3,7 @@ package com.mymusic.music.View.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.mymusic.music.DataBean.NewVideo;
 import com.mymusic.music.DataBean.Title;
 import com.mymusic.music.DataBean.VideoItem;
 import com.mymusic.music.DiyTab.TabLayout;
@@ -24,6 +27,8 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.TabNavigation;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.Util.TopNavigation;
+import com.mymusic.music.View.Activity.Detail.DetailsActivity;
+import com.mymusic.music.View.Adapter.RcAdapterVideo2;
 import com.mymusic.music.View.Adapter.RcAdpaterVideo;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -71,7 +76,7 @@ public class VideoPindaoActivity extends BaseActivity {
                 Title bean = GsonUtil.GsonToBean(result, Title.class);
                 List<Title.DataBean.ListBean> list = bean.getData().getList();
                 for (int i = 0;i<list.size();i++){
-                    for(int a = 0 ;a<list.get(i).getList().size();i++){
+                    for(int a = 0 ;a<list.get(i).getList().size();a++){
                         TabNavigation navigation = new TabNavigation(VideoPindaoActivity.this);
                         LinearLayout.LayoutParams layoutParams =
                                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -80,15 +85,31 @@ public class VideoPindaoActivity extends BaseActivity {
                                 DpPxUtils.dip2px(VideoPindaoActivity.this,10),
                                 DpPxUtils.dip2px(VideoPindaoActivity.this,5));
                         navigation.setLayoutParams(layoutParams);
+                        navigation.setCurrentPosition(i);
                         navigation.addTab(new TabNavigation.Tab().setText(list.get(i).getList().get(a))
                                 .setPressedIcon(R.drawable.tab_back)
                                 .setNormalIcon(R.drawable.tab_back_normal));
                         navigation.setCurrentItem(0);
+                        if(i == 0){
+                            title1 = list.get(i).getList().get(0);
+                        }
+                        if(i == 1){
+                            title2 = list.get(i).getList().get(0);
+                        }
+                        if(i == 2){
+                            title3 = list.get(i).getList().get(0);
+                        }
+                        if(i == 3){
+                            title4 = list.get(i).getList().get(0);
+                        }
+                        if(i == 4){
+                            title5 = list.get(i).getList().get(0);
+                        }
                         tab_Collection.addView(navigation);
-                        int finalI = i;
                         navigation.setOnTabChechListener(new TabNavigation.OnTabCheckListener() {
                             @Override
                             public void onTabSelected(View v, int position) {
+                                int finalI = navigation.getCurrtPosition();
                                 if(finalI == 0){
                                     title1 = list.get(finalI).getList().get(position);
                                 }
@@ -138,9 +159,19 @@ public class VideoPindaoActivity extends BaseActivity {
             public void requestSuccess(String result) throws Exception {
                 Log.d("33",result);
                 hideloading();
-                VideoItem bean = GsonUtil.GsonToBean(result, VideoItem.class);
-                rc.setLayoutManager(new LinearLayoutManager(VideoPindaoActivity.this));
-                RcAdpaterVideo videoAdapter = new RcAdpaterVideo(R.layout.rc_adapter_item_video,bean.getData().getList());
+                NewVideo bean = GsonUtil.GsonToBean(result, NewVideo.class);
+                rc.setLayoutManager(new GridLayoutManager(VideoPindaoActivity.this,2));
+                RcAdapterVideo2 videoAdapter = new RcAdapterVideo2(R.layout.gridtype2_layout,bean.getData().getList());
+                videoAdapter.setEmptyView(LayoutInflater.from(VideoPindaoActivity.this).inflate(R.layout.empty_layout,null));
+                videoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        Intent intent = new Intent(VideoPindaoActivity.this, DetailsActivity.class);
+                        intent.putExtra("id",bean.getData().getList().get(position).getId());
+                        intent.putExtra("new",true);
+                        startActivity(intent);
+                    }
+                });
                 rc.setAdapter(videoAdapter);
             }
 

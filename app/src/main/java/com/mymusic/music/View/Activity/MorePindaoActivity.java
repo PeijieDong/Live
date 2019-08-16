@@ -66,8 +66,8 @@ public class MorePindaoActivity extends BaseActivity {
                 hideloading();
             }
         });
-    }
 
+    }
     private void initRc(PinDao bean) {
         RC.setLayoutManager(new LinearLayoutManager(this));
         MoreRcAdapter adapter = new MoreRcAdapter(R.layout.grid_item_layout,bean.getData().getList());
