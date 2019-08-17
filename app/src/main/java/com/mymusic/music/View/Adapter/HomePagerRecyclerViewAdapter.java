@@ -80,7 +80,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                     case "推荐":
                         return RECOMMEND;
                     //广告
-                    case "关注":
+                    case "广告":
                         return ADV;
                     case "小视频":
                         if(s.getObjs() != null){
@@ -200,6 +200,13 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
             case RECOMMEND:
                 break;
             case ADV:
+                helper.setText(R.id.title,item.getTitle())
+                .setText(R.id.number,item.getNumber()+"人观看中")
+                .setText(R.id.name,item.getName());
+                Glide.with(mContext).load(item.getImage()).placeholder(R.drawable.fq_bottom_transparent)
+                        .error(R.drawable.fq_ic_placeholder).into((ImageView) helper.getView(R.id.adv_image));
+                Glide.with(mContext).load(item.getAvatar()).placeholder(R.drawable.fq_bottom_transparent)
+                        .error(R.drawable.fq_ic_placeholder).into((ImageView) helper.getView(R.id.head));
                 break;
             case PAPA:
                 RecyclerView FoundRc = helper.getView(R.id.found_rc);

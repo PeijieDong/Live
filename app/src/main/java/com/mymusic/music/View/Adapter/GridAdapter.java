@@ -56,7 +56,7 @@ public class GridAdapter extends BaseAdapter {
         Log.d("33","刷新一次");
         ViewHolder holder = null;
         if(view == null){
-            view = inflater.inflate(R.layout.grid_layout, viewGroup,false);
+            view = inflater.inflate(R.layout.grid_layout_2, viewGroup,false);
             holder = new ViewHolder();
             holder.title = view.findViewById(R.id.title);
             holder.hook = view.findViewById(R.id.hook);
@@ -77,7 +77,7 @@ public class GridAdapter extends BaseAdapter {
                     }
                 }else{
                     finalHolder.hook.setVisibility(View.GONE);
-                    finalHolder.back.setBackgroundResource(R.drawable.grid_normal_back);
+                    finalHolder.back.setBackgroundResource(R.drawable.grid_normal_back_2);
                     listener.remove(list.get(i));
                 }
                 notifyDataSetChanged();

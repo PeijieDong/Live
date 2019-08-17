@@ -190,4 +190,6 @@ public class UrlManager {
     public static final String HOME_DETAILS_TWO = BaseUrl + "video/vinfo";
 
     public static final String GET_FIND_HOT = BaseUrl+"video/hotsearch";
+
+    public static final String YAOQING = BaseUrl +"users/invite";
 }

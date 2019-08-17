@@ -123,9 +123,36 @@ public class HomeData implements Serializable {
             private String user_nicename;
             private String filepath;
             private String Vid;
+            private String number;
+            private String name;
+            private String url;
             private List<String> images;
             private List<ObjsBean> objs;
 
+
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getNumber() {
+                return number;
+            }
+
+            public void setNumber(String number) {
+                this.number = number;
+            }
 
             public String getVid() {
                 return Vid;

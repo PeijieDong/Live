@@ -2,6 +2,7 @@ package com.mymusic.music.View.ChildFragment;
 
 import android.content.Intent;
 import android.content.UriMatcher;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.google.gson.Gson;
 import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.DataBean.UserDetail;
@@ -126,9 +128,17 @@ public class HomePagerFragment extends BaseFragment implements  OnRefreshListene
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra("id",list.get(position).getId());
-                startActivity(intent);
+                if(list.get(position).getType().equals("广告")){
+                    Intent intent= new Intent();
+                    intent.setAction("android.intent.action.VIEW");
+                    Uri content_url = Uri.parse(list.get(position).getUrl());
+                    intent.setData(content_url);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getContext(), DetailsActivity.class);
+                    intent.putExtra("id", list.get(position).getId());
+                    startActivity(intent);
+                }
             }
         });
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

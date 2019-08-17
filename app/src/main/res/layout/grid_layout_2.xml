@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="30dp"
-    android:background="@drawable/grid_normal_back"
+    android:layout_height="25dp"
+    android:background="@drawable/grid_normal_back_2"
     android:gravity="center"
     android:id="@+id/back">
     <ImageView
         android:id="@+id/hook"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:visibility="gone" />
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:visibility="gone"
+        android:src="@mipmap/ic_launcher"/>
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"

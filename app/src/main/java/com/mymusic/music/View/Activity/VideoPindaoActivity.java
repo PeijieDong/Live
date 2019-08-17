@@ -80,9 +80,9 @@ public class VideoPindaoActivity extends BaseActivity {
                         TabNavigation navigation = new TabNavigation(VideoPindaoActivity.this);
                         LinearLayout.LayoutParams layoutParams =
                                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        layoutParams.setMargins(DpPxUtils.dip2px(VideoPindaoActivity.this,10)
+                        layoutParams.setMargins(DpPxUtils.dip2px(VideoPindaoActivity.this,7)
                                 ,DpPxUtils.dip2px(VideoPindaoActivity.this,5),
-                                DpPxUtils.dip2px(VideoPindaoActivity.this,10),
+                                DpPxUtils.dip2px(VideoPindaoActivity.this,7),
                                 DpPxUtils.dip2px(VideoPindaoActivity.this,5));
                         navigation.setLayoutParams(layoutParams);
                         navigation.setCurrentPosition(i);

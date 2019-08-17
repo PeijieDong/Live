@@ -11,7 +11,9 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,9 +24,13 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.mymusic.music.DataBean.Yaoqing;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.base.BaseActivity;
+import com.mymusic.music.base.UrlManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,6 +39,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 public class ShareActivity extends BaseActivity {
 
@@ -53,7 +60,38 @@ public class ShareActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
-        code.setImageBitmap(setCode("http://live.shuiqiao.net/users/share",code.getMaxWidth(),code.getMaxHeight()));
+        initNet();
+    }
+
+    private void initNet() {
+        loading();
+        NetRequest.postFormRequest(UrlManager.YAOQING, null, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.d("33",result);
+                hideloading();
+                Yaoqing bean = GsonUtil.GsonToBean(result, Yaoqing.class);
+                ViewTreeObserver vto2 = code.getViewTreeObserver();
+                vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        code.setImageBitmap(setCode(bean.getData().getQrcodeimg(),code.getWidth(),code.getHeight()));
+                    }
+                });
+
+                copyText.setText(bean.getData().getInvitecontent());
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                hideloading();
+            }
+
+            @Override
+            public void TokenFail() {
+                hideloading();
+            }
+        });
     }
 
 
@@ -93,9 +131,12 @@ public class ShareActivity extends BaseActivity {
         return null;
     }
 
-    @OnClick({R.id.save,R.id.copy})
+    @OnClick({R.id.save,R.id.copy,R.id.back})
     public void ClickEvent(View view){
         switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
             case R.id.save:
                 saveQrcodeToGallery();
                 break;
