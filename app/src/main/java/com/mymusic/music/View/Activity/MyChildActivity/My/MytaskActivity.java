@@ -16,8 +16,10 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.WebActivity;
+import com.mymusic.music.View.Activity.message.SettingActivity;
 import com.mymusic.music.View.Activity.user.ExpActivity;
 import com.mymusic.music.View.Activity.user.IntegalActivity;
+import com.mymusic.music.View.Activity.user.UserActivity;
 import com.mymusic.music.View.Adapter.MyTaskRcAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -69,7 +71,7 @@ public class MytaskActivity extends BaseActivity {
                     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                         switch (view.getId()){
                             case R.id.doit:
-                                if (bean.getData().getList().get(1).getList().get(position).getId().equals("1")){
+                                if (bean.getData().getList().get(1).getList().get(position).getType().equals("1")){
                                     Intent intent1 = new Intent(MytaskActivity.this, WebActivity.class);
                                     intent1.putExtra("url","http://live.shuiqiao.net/users/share");
                                     intent1.putExtra("title","推广分享");
@@ -95,9 +97,14 @@ public class MytaskActivity extends BaseActivity {
                     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                         switch (view.getId()){
                             case R.id.doit:
-                                Intent intent = new Intent(MytaskActivity.this, MainActivity.class);
-                                intent.putExtra("position",0);
-                                startActivity(intent);
+                                if(bean.getData().getList().get(2).getList().get(position).getType().equals("8")){
+                                    Intent intent = new Intent(MytaskActivity.this, UserActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Intent intent = new Intent(MytaskActivity.this, MainActivity.class);
+                                    intent.putExtra("position", 0);
+                                    startActivity(intent);
+                                }
                                 break;
                         }
                     }

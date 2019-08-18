@@ -192,4 +192,6 @@ public class UrlManager {
     public static final String GET_FIND_HOT = BaseUrl+"video/hotsearch";
 
     public static final String YAOQING = BaseUrl +"users/invite";
+
+    public static final String TOPUP_VIP = BaseUrl+"users/vip";
 }

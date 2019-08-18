@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
 import com.mymusic.music.View.Activity.WalletFeedback;
 import com.mymusic.music.View.Activity.WebActivity;
 import com.mymusic.music.View.Adapter.ViewpagerAdapter;
+import com.mymusic.music.View.ChildFragment.TopVipFragment;
 import com.mymusic.music.View.ChildFragment.WalletFragment;
 import com.mymusic.music.View.ChildFragment.WalletOnLineFragment;
 import com.mymusic.music.base.BaseFragment;
@@ -54,6 +56,8 @@ public class TopUpFragment extends BaseFragment {
     TextView money_balance;
     @BindView(R.id.go_money)
     TextView goMoney;
+    @BindView(R.id.card_vip)
+    CardView cardVip;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.activity_mywallet,container,false);
@@ -90,6 +94,7 @@ public class TopUpFragment extends BaseFragment {
                 List<String> title = new ArrayList<>();
                 title.add("代理充值");
                 title.add("在线充值");
+                title.add("开通VIP");
                 List<Fragment> list = new ArrayList<>();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("wallet",bean);
@@ -97,9 +102,32 @@ public class TopUpFragment extends BaseFragment {
                 fragment.setArguments(bundle);
                 WalletOnLineFragment fragment2 = new WalletOnLineFragment();
                 fragment2.setArguments(bundle);
+                TopVipFragment fragment3 = new TopVipFragment();
                 list.add(fragment);
                 list.add(fragment2);
-                viewPager.setAdapter(new ViewpagerAdapter(getChildFragmentManager(),title,list));
+                list.add(fragment3);
+                ViewpagerAdapter adapter = new ViewpagerAdapter(getChildFragmentManager(), title, list);
+                viewPager.setAdapter(adapter);
+                viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int i, float v, int i1) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int i) {
+                        if(i == 2){
+                            cardVip.setVisibility(View.GONE);
+                        }else{
+                            cardVip.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int i) {
+
+                    }
+                });
                 tab.setupWithViewPager(viewPager);
             }
 

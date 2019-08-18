@@ -101,15 +101,12 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) containter.getLayoutParams();
         for(int i = 0;i<list.size();i++){
             if(i == position){
-//                if(position == 1){
-//                    params.removeRule(RelativeLayout.ABOVE);
-//                    bottomNavigation.setBackgroundColor(getResources().getColor(R.color.transparent));
-//                    cardView.setBackgroundColor(getResources().getColor(R.color.transparent));
-//                }else {
-//                    params.addRule(RelativeLayout.ABOVE, R.id.card_view);
-//                    bottomNavigation.setBackgroundColor(getResources().getColor(R.color.white));
-//                    cardView.setBackgroundColor(getResources().getColor(R.color.white));
-//                }
+                if(position == 3){
+                    if(Live.getInstance().getToken(this).equals("")){
+                        ToastUtil.show(this,"请登录使用该功能",1);
+                        return;
+                    }
+                }
                 transaction.show(list.get(i));
             }else{
                 transaction.hide(list.get(i));
