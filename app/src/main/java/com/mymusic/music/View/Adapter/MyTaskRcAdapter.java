@@ -55,7 +55,7 @@ public class MyTaskRcAdapter extends BaseQuickAdapter<Task.DataBean.ListBeanX.Li
                 .setText(R.id.unfinish,item.getTotalValue()+"/")
                 .setText(R.id.total,item.getExperience());
         Glide.with(mContext).load(item.getIcon()).error(R.drawable.fq_ic_placeholder).into((CircleImageView) helper.getView(R.id.task_head));
-        if(item.getIntegral().equals(item.getTotalValue())){
+        if(item.getIntegral().equals(item.getExperience())){
             helper.setBackgroundRes(R.id.doit,R.drawable.isfocus);
             helper.setText(R.id.doit,"已完成");
             helper.getView(R.id.doit).setClickable(false);

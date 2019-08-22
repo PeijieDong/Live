@@ -17,6 +17,8 @@ import com.mymusic.music.View.Activity.Login.LoginActivity;
 
 import org.litepal.LitePal;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Create By mr.mao in 2019/6/7 20:39
  * 我珍惜一眼而过的青春，才如此疯狂的对待未来
@@ -66,6 +68,8 @@ public class Live extends Application {
         LitePal.initialize(this);
         ContextUtils.init(this);
         MultiDex.install(this);
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
 //        Locale _UserLocale=LocaleUtils.getUserLocale(this);
 //        LocaleUtils.updateLocale(this, _UserLocale);
     }
