@@ -9,7 +9,7 @@ import java.util.List;
 public class PinDao {
 
     /**
-     * data : {"list":[{"title":"精选","pid":"1","list":[{"id":"5","pid":"1","title":"分类一","otype":"typeTwo"},{"id":"6","pid":"1","title":"分类二","otype":"typeThree"}]},{"title":"男歌手","pid":"2","list":[{"id":"7","pid":"2","title":"typeTwo","otype":"分类三"},{"id":"8","pid":"2","title":"分类四","otype":"typeThree"}]},{"title":"女歌手","pid":"3","list":[{"id":"9","pid":"3","title":"分类五","otype":"typeTwo"},{"id":"10","pid":"3","title":"分类六","otype":"typeThree"}]},{"title":"内地歌手","pid":"4"}]}
+     * data : {"list":[{"title":"内地","pid":"1","list":[{"id":"13","pid":"1","title":"内地女歌手","otype":"typeTwo","istop":"1","sortby":"0"},{"id":"12","pid":"1","title":"内地男歌手","otype":"typeTwo","istop":"0","sortby":"0"}]},{"title":"港台","pid":"2","list":[{"id":"6","pid":"2","title":"精选1","otype":"typeTwo","istop":"0","sortby":"0"}]},{"title":"欧美","pid":"3","list":[{"id":"7","pid":"3","title":"精选1","otype":"typeTwo","istop":"0","sortby":"0"}]},{"title":"日韩","pid":"4","list":[{"id":"8","pid":"4","title":"精选1","otype":"typeTwo","istop":"0","sortby":"0"}]}]}
      * status : 1
      * referer :
      * state : 1
@@ -65,9 +65,9 @@ public class PinDao {
 
         public static class ListBeanX {
             /**
-             * title : 精选
+             * title : 内地
              * pid : 1
-             * list : [{"id":"5","pid":"1","title":"分类一","otype":"typeTwo"},{"id":"6","pid":"1","title":"分类二","otype":"typeThree"}]
+             * list : [{"id":"13","pid":"1","title":"内地女歌手","otype":"typeTwo","istop":"1","sortby":"0"},{"id":"12","pid":"1","title":"内地男歌手","otype":"typeTwo","istop":"0","sortby":"0"}]
              */
 
             private String title;
@@ -100,16 +100,20 @@ public class PinDao {
 
             public static class ListBean {
                 /**
-                 * id : 5
+                 * id : 13
                  * pid : 1
-                 * title : 分类一
+                 * title : 内地女歌手
                  * otype : typeTwo
+                 * istop : 1
+                 * sortby : 0
                  */
 
                 private String id;
                 private String pid;
                 private String title;
                 private String otype;
+                private String istop;
+                private String sortby;
 
                 public String getId() {
                     return id;
@@ -141,6 +145,22 @@ public class PinDao {
 
                 public void setOtype(String otype) {
                     this.otype = otype;
+                }
+
+                public String getIstop() {
+                    return istop;
+                }
+
+                public void setIstop(String istop) {
+                    this.istop = istop;
+                }
+
+                public String getSortby() {
+                    return sortby;
+                }
+
+                public void setSortby(String sortby) {
+                    this.sortby = sortby;
                 }
             }
         }

@@ -100,6 +100,8 @@ public class MyFragment extends BaseFragment {
     ImageView logo_level;
     @BindView(R.id.level_back)
     LinearLayout levelBack;
+    @BindView(R.id.my_live)
+    ConstraintLayout live;
     private User user;
     private UserBean bean;
     @Override
@@ -179,6 +181,9 @@ public class MyFragment extends BaseFragment {
                     levelBack.setBackgroundResource(R.drawable.level_back_20);
                     logo_level.setImageResource(R.drawable.icon_user_level_20);
                 }
+                if(bean.getData().getIsanchor() == 1){
+                    live.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -197,7 +202,8 @@ public class MyFragment extends BaseFragment {
     @OnClick({R.id.my_setting,R.id.my_level,R.id.my_user_head,
             R.id.my_foucus,R.id.my_fans,R.id.my_publish,R.id.my_collection,R.id.my_cl_task,
             R.id.my_wallet,R.id.my_live,R.id.my_exchange,R.id.my_message,R.id.my_comment,
-            R.id.my_like,R.id.my_history,R.id.my_feedback,R.id.my_about,R.id.my_community,R.id.my_share})
+            R.id.my_like,R.id.my_history,R.id.my_feedback,R.id.my_about,R.id.my_community,R.id.my_share,
+            R.id.go_home})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.my_setting:
@@ -293,6 +299,10 @@ public class MyFragment extends BaseFragment {
                 hideloading();
                 break;
             case R.id.my_share:
+                if(Live.getInstance().getToken(getContext()).equals("")){
+                    ToastUtil.show(getContext(),"请登录使用",1);
+                    return;
+                }
                 Intent intent = new Intent(getContext(), ShareActivity.class);
                 startActivity(intent);
 //                Intent intent1 = new Intent(getContext(), WebActivity.class);
@@ -300,6 +310,12 @@ public class MyFragment extends BaseFragment {
 //                intent1.putExtra("share",true);
 //                intent1.putExtra("title","推广分享");
 //                startActivity(intent1);
+                break;
+            case R.id.go_home:
+                Intent intent1 = new Intent(getContext(),WebActivity.class);
+                intent1.putExtra("home",true);
+                intent1.putExtra("title","回家地址");
+                startActivity(intent1);
                 break;
         }
     }

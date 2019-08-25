@@ -198,14 +198,14 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
             ToastUtil.show(this,"请输入标题",Toast.LENGTH_SHORT);
             return;
         }
-        if(cid.equals("")){
-            ToastUtil.show(this,"请选择圈子",Toast.LENGTH_SHORT);
-            return;
-        }
+//        if(cid.equals("")){
+//            ToastUtil.show(this,"请选择圈子",Toast.LENGTH_SHORT);
+//            return;
+//        }
         String url = UrlManager.Post_Video;
         File file = null;
         HashMap<String, String> map = new HashMap<>();
-        map.put("cate", cid);
+//        map.put("cate", cid);
         map.put("type", type);
         map.put("tag", tag.toString());
         List<File> fileList = new ArrayList<>();

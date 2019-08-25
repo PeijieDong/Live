@@ -63,6 +63,8 @@ public class GridAdapter2 extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context , VideoPindaoActivity.class);
+                intent.putExtra("id",list.get(i).getId());
+                intent.putExtra("title",list.get(i).getTitle());
                 context.startActivity(intent);
             }
         });

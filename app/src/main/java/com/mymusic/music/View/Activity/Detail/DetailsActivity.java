@@ -234,7 +234,7 @@ public class DetailsActivity extends BaseActivity {
         time2.setText(data.getData().getList().getCreatetime());
         content.setText(data.getData().getList().getContent());
         friendName.setText("#"+data.getData().getList().getCatename()+"#");
-        playNum.setText("|  "+data.getData().getList().getClick()+"次浏览");
+        playNum.setText(data.getData().getList().getClick()+"次浏览");
         detail_time.setText(data.getData().getList().getCreatetime()+"  "+data.getData().getList().getClick()+"次浏览");
         home_rc_type.setText(data.getData().getList().getCatename());
         shareNum.setText(data.getData().getList().getShare());
@@ -251,8 +251,9 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.Play_Num, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.d("44",result);
                 Play bean = GsonUtil.GsonToBean(result, Play.class);
-                if(bean.getData().getList().getCount() == 0){
+                if(bean.getData().getList().getCount() <= 0){
                     VideoPlay.goOnPlayOnPause();
                     noNum.setVisibility(View.VISIBLE);
                     VideoPlay.setVisibility(View.GONE);

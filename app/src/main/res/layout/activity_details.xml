@@ -173,6 +173,7 @@
                         android:id="@+id/go_friend_detail"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
+                        android:visibility="gone"
                         android:layout_marginLeft="10dp">
                         <TextView
                             android:id="@+id/signTv"
@@ -284,6 +285,7 @@
                             android:id="@+id/friend_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             android:textColor="@color/navi_title_color"/>
                         <TextView
                             android:id="@+id/playNum"

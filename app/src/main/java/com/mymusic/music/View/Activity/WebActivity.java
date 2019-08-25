@@ -16,7 +16,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,10 +31,16 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.mymusic.music.DataBean.HomeUrl;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LoginDialog;
+import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyshareActivity;
+import com.mymusic.music.View.Jpush.BoradReceiver;
 import com.mymusic.music.base.BaseActivity;
+import com.mymusic.music.base.UrlManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,6 +50,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 public class WebActivity extends BaseActivity {
 
@@ -62,12 +73,14 @@ public class WebActivity extends BaseActivity {
     String url;
     Boolean isshare = false;
     String title = "";
+    boolean home;
 
     @Override
     protected void initVariables(Intent intent) {
         url = intent.getStringExtra("url");
         title = intent.getStringExtra("title");
         isshare = intent.getBooleanExtra("share",false);
+        home = intent.getBooleanExtra("home", false);
     }
 
     @Override
@@ -78,35 +91,66 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void LoadData() {
         tv_title.setText(title);
-        ewCode.setImageBitmap(setCode(url,600,600));
-        if(isshare){
-            share.setVisibility(View.VISIBLE);
+        webView.setWebChromeClient(webChromeClient);
+        webView.setWebViewClient(webViewClient);
+
+        WebSettings webSettings=webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);//允许使用js
+        if(home){
+            initNet();
+        }else {
+            if (isshare) {
+                share.setVisibility(View.VISIBLE);
+                ewCode.setImageBitmap(setCode(url,600,600));
+            }
+            save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    shareCode.setVisibility(View.VISIBLE);
+                    close.setVisibility(View.VISIBLE);
+                    saveQrcodeToGallery();
+                }
+            });
+            copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager clipboard = (ClipboardManager) WebActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText(null, url);
+                    clipboard.setPrimaryClip(clipData);
+                    ToastUtil.show(WebActivity.this, "复制成功，快去分享吧", Toast.LENGTH_SHORT);
+                }
+            });
+            close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    shareCode.setVisibility(View.GONE);
+                    close.setVisibility(View.GONE);
+                }
+            });
+            webView.loadUrl(url);
         }
-        save.setOnClickListener(new View.OnClickListener() {
+    }
+
+    private void initNet() {
+        NetRequest.getFormRequest(UrlManager.HOME_URL, null, new NetRequest.DataCallBack() {
             @Override
-            public void onClick(View v) {
-                shareCode.setVisibility(View.VISIBLE);
-                close.setVisibility(View.VISIBLE);
-                saveQrcodeToGallery();
+            public void requestSuccess(String result) throws Exception {
+                HomeUrl homeUrl = GsonUtil.GsonToBean(result, HomeUrl.class);
+
+                webView.loadUrl(homeUrl.getDownurl());
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(WebActivity.this);
+                dialog.Show();
             }
         });
-        copy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ClipboardManager clipboard = (ClipboardManager) WebActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clipData = ClipData.newPlainText(null, url);
-                clipboard.setPrimaryClip(clipData);
-                ToastUtil.show(WebActivity.this,"复制成功，快去分享吧",Toast.LENGTH_SHORT);
-            }
-        });
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareCode.setVisibility(View.GONE);
-                close.setVisibility(View.GONE);
-            }
-        });
-        webView.loadUrl(url);
     }
 
 
@@ -202,6 +246,50 @@ public class WebActivity extends BaseActivity {
 
         return image;
     }
+
+    //WebViewClient主要帮助WebView处理各种通知、请求事件
+    private WebViewClient webViewClient=new WebViewClient(){
+        @Override
+        public void onPageFinished(WebView view, String url) {//页面加载完成
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {//页面开始加载
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if(url.equals("http://www.google.com/")){
+                return true;//表示我已经处理过了
+            }
+            return super.shouldOverrideUrlLoading(view, url);
+        }
+
+    };
+
+    //WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
+    private WebChromeClient webChromeClient=new WebChromeClient(){
+        //不支持js的alert弹窗，需要自己监听然后通过dialog弹窗
+        @Override
+        public boolean onJsAlert(WebView webView, String url, String message, JsResult result) {
+
+            //注意:
+            //必须要这一句代码:result.confirm()表示:
+            //处理结果为确定状态同时唤醒WebCore线程
+            //否则不能继续点击按钮
+            return true;
+        }
+
+        //获取网页标题
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+        }
+
+        //加载进度回调
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+        }
+    };
 
     /**
      * 将图片保存到系统相册

@@ -80,19 +80,19 @@ public class TopUpFragment extends BaseFragment {
 
 
     private void initNet() {
-        if(Live.getInstance().getToken(getContext()) == null){
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
-            return;
-        }
+//        if(Live.getInstance().getToken(getContext()) == null){
+//            Intent intent = new Intent(getContext(), LoginActivity.class);
+//            startActivity(intent);
+//            return;
+//        }
         NetRequest.postFormHeadRequest(UrlManager.Get_Wallet, null, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                Log.e("33",result);
+                Log.e("44",result);
                 Wallet bean = GsonUtil.GsonToBean(result, Wallet.class);
                 money_balance.setText(bean.getData().getList().getMoney());
                 List<String> title = new ArrayList<>();
-                title.add("代理充值");
+//                title.add("代理充值");
                 title.add("在线充值");
                 title.add("开通VIP");
                 List<Fragment> list = new ArrayList<>();
@@ -103,7 +103,7 @@ public class TopUpFragment extends BaseFragment {
                 WalletOnLineFragment fragment2 = new WalletOnLineFragment();
                 fragment2.setArguments(bundle);
                 TopVipFragment fragment3 = new TopVipFragment();
-                list.add(fragment);
+//                list.add(fragment);
                 list.add(fragment2);
                 list.add(fragment3);
                 ViewpagerAdapter adapter = new ViewpagerAdapter(getChildFragmentManager(), title, list);
@@ -146,6 +146,11 @@ public class TopUpFragment extends BaseFragment {
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.money_detail:
+                if(Live.getInstance().getToken(getContext()).equals("")){
+                    Intent intent3 = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent3);
+                    return;
+                }
                 Intent intent = new Intent(getContext(), MoneyDetailActivity.class);
                 startActivity(intent);
                 break;
@@ -156,11 +161,21 @@ public class TopUpFragment extends BaseFragment {
                 startActivity(intent1);
                 break;
             case R.id.fankui:
+                if(Live.getInstance().getToken(getContext()).equals("")){
+                    Intent intent3 = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent3);
+                    return;
+                }
                 Intent intent2 = new Intent(getContext(), WalletFeedback.class);
                 startActivity(intent2);
                 break;
             case R.id.go_money:
-                initMoney();
+                if(Live.getInstance().getToken(getContext()).equals("")){
+                    Intent intent3 = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent3);
+                }else {
+                    initMoney();
+                }
                 break;
         }
     }

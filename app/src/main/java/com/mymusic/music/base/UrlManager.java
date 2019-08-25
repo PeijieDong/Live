@@ -194,4 +194,7 @@ public class UrlManager {
     public static final String YAOQING = BaseUrl +"users/invite";
 
     public static final String TOPUP_VIP = BaseUrl+"users/vip";
+
+    public static final String HOME_URL = BaseUrl+"index/thirddown";
+
 }

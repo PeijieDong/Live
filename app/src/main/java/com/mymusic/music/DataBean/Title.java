@@ -9,7 +9,7 @@ import java.util.List;
 public class Title {
 
     /**
-     * data : {"list":[{"title":"最新发布","list":["按时间排序","按播放排序"]},{"title":"最新歌曲","list":["内地歌手"]},{"title":"全部地区","list":["陕西"]},{"title":"全部时长","list":["1小时内"]},{"title":"全部发布","list":["发布排序一"]}]}
+     * data : {"list":[{"title":"最新发布","list":[{"did":"10001","title":"最新发布"},{"did":"10002","title":"最火视频"}]},{"title":"全部时长","list":[{"cid":"10003","title":"30"},{"cid":"10004","title":"60"},{"cid":"10005","id":"90"}]},{"title":null,"list":[{"id":"-1","title":"全部"},{"id":"1","title":"内地"},{"id":"2","title":"港台"},{"id":"3","title":"欧美"},{"id":"4","title":"日韩"}]}]}
      * status : 1
      * referer :
      * state : 1
@@ -53,24 +53,24 @@ public class Title {
     }
 
     public static class DataBean {
-        private List<ListBean> list;
+        private List<ListBeanX> list;
 
-        public List<ListBean> getList() {
+        public List<ListBeanX> getList() {
             return list;
         }
 
-        public void setList(List<ListBean> list) {
+        public void setList(List<ListBeanX> list) {
             this.list = list;
         }
 
-        public static class ListBean {
+        public static class ListBeanX {
             /**
              * title : 最新发布
-             * list : ["按时间排序","按播放排序"]
+             * list : [{"did":"10001","title":"最新发布"},{"did":"10002","title":"最火视频"}]
              */
 
             private String title;
-            private List<String> list;
+            private List<ListBean> list;
 
             public String getTitle() {
                 return title;
@@ -80,12 +80,56 @@ public class Title {
                 this.title = title;
             }
 
-            public List<String> getList() {
+            public List<ListBean> getList() {
                 return list;
             }
 
-            public void setList(List<String> list) {
+            public void setList(List<ListBean> list) {
                 this.list = list;
+            }
+
+            public static class ListBean {
+                /**
+                 * did : 10001
+                 * title : 最新发布
+                 */
+
+                private String did;
+                private String cid;
+                private String id;
+                private String title;
+
+                public String getCid() {
+                    return cid;
+                }
+
+                public void setCid(String cid) {
+                    this.cid = cid;
+                }
+
+                public String getId() {
+                    return id;
+                }
+
+                public void setId(String id) {
+                    this.id = id;
+                }
+
+                public String getDid() {
+                    return did;
+                }
+
+                public void setDid(String did) {
+                    this.did = did;
+                }
+
+                public String getTitle() {
+                    return title;
+                }
+
+                public void setTitle(String title) {
+                    this.title = title;
+                }
             }
         }
     }

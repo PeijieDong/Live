@@ -126,6 +126,15 @@ public class UserBean {
         private String shoucang;
         private String guanying;
         private int notice;
+        private int isanchor;
+
+        public int getIsanchor() {
+            return isanchor;
+        }
+
+        public void setIsanchor(int isanchor) {
+            this.isanchor = isanchor;
+        }
 
         public String getId() {
             return id;
