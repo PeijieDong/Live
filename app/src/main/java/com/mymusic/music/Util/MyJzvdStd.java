@@ -128,7 +128,7 @@ public class MyJzvdStd extends JZVideoPlayerStandard {
     @Override
     public void onStatePlaying() {
         super.onStatePlaying();
-        initPlay();
+//        initPlay();
     }
 
     @Override

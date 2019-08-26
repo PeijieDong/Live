@@ -63,6 +63,7 @@ import java.util.List;
 import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jzvd.JZMediaManager;
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -194,10 +195,6 @@ public class DetailsActivity extends BaseActivity {
             playLayout.setVisibility(View.VISIBLE);
             otherPlayout.setVisibility(View.GONE);
             title.setText("视频详情");
-            VideoPlay.setUp(data.getData().getList().getVideourl(),
-                    JZVideoPlayerStandard.CURRENT_STATE_NORMAL);
-            VideoPlay.startVideo();
-            VideoPlay.setId(data.getData().getList().getId());
             Glide.with(this).load(data.getData().getList().getImage()).into(VideoPlay.thumbImageView);
             initPlay(data.getData().getList().getId());
         }else if(data.getData().getList().getType().equals("文字")){
@@ -254,7 +251,7 @@ public class DetailsActivity extends BaseActivity {
                 Log.d("44",result);
                 Play bean = GsonUtil.GsonToBean(result, Play.class);
                 if(bean.getData().getList().getCount() <= 0){
-                    VideoPlay.goOnPlayOnPause();
+                    MyJzvdStd.goOnPlayOnPause();
                     noNum.setVisibility(View.VISIBLE);
                     VideoPlay.setVisibility(View.GONE);
                     VideoPlay.setClickable(false);
@@ -306,6 +303,11 @@ public class DetailsActivity extends BaseActivity {
                             }
                         });
                     }
+                }else{
+                    VideoPlay.setUp(data.getData().getList().getVideourl(),
+                            MyJzvdStd.CURRENT_STATE_NORMAL);
+                    VideoPlay.startVideo();
+                    VideoPlay.setId(data.getData().getList().getId());
                 }
             }
             @Override
@@ -327,7 +329,11 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.GoMoney, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                VideoPlay.setUp(data.getData().getList().getVideourl(),
+                        MyJzvdStd.CURRENT_STATE_NORMAL);
                 VideoPlay.startVideo();
+                VideoPlay.setId(data.getData().getList().getId());
+                MyJzvdStd.goOnPlayOnResume();
                 VideoPlay.setVisibility(View.VISIBLE);
                 VideoPlay.setClickable(true);
                 noNum.setVisibility(View.GONE);
@@ -777,6 +783,8 @@ public class DetailsActivity extends BaseActivity {
         }
         super.onBackPressed();
     }
+
+
     @Override
     protected void onPause() {
         super.onPause();

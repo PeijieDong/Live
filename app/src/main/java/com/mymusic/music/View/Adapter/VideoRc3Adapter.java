@@ -107,7 +107,7 @@ public class VideoRc3Adapter  extends BaseRecAdapter<HomeData.DataBean.ListBean.
             }
         });
         holder.mp_video.startVideo();
-        initAdd(position+"");
+//        initAdd(position+"");
         if(position == select){
             listener.holder(holder);
         }

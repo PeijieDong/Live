@@ -164,7 +164,7 @@ public class VideoPlayActivity extends BaseActivity {
             public void requestSuccess(String result) {
                 Log.e("3333",result);
                 Play bean = GsonUtil.GsonToBean(result, Play.class);
-                if(bean.getData().getList().getCount() == 0){
+                if(bean.getData().getList().getCount() <= 0){
                     JZVideoPlayer.releaseAllVideos();
                     JZVideoPlayer.goOnPlayOnPause();
                     viewHolder.noNum.setVisibility(View.VISIBLE);

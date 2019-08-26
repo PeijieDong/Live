@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.Vip;
+import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.TopUpRcAdapter;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
@@ -65,6 +67,11 @@ public class TopVipFragment extends BaseFragment {
                     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                         switch (view.getId()){
                             case R.id.doit:
+                                if(Live.getInstance().getToken(getContext()).equals("")){
+                                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                                    startActivity(intent);
+                                    return;
+                                }
                                 Intent intent = new Intent();
                                 intent.setAction("android.intent.action.VIEW");
                                 Uri uri = Uri.parse(bean.getList().get(position).getRechargeURL());

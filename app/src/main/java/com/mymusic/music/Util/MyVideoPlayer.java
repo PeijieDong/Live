@@ -137,6 +137,8 @@ public class MyVideoPlayer extends JZVideoPlayerStandard {
         resetPlayView();
     }
 
+
+
     @Override
     public void startWindowTiny() {
     }
@@ -165,7 +167,7 @@ public class MyVideoPlayer extends JZVideoPlayerStandard {
     @Override
     public void onStatePlaying() {
         super.onStatePlaying();
-        initPlay();
+//        initPlay();
     }
 
     private void initPlay() {

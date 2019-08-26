@@ -77,7 +77,9 @@ public class VideoPindaoActivity extends BaseActivity {
     }
 
     private void initTitle() {
-        NetRequest.getFormRequest(UrlManager.GET_TITLE, null, new NetRequest.DataCallBack() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("pid",id);
+        NetRequest.getFormRequest(UrlManager.GET_TITLE, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Title bean = GsonUtil.GsonToBean(result, Title.class);
