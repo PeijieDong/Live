@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.mymusic.music.DataBean.Play;
 import com.mymusic.music.DataBean.ShareFriend;
 import com.mymusic.music.DataBean.User;
 import com.mymusic.music.DataBean.UserBean;
@@ -140,12 +141,36 @@ public class MyFragment extends BaseFragment {
                     startActivity(intent);
                 }
             });
+            initNum();
 //            map = null;
         }
         Log.d("4444",AppUtil.getSerialNumber());
 
 //        initUserInfo();
 //        user = Live.getInstance().get(getContext());
+    }
+
+    private void initNum() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("client",AppUtil.getSerialNumber());
+        NetRequest.postFormRequest(UrlManager.Play_Num, map, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Play bean = GsonUtil.GsonToBean(result, Play.class);
+                number.setText(bean.getData().getList().getCount());
+                totalNumber.setText("/"+bean.getData().getList().getCount());
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void TokenFail() {
+
+            }
+        });
     }
 
     private void initUserInfo() {
@@ -363,7 +388,11 @@ public class MyFragment extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden){
-            initLogin();
+            if(Live.getInstance().getToken(getContext()).equals("")){
+                initNum();
+            }else {
+                initLogin();
+            }
         }
     }
 
