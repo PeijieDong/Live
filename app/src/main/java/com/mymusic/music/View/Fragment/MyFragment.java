@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,20 +15,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 import com.mymusic.music.DataBean.ShareFriend;
 import com.mymusic.music.DataBean.User;
 import com.mymusic.music.DataBean.UserBean;
 import com.mymusic.music.Live;
+import com.mymusic.music.R;
+import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
-import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.Util.ToastUtil;
-import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
-import com.mymusic.music.View.Activity.MyChildActivity.My.MyLiveActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyaboutActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MycollectionActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MycommentActivity;
@@ -38,22 +35,16 @@ import com.mymusic.music.View.Activity.MyChildActivity.My.MyfansActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyfeedbackActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyfocusActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyhistoryActivity;
-import com.mymusic.music.View.Activity.MyChildActivity.My.MyhomeActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MylevelActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MylikeActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MymessageActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MypubliskActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MysettingActivity;
-import com.mymusic.music.View.Activity.MyChildActivity.My.MyshareActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
-import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
 import com.mymusic.music.View.Activity.ShareActivity;
 import com.mymusic.music.View.Activity.WebActivity;
 import com.mymusic.music.base.BaseFragment;
-import com.mymusic.music.R;
 import com.mymusic.music.base.UrlManager;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -102,8 +93,11 @@ public class MyFragment extends BaseFragment {
     LinearLayout levelBack;
     @BindView(R.id.my_live)
     ConstraintLayout live;
+    @BindView(R.id.icon_vip)
+    ImageView img_vip;
     private User user;
     private UserBean bean;
+    private HashMap<String,String> map;
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_my,container,false);
@@ -126,9 +120,11 @@ public class MyFragment extends BaseFragment {
 
     private void initLogin() {
         if(!Live.getInstance().getToken(getContext()).equals("")){
-            initUserInfo();
             cl3.setVisibility(View.GONE);
             cl4.setVisibility(View.VISIBLE);
+//            map = new HashMap<>();
+//            map.put("client",AppUtil.getSerialNumber());
+            initUserInfo();
             user = Live.getInstance().get(getContext());
         }else{
             cl3.setVisibility(View.VISIBLE);
@@ -144,12 +140,17 @@ public class MyFragment extends BaseFragment {
                     startActivity(intent);
                 }
             });
+//            map = null;
         }
+        Log.d("4444",AppUtil.getSerialNumber());
+
+//        initUserInfo();
+//        user = Live.getInstance().get(getContext());
     }
 
     private void initUserInfo() {
         loading();
-        NetRequest.postFormHeadRequest(UrlManager.GetUserInfo, null,Live.getInstance().get(getContext()).getList().getToken(), new NetRequest.DataCallBack() {
+        NetRequest.postFormHeadRequest(UrlManager.GetUserInfo, null,Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.e("33",result);
@@ -166,6 +167,9 @@ public class MyFragment extends BaseFragment {
                 String[] split = guanying.split("/");
                 number.setText(split[0]);
                 totalNumber.setText("/"+split[1]);
+                if(bean.getData().getIs_vip().equals("0")){
+                    img_vip.setVisibility(View.GONE);
+                }
                 if(Integer.parseInt(bean.getData().getLevel()) > 5 && Integer.parseInt(bean.getData().getLevel()) < 11){
                     level.setTextColor(ContextCompat.getColor(getContext(),R.color.text_level_10));
                     levelBack.setBackgroundResource(R.drawable.level_back_10);

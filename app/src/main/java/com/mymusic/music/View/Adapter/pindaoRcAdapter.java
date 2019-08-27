@@ -1,16 +1,10 @@
 package com.mymusic.music.View.Adapter;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mymusic.music.DataBean.Find;
-import com.mymusic.music.DataBean.PinDao;
-import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.MyGridView;
 
@@ -41,6 +35,11 @@ public class pindaoRcAdapter extends BaseQuickAdapter<Find.DataBean.ListBean,Bas
             public void remove(String title) {
                 listener.Remove(title);
             }
+
+            @Override
+            public void ClickEvent(String title) {
+                listener.ClickTitle(title);
+            }
         });
         grid.setAdapter(gridAdapter);
         helper.setText(R.id.title,s.getTitle());
@@ -50,6 +49,8 @@ public class pindaoRcAdapter extends BaseQuickAdapter<Find.DataBean.ListBean,Bas
         boolean ClickEvent(String title);
 
         void Remove(String title);
+
+        void ClickTitle(String title);
     }
     public void setClickListener(ClickItemListener listener){
         this.listener = listener;

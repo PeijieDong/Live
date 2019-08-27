@@ -19,13 +19,26 @@
             app:tabIndicatorColor="@color/navi_title_color"
             app:tabSelectedTextColor="@color/blank"
             android:layout_height="45dp"/>
-        <ImageView
+        <LinearLayout
             android:id="@+id/more"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="45dp"
-            android:padding="10dp"
-            android:src="@drawable/more_pindao"/>
+            android:layout_height="45dp">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/more_pindao"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:textSize="14sp"
+                    android:text="更多"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

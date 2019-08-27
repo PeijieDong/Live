@@ -4,21 +4,15 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.media.Image;
+import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,10 +21,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.google.gson.Gson;
 import com.mymusic.music.DataBean.CommentData;
 import com.mymusic.music.DataBean.DetailData;
-import com.mymusic.music.DataBean.Details;
 import com.mymusic.music.DataBean.Play;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
@@ -51,21 +43,14 @@ import com.mymusic.music.View.Adapter.HomeGridAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
-import org.w3c.dom.Comment;
-import org.w3c.dom.Text;
-
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.jzvd.JZMediaManager;
 import cn.jzvd.JZVideoPlayer;
-import cn.jzvd.JZVideoPlayerStandard;
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Request;
 
@@ -251,7 +236,6 @@ public class DetailsActivity extends BaseActivity {
                 Log.d("44",result);
                 Play bean = GsonUtil.GsonToBean(result, Play.class);
                 if(bean.getData().getList().getCount() <= 0){
-                    MyJzvdStd.goOnPlayOnPause();
                     noNum.setVisibility(View.VISIBLE);
                     VideoPlay.setVisibility(View.GONE);
                     VideoPlay.setClickable(false);
@@ -315,6 +299,8 @@ public class DetailsActivity extends BaseActivity {
             }
             @Override
             public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
             }
         });
     }
@@ -331,9 +317,9 @@ public class DetailsActivity extends BaseActivity {
             public void requestSuccess(String result) throws Exception {
                 VideoPlay.setUp(data.getData().getList().getVideourl(),
                         MyJzvdStd.CURRENT_STATE_NORMAL);
+                MyJzvdStd.goOnPlayOnResume();
                 VideoPlay.startVideo();
                 VideoPlay.setId(data.getData().getList().getId());
-                MyJzvdStd.goOnPlayOnResume();
                 VideoPlay.setVisibility(View.VISIBLE);
                 VideoPlay.setClickable(true);
                 noNum.setVisibility(View.GONE);

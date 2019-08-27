@@ -1,7 +1,6 @@
 package com.mymusic.music.View.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mymusic.music.DataBean.PinDao;
 import com.mymusic.music.R;
-import com.mymusic.music.View.Activity.VideoPindaoActivity;
 
 import java.util.List;
 
@@ -70,17 +67,18 @@ public class GridAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(finalHolder.hook.getVisibility() == View.GONE){
-                    if(listener != null && listener.click(list.get(i))){
-                        finalHolder.hook.setVisibility(View.VISIBLE);
-                        finalHolder.back.setBackgroundResource(R.drawable.grid_press_back);
-                    }
-                }else{
-                    finalHolder.hook.setVisibility(View.GONE);
-                    finalHolder.back.setBackgroundResource(R.drawable.grid_normal_back_2);
-                    listener.remove(list.get(i));
-                }
-                notifyDataSetChanged();
+//                if(finalHolder.hook.getVisibility() == View.GONE){
+//                    if(listener != null && listener.click(list.get(i))){
+//                        finalHolder.hook.setVisibility(View.VISIBLE);
+//                        finalHolder.back.setBackgroundResource(R.drawable.grid_press_back);
+//                    }
+//                }else{
+//                    finalHolder.hook.setVisibility(View.GONE);
+//                    finalHolder.back.setBackgroundResource(R.drawable.grid_normal_back_2);
+//                    listener.remove(list.get(i));
+//                }
+//                notifyDataSetChanged();
+                listener.ClickEvent(list.get(i));
             }
         });
         return view;
@@ -100,6 +98,8 @@ public class GridAdapter extends BaseAdapter {
     public interface ItemListener{
         boolean click(String title);
         void remove(String title);
+
+        void ClickEvent(String title);
     }
     public void setListener(ItemListener listener){
         this.listener = listener;

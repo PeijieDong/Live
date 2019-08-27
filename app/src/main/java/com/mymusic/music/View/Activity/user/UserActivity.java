@@ -3,8 +3,9 @@ package com.mymusic.music.View.Activity.user;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -14,16 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aigestudio.wheelpicker.WheelPicker;
+import com.bumptech.glide.Glide;
 import com.mymusic.music.DataBean.UserBean;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.PicToBase64;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
-
-
+import com.wildma.pictureselector.PictureSelector;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,13 +35,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Request;
 
 public class UserActivity extends BaseActivity {
 
     UserBean user;
-//    @BindView(R.id.head)
-//    CircleImageView head;
+    @BindView(R.id.head)
+    CircleImageView head;
     @BindView(R.id.name)
     TextView nametv;
     @BindView(R.id.sign)
@@ -86,7 +89,7 @@ public class UserActivity extends BaseActivity {
 
     private void initView() {
         user = Live.getInstance().getUser(this);
-//        Glide.with(this).load(user.getList().getAvatar()).into(head);
+        Glide.with(this).load(user.getData().getAvatar()).into(head);
         nametv.setText(user.getData().getUser_nicename());
         sextv.setText(user.getData().getSex());
         birthdaytv.setText(user.getData().getBirthday());
@@ -99,9 +102,14 @@ public class UserActivity extends BaseActivity {
         picker.setAtmospheric(true);
     }
 
-    @OnClick({R.id.change_name,R.id.change_sign,R.id.change_sex,R.id.change_birthday,R.id.friend_direction,R.id.marray,R.id.chose_sex})
+    @OnClick({R.id.chose_head,R.id.change_name,R.id.change_sign,R.id.change_sex,R.id.change_birthday,R.id.friend_direction,R.id.marray,R.id.chose_sex})
     public void ClickEvent(View view){
         switch (view.getId()){
+            case R.id.chose_head:
+                PictureSelector
+                        .create(UserActivity.this, PictureSelector.SELECT_REQUEST_CODE)
+                        .selectPicture(true, 200, 200, 1, 1);
+                break;
             case R.id.change_name:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("请输入新昵称");
@@ -298,6 +306,51 @@ public class UserActivity extends BaseActivity {
             public void requestFailure(Request request, IOException e) {
                 ToastUtil.show(UserActivity.this,"修改失败",Toast.LENGTH_SHORT);
             }
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(getActivity());
+                dialog.Show();
+            }
+        });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /*结果回调*/
+        if (requestCode == PictureSelector.SELECT_REQUEST_CODE) {
+            if (data != null) {
+                String picturePath = data.getStringExtra(PictureSelector.PICTURE_PATH);
+                head.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                String base64 = PicToBase64.bitmapToBase64(BitmapFactory.decodeFile(picturePath));
+                initHead(base64);
+                /*如果使用 Glide 加载图片，则需要禁止 Glide 从缓存中加载，因为裁剪后保存的图片地址是相同的*/
+                /*RequestOptions requestOptions = RequestOptions
+                        .circleCropTransform()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true);
+                Glide.with(this).load(picturePath).apply(requestOptions).into(mIvImage);*/
+            }
+        }
+    }
+
+    private void initHead(String base64) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("images","data:image/jpeg;base64,"+base64);
+        NetRequest.postFormRequest(UrlManager.HEAD, map, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.d("444",result);
+                ToastUtil.show(UserActivity.this,"修改成功",1);
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Log.d("444",e.getMessage());
+                ToastUtil.show(UserActivity.this,e.getMessage(),1);
+            }
+
             @Override
             public void TokenFail() {
                 LoginDialog dialog = new LoginDialog(getActivity());
