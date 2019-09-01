@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".View.Activity.ShareActivity"></activity>
+        <activity android:name=".View.Activity.ShareActivity" />
         <activity android:name=".ActivityAdv" />
         <activity android:name=".View.Activity.Detail.CommentDetailActivity" />
         <activity
@@ -119,8 +119,8 @@
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.mydomain.fileprovider"
             android:exported="false"
-            tools:replace="android:authorities"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
@@ -131,11 +131,11 @@
         <activity android:name=".View.Activity.MorePindaoActivity" />
         <activity android:name=".View.Activity.VideoPindaoActivity" />
 
-
-        <!-- Since JCore2.0.0 Required SDK核心功能-->
+        <!-- Since JCore2.0.0 Required SDK核心功能 -->
         <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
         <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
-        <service android:name=".View.Jpush.BoradReceiver"
+        <service
+            android:name=".View.Jpush.BoradReceiver"
             android:enabled="true"
             android:exported="false"
             android:process=":pushcore">
@@ -151,12 +151,15 @@
         <receiver
             android:name=".View.Jpush.MyReceiver"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+
                 <category android:name="com.mymusic.music" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".View.Activity.SignInActivity"></activity>
     </application>
 
 </manifest>
