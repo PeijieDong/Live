@@ -1,6 +1,7 @@
 package com.mymusic.music.View.ChildFragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,9 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Adapter.RcAdpaterVideo;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -29,6 +33,8 @@ public class VideoItemFragment extends BaseFragment {
 
     @BindView(R.id.Rc)
     RecyclerView rc;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout refreshLayout;
     String pid;
 
     @Override
@@ -43,6 +49,7 @@ public class VideoItemFragment extends BaseFragment {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
+        initRefresh();
         initNet();
     }
 
@@ -52,6 +59,7 @@ public class VideoItemFragment extends BaseFragment {
         NetRequest.postFormRequest(UrlManager.GET_PINDAO_DETAIL, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                refreshLayout.finishRefresh();
                 VideoItem bean = GsonUtil.GsonToBean(result, VideoItem.class);
                 rc.setLayoutManager(new LinearLayoutManager(getContext()));
                 RcAdpaterVideo videoAdapter = new RcAdpaterVideo(R.layout.rc_adapter_item_video,bean.getData().getList());
@@ -73,5 +81,15 @@ public class VideoItemFragment extends BaseFragment {
     @Override
     protected void LoadData() {
 
+    }
+
+
+    private void initRefresh() {
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                initNet();
+            }
+        });
     }
 }

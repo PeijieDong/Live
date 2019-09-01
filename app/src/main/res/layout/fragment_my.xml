@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F0F0F0">
         <RelativeLayout
             android:id="@+id/rl_my_setting"
             android:layout_width="match_parent"

@@ -6,26 +6,23 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.mymusic.music.DataBean.PinDao;
 import com.mymusic.music.DataBean.TopType;
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
-import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.FindActivity;
 import com.mymusic.music.View.Activity.MorePindaoActivity;
 import com.mymusic.music.View.ChildFragment.VideoItemFragment;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,6 +44,7 @@ public class NewVideoFragment extends BaseFragment {
     ViewPager viewPager;
     @BindView(R.id.Find)
     LinearLayout find;
+
     private List<String> tabs;
     private List<Fragment> fragments;
 
@@ -64,6 +62,8 @@ public class NewVideoFragment extends BaseFragment {
     protected void initViews(Bundle savedInstanceState) {
         initTab();
     }
+
+
 
     private void initTab() {
         NetRequest.getFormRequest(UrlManager.GET_TOP, null, new NetRequest.DataCallBack() {

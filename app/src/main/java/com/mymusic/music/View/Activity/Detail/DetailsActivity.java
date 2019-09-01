@@ -503,6 +503,7 @@ public class DetailsActivity extends BaseActivity {
                     startActivity(intent1);
                     return;
                 }
+                loading();
                 initNet();
                 break;
             case R.id.icon_like:
@@ -731,6 +732,7 @@ public class DetailsActivity extends BaseActivity {
             NetRequest.postFormHeadRequest(UrlManager.Detail_Comment_Put, map,Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
                 @Override
                 public void requestSuccess(String result) throws Exception {
+                    hideloading();
                     Log.e("333",result);
                     ToastUtil.show(DetailsActivity.this,"提交评论成功",Toast.LENGTH_SHORT);
                     detailEt.setText("");
@@ -738,10 +740,12 @@ public class DetailsActivity extends BaseActivity {
 
                 @Override
                 public void requestFailure(Request request, IOException e) {
+                    hideloading();
                     ToastUtil.show(DetailsActivity.this,"提交评论失败",Toast.LENGTH_SHORT);
                 }
                 @Override
                 public void TokenFail() {
+                    hideloading();
                     LoginDialog dialog = new LoginDialog(getActivity());
                     dialog.Show();
                 }

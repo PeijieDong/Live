@@ -6,22 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.ProgressBar;
 
-import com.mymusic.music.Live;
-import com.mymusic.music.R;
 import com.mymusic.music.Util.LoadingDialog;
-import com.mymusic.music.Util.SharedPrefrenceUtils;
-import com.mymusic.music.View.Activity.Login.LoginActivity;
-import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.LockScreenActivity;
 
 import butterknife.ButterKnife;
-import scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView;
 
 /**
  * Create By mr.mao in 2019/5/28 19:35
@@ -67,7 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         progressDialog.setTitle("正在努力上传");
         progressDialog.setMessage("等待中");
         progressDialog.setIndeterminate(true);
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
         progressDialog.show();
 
     }
@@ -75,8 +65,20 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void loading(){
         LoadingDialog.Builder builder = new LoadingDialog.Builder(this)
                 .setMessage("加载中...")
-                .setCancelable(false);
+                .setCancelable(true);
         dialog = builder.create();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                dialog.cancel();
+            }
+        });
         dialog.show();
     }
 

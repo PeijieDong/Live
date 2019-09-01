@@ -8,7 +8,7 @@
     </item>
     <item android:id="@android:id/progress">
     <scale
-        android:drawable="#FEA95E"
+        android:drawable="@drawable/progres_back"
         android:scaleWidth="100%" />
     </item>
 </layer-list>

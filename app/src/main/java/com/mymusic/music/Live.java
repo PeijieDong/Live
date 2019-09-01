@@ -2,18 +2,20 @@ package com.mymusic.music;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.support.multidex.MultiDex;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.mymusic.music.DataBean.User;
 import com.mymusic.music.DataBean.UserBean;
-import com.mymusic.music.DataBean.UserInfo;
 import com.mymusic.music.Util.ContextUtils;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.MyFileNameGenerator;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
-import com.mymusic.music.View.Activity.Login.LoginActivity;
+import com.scwang.smartrefresh.header.WaterDropHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
+import com.scwang.smartrefresh.layout.api.RefreshHeader;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import org.litepal.LitePal;
 
@@ -26,6 +28,16 @@ import cn.jpush.android.api.JPushInterface;
 public class Live extends Application {
     private static Live live;
     private HttpProxyCacheServer proxy;
+    static {
+        //设置全局的Header构建器
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
+            @Override
+            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
+                layout.setPrimaryColorsId(R.color.navi_title_color,R.color.navi_title_color);//全局设置主题颜色
+                return new WaterDropHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
+            }
+        });
+    }
 
     public static Live getInstance() {
         if(live != null){

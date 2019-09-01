@@ -143,7 +143,7 @@ public class UrlManager {
 
     public static final String History_FeedBack = BaseUrl+"users/gblist";
 
-    public static final String Play_Num = BaseUrl+"video/getNums";
+    public static final String Play_Num = BaseUrl+"video/LimitWatchNum";
 
     public static final String GoMoney = BaseUrl+"users/scoretovideo";
 
