@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -26,6 +27,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.mymusic.music.DataBean.Yaoqing;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
@@ -145,6 +147,11 @@ public class ShareActivity extends BaseActivity {
                 ClipData clipData = ClipData.newPlainText(null, copyText.getText().toString());
                 clipboard.setPrimaryClip(clipData);
                 ToastUtil.show(this,"复制成功，快去分享吧",Toast.LENGTH_SHORT);
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, copyText.getText().toString());
+                startActivity(Intent.createChooser(intent, copyText.getText().toString()));
                 break;
         }
     }
@@ -161,15 +168,21 @@ public class ShareActivity extends BaseActivity {
 
         //将视图生成图片
         Bitmap image = generateImageFromView(qrcodeView, width, height);
-
         //将图片保存到系统相册
         boolean isSuccess = saveImageToGallery(this, image);
-        image.recycle();
         if (isSuccess) {
             ToastUtil.show(this, "已保存到系统相册！", Toast.LENGTH_SHORT);
         } else {
             ToastUtil.show(this, "保存到系统相册失败！", Toast.LENGTH_SHORT);
         }
+
+
+        Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), image, null, null));
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/png");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        startActivity(Intent.createChooser(intent, AppUtil.getAppName(this)));
+        image.recycle();
     }
 
     public static int getActionBarHeight(Context context) {

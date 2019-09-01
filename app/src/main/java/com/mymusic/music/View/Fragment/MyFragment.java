@@ -156,8 +156,9 @@ public class MyFragment extends BaseFragment {
         NetRequest.postFormRequest(UrlManager.Play_Num, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.d("4444",result);
                 Play bean = GsonUtil.GsonToBean(result, Play.class);
-                number.setText(bean.getData().getList().getCount());
+                number.setText(bean.getData().getList().getCount()+"");
                 totalNumber.setText("/"+bean.getData().getList().getCount());
             }
 

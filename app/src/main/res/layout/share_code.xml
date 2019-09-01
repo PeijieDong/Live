@@ -16,7 +16,7 @@
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="我的二维码"/>
+        android:text="茄子影视二维码"/>
     <ImageView
         android:id="@+id/ewCode"
         android:layout_width="140dp"
