@@ -1,14 +1,16 @@
 package com.mymusic.music.View.Activity.user;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.mymusic.music.DataBean.LevelDate;
 import com.mymusic.music.DataBean.Scroe;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
@@ -22,7 +24,6 @@ import com.mymusic.music.base.UrlManager;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -31,7 +32,7 @@ import okhttp3.Request;
 public class ExpActivity extends BaseActivity {
 
     @BindView(R.id.progress)
-    ProgressBar progressBar;
+    ProgressBar progress;
     @BindView(R.id.Rc)
     RecyclerView rc;
     @BindView(R.id.des)
@@ -40,6 +41,12 @@ public class ExpActivity extends BaseActivity {
     TextView score;
     @BindView(R.id.level)
     TextView level;
+    @BindView(R.id.tol_exp)
+    TextView tolExp;
+    @BindView(R.id.curr_exp)
+    TextView currExp;
+    @BindView(R.id.instructions)
+    TextView instructions;
     String exp;
 
     @Override
@@ -55,7 +62,39 @@ public class ExpActivity extends BaseActivity {
     @Override
     protected void LoadData() {
         score.setText(exp);
-        initNet();
+        initLevel();
+
+    }
+
+    private void initLevel() {
+        NetRequest.postFormHeadRequest(UrlManager.Level, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                Log.e("33",result);
+                LevelDate bean = GsonUtil.GsonToBean(result, LevelDate.class);
+                des.setText("LV"+bean.getData().getList().getNowlevel());
+                level.setText("LV"+bean.getData().getList().getNextlevel());
+                tolExp.setText("/"+bean.getData().getList().getNextscore());
+                currExp.setText(bean.getData().getList().getNowscore()+"");
+                progress.setProgress(Integer.valueOf(bean.getData().getList().getNowscore()));
+                progress.setMax(Integer.valueOf(bean.getData().getList().getNextscore()));
+                String instructionsTv = "<font color='#FFFFFF'>温馨提示：还差</font><font color='#FFE400'>"+bean.getData().getList().getTonext()+"点</font><font color='#FFFFFF'>经验值将</font><font color='#FFE400'>升级</font>" +
+                        "<font color='#FFFFFF'>到更高等级</font>";
+                instructions.setText(Html.fromHtml(instructionsTv));
+                initNet();
+            }
+
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void TokenFail() {
+                LoginDialog dialog = new LoginDialog(ExpActivity.this);
+                dialog.Show();
+            }
+        });
     }
 
     private void initNet() {

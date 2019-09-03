@@ -18,6 +18,15 @@
             android:textColor="#333333"
             android:layout_marginLeft="5dp"
             android:text=""/>
+        <TextView
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/blank"
+            android:layout_alignParentRight="true"
+            android:text="更多"/>
     </RelativeLayout>
     <com.mymusic.music.Util.MyGridView
         android:id="@+id/RecyclerGrid"

@@ -1,8 +1,6 @@
 package com.mymusic.music.View.Adapter;
 
-import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -24,6 +22,7 @@ public class RcAdpaterVideo extends BaseQuickAdapter <VideoItem.DataBean.ListBea
 
     @Override
     protected void convert(BaseViewHolder helper, VideoItem.DataBean.ListBeanX s) {
+        helper.addOnClickListener(R.id.more);
         MyGridView grid2 = helper.getView(R.id.RecyclerGrid);
         grid2.setAdapter(new Grid2Adapter(mContext,s.getList()));
         helper.setText(R.id.HomeListTitle,s.getTitle());

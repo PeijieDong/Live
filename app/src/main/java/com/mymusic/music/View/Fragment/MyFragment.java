@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -96,6 +95,12 @@ public class MyFragment extends BaseFragment {
     ConstraintLayout live;
     @BindView(R.id.icon_vip)
     ImageView img_vip;
+    @BindView(R.id.user_sex)
+    ImageView userSex;
+    @BindView(R.id.user_Id)
+    TextView userId;
+    @BindView(R.id.LV_level)
+    TextView Lv;
     private User user;
     private UserBean bean;
     private HashMap<String,String> map;
@@ -186,6 +191,13 @@ public class MyFragment extends BaseFragment {
                 fansNum.setText(bean.getData().getFans());
                 fabuNum.setText(bean.getData().getFabu());
                 collectionNum.setText(bean.getData().getShoucang());
+                if(bean.getData().getSex().equals("男")){
+                    userSex.setImageDrawable(getResources().getDrawable(R.drawable.my_boy));
+                }else{
+                    userSex.setImageDrawable(getResources().getDrawable(R.drawable.my_gril));
+                }
+                Lv.setText("LV"+bean.getData().getLevel());
+                userId.setText("ID:"+bean.getData().getId());
                 level.setText("LV"+bean.getData().getLevel()+"经验值"+bean.getData().getConsumption()+" >");
                 name.setText(bean.getData().getUser_nicename());
                 Glide.with(getContext()).load(bean.getData().getAvatar()).into(head);

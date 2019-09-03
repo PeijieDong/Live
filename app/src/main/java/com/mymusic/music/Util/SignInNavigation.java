@@ -9,7 +9,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -112,24 +111,27 @@ public class SignInNavigation extends LinearLayout {
             return dayNum;
         }
 
-        public void setDayNum(String dayNum) {
+        public Tab setDayNum(String dayNum) {
             this.dayNum = dayNum;
+            return this;
         }
 
         public String getRewardNum() {
             return rewardNum;
         }
 
-        public void setRewardNum(String rewardNum) {
+        public Tab setRewardNum(String rewardNum) {
             this.rewardNum = rewardNum;
+            return this;
         }
 
         public CircleImageView getRewardBack() {
             return rewardBack;
         }
 
-        public void setRewardBack(CircleImageView rewardBack) {
+        public Tab setRewardBack(CircleImageView rewardBack) {
             this.rewardBack = rewardBack;
+            return this;
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.mymusic.music.View.ChildFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,19 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mymusic.music.DataBean.VideoItem;
 import com.mymusic.music.R;
+import com.mymusic.music.Util.GlideImageLoader;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.VideoPindaoActivity;
 import com.mymusic.music.View.Adapter.RcAdpaterVideo;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.youth.banner.Banner;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import okhttp3.Request;
@@ -35,6 +42,8 @@ public class VideoItemFragment extends BaseFragment {
     RecyclerView rc;
     @BindView(R.id.refresh)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.banner)
+    Banner banner;
     String pid;
 
     @Override
@@ -61,8 +70,31 @@ public class VideoItemFragment extends BaseFragment {
             public void requestSuccess(String result) throws Exception {
                 refreshLayout.finishRefresh();
                 VideoItem bean = GsonUtil.GsonToBean(result, VideoItem.class);
+                List<VideoItem.DataBean.AdBean> ad = bean.getData().getAd();
+                List<String> images = new ArrayList<>();
+                if(ad != null){
+                    for (int i = 0;i<ad.size();i++){
+                        images.add(ad.get(i).getUrl());
+                    }
+                }
+                banner.setImageLoader(new GlideImageLoader());
+                banner.setImages(images);
+                banner.start();
                 rc.setLayoutManager(new LinearLayoutManager(getContext()));
                 RcAdpaterVideo videoAdapter = new RcAdpaterVideo(R.layout.rc_adapter_item_video,bean.getData().getList());
+                videoAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                    @Override
+                    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                        switch (view.getId()){
+                            case R.id.more:
+                                Intent intent = new Intent(getContext() , VideoPindaoActivity.class);
+                                intent.putExtra("id",bean.getData().getList().get(position).getPid());
+                                intent.putExtra("title",bean.getData().getList().get(position).getTitle());
+                                startActivity(intent);
+                                break;
+                        }
+                    }
+                });
                 rc.setAdapter(videoAdapter);
             }
 

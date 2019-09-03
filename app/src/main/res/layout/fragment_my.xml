@@ -61,16 +61,18 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="32dp"
-                    android:layout_marginBottom="28dp"/>
+                    android:layout_marginBottom="28dp"
+                    android:src="@drawable/no_login_head"/>
+
                 <ImageView
                     android:id="@+id/icon_vip"
                     android:layout_width="43.5dp"
                     android:layout_height="20.5dp"
-                    app:layout_constraintBottom_toBottomOf="@id/my_user_head"
+                    android:src="@drawable/vip"
                     app:layout_constraintTop_toBottomOf="@id/my_user_head"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_marginLeft="40.5dp"
-                    android:src="@color/text_gray_33"/>
+                    app:layout_constraintBottom_toBottomOf="@id/my_user_head"
+                    app:layout_constraintRight_toRightOf="@id/my_user_head"
+                    app:layout_constraintLeft_toLeftOf="@id/my_user_head"/>
                 <TextView
                     android:id="@+id/my_user_name"
                     android:layout_width="wrap_content"
@@ -85,14 +87,16 @@
                     android:text="茄子用户"/>
 
                 <ImageView
+                    android:id="@+id/user_sex"
                     android:layout_width="20.5dp"
                     android:layout_height="20.5dp"
-                    android:src="@color/text_gray_33"
+                    android:src="@drawable/my_boy"
                     app:layout_constraintLeft_toRightOf="@id/my_user_name"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="48dp"
                     android:layout_marginLeft="5dp"/>
                 <TextView
+                    android:id="@+id/user_Id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/my_user_name"
@@ -103,7 +107,21 @@
                     android:textSize="14sp"
                     android:text="ID:00001"/>
 
-
+                <TextView
+                    android:id="@+id/LV_level"
+                    android:layout_width="48dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/vip_level"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:textSize="12sp"
+                    android:textStyle="italic|bold"
+                    android:textColor="@color/blank"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="13dp"
+                    app:layout_constraintTop_toBottomOf="@id/my_user_name"
+                    app:layout_constraintLeft_toRightOf="@id/user_Id"
+                    android:text="LV1"/>
                 <LinearLayout
                     android:id="@+id/level_back"
                     android:layout_width="wrap_content"
@@ -165,7 +183,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    android:src="@color/text_gray_99"/>
+                    android:src="@drawable/no_login_head"/>
                 <TextView
                     android:id="@+id/no_login_name"
                     android:layout_width="wrap_content"
@@ -208,6 +226,8 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintTop_toBottomOf="@id/cl1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
@@ -224,7 +244,7 @@
                 <ImageView
                     android:layout_width="29dp"
                     android:layout_height="29dp"
-                    android:src="@color/text_gray_33"/>
+                    android:src="@drawable/my_focus"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -255,7 +275,7 @@
                 <ImageView
                     android:layout_width="29dp"
                     android:layout_height="29dp"
-                    android:src="@color/text_gray_33"/>
+                    android:src="@drawable/my_fans"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -287,7 +307,7 @@
                 <ImageView
                     android:layout_width="29dp"
                     android:layout_height="29dp"
-                    android:src="@color/text_gray_33"/>
+                    android:src="@drawable/my_publish"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -318,7 +338,7 @@
                 <ImageView
                     android:layout_width="29dp"
                     android:layout_height="29dp"
-                    android:src="@color/text_gray_33"/>
+                    android:src="@drawable/my_collection"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
