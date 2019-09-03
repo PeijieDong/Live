@@ -14,6 +14,7 @@ import com.mymusic.music.DataBean.VideoItem;
 import com.mymusic.music.R;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,13 +30,17 @@ public class Grid2Adapter extends BaseAdapter {
 
     public Grid2Adapter(Context mContext, List<VideoItem.DataBean.ListBeanX.ListBean> list) {
         this.context = mContext;
-        this.list = list;
+        if(list != null){
+            this.list = list;
+        }else{
+            this.list = new ArrayList<>();
+        }
+
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-
         return list.size();
     }
 
