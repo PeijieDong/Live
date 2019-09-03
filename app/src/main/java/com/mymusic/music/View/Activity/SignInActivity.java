@@ -21,6 +21,25 @@ public class SignInActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
-
+//        initNet();
     }
+
+//    private void initNet() {
+//        NetRequest.postFormRequest(UrlManager.SIGNIN, null, new NetRequest.DataCallBack() {
+//            @Override
+//            public void requestSuccess(String result) throws Exception {
+//
+//            }
+//
+//            @Override
+//            public void requestFailure(Request request, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void TokenFail() {
+//
+//            }
+//        });
+//    }
 }

@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.DataBean.VideoItem;
 import com.mymusic.music.R;
 import com.mymusic.music.View.Activity.Detail.DetailsActivity;
@@ -72,7 +71,7 @@ public class Grid2Adapter extends BaseAdapter {
         ImageView typeImage = v.findViewById(R.id.typeImage);
         TextView typename = v.findViewById(R.id.name);
         TextView time = v.findViewById(R.id.time);
-        Glide.with(context).load(list.get(i).getImage()).into(typeImage);
+        Glide.with(context).load(list.get(i).getImage()).placeholder(R.drawable.fq_bottom_transparent).into(typeImage);
         typename.setText(list.get(i).getTitle());
         time.setText(list.get(i).getPlaytime());
         return v;

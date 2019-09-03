@@ -28,7 +28,6 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
-import com.mymusic.music.View.Activity.MyChildActivity.My.MyaboutActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MycollectionActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MycommentActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyexchangeActivity;
@@ -83,7 +82,7 @@ public class MyFragment extends BaseFragment {
     @BindView(R.id.cl4)
     ConstraintLayout cl4;
     @BindView(R.id.go_login)
-    Button goLogin;
+    TextView goLogin;
     @BindView(R.id.my_totalNumber)
     TextView totalNumber;
     @BindView(R.id.my_number)
@@ -321,11 +320,13 @@ public class MyFragment extends BaseFragment {
                 }
                 break;
             case R.id.my_about:
-                goActivity(MyaboutActivity.class);
+                loading();
+                getShare(UrlManager.ABOUT);
+                hideloading();
                 break;
             case R.id.my_community:
                 loading();
-                getShare();
+                getShare(UrlManager.ShareFriend);
                 hideloading();
                 break;
             case R.id.my_share:
@@ -350,8 +351,8 @@ public class MyFragment extends BaseFragment {
         }
     }
 
-    private void getShare() {
-        NetRequest.postFormRequest(UrlManager.ShareFriend, null, new NetRequest.DataCallBack() {
+    private void getShare(String url) {
+        NetRequest.postFormRequest(url, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 ShareFriend bean = GsonUtil.GsonToBean(result, ShareFriend.class);

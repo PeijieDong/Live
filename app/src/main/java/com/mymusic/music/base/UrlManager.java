@@ -197,4 +197,7 @@ public class UrlManager {
 
     public static final String HEAD = BaseUrl + "users/upavatar";
 
+    public static final String ABOUT = BaseUrl + "index/customerService";
+
+    public static final String SIGNIN = BaseUrl + "users/record";
 }

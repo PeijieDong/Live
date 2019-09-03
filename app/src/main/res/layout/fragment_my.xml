@@ -62,6 +62,14 @@
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="28dp"/>
+                <ImageView
+                    android:layout_width="43.5dp"
+                    android:layout_height="20.5dp"
+                    app:layout_constraintBottom_toBottomOf="@id/my_user_head"
+                    app:layout_constraintTop_toBottomOf="@id/my_user_head"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="40.5dp"
+                    android:src="@color/text_gray_33"/>
                 <TextView
                     android:id="@+id/my_user_name"
                     android:layout_width="wrap_content"
@@ -70,10 +78,31 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="48dp"
                     android:textSize="18sp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="13dp"
                     android:textColor="#000"
                     android:textStyle="bold"
                     android:text="茄子用户"/>
+
+                <ImageView
+                    android:layout_width="20.5dp"
+                    android:layout_height="20.5dp"
+                    android:src="@color/text_gray_33"
+                    app:layout_constraintLeft_toRightOf="@id/my_user_name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/my_user_name"
+                    app:layout_constraintLeft_toRightOf="@id/my_user_head"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#4D4D4D"
+                    android:textSize="14sp"
+                    android:text="ID:00001"/>
+
+
                 <LinearLayout
                     android:id="@+id/level_back"
                     android:layout_width="wrap_content"
@@ -83,6 +112,7 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:paddingRight="10dp"
+                    android:visibility="gone"
                     android:background="@drawable/back_level"
                     app:layout_constraintLeft_toRightOf="@id/my_user_head"
                     app:layout_constraintTop_toBottomOf="@id/my_user_name">
@@ -144,6 +174,7 @@
                     android:textSize="18sp"
                     android:textColor="#000" />
                 <TextView
+                    android:id="@+id/go_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#4D4D4D"
@@ -154,7 +185,6 @@
                     android:layout_marginTop="10dp"
                     android:text="现在点击注册/登陆"/>
                 <Button
-                    android:id="@+id/go_login"
                     android:layout_width="100dp"
                     android:layout_height="35dp"
                     android:background="@drawable/no_login"
@@ -320,6 +350,58 @@
                 android:layout_height="66dp"
                 android:background="@drawable/video_num">
                 <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="51dp"
+                    android:layout_height="51dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:src="@color/text_gray_33"/>
+                <TextView
+                    android:id="@+id/my_videoVip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="观影次数"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="#FFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/img2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/my_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30"
+                    android:textColor="#FFE400"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintLeft_toRightOf="@id/img2"
+                    app:layout_constraintTop_toBottomOf="@id/my_videoVip" />
+                <TextView
+                    android:id="@+id/my_totalNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/30"
+                    android:textColor="#FFE400"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintLeft_toRightOf="@id/my_number"
+                    app:layout_constraintTop_toBottomOf="@id/my_videoVip"/>
+            </android.support.constraint.ConstraintLayout>
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/my_cl_task"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="66dp"
+                android:layout_marginLeft="4.5dp"
+                android:layout_marginRight="19dp"
+                android:background="@drawable/play_game_back">
+                <ImageView
                     android:id="@+id/img1"
                     android:layout_width="51dp"
                     android:layout_height="51dp"
@@ -337,7 +419,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/img1"
                     android:layout_marginTop="13dp"
-                    android:layout_marginLeft="8dp"/>
+                    android:layout_marginLeft="8dp"
+                    android:text="当前任务"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -346,68 +429,9 @@
                     app:layout_constraintTop_toBottomOf="@id/text1"
                     app:layout_constraintLeft_toRightOf="@id/img1"
                     android:layout_marginLeft="9dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:text="玩游戏赚积分"/>
 
-            </android.support.constraint.ConstraintLayout>
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/my_cl_task"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="66dp"
-                android:layout_marginLeft="4.5dp"
-                android:layout_marginRight="19dp"
-                android:background="@color/white">
-
-                <TextView
-                    android:id="@+id/my_videoVip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/my_equity"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="#333333"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/my_equityNum"
-                    app:layout_constraintRight_toLeftOf="@id/my_number"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/my_totalNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="/30"
-                    android:layout_marginRight="5dp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/my_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="30"
-                    android:textColor="#EB5F59"
-                    app:layout_constraintRight_toLeftOf="@id/my_totalNumber"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/my_user_task"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/my_videoVip" />
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
 
@@ -652,7 +676,7 @@
                     app:layout_constraintLeft_toRightOf="@id/my_icon8"
                     android:textSize="16sp"
                     android:textColor="#333333"
-                    android:text="@string/my_about"/>
+                    android:text="联系客服"/>
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
