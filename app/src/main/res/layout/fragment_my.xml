@@ -207,13 +207,14 @@
                     app:layout_constraintLeft_toRightOf="@id/no_Login_head"
                     android:layout_marginTop="10dp"
                     android:text="现在点击注册/登陆"/>
-                <Button
+                <TextView
                     android:layout_width="100dp"
                     android:layout_height="35dp"
                     android:background="@drawable/no_login"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:text="签到"
+                    android:gravity="center"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -382,7 +383,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginLeft="15dp"
-                    android:src="@color/text_gray_33"/>
+                    android:src="@drawable/video_play_img"/>
                 <TextView
                     android:id="@+id/my_videoVip"
                     android:layout_width="wrap_content"
@@ -434,7 +435,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginLeft="15dp"
-                    android:src="@color/text_gray_33"/>
+                    android:src="@drawable/task_img"/>
                 <TextView
                     android:id="@+id/text1"
                     android:layout_width="wrap_content"
@@ -514,7 +515,7 @@
                     android:id="@+id/my_icon2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:src="@drawable/my_exchange_zone"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
@@ -543,7 +544,7 @@
                     android:id="@+id/my_icon3"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:src="@drawable/my_icon_message"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
@@ -572,7 +573,7 @@
                     android:id="@+id/my_icon4"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:src="@drawable/my_icon_comment"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
@@ -601,7 +602,7 @@
                     android:id="@+id/my_icon5"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:src="@drawable/my_icon_like"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
@@ -630,7 +631,7 @@
                     android:id="@+id/my_icon6"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:src="@drawable/my_icon_history"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
@@ -660,7 +661,7 @@
                     android:id="@+id/my_icon7"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:src="@drawable/my_icon_feedback"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
@@ -685,14 +686,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white">
+
                 <ImageView
                     android:id="@+id/my_icon8"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:src="@drawable/my_icon_about"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_margin="10dp"/>
+                    android:layout_margin="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -718,8 +720,8 @@
                     android:id="@+id/home_img"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
-                    android:src="@drawable/my_icon_about"
+                    android:padding="16dp"
+                    android:src="@drawable/my_icon_address"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
                 <TextView
@@ -747,7 +749,7 @@
                     android:id="@+id/my_icon9"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:src="@drawable/my_icon_community"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
@@ -776,7 +778,7 @@
                     android:id="@+id/my_icon10"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:src="@drawable/my_icon_share"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>
@@ -805,7 +807,7 @@
                     android:id="@+id/my_icon11"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:src="@drawable/my_icon_live"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="10dp"/>

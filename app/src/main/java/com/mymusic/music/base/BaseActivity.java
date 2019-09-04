@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.mymusic.music.Util.LoadingDialog;
@@ -31,6 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             initVariables(null);
         }
         ActivityCollector.addActivity(this);
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         initViews(savedInstanceState);
         LoadData();
     }

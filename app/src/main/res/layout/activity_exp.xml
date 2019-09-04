@@ -30,6 +30,13 @@
                 android:textSize="18sp"
                 android:textColor="#030303"
                 android:text="经验值"/>
+            <ImageView
+                android:id="@+id/help_iv"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:src="@drawable/bangzhu_icon"/>
         </RelativeLayout>
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"

@@ -76,7 +76,7 @@ public class Grid2Adapter extends BaseAdapter {
         ImageView typeImage = v.findViewById(R.id.typeImage);
         TextView typename = v.findViewById(R.id.name);
         TextView time = v.findViewById(R.id.time);
-        Glide.with(context).load(list.get(i).getImage()).placeholder(R.drawable.fq_bottom_transparent).into(typeImage);
+        Glide.with(context).load(list.get(i).getImage()).error(R.drawable.fq_ic_placeholder).placeholder(R.drawable.fq_bottom_transparent).into(typeImage);
         typename.setText(list.get(i).getTitle());
         time.setText(list.get(i).getPlaytime());
         return v;

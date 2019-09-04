@@ -1,47 +1,27 @@
 package com.mymusic.music.View.Adapter;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.mymusic.music.DataBean.HomeData;
-import com.mymusic.music.Live;
 import com.mymusic.music.R;
-import com.mymusic.music.Util.LogUtils;
 import com.mymusic.music.Util.MyGridView;
-import com.mymusic.music.Util.NetRequest;
-import com.mymusic.music.Util.ToastUtil;
-import com.mymusic.music.View.Activity.Detail.FriendDetailActivity;
-import com.mymusic.music.View.Activity.Detail.UserDetailActivity;
 import com.mymusic.music.View.Activity.Detail.VideoPlayActivity;
-import com.mymusic.music.View.Activity.Login.LoginActivity;
-import com.mymusic.music.base.BaseRecAdapter;
-import com.mymusic.music.base.UrlManager;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.Request;
 
 /**
  * Create By mr.mao in 2019/5/29 22:22
@@ -185,7 +165,8 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
                         .setText(R.id.username,item.getUsername())
                         .setText(R.id.home_rc_type,item.getCatename())
                         .setText(R.id.tv_content,item.getTitle())
-                        .setText(R.id.play_num,item.getClick()+"次播放"+" "+item.getPlaytime());
+                        .setText(R.id.play_time,item.getClick()+"次播放")
+                        .setText(R.id.play_num,item.getPlaytime());
                 helper.addOnClickListener(R.id.icon_more);
                 Glide.with(mContext).load(item.getAvatar()).error(R.drawable.fq_ic_placeholder)
                         .into((CircleImageView) helper.getView(R.id.userHead));

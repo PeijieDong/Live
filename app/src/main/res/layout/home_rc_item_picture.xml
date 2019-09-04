@@ -11,6 +11,7 @@
         android:id="@+id/themeBt"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="10dp">
         <TextView
             android:id="@+id/signTv"
@@ -32,6 +33,25 @@
             android:textSize="12sp"
             android:padding="5dp"
             android:background="@drawable/back_home_top" />
+        <LinearLayout
+            android:id="@+id/userBt"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userHead"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="3dp"/>
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="我是迷笛"/>
+        </LinearLayout>
         <ImageView
             android:id="@+id/icon_more"
             android:layout_width="30dp"
@@ -41,25 +61,25 @@
             android:src="@drawable/icon_godown"/>
     </RelativeLayout>
     <include layout="@layout/home_rc_pic"/>
-    <LinearLayout
-        android:id="@+id/userBt"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/userHead"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="3dp"/>
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:text="我是迷笛"/>
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/userBt"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:orientation="horizontal">-->
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/userHead"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:padding="3dp"/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/username"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="我是迷笛"/>-->
+    <!--</LinearLayout>-->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

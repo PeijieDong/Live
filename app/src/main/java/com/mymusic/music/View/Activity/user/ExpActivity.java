@@ -121,9 +121,15 @@ public class ExpActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.back,R.id.get_exp})
+    @OnClick({R.id.back,R.id.get_exp,R.id.help_iv})
     public void ClickEvent(View view){
         switch (view.getId()){
+            case R.id.help_iv:
+                Intent intent2 = new Intent(this,WebActivity.class);
+                intent2.putExtra("url","http://live.shuiqiao.net/users/level");
+                intent2.putExtra("title","等级说明");
+                startActivity(intent2);
+                break;
             case R.id.back:
                 finish();
                 break;

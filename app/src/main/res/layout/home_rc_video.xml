@@ -10,6 +10,7 @@
         android:id="@+id/themeBt"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_marginTop="7dp"
         android:layout_marginRight="10dp">
         <TextView
             android:id="@+id/signTv"
@@ -32,6 +33,26 @@
             android:padding="5dp"
             android:background="@drawable/back_home_top"
             android:text="迷笛大本营"/>
+        <LinearLayout
+            android:id="@+id/userBt"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userHead"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="3dp"
+                android:src="@drawable/ic_launcher_background"/>
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="我是迷笛"/>
+        </LinearLayout>
         <ImageView
             android:id="@+id/icon_more"
             android:layout_width="30dp"
@@ -70,23 +91,43 @@
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"/>
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
-        <ImageView
-            android:id="@+id/video_image"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="190dp"
-            android:scaleType="centerCrop"/>
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp">
+            <ImageView
+                android:id="@+id/video_image"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:scaleType="centerCrop"/>
+        </android.support.v7.widget.CardView>
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:src="@drawable/post_video_play"/>
+        <TextView
+            android:id="@+id/play_time"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFE400"/>
         <TextView
             android:id="@+id/play_num"
             android:layout_width="wrap_content"
@@ -100,28 +141,28 @@
             android:paddingRight="5dp"
             android:textColor="@color/white"
             android:textSize="12sp"
-            android:background="@drawable/tran_blank" />
+            android:textStyle="bold" />
     </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/userBt"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/userHead"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="3dp"
-            android:src="@drawable/ic_launcher_background"/>
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:text="我是迷笛"/>
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/userBt"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:orientation="horizontal">-->
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/userHead"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:padding="3dp"-->
+            <!--android:src="@drawable/ic_launcher_background"/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/username"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="我是迷笛"/>-->
+    <!--</LinearLayout>-->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

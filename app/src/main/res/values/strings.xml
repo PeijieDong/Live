@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name" tools:ignore="MissingTranslation">茄子影视</string>
+    <string name="app_name" tools:ignore="MissingTranslation">思蜜哒</string>
     <string name="welcome">欢迎登陆</string>
     <string name="LoginBt">登陆</string>
     <string name="goRegister"><![CDATA[快速注册>]]></string>

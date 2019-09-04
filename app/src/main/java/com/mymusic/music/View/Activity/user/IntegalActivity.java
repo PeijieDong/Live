@@ -1,10 +1,9 @@
 package com.mymusic.music.View.Activity.user;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -62,7 +61,7 @@ public class IntegalActivity extends BaseActivity {
         tab.setupWithViewPager(viewPager);
     }
 
-    @OnClick({R.id.back,R.id.get_Score})
+    @OnClick({R.id.back,R.id.get_Score,R.id.help_iv})
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.back:
@@ -73,6 +72,12 @@ public class IntegalActivity extends BaseActivity {
                 intent.putExtra("url","http://live.shuiqiao.net/users/jifen");
                 intent.putExtra("title","获取攻略");
                 startActivity(intent);
+                break;
+            case R.id.help_iv:
+                Intent intent2 = new Intent(this, WebActivity.class);
+                intent2.putExtra("url","http://live.shuiqiao.net/users/jifen");
+                intent2.putExtra("title","获取攻略");
+                startActivity(intent2);
                 break;
         }
     }

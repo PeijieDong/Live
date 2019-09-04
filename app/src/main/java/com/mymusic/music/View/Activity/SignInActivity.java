@@ -2,6 +2,8 @@ package com.mymusic.music.View.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.widget.ProgressBar;
@@ -12,6 +14,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.SignInNavigation;
+import com.mymusic.music.View.Adapter.SignInAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
@@ -33,6 +36,8 @@ public class SignInActivity extends BaseActivity {
     TextView des;
     @BindView(R.id.signInProgress)
     ProgressBar progressBar;
+    @BindView(R.id.rc)
+    RecyclerView Rc;
     private String desTv = "说明：<font color='#FFE400'>连续签到</font>5天，签到金上升到" +
             "<font color='#FFE400'>5倍</font> 如间断<font color='#FFE400'>漏签</font>，金额<font color='#FFE400'>清零</font>，重新计算";
     @Override
@@ -78,6 +83,8 @@ public class SignInActivity extends BaseActivity {
                 num.setCurrentItem(bean.getData().getTotaldays());
                 progressBar.setMax(7);
                 progressBar.setProgress(bean.getData().getTotaldays());
+                Rc.setLayoutManager(new LinearLayoutManager(SignInActivity.this));
+                Rc.setAdapter(new SignInAdapter(R.layout.get_scroe_item,bean.getData().getList()));
             }
 
             @Override

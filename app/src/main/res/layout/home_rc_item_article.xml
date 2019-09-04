@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/themeBt"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_marginRight="10dp">
         <TextView
             android:id="@+id/signTv"
@@ -32,6 +32,26 @@
             android:padding="5dp"
             android:background="@drawable/back_home_top"
             android:text="迷笛大本营"/>
+        <LinearLayout
+            android:id="@+id/userBt"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userHead"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="3dp"
+                android:src="@drawable/ic_launcher_background"/>
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="我是迷笛"/>
+        </LinearLayout>
         <ImageView
             android:id="@+id/icon_more"
             android:layout_width="30dp"
@@ -70,7 +90,10 @@
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
             android:textSize="16sp"
             android:textColor="#000"
             android:maxLines="2"
@@ -81,7 +104,10 @@
         android:id="@+id/tv_content_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:ellipsize="end" />
     <TextView
         android:id="@+id/tv_content_vis"
@@ -93,26 +119,26 @@
         android:visibility="gone"
         android:textColor="#FF5252"
         android:text="全文"/>
-    <LinearLayout
-        android:id="@+id/userBt"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/userHead"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="3dp"
-            android:src="@drawable/ic_launcher_background"/>
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:text="我是迷笛"/>
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/userBt"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:orientation="horizontal">-->
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/userHead"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:padding="3dp"-->
+            <!--android:src="@drawable/ic_launcher_background"/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/username"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="我是迷笛"/>-->
+    <!--</LinearLayout>-->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

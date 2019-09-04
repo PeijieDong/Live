@@ -1,10 +1,10 @@
 package com.mymusic.music.View.Activity.MyChildActivity.My;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,7 +16,6 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.WebActivity;
-import com.mymusic.music.View.Activity.message.SettingActivity;
 import com.mymusic.music.View.Activity.user.ExpActivity;
 import com.mymusic.music.View.Activity.user.IntegalActivity;
 import com.mymusic.music.View.Activity.user.UserActivity;
@@ -63,6 +62,7 @@ public class MytaskActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.Task, null, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.d("33",result);
                 bean = GsonUtil.GsonToBean(result, Task.class);
                 Rc1.setLayoutManager(new LinearLayoutManager(MytaskActivity.this));
                 MyTaskRcAdapter taskAdapter = new MyTaskRcAdapter(R.layout.my_task_layout,bean.getData().getList().get(1).getList());

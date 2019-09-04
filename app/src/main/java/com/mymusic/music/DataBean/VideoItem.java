@@ -8,8 +8,9 @@ import java.util.List;
  **/
 public class VideoItem {
 
+
     /**
-     * data : {"list":[{"title":"分类一","type":"typeTwo","pid":"5","list":[{"id":"4","title":"","playtime":"00:01:05","image":"http://live.shuiqiao.net/data/upload/video/156390195328.jpg"}]},{"title":"分类二","type":"typeThree","pid":"6","list":[{"id":"5","title":"","playtime":"00:01:05","image":"http://live.shuiqiao.net/data/upload/video/156390394814.jpg"}]}],"ad":[{"url":"http://www.baidu.com","img":"image.jpg"},{"url":"http://www.baidu.com","img":"image.jpg"}]}
+     * data : {"list":[{"title":"内地女歌手","type":"typeTwo","pid":"13","list":[{"id":"l42","title":"天天 Amber-邱比 CHIU PI,天天 AmberMV免费下载,高清MV在线观看 _千千音乐-听见世界","playtime":"0","image":""},{"id":"l38","title":"","playtime":"0","image":""},{"id":"l37","title":"我愿意平凡的陪在你身旁-王七七","playtime":"0","image":"http://live.shuiqiao.net/data/upload/20190826/5d6361cb2bd83.jpg"}],"image":"http://live.shuiqiao.net/data/upload/20190830/5d68d092d8f7f.jpg","link":"http://www.baidu.com"},{"title":"内地男歌手","type":"typeTwo","pid":"12","list":[{"id":"l35","title":"天份-薛之谦","playtime":"0","image":"http://live.shuiqiao.net/data/upload/20190826/5d6357df2819d.jpg"}]},{"title":"广告","type":"广告","image":"http://live.shuiqiao.net/data/upload/20190830/5d68d092d8f7f.jpg","link":"http://www.baidu.com"},{"title":"中国新说唱","type":"typeTwo","pid":"21"},{"title":"一起乐队吧","type":"typeTwo","pid":"22"}],"ad":[{"url":"http://www.baidu.com","img":"image.jpg"},{"url":"http://www.baidu.com","img":"image.jpg"}]}
      * status : 1
      * referer :
      * state : 1
@@ -74,15 +75,19 @@ public class VideoItem {
 
         public static class ListBeanX {
             /**
-             * title : 分类一
+             * title : 内地女歌手
              * type : typeTwo
-             * pid : 5
-             * list : [{"id":"4","title":"","playtime":"00:01:05","image":"http://live.shuiqiao.net/data/upload/video/156390195328.jpg"}]
+             * pid : 13
+             * list : [{"id":"l42","title":"天天 Amber-邱比 CHIU PI,天天 AmberMV免费下载,高清MV在线观看 _千千音乐-听见世界","playtime":"0","image":""},{"id":"l38","title":"","playtime":"0","image":""},{"id":"l37","title":"我愿意平凡的陪在你身旁-王七七","playtime":"0","image":"http://live.shuiqiao.net/data/upload/20190826/5d6361cb2bd83.jpg"}]
+             * image : http://live.shuiqiao.net/data/upload/20190830/5d68d092d8f7f.jpg
+             * link : http://www.baidu.com
              */
 
             private String title;
             private String type;
             private String pid;
+            private String image;
+            private String link;
             private List<ListBean> list;
 
             public String getTitle() {
@@ -109,6 +114,22 @@ public class VideoItem {
                 this.pid = pid;
             }
 
+            public String getImage() {
+                return image;
+            }
+
+            public void setImage(String image) {
+                this.image = image;
+            }
+
+            public String getLink() {
+                return link;
+            }
+
+            public void setLink(String link) {
+                this.link = link;
+            }
+
             public List<ListBean> getList() {
                 return list;
             }
@@ -119,10 +140,10 @@ public class VideoItem {
 
             public static class ListBean {
                 /**
-                 * id : 4
-                 * title :
-                 * playtime : 00:01:05
-                 * image : http://live.shuiqiao.net/data/upload/video/156390195328.jpg
+                 * id : l42
+                 * title : 天天 Amber-邱比 CHIU PI,天天 AmberMV免费下载,高清MV在线观看 _千千音乐-听见世界
+                 * playtime : 0
+                 * image :
                  */
 
                 private String id;

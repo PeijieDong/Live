@@ -315,11 +315,16 @@ public class DetailsActivity extends BaseActivity {
         NetRequest.postFormHeadRequest(UrlManager.GoMoney, map, Live.getInstance().getToken(this), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.d("33",result);
                 VideoPlay.setUp(data.getData().getList().getVideourl(),
                         MyJzvdStd.CURRENT_STATE_NORMAL);
-                MyJzvdStd.goOnPlayOnResume();
                 VideoPlay.startVideo();
                 VideoPlay.setId(data.getData().getList().getId());
+//                VideoPlay.setUp(data.getData().getList().getVideourl(),
+//                        MyJzvdStd.CURRENT_STATE_NORMAL);
+//                MyJzvdStd.goOnPlayOnResume();
+//                VideoPlay.startVideo();
+//                VideoPlay.setId(data.getData().getList().getId());
                 VideoPlay.setVisibility(View.VISIBLE);
                 VideoPlay.setClickable(true);
                 noNum.setVisibility(View.GONE);

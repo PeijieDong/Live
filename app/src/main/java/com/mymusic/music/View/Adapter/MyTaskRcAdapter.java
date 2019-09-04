@@ -1,7 +1,6 @@
 package com.mymusic.music.View.Adapter;
 
 import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -55,7 +54,7 @@ public class MyTaskRcAdapter extends BaseQuickAdapter<Task.DataBean.ListBeanX.Li
                 .setText(R.id.unfinish,item.getTotalValue()+"/")
                 .setText(R.id.total,item.getExperience());
         Glide.with(mContext).load(item.getIcon()).error(R.drawable.fq_ic_placeholder).into((CircleImageView) helper.getView(R.id.task_head));
-        if(item.getIntegral().equals(item.getExperience())){
+        if(item.getTotalValue().equals(item.getExperience())){
             helper.setBackgroundRes(R.id.doit,R.drawable.isfocus);
             helper.setText(R.id.doit,"已完成");
             helper.getView(R.id.doit).setClickable(false);

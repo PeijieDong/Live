@@ -12,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:cardCornerRadius="5dp">
+        app:cardCornerRadius="10dp">
         <android.support.constraint.ConstraintLayout
             android:layout_width="180dp"
             android:layout_height="110dp">
@@ -20,7 +20,7 @@
                 android:id="@+id/typeImage"
                 android:layout_width="180dp"
                 android:layout_height="110dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background"/>
             <ImageView
                 android:layout_width="180dp"

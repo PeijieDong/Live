@@ -1,6 +1,7 @@
 package com.mymusic.music.View.ChildFragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -81,7 +82,7 @@ public class VideoItemFragment extends BaseFragment {
                 banner.setImages(images);
                 banner.start();
                 rc.setLayoutManager(new LinearLayoutManager(getContext()));
-                RcAdpaterVideo videoAdapter = new RcAdpaterVideo(R.layout.rc_adapter_item_video,bean.getData().getList());
+                RcAdpaterVideo videoAdapter = new RcAdpaterVideo(bean.getData().getList());
                 videoAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                     @Override
                     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -91,6 +92,13 @@ public class VideoItemFragment extends BaseFragment {
                                 intent.putExtra("id",bean.getData().getList().get(position).getPid());
                                 intent.putExtra("title",bean.getData().getList().get(position).getTitle());
                                 startActivity(intent);
+                                break;
+                            case R.id.adv_image:
+                                Intent intent2 = new Intent();
+                                intent2.setAction("android.intent.action.VIEW");
+                                Uri uri = Uri.parse(bean.getData().getList().get(position).getLink());
+                                intent2.setData(uri);
+                                startActivity(intent2);
                                 break;
                         }
                     }
