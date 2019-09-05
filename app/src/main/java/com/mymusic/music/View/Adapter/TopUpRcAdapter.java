@@ -18,7 +18,7 @@ public class TopUpRcAdapter extends BaseQuickAdapter<Vip.ListBean,BaseViewHolder
     @Override
     protected void convert(BaseViewHolder helper, Vip.ListBean item) {
         helper.addOnClickListener(R.id.doit);
-        helper.setText(R.id.title2,item.getTitle()).setText(R.id.title3,item.getActivityValue())
+        helper.setText(R.id.title,item.getTitle()).setText(R.id.title2,item.getActivityDesc()).setText(R.id.title3,item.getActivityValue())
                 .setText(R.id.title4,item.getActivityDesc()).setText(R.id.title5,item.getPrice());
     }
 }
