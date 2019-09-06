@@ -83,7 +83,7 @@
     <string name="community_report"><![CDATA[我要举报 >]]></string>
     <string name="userdetail_editor">编辑</string>
     <string name="community_put">发表</string>
-    <string name="community_et_feed">请用10-200字描述给社区的建议</string>
+    <string name="community_et_feed">请用10-200字描述您的建议</string>
     <string name="community_contact">手机、邮箱等联系方式</string>
     <string name="community_hint">填写联系方式有助于我们沟通和解决问题。</string>
     <string name="community_advice_item">给社区建议</string>

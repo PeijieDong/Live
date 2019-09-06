@@ -1,6 +1,7 @@
 package com.mymusic.music.View.Fragment;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -469,6 +470,17 @@ public class HomeFragment extends BaseFragment {
         super.onDestroy();
         if(downDisposable != null){
             downDisposable.dispose();//取消订阅
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.navi_title_color));
+        }else{
+            getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         }
     }
 }

@@ -60,7 +60,7 @@ public class Vip {
 
         private String icon;
         private String title;
-        private String activityDesc;
+        private String activitydesc;
         private String activityValue;
         private String rechargeURL;
         private String price;
@@ -82,11 +82,11 @@ public class Vip {
         }
 
         public String getActivityDesc() {
-            return activityDesc;
+            return activitydesc;
         }
 
         public void setActivityDesc(String activityDesc) {
-            this.activityDesc = activityDesc;
+            this.activitydesc = activityDesc;
         }
 
         public String getActivityValue() {

@@ -2,32 +2,23 @@ package com.mymusic.music;
 
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.mymusic.music.Util.BottomNavigation;
-import com.mymusic.music.Util.NetRequest;
-import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.Util.ToastUtil;
-import com.mymusic.music.View.Activity.MyChildActivity.SettingActivity.LockScreenActivity;
-import com.mymusic.music.View.Fragment.FriendFragment;
 import com.mymusic.music.View.Fragment.HomeFragment;
 import com.mymusic.music.View.Fragment.LiveFragment;
 import com.mymusic.music.View.Fragment.MyFragment;
 import com.mymusic.music.View.Fragment.NewVideoFragment;
 import com.mymusic.music.View.Fragment.TopUpFragment;
-import com.mymusic.music.View.Fragment.VideoFragment;
 import com.mymusic.music.base.ActivityCollector;
 import com.mymusic.music.base.BaseActivity;
 
@@ -54,6 +45,7 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
     @BindView(R.id.main_rl)
     RelativeLayout rl;
     private List<Fragment> list;
+
 
     @Override
     protected void initVariables(Intent intent) {

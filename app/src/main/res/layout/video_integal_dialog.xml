@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/radio_white_two">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        android:textColor="@color/blank"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="积分说明"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/blank"
+        android:padding="15dp"
+        android:text="积分可用于福利房、时长房、收费房可抵用此积分，100积分可兑换一分钟时长观看福利房和计费房"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F2F2F2"/>
+    <TextView
+        android:id="@+id/sure"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/navi_title_color"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:text="我知道了"/>
+</LinearLayout>

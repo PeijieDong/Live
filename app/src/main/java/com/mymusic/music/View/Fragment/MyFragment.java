@@ -206,8 +206,10 @@ public class MyFragment extends BaseFragment {
                 String[] split = guanying.split("/");
                 number.setText(split[0]);
                 totalNumber.setText("/"+split[1]);
-                if(bean.getData().getIs_vip().equals("0")){
-                    img_vip.setVisibility(View.GONE);
+                if(!bean.getData().getIs_vip().equals("0")){
+                    img_vip.setImageDrawable(getResources().getDrawable(R.drawable.vip));
+                }else{
+                    img_vip.setImageDrawable(getResources().getDrawable(R.drawable.no_vip));
                 }
                 if(Integer.parseInt(bean.getData().getLevel()) > 5 && Integer.parseInt(bean.getData().getLevel()) < 11){
                     level.setTextColor(ContextCompat.getColor(getContext(),R.color.text_level_10));
@@ -246,7 +248,7 @@ public class MyFragment extends BaseFragment {
             R.id.my_foucus,R.id.my_fans,R.id.my_publish,R.id.my_collection,R.id.my_cl_task,
             R.id.my_wallet,R.id.my_live,R.id.my_exchange,R.id.my_message,R.id.my_comment,
             R.id.my_like,R.id.my_history,R.id.my_feedback,R.id.my_about,R.id.my_community,R.id.my_share,
-            R.id.go_home,R.id.signIn,R.id.LV_level,R.id.cl3})
+            R.id.go_home,R.id.signIn,R.id.LV_level,R.id.cl3,R.id.video_play_num})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.cl3:
@@ -352,6 +354,7 @@ public class MyFragment extends BaseFragment {
                 getShare(UrlManager.ShareFriend);
                 hideloading();
                 break;
+            case R.id.video_play_num:
             case R.id.my_share:
                 if(Live.getInstance().getToken(getContext()).equals("")){
                     ToastUtil.show(getContext(),"请登录使用",1);

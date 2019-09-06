@@ -369,6 +369,7 @@
             android:paddingBottom="23dp"
             android:orientation="horizontal">
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/video_play_num"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="4.5dp"
                 android:layout_width="0dp"

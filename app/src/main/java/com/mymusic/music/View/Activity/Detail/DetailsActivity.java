@@ -1,5 +1,6 @@
 package com.mymusic.music.View.Activity.Detail;
 
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -25,6 +26,7 @@ import com.mymusic.music.DataBean.CommentData;
 import com.mymusic.music.DataBean.DetailData;
 import com.mymusic.music.DataBean.Play;
 import com.mymusic.music.Live;
+import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.DiyView.SwitchButton;
@@ -36,8 +38,6 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
-import com.mymusic.music.View.Activity.MyChildActivity.My.MytaskActivity;
-import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
 import com.mymusic.music.View.Adapter.DetailCommentRcAdapter;
 import com.mymusic.music.View.Adapter.HomeGridAdapter;
 import com.mymusic.music.base.BaseActivity;
@@ -236,57 +236,81 @@ public class DetailsActivity extends BaseActivity {
                 Log.d("44",result);
                 Play bean = GsonUtil.GsonToBean(result, Play.class);
                 if(bean.getData().getList().getCount() <= 0){
-                    noNum.setVisibility(View.VISIBLE);
-                    VideoPlay.setVisibility(View.GONE);
-                    VideoPlay.setClickable(false);
-                    noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看\n当前积分"+bean.getData().getList().getScore()
-                            +"个，番茄币"+bean.getData().getList().getMoney()+"个");
-                    if(Integer.parseInt(bean.getData().getList().getMoney()) < 10){
-                        goMoney.setText("充值番茄币");
-                        goMoney.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if(Live.getInstance().getToken(DetailsActivity.this).equals("")){
-                                    Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                }else {
-                                    Intent intent = new Intent(DetailsActivity.this, MywalletActivity.class);
-                                    startActivity(intent);
-                                }
+//                    noNum.setVisibility(View.VISIBLE);
+//                    VideoPlay.setVisibility(View.GONE);
+//                    VideoPlay.setClickable(false);
+                    Dialog dialog = new Dialog(DetailsActivity.this,R.style.transparentDialog);
+                    View view = LayoutInflater.from(DetailsActivity.this).inflate(R.layout.video_play_dialog, null);
+                    view.findViewById(R.id.sure).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(Live.getInstance().getToken(DetailsActivity.this).equals("")){
+                                Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            }else {
+                                Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
+                                intent.putExtra("position",3);
+                                startActivity(intent);
+                                finish();
                             }
-                        });
-                    }else{
-                        goMoney.setText("10币观看");
-                        goMoney.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                initLook("1");
-                            }
-                        });
-                    }
-                    if(Integer.parseInt(bean.getData().getList().getScore()) < 10){
-                        goLook.setText("赚取积分");
-                        goLook.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if(Live.getInstance().getToken(DetailsActivity.this).equals("")){
-                                    Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                }else {
-                                    Intent intent = new Intent(DetailsActivity.this, MytaskActivity.class);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
-                    }else{
-                        goLook.setText("10积分观看");
-                        goLook.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                initLook("0");
-                            }
-                        });
-                    }
+                        }
+                    });
+                    view.findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
+                    dialog.setContentView(view);
+                    dialog.setCancelable(false);
+                    dialog.show();
+//                    noMoneyTitle.setText("提示：免费观看次数已用完，开通会员享无限观看");
+//                    if(Integer.parseInt(bean.getData().getList().getMoney()) < 10){
+//                        goMoney.setText("充值番茄币");
+//                        goMoney.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                if(Live.getInstance().getToken(DetailsActivity.this).equals("")){
+//                                    Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
+//                                    startActivity(intent);
+//                                }else {
+//                                    Intent intent = new Intent(DetailsActivity.this, MywalletActivity.class);
+//                                    startActivity(intent);
+//                                }
+//                            }
+//                        });
+//                    }else{
+//                        goMoney.setText("10币观看");
+//                        goMoney.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                initLook("1");
+//                            }
+//                        });
+//                    }
+//                    if(Integer.parseInt(bean.getData().getList().getScore()) < 10){
+//                        goLook.setText("赚取积分");
+//                        goLook.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                if(Live.getInstance().getToken(DetailsActivity.this).equals("")){
+//                                    Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
+//                                    startActivity(intent);
+//                                }else {
+//                                    Intent intent = new Intent(DetailsActivity.this, MytaskActivity.class);
+//                                    startActivity(intent);
+//                                }
+//                            }
+//                        });
+//                    }else{
+//                        goLook.setText("10积分观看");
+//                        goLook.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                initLook("0");
+//                            }
+//                        });
+//                    }
                 }else{
                     VideoPlay.setUp(data.getData().getList().getVideourl(),
                             MyJzvdStd.CURRENT_STATE_NORMAL);
