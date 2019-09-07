@@ -134,6 +134,7 @@ public class DetailsActivity extends BaseActivity {
     private DetailCommentRcAdapter adapter;
     private DetailData data;
     private boolean isFocus = false;
+    private boolean aNew = false;
     private List<CommentData.DataBean.ListBean> list = new ArrayList<>();
 
     @Override
@@ -142,7 +143,7 @@ public class DetailsActivity extends BaseActivity {
     }
     @Override
     protected void initVariables(Intent intent) {
-        boolean aNew = intent.getBooleanExtra("new", false);
+        aNew = intent.getBooleanExtra("new", false);
         id = intent.getStringExtra("id");
         String url = "";
         if(aNew){
@@ -225,6 +226,10 @@ public class DetailsActivity extends BaseActivity {
         Glide.with(this).load(data.getData().getList().getAvatar()).error(R.drawable.default_img_head).into(detail_head);
         Glide.with(this).load(data.getData().getList().getAvatar()).error(R.drawable.default_img_head).into(head2);
         initComment("new","0");
+        if(aNew){
+            focus3.setVisibility(View.GONE);
+            head2.setClickable(false);
+        }
     }
 
     private void initPlay(String id) {

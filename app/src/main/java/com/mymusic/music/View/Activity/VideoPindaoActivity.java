@@ -1,6 +1,9 @@
 package com.mymusic.music.View.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,7 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -23,6 +32,7 @@ import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.BottomNavigation;
 import com.mymusic.music.Util.DpPxUtils;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.HorizontalListView;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.TabNavigation;
@@ -33,6 +43,10 @@ import com.mymusic.music.View.Adapter.RcAdapterVideo2;
 import com.mymusic.music.View.Adapter.RcAdpaterVideo;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,9 +62,11 @@ public class VideoPindaoActivity extends BaseActivity {
     @BindView(R.id.rc)
     RecyclerView rc;
     @BindView(R.id.tab_Collection)
-    LinearLayout tab_Collection;
+    ListView tab_Collection;
     @BindView(R.id.title)
     TextView titleTv;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout refreshLayout;
     private static String title1 ="";
     private static String title2 ="";
     private static String title3 ="";
@@ -58,6 +74,7 @@ public class VideoPindaoActivity extends BaseActivity {
     private static String title5 ="";
     private String id;
     String title;
+    private int pager=0;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -73,6 +90,20 @@ public class VideoPindaoActivity extends BaseActivity {
     @Override
     protected void LoadData() {
         titleTv.setText(title);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                pager = 0;
+                initRc();
+            }
+        });
+//        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+//            @Override
+//            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+//                pager ++ ;
+//                initRc();
+//            }
+//        });
         initTitle();
     }
 
@@ -82,51 +113,12 @@ public class VideoPindaoActivity extends BaseActivity {
         NetRequest.getFormRequest(UrlManager.GET_TITLE, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.d("33","title:"+result);
                 Title bean = GsonUtil.GsonToBean(result, Title.class);
-                List<Title.DataBean.ListBeanX> list = bean.getData().getList();
-                for (int i = 0;i<list.size();i++){
-                    TabNavigation navigation = new TabNavigation(VideoPindaoActivity.this);
-                    LinearLayout.LayoutParams layoutParams =
-                            new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    layoutParams.setMargins(DpPxUtils.dip2px(VideoPindaoActivity.this,7)
-                            ,DpPxUtils.dip2px(VideoPindaoActivity.this,5),
-                            DpPxUtils.dip2px(VideoPindaoActivity.this,10),
-                            DpPxUtils.dip2px(VideoPindaoActivity.this,5));
-                    navigation.setLayoutParams(layoutParams);
-                    for(int a = 0 ;a<list.get(i).getList().size();a++) {
-                        navigation.setCurrentPosition(i);
-                        navigation.addTab(new TabNavigation.Tab().setText(list.get(i).getList().get(a).getTitle())
-                                .setPressedIcon(R.drawable.tab_back)
-                                .setNormalIcon(R.drawable.tab_back_normal));
-                    }
-                        navigation.setCurrentItem(0);
-                        if(i == 0){
-                            title1 = list.get(i).getList().get(0).getDid();
-                        }
-                        if(i == 1){
-                            title2 = list.get(i).getList().get(0).getCid();
-                        }
-                        if(i == 2){
-                            title3 = list.get(i).getList().get(0).getId();
-                        }
-                        tab_Collection.addView(navigation);
-                        navigation.setOnTabChechListener(new TabNavigation.OnTabCheckListener() {
-                            @Override
-                            public void onTabSelected(View v, int position) {
-                                int finalI = navigation.getCurrtPosition();
-                                if(finalI == 0){
-                                    title1 = list.get(finalI).getList().get(position).getDid();
-                                }
-                                if(finalI == 1){
-                                    title2 = list.get(finalI).getList().get(position).getCid();
-                                }
-                                if(finalI == 2){
-                                    title3 = list.get(finalI).getList().get(position).getId();
-                                }
-                                initRc();
-                            }
-                        });
-                }
+                tab_Collection.setAdapter(new TabListAdapter(VideoPindaoActivity.this,bean.getData().getList()));
+                title1 = bean.getData().getList().get(0).getList().get(0).getDid();
+                title2 = bean.getData().getList().get(1).getList().get(0).getCid();
+                title3 = bean.getData().getList().get(2).getList().get(0).getId();
                 initRc();
             }
 
@@ -150,35 +142,56 @@ public class VideoPindaoActivity extends BaseActivity {
         map.put("pid",title3);
 //        map.put("cate4",title4);
 //        map.put("cate5",title5);
-        map.put("page","0");
+        map.put("page",pager+"");
+        Log.d("33","title1"+title3+"title2"+title3+"title3"+title3);
         NetRequest.getFormRequest(UrlManager.GET_VIDEO, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 Log.d("33",result);
                 hideloading();
                 NewVideo bean = GsonUtil.GsonToBean(result, NewVideo.class);
-                rc.setLayoutManager(new GridLayoutManager(VideoPindaoActivity.this,2));
-                RcAdapterVideo2 videoAdapter = new RcAdapterVideo2(R.layout.gridtype2_layout,bean.getData().getList());
-                videoAdapter.setEmptyView(LayoutInflater.from(VideoPindaoActivity.this).inflate(R.layout.empty_layout,null));
-                videoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        Intent intent = new Intent(VideoPindaoActivity.this, DetailsActivity.class);
-                        intent.putExtra("id",bean.getData().getList().get(position).getId());
-                        intent.putExtra("new",true);
-                        startActivity(intent);
-                    }
-                });
-                rc.setAdapter(videoAdapter);
+                RcAdapterVideo2 videoAdapter = null;
+                List<NewVideo.DataBean.ListBean> data = new ArrayList<>();
+                if(pager == 0){
+                    refreshLayout.finishRefresh();
+                    data = bean.getData().getList();
+                    rc.setLayoutManager(new GridLayoutManager(VideoPindaoActivity.this,3));
+                    videoAdapter = new RcAdapterVideo2(R.layout.gridtype2_layout,data);
+                    videoAdapter.setEmptyView(LayoutInflater.from(VideoPindaoActivity.this).inflate(R.layout.empty_layout,null));
+                    videoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            Intent intent = new Intent(VideoPindaoActivity.this, DetailsActivity.class);
+                            intent.putExtra("id",bean.getData().getList().get(position).getId());
+                            intent.putExtra("new",true);
+                            startActivity(intent);
+                        }
+                    });
+                    rc.setAdapter(videoAdapter);
+                }
+//                else{
+//                    if(bean.getData().getList() == null || bean.getData().getList().size()==0){
+//                        ToastUtil.show(VideoPindaoActivity.this,"没有更多数据了",1);
+//                        return;
+//                    }
+//                    for (NewVideo.DataBean.ListBean databean : bean.getData().getList()){
+//                        data.add(databean);
+//                    }
+//                    videoAdapter.setNewData(data);
+//                    videoAdapter.notifyDataSetChanged();
+//                    refreshLayout.finishLoadMore();
+//                }
             }
 
             @Override
             public void requestFailure(Request request, IOException e) {
+                refreshLayout.finishRefresh();
                 hideloading();
             }
 
             @Override
             public void TokenFail() {
+                refreshLayout.finishRefresh();
                 hideloading();
                 LoginDialog dialog = new LoginDialog(getActivity());
                 dialog.Show();
@@ -187,4 +200,130 @@ public class VideoPindaoActivity extends BaseActivity {
     }
 
 
+    private class videoListAdapter extends BaseAdapter {
+        Context context;
+        List<Title.DataBean.ListBeanX.ListBean> data ;
+        private int i = 0;
+        public videoListAdapter(Context context, List<Title.DataBean.ListBeanX.ListBean> data) {
+            this.context=context;
+            this.data = data;
+        }
+
+        @Override
+        public int getCount() {
+            return data == null ? 0 : data.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return data == null ? 0 : data.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = null;
+            if(convertView == null) {
+                holder = new ViewHolder();
+                convertView = LayoutInflater.from(context).inflate(R.layout.tabnavigation_layout, parent, false);
+                holder.text = convertView.findViewById(R.id.btText);
+                convertView.setTag(holder);
+            }else{
+                holder = (ViewHolder) convertView.getTag();
+            }
+            holder.text.setText(data.get(position).getTitle());
+            if(i == position){
+                holder.text.setBackgroundResource(R.drawable.wallet_back_press);
+            }else{
+                holder.text.setBackgroundResource(R.drawable.wallet_back_normal);
+            }
+            return convertView;
+        }
+
+        public void setCurrPosition(int position){
+            this.i = position;
+            notifyDataSetChanged();
+        }
+
+    }
+
+    class ViewHolder{
+        TextView text;
+    }
+    class ViewHolder2{
+        HorizontalListView tab;
+    }
+    private class TabListAdapter extends BaseAdapter {
+        Context context;
+        List<Title.DataBean.ListBeanX> data;
+        public TabListAdapter(Context context, List<Title.DataBean.ListBeanX> data) {
+            this.context = context;
+            this.data = data;
+        }
+        @Override
+        public int getCount() {
+            return data == null ? 0 : data.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return data == null ? 0 : data.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder2 holder = null;
+            if(convertView == null) {
+                holder = new ViewHolder2();
+                convertView = LayoutInflater.from(context).inflate(R.layout.tab_navigation_layout, parent, false);
+                holder.tab = convertView.findViewById(R.id.tab);
+                convertView.setTag(holder);
+            }else{
+                holder = (ViewHolder2) convertView.getTag();
+            }
+
+            videoListAdapter adapter = new videoListAdapter(VideoPindaoActivity.this, data.get(position).getList());
+            holder.tab.setAdapter(adapter);
+            holder.tab.setCurrtPosition(position);
+
+            if(position == 0){
+                title1 = data.get(position).getList().get(0).getDid();
+            }
+            if(position == 1){
+                title2 = data.get(position).getList().get(0).getCid();
+            }
+            if(position == 2){
+                title3 = data.get(position).getList().get(0).getId();
+            }
+            ViewHolder2 finalHolder = holder;
+            holder.tab.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    adapter.setCurrPosition(position);
+                    int finalI = finalHolder.tab.getCurrtPosition();
+                    if(finalI == 0){
+                        title1 = data.get(finalI).getList().get(position).getDid();
+                    }
+                    if(finalI == 1){
+                        title2 = data.get(finalI).getList().get(position).getCid();
+                    }
+                    if(finalI == 2){
+                        title3 = data.get(finalI).getList().get(position).getId();
+                    }
+                    initRc();
+                }
+            });
+
+            return convertView;
+        }
+    }
 }

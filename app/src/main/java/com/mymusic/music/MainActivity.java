@@ -83,6 +83,9 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
                 .setPressedIcon(R.drawable.icon_my_pressed).setText("我的"));
         bottomNavigation.setOnTabChechListener(this);
         bottomNavigation.setCurrentItem(0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.navi_title_color));
+        }
     }
 
 
@@ -93,6 +96,16 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) containter.getLayoutParams();
         for(int i = 0;i<list.size();i++){
             if(i == position){
+                if(position == 0){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.navi_title_color));
+                    }
+                }else{
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+                    }
+
+                }
                 transaction.show(list.get(i));
             }else{
                 transaction.hide(list.get(i));
