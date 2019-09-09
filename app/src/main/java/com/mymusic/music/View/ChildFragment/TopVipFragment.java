@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class TopVipFragment extends BaseFragment {
         NetRequest.postFormRequest(UrlManager.TOPUP_VIP, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                Log.d("33",result);
                 hideloading();
                 Vip bean = GsonUtil.GsonToBean(result, Vip.class);
                 rc.setLayoutManager(new LinearLayoutManager(getContext()));

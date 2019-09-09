@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +31,7 @@ import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
+import com.mymusic.music.View.Activity.MyChildActivity.My.MyshareActivity;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
 
@@ -49,6 +50,8 @@ public class ShareActivity extends BaseActivity {
     ImageView code;
     @BindView(R.id.copy_text)
     TextView copyText;
+    @BindView(R.id.share_earnings)
+    TextView shareEarning;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -73,6 +76,7 @@ public class ShareActivity extends BaseActivity {
                 Log.d("33",result);
                 hideloading();
                 Yaoqing bean = GsonUtil.GsonToBean(result, Yaoqing.class);
+                shareEarning.setText(Html.fromHtml(bean.getData().getInvitdetails()));
                 ViewTreeObserver vto2 = code.getViewTreeObserver();
                 vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
@@ -133,7 +137,7 @@ public class ShareActivity extends BaseActivity {
         return null;
     }
 
-    @OnClick({R.id.save,R.id.copy,R.id.back})
+    @OnClick({R.id.save,R.id.copy,R.id.back,R.id.my_share_tv})
     public void ClickEvent(View view){
         switch (view.getId()){
             case R.id.back:
@@ -152,6 +156,10 @@ public class ShareActivity extends BaseActivity {
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TEXT, copyText.getText().toString());
                 startActivity(Intent.createChooser(intent, copyText.getText().toString()));
+                break;
+            case R.id.my_share_tv:
+                Intent intent1 = new Intent(this, MyshareActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

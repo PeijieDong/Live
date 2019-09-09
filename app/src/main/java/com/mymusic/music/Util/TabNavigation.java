@@ -96,6 +96,14 @@ public class TabNavigation extends LinearLayout implements View.OnClickListener 
         updateState(position);
     }
 
+    //修改tab的尺寸
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        setLayoutParams(params);
+    }
+
     //设置当前项
     public void setCurrentItem(int position){
         if(position >= Tabs.size() || position < 0){

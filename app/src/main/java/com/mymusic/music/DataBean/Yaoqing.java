@@ -54,6 +54,7 @@ public class Yaoqing {
 
         private String qrcodeimg;
         private String invitecontent;
+        private String invitdetails;
 
         public String getQrcodeimg() {
             return qrcodeimg;
@@ -69,6 +70,14 @@ public class Yaoqing {
 
         public void setInvitecontent(String invitecontent) {
             this.invitecontent = invitecontent;
+        }
+
+        public String getInvitdetails() {
+            return invitdetails;
+        }
+
+        public void setInvitdetails(String invitdetails) {
+            this.invitdetails = invitdetails;
         }
     }
 }

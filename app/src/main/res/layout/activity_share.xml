@@ -27,6 +27,16 @@
                 android:textSize="18sp"
                 android:textColor="#030303"
                 android:text="App下载地址"/>
+            <TextView
+                android:id="@+id/my_share_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/navi_title_color"
+                android:text="我的推广"/>
         </RelativeLayout>
         <LinearLayout
             android:layout_width="200dp"
@@ -82,5 +92,36 @@
             android:textSize="16sp"
             android:gravity="center"
             android:text="复制文字口令"/>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blank"
+                    android:textSize="16sp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:text="推广收益"/>
+                <TextView
+                    android:id="@+id/share_earnings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:textSize="14sp"
+                    android:text="sdsdsds"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -24,6 +24,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,12 +76,22 @@ public class VideoItemFragment extends BaseFragment {
                 List<String> images = new ArrayList<>();
                 if(ad != null){
                     for (int i = 0;i<ad.size();i++){
-                        images.add(ad.get(i).getUrl());
+                        images.add(ad.get(i).getImg());
                     }
                 }
                 banner.setImageLoader(new GlideImageLoader());
                 banner.setImages(images);
                 banner.start();
+                banner.setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void OnBannerClick(int position) {
+                        Intent intent2 = new Intent();
+                        intent2.setAction("android.intent.action.VIEW");
+                        Uri uri = Uri.parse(bean.getData().getAd().get(position).getUrl());
+                        intent2.setData(uri);
+                        startActivity(intent2);
+                    }
+                });
                 rc.setLayoutManager(new LinearLayoutManager(getContext()));
                 RcAdpaterVideo videoAdapter = new RcAdpaterVideo(bean.getData().getList());
                 videoAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

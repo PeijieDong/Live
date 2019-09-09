@@ -28,17 +28,24 @@
             android:textColor="#030303"
             android:text=""/>
     </RelativeLayout>
-    <LinearLayout
+    <ListView
         android:id="@+id/tab_Collection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
-
-    </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rc"
+        android:divider="@null"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+    </ListView>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/light_gray"/>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_gray"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 </LinearLayout>

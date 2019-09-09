@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/refresh">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/home_pager_Rc"
+    android:orientation="vertical">
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        android:layout_height="12dp"
+        android:tint="@color/navi_title_color"
+        android:background="@drawable/home_top_back"
+        />
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/home_pager_Rc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

@@ -1,9 +1,11 @@
 package com.mymusic.music.View.Activity.user;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,6 +30,8 @@ public class IntegalActivity extends BaseActivity {
     ViewPager viewPager;
     @BindView(R.id.score)
     TextView score;
+    @BindView(R.id.get_Score)
+    TextView getScore;
     String integal;
 
     @Override
@@ -43,6 +47,8 @@ public class IntegalActivity extends BaseActivity {
     @Override
     protected void LoadData() {
         score.setText(integal);
+        int i = Integer.valueOf(integal) / 100;
+        getScore.setText("可兑换时长:"+i);
         List<String> tablist = new ArrayList<>();
         List<Fragment> list = new ArrayList<>();
         tablist.add("获取记录");
@@ -74,10 +80,16 @@ public class IntegalActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.help_iv:
-                Intent intent2 = new Intent(this, WebActivity.class);
-                intent2.putExtra("url","http://live.shuiqiao.net/users/jifen");
-                intent2.putExtra("title","获取攻略");
-                startActivity(intent2);
+                Dialog dialog = new Dialog(IntegalActivity.this,R.style.transparentDialog);
+                View view2 = LayoutInflater.from(IntegalActivity.this).inflate(R.layout.video_integal_dialog, null);
+                view2.findViewById(R.id.sure).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.setContentView(view2);
+                dialog.show();
                 break;
         }
     }

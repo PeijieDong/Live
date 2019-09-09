@@ -31,4 +31,5 @@ public class RcAdapterVideo2 extends BaseQuickAdapter<NewVideo.DataBean.ListBean
         helper.setText(R.id.name,s.getTitle());
         helper.setText(R.id.time,s.getPlaytime());
     }
+
 }

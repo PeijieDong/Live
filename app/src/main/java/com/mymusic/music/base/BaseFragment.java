@@ -1,5 +1,6 @@
 package com.mymusic.music.base;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -67,5 +68,20 @@ public abstract class BaseFragment extends Fragment {
 
     public void hideloading(){
         dialog.dismiss();
+    }
+
+
+    ProgressDialog progressDialog;
+    public void showLoading(){
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("正在努力上传");
+        progressDialog.setMessage("等待中");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+
+    }
+    public void closeLoading(){
+        progressDialog.dismiss();
     }
 }
