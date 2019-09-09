@@ -135,6 +135,8 @@ public class DetailsActivity extends BaseActivity {
     private DetailData data;
     private boolean isFocus = false;
     private boolean aNew = false;
+    private String nowType;
+    private String body;
     private List<CommentData.DataBean.ListBean> list = new ArrayList<>();
 
     @Override
@@ -372,6 +374,8 @@ public class DetailsActivity extends BaseActivity {
     }
 
     private void initComment(String type,String somebody) {
+        nowType = type;
+        body = somebody;
         HashMap<String, String> map = new HashMap<>();
         map.put("id",id);
         map.put("sortby",type);
@@ -770,6 +774,7 @@ public class DetailsActivity extends BaseActivity {
                     Log.e("333",result);
                     ToastUtil.show(DetailsActivity.this,"提交评论成功",Toast.LENGTH_SHORT);
                     detailEt.setText("");
+                    initComment(nowType,body);
                 }
 
                 @Override

@@ -92,7 +92,7 @@ public class TopUpFragment extends BaseFragment {
                 Wallet bean = GsonUtil.GsonToBean(result, Wallet.class);
                 money_balance.setText(bean.getData().getList().getMoney());
                 List<String> title = new ArrayList<>();
-//                title.add("代理充值");
+                title.add("代理充值");
                 title.add("在线充值");
                 title.add("开通VIP");
                 List<Fragment> list = new ArrayList<>();
@@ -103,7 +103,7 @@ public class TopUpFragment extends BaseFragment {
                 WalletOnLineFragment fragment2 = new WalletOnLineFragment();
                 fragment2.setArguments(bundle);
                 TopVipFragment fragment3 = new TopVipFragment();
-//                list.add(fragment);
+                list.add(fragment);
                 list.add(fragment2);
                 list.add(fragment3);
                 ViewpagerAdapter adapter = new ViewpagerAdapter(getChildFragmentManager(), title, list);

@@ -204,7 +204,7 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
         title.add("视频");
         title.add("图片");
         title.add("短文");
-        title.add("啪啪");
+//        title.add("啪啪");
         title.add("用户");
         HomePagerAdapter adapter = new HomePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);

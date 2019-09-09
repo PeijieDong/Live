@@ -89,7 +89,6 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onTabSelected(View v, int position) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

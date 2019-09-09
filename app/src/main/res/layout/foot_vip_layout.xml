@@ -8,6 +8,7 @@
     android:paddingBottom="10dp"
     android:paddingRight="15dp"
     android:textColor="#222"
-    android:text="返利说明">
+    android:text="返利说明：
+    VIP充值返利50%金额发放至棋牌账户，您可用于本平台棋牌娱乐赢得更多金额满一百即可提现。">
 
 </TextView>
