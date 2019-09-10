@@ -51,6 +51,7 @@ public class NetRequest {
     private static OkHttpClient okHttpClient; // OKHttp网络请求
     private Handler mHandler;
     private Gson gson = new Gson();
+    private static Call fileCall;
 
     private NetRequest() {
         // 初始化okhttp 创建一个OKHttpClient对象，一个app里最好实例化一个此对象
@@ -62,6 +63,7 @@ public class NetRequest {
 
         mHandler = new Handler(Looper.getMainLooper());
     }
+
 
     /**
      * 单例模式  获取NetRequest实例
@@ -151,6 +153,13 @@ public class NetRequest {
     public static void getFormHeadRequest(String url, Map<String, String> params,String head, DataCallBack callBack) {
         getInstance().inner_postFormAsync3(url,head, params, callBack);
     }
+
+    public static void clearCall() {
+        if(fileCall != null){
+            fileCall.cancel();
+        }
+    }
+
     //-------------对外提供的方法End--------------------------------
 
     /**
@@ -494,8 +503,9 @@ public class NetRequest {
         final Request request = new Request.Builder().url(url)
                 .addHeader("udid",AppUtil.getSerialNumber())
                 .addHeader("token", Live.getInstance().getToken(context)).post(requestBody.build()).build();
+        fileCall = client.newBuilder().addInterceptor(new LoggerInterceptor(true)).readTimeout(10000, TimeUnit.MILLISECONDS).build().newCall(request);
         // readTimeout("请求超时时间" , 时间单位);
-        client.newBuilder().addInterceptor(new LoggerInterceptor(true)).readTimeout(10000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
+        fileCall.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 deliverDataFailure(request, e, callBack);

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -216,12 +217,20 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                 return;
             }
             showLoading();
+            if(progressDialog != null){
+                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        NetRequest.clearCall();
+                        dialog.dismiss();
+                    }
+                });
+            }
             map.put("images", "data:image/jpeg;base64,"+PicToBase64.imageToBase64(getRealPathFromURI(putContentActivity.this,image.get(0))));
             for (int i = 0 ;i<image.size();i++){
                 File file1 = getFileByUri(image.get(i),putContentActivity.this);
                 fileList.add(file1);
             }
-            loading();
             NetRequest.postmorePicRequest(url, this, map, fileList, new NetRequest.DataCallBack() {
                 @Override
                 public void requestSuccess(String result) throws Exception {
@@ -243,7 +252,6 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
                     dialog.Show();
                 }
             });
-            hideloading();
             return;
         }
         if (navigation.getPosition() == 0) {
@@ -492,7 +500,5 @@ public class putContentActivity extends BaseActivity implements View.OnClickList
         }
         return result;
     }
-
-
 
 }

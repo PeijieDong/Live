@@ -53,15 +53,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    ProgressDialog progressDialog;
+    protected ProgressDialog progressDialog;
     public void showLoading(){
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("正在努力上传");
         progressDialog.setMessage("等待中");
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(true);
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-
     }
     LoadingDialog dialog;
     public void loading(){
@@ -87,11 +87,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void hideloading(){
         if(dialog != null){
             dialog.dismiss();
+            dialog.cancel();
         }
     }
 
     public void closeLoading(){
         progressDialog.dismiss();
+        progressDialog.cancel();
     }
     @Override
     protected void onDestroy() {
