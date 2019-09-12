@@ -56,11 +56,14 @@ public class CommunityAdviceFragment extends BaseFragment implements View.OnClic
     EditText adress;
     @BindView(R.id.grid)
     MyGridView gridView;
+    @BindView(R.id.my_qq)
+    EditText myQQ;
     private int REQUEST_CODE_CHOOSE = 1;
     private List<Uri> mSelected;
     private CommunityRcAdapter adapter;
     private List<Uri> list;
     private List<String> title;
+    private int type = 1;
 
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
@@ -91,6 +94,7 @@ public class CommunityAdviceFragment extends BaseFragment implements View.OnClic
         adapter.setListener(new AdviceGridAdapter.OnItemClickListener() {
             @Override
             public void addPosition(int position) {
+                type = position + 1;
                 adapter.setPosition(position);
             }
         });
@@ -116,9 +120,9 @@ public class CommunityAdviceFragment extends BaseFragment implements View.OnClic
                     ToastUtil.show(getContext(), "请输入举报内容", Toast.LENGTH_SHORT);
                     return;
                 }
-                if (adress.getText().toString().equals("")) {
-                    ToastUtil.show(getContext(), "请输入联系方式", Toast.LENGTH_SHORT);
-                    return;
+                if(list == null || list.size()<=0){
+                    ToastUtil.show(getContext(), "请上传相关图片", Toast.LENGTH_SHORT);
+                    return ;
                 }
                 showLoading();
                 initNet();
@@ -132,7 +136,8 @@ public class CommunityAdviceFragment extends BaseFragment implements View.OnClic
         HashMap<String, String> map = new HashMap<>();
         map.put("content", Et.getText().toString());
         map.put("contact", adress.getText().toString());
-        map.put("type", "1");
+        map.put("type", type+"");
+        map.put("qqidcode",myQQ.getText().toString());
         map.put("images", "data:image/jpeg;base64," + PicToBase64.imageToBase64(getRealPathFromURI(getContext(), list.get(0))));
         NetRequest.postFormHeadRequest(UrlManager.FeedBack, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
