@@ -18,6 +18,7 @@ import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.WebActivity;
+import com.mymusic.music.View.Adapter.ScroeRc2Adapter;
 import com.mymusic.music.View.Adapter.ScroeRcAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
@@ -106,7 +107,7 @@ public class ExpActivity extends BaseActivity {
             public void requestSuccess(String result) throws Exception {
                 Scroe bean = GsonUtil.GsonToBean(result, Scroe.class);
                 rc.setLayoutManager(new LinearLayoutManager(ExpActivity.this));
-                rc.setAdapter(new ScroeRcAdapter(R.layout.get_scroe_item, bean.getData().getList()));
+                rc.setAdapter(new ScroeRc2Adapter(R.layout.get_scroe_item, bean.getData().getList()));
             }
 
             @Override
