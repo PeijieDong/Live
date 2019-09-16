@@ -48,7 +48,7 @@ public class IntegalActivity extends BaseActivity {
     protected void LoadData() {
         score.setText(integal+"分");
         int i = Integer.valueOf(integal) / 100;
-        getScore.setText("可兑换时长:"+i);
+        getScore.setText("可兑换时长:"+i+"分");
         List<String> tablist = new ArrayList<>();
         List<Fragment> list = new ArrayList<>();
         tablist.add("获取记录");
