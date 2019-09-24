@@ -9,6 +9,7 @@ import com.mymusic.music.DataBean.User;
 import com.mymusic.music.DataBean.UserBean;
 import com.mymusic.music.Util.ContextUtils;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.JZExoPlayer;
 import com.mymusic.music.Util.MyFileNameGenerator;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.scwang.smartrefresh.header.WaterDropHeader;
@@ -20,6 +21,10 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import org.litepal.LitePal;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jzvd.JZMediaInterface;
+import cn.jzvd.JZMediaManager;
+import cn.jzvd.JZMediaSystem;
+import cn.jzvd.JZVideoPlayer;
 
 /**
  * Create By mr.mao in 2019/6/7 20:39
@@ -82,6 +87,7 @@ public class Live extends Application {
         MultiDex.install(this);
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+        JZVideoPlayer.setMediaInterface(new JZExoPlayer());  //exo
 //        Locale _UserLocale=LocaleUtils.getUserLocale(this);
 //        LocaleUtils.updateLocale(this, _UserLocale);
     }
