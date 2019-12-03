@@ -23,7 +23,7 @@
             android:layout_centerInParent="true"
             android:textSize="18sp"
             android:textColor="#030303"
-            android:text="积分"/>
+            android:text="金币"/>
         <ImageView
             android:id="@+id/help_iv"
             android:layout_width="45dp"
@@ -47,7 +47,7 @@
                     android:id="@+id/currIntegal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="当前积分"
+                    android:text="当前金币"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"

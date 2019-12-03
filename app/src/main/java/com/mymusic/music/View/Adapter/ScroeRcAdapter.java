@@ -24,6 +24,6 @@ public class ScroeRcAdapter extends BaseQuickAdapter<Scroe.DataBean.ListBean,Bas
         helper.setText(R.id.title,item.getType())
                 .setText(R.id.time,item.getAddtime())
                 .setText(R.id.scroe,item.getScore())
-                .setText(R.id.type,"积分");
+                .setText(R.id.type,"金币");
     }
 }

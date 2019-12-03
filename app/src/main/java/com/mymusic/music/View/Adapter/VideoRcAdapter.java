@@ -90,7 +90,7 @@ public class VideoRcAdapter  extends BaseRecAdapter<VideoData.DataBean.ListBean,
                 if(bean.getData().getList().getCount() == 0){
                     holder.mp_video.onStatePause();
                     holder.noNum.setVisibility(View.VISIBLE);
-                    holder.noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看\n当前积分"+bean.getData().getList().getScore()
+                    holder.noMoneyTitle.setText("免费观看已用完，消耗金币/番茄币享今日无限观看\n当前金币"+bean.getData().getList().getScore()
                             +"个，番茄币"+bean.getData().getList().getMoney()+"个");
                     if(Integer.parseInt(bean.getData().getList().getMoney()) < 10){
                         holder.goMoney.setText("充值番茄币");
@@ -111,7 +111,7 @@ public class VideoRcAdapter  extends BaseRecAdapter<VideoData.DataBean.ListBean,
                         });
                     }
                     if(Integer.parseInt(bean.getData().getList().getScore()) < 10){
-                        holder.goLook.setText("赚取积分");
+                        holder.goLook.setText("赚取金币");
                         holder.goLook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -120,7 +120,7 @@ public class VideoRcAdapter  extends BaseRecAdapter<VideoData.DataBean.ListBean,
                             }
                         });
                     }else{
-                        holder.goLook.setText("10积分观看");
+                        holder.goLook.setText("10金币观看");
                         holder.goLook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

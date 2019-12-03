@@ -296,7 +296,7 @@ public class DetailsActivity extends BaseActivity {
 //                        });
 //                    }
 //                    if(Integer.parseInt(bean.getData().getList().getScore()) < 10){
-//                        goLook.setText("赚取积分");
+//                        goLook.setText("赚取金币");
 //                        goLook.setOnClickListener(new View.OnClickListener() {
 //                            @Override
 //                            public void onClick(View v) {
@@ -310,7 +310,7 @@ public class DetailsActivity extends BaseActivity {
 //                            }
 //                        });
 //                    }else{
-//                        goLook.setText("10积分观看");
+//                        goLook.setText("10金币观看");
 //                        goLook.setOnClickListener(new View.OnClickListener() {
 //                            @Override
 //                            public void onClick(View v) {

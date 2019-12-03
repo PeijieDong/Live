@@ -222,7 +222,7 @@ public class VideoFragment extends BaseFragment {
                     ((VideoViewHolder) viewHolder).mp_video.goOnPlayOnPause();
                     ((VideoViewHolder) viewHolder).noNum.setVisibility(View.VISIBLE);
                     ((VideoViewHolder) viewHolder).mp_video.setVisibility(View.GONE);
-                    ((VideoViewHolder) viewHolder).noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看\n当前积分"+bean.getData().getList().getScore()
+                    ((VideoViewHolder) viewHolder).noMoneyTitle.setText("免费观看已用完，消耗金币/番茄币享今日无限观看\n当前金币"+bean.getData().getList().getScore()
                             +"个，番茄币"+bean.getData().getList().getMoney()+"个");
 
                     if(Integer.parseInt(bean.getData().getList().getMoney()) < 10){
@@ -249,7 +249,7 @@ public class VideoFragment extends BaseFragment {
                         });
                     }
                     if(Integer.parseInt(bean.getData().getList().getScore()) < 10){
-                        ((VideoViewHolder) viewHolder).goLook.setText("赚取积分");
+                        ((VideoViewHolder) viewHolder).goLook.setText("赚取金币");
                         ((VideoViewHolder) viewHolder).goLook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -263,7 +263,7 @@ public class VideoFragment extends BaseFragment {
                             }
                         });
                     }else{
-                        ((VideoViewHolder) viewHolder).goLook.setText("10积分观看");
+                        ((VideoViewHolder) viewHolder).goLook.setText("10金币观看");
                         ((VideoViewHolder) viewHolder).goLook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

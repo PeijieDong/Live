@@ -169,7 +169,7 @@ public class VideoPlayActivity extends BaseActivity {
                     JZVideoPlayer.goOnPlayOnPause();
                     viewHolder.noNum.setVisibility(View.VISIBLE);
                     viewHolder.mp_video.setVisibility(View.GONE);
-                    viewHolder.noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看\n当前积分"+bean.getData().getList().getScore()
+                    viewHolder.noMoneyTitle.setText("免费观看已用完，消耗金币/番茄币享今日无限观看\n当前金币"+bean.getData().getList().getScore()
                             +"个，番茄币"+bean.getData().getList().getMoney()+"个");
                     if(Integer.parseInt(bean.getData().getList().getMoney()) < 10){
                         viewHolder.goMoney.setText("充值番茄币");
@@ -195,7 +195,7 @@ public class VideoPlayActivity extends BaseActivity {
                         });
                     }
                     if(Integer.parseInt(bean.getData().getList().getScore()) < 10){
-                        viewHolder.goLook.setText("赚取积分");
+                        viewHolder.goLook.setText("赚取金币");
                         viewHolder.goLook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -209,7 +209,7 @@ public class VideoPlayActivity extends BaseActivity {
                             }
                         });
                     }else{
-                        viewHolder.goLook.setText("10积分观看");
+                        viewHolder.goLook.setText("10金币观看");
                         viewHolder.goLook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -271,7 +271,7 @@ public class VideoPlayActivity extends BaseActivity {
                     viewHolder.mp_video.goOnPlayOnPause();
                     viewHolder.noNum.setVisibility(View.VISIBLE);
                     viewHolder.mp_video.setVisibility(View.GONE);
-                    viewHolder.noMoneyTitle.setText("免费观看已用完，消耗积分/番茄币享今日无限观看当前积分"+bean.getData().getList().getScore()
+                    viewHolder.noMoneyTitle.setText("免费观看已用完，消耗金币/番茄币享今日无限观看当前金币"+bean.getData().getList().getScore()
                             +"个，番茄币"+bean.getData().getList().getMoney()+"个");
                     if(Integer.parseInt(bean.getData().getList().getMoney()) < 10){
                         viewHolder.goMoney.setText("充值番茄币");
@@ -297,7 +297,7 @@ public class VideoPlayActivity extends BaseActivity {
                         });
                     }
                     if(Integer.parseInt(bean.getData().getList().getScore()) < 10){
-                        viewHolder.goLook.setText("赚取积分");
+                        viewHolder.goLook.setText("赚取金币");
                         viewHolder.goLook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -311,7 +311,7 @@ public class VideoPlayActivity extends BaseActivity {
                             }
                         });
                     }else{
-                        viewHolder.goLook.setText("10积分观看");
+                        viewHolder.goLook.setText("10金币观看");
                         viewHolder.goLook.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
