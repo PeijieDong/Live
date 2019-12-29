@@ -559,7 +559,7 @@ public class DetailsActivity extends BaseActivity {
                     return;
                 }
                 ClipboardManager clipboard = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clipData = ClipData.newPlainText(null, data.getData().getList().getContent());
+                ClipData clipData = ClipData.newPlainText(null, data.getData().getList().getSharecontent());
                 clipboard.setPrimaryClip(clipData);
                 ToastUtil.show(DetailsActivity.this,"复制成功,快去分享吧",Toast.LENGTH_SHORT);
                 break;

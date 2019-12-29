@@ -90,8 +90,7 @@ public class HomePagerRecyclerViewAdapter extends BaseQuickAdapter<HomeData.Data
         helper.addOnClickListener(R.id.themeBt)
                 .addOnClickListener(R.id.ll_home_like)
                 .addOnClickListener(R.id.icon_comment)
-                .addOnClickListener(R.id.userBt)
-                .addOnClickListener(R.id.icon_share);
+                .addOnClickListener(R.id.userBt);
         switch (type){
             case PICTURE:
                 initListener(helper,item);

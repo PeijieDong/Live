@@ -120,7 +120,16 @@ public class DetailData {
             private String catename;
             private String avatar;
             private String sex;
+            private String sharecontent;
             private List<String> images;
+
+            public String getSharecontent() {
+                return sharecontent;
+            }
+
+            public void setSharecontent(String sharecontent) {
+                this.sharecontent = sharecontent;
+            }
 
             public String getId() {
                 return id;
