@@ -62,6 +62,7 @@ public class TopUpFragment extends BaseFragment {
     @BindView(R.id.vip_date)
     TextView vipDate;
     private int fragmentID=0;
+    private String overtime= "未登录";
 
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
@@ -91,7 +92,7 @@ public class TopUpFragment extends BaseFragment {
 //            startActivity(intent);
 //            return;
 //        }
-        String overtime = Live.getInstance().getUser(getContext()).getData().getOvertime();
+
         if(overtime != null){
             vipDate.setText(overtime);
         }
@@ -224,8 +225,20 @@ public class TopUpFragment extends BaseFragment {
 //            public void TokenFail() {
 //                LoginDialog dialog = new LoginDialog(getActivity());
 //                dialog.Show();
-//            }
+//            }V
 //        });
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            if(Live.getInstance().getUser(getContext()) != null){
+                overtime = Live.getInstance().getUser(getContext()).getData().getOvertime();
+                if(overtime != null){
+                    vipDate.setText(overtime);
+                }
+            }
+        }
+    }
 }
