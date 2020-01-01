@@ -15,14 +15,61 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textColor="#888"
+            android:textColor="#333"
+            android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
-            android:text="会员尊贵特权"/>
+            android:text="VIP会员权益"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/top_vip_one"
+                android:drawablePadding="5dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:text="独家AV影片"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/top_vip_two"
+                android:drawablePadding="5dp"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:text="超清画质"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/top_vip_three"
+                android:drawablePadding="5dp"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:text="尊贵身份"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/top_vip_four"
+                android:textSize="12sp"
+                android:drawablePadding="5dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="免广告特权"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:layout_marginTop="10dp">
             <LinearLayout
                 android:layout_width="0dp"
@@ -134,8 +181,9 @@
             android:textSize="16sp"
             android:textColor="#888"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:text="会员充值"/>
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:text="VIP套餐"/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rc"
             android:layout_width="match_parent"
