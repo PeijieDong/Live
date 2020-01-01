@@ -10,6 +10,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,20 +32,27 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.DiyView.SwitchButton;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LogUtils;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.MyGridView;
 import com.mymusic.music.Util.MyJzvdStd;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.Util.ToastUtil;
+import com.mymusic.music.View.Activity.FoundActivity;
 import com.mymusic.music.View.Activity.JubaoActivity;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Adapter.DetailCommentRcAdapter;
 import com.mymusic.music.View.Adapter.HomeGridAdapter;
 import com.mymusic.music.base.BaseActivity;
 import com.mymusic.music.base.UrlManager;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -128,6 +136,14 @@ public class DetailsActivity extends BaseActivity {
     TextView goLook;
     @BindView(R.id.goMoney)
     TextView goMoney;
+    @BindView(R.id.flowLayout)
+    TagFlowLayout flowLayout;
+    @BindView(R.id.flowLayout2)
+    TagFlowLayout flowLayout2;
+    @BindView(R.id.flow_ll)
+    LinearLayout flow_ll;
+    @BindView(R.id.flow_ll2)
+    LinearLayout flow_ll2;
 
 
     private String id;
@@ -175,6 +191,53 @@ public class DetailsActivity extends BaseActivity {
         });
     }
 
+    //初始化流式布局
+    private void initFlow(DetailData data) {
+        if(data != null){
+            String tag = data.getData().getList().getTag();
+            LogUtils.d("TAG",tag);
+            ArrayList<String> strings = new ArrayList<>();
+            if(!TextUtils.isEmpty(tag)){
+                String[] split = tag.split(",");
+                strings.addAll(Arrays.asList(split));
+                //加载数据
+                flowLayout.setAdapter(new TagAdapter<String>(strings) {
+                    @Override
+                    public View getView(FlowLayout parent, int position, String s) {
+                        TextView textView = (TextView) LayoutInflater.from(DetailsActivity.this).inflate(R.layout.search_page_flowlayout_tv5, flowLayout, false);
+                        textView.setText(s);
+                        return textView;
+                    }
+                });
+            }else{
+                flow_ll.setVisibility(View.GONE);
+            }
+        }
+    }
+    //初始化流式布局
+    private void initFlow2(DetailData data) {
+        if(data != null){
+            String tag = data.getData().getList().getTag();
+            LogUtils.d("TAG",tag);
+            ArrayList<String> strings = new ArrayList<>();
+            if(!TextUtils.isEmpty(tag)){
+                String[] split = tag.split(",");
+                strings.addAll(Arrays.asList(split));
+                //加载数据
+                flowLayout2.setAdapter(new TagAdapter<String>(strings) {
+                    @Override
+                    public View getView(FlowLayout parent, int position, String s) {
+                        TextView textView = (TextView) LayoutInflater.from(DetailsActivity.this).inflate(R.layout.search_page_flowlayout_tv5, flowLayout2, false);
+                        textView.setText(s);
+                        return textView;
+                    }
+                });
+            }else{
+                flow_ll2.setVisibility(View.GONE);
+            }
+        }
+    }
+
 
     private void initView(DetailData data) {
         if(data.getData().getList().getType().equals("视频")){
@@ -185,6 +248,7 @@ public class DetailsActivity extends BaseActivity {
             title.setText("视频详情");
             Glide.with(this).load(data.getData().getList().getImage()).into(VideoPlay.thumbImageView);
             initPlay(data.getData().getList().getId());
+            initFlow2(data);
         }else if(data.getData().getList().getType().equals("文字")){
             title.setText("短文详情");
             View view = (View) LayoutInflater.from(this).inflate(R.layout.detail_text_item, null);
@@ -193,6 +257,7 @@ public class DetailsActivity extends BaseActivity {
             textContext.setText(data.getData().getList().getContent());
             textTitle.setText(data.getData().getList().getTitle());
             detail_ll.addView(view);
+            initFlow(data);
         }else if(data.getData().getList().getType().equals("图片")){
             title.setText("图片详情");
             View view = LayoutInflater.from(this).inflate(R.layout.home_rc_pic, null);
@@ -202,6 +267,7 @@ public class DetailsActivity extends BaseActivity {
             HomeGridAdapter adapter = new HomeGridAdapter(this,data.getData().getList().getImages());
             grid.setAdapter(adapter);
             detail_ll.addView(view);
+            initFlow(data);
         }
         switch (data.getData().getList().getSex()){
             case "1":

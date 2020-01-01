@@ -20,16 +20,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".View.Activity.ShareActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActivityAdv"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Detail.CommentDetailActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".View.Activity.ShareDetailActivity"></activity>
+        <activity
+            android:name=".View.Activity.ShareActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityAdv"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Detail.CommentDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity android:name=".View.LaunchAcvtivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,152 +41,211 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Activity.Login.LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Login.LoginPhoneActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Login.RegisterActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Login.ForgetPwdActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.user.UserActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".View.Activity.Login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Login.LoginPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Login.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Login.ForgetPwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.user.UserActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Activity.Detail.DetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".View.Activity.MyChildActivity.My.MywalletActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MyLiveActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MysettingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MylevelActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MyhomeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MyfocusActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MyfansActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MypubliskActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MycollectionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MytaskActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MyexchangeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MymessageActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MycommentActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MylikeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MyhistoryActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MyfeedbackActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MyaboutActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.My.MyshareActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.SettingActivity.BacklistActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.SettingActivity.AccountActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MywalletActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MyLiveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MysettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MylevelActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MyhomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MyfocusActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MyfansActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MypubliskActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MycollectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MytaskActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MyexchangeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MymessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MycommentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MylikeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MyhistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MyfeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MyaboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.My.MyshareActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.SettingActivity.BacklistActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.SettingActivity.AccountActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Activity.MyChildActivity.SettingActivity.LockScreenActivity"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.LiveActivity.LivelevelActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.LiveActivity.LiveHostAuthenticationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MyChildActivity.LiveActivity.LiveGiftActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Detail.UserDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Community.CommunityAdviceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Community.CommunityReportActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.FoundActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Detail.FriendDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.PostArtActivity.PostArtActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.FriendFoundActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Detail.FriendDetailTwoActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.LiveActivity.LivelevelActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.LiveActivity.LiveHostAuthenticationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MyChildActivity.LiveActivity.LiveGiftActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Detail.UserDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Community.CommunityAdviceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Community.CommunityReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.FoundActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Detail.FriendDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.PostArtActivity.PostArtActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.FriendFoundActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Detail.FriendDetailTwoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Activity.post.putContentActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.user.ListUserActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Login.SetPasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.post.SignActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MoneyDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.WebActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.user.ListUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Login.SetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.post.SignActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MoneyDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.WebActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Activity.post.PutVideoActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Activity.JubaoActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Activity.JubaoVideoActiviy"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.WalletFeedback"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.message.SettingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.message.AuditActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.message.ViolationActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.WalletFeedback"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.message.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.message.AuditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.message.ViolationActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Activity.message.FeedbackActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.message.CommendActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.message.NoticeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Detail.VideoPlayActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.FriendListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.user.IntegalActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.user.ExpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.HistoryFeedBackActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Detail.HistoryFeedDetail"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.OrderFindAvtivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.message.NoticeDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.ChangePhoneActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.BindPhoneActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Backlist2Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.Detail.VideoSingleActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.message.CommendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.message.NoticeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Detail.VideoPlayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.FriendListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.user.IntegalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.user.ExpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.HistoryFeedBackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Detail.HistoryFeedDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.OrderFindAvtivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.message.NoticeDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.ChangePhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.BindPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Backlist2Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.Detail.VideoSingleActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -195,16 +258,18 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".View.Activity.FindActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.FindDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.MorePindaoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activity.VideoPindaoActivity"
-            android:screenOrientation="portrait"/>
-
-        <!-- Since JCore2.0.0 Required SDK核心功能 -->
+        <activity
+            android:name=".View.Activity.FindActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.FindDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.MorePindaoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Activity.VideoPindaoActivity"
+            android:screenOrientation="portrait" /> <!-- Since JCore2.0.0 Required SDK核心功能 -->
         <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
         <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
         <service
@@ -215,9 +280,7 @@
             <intent-filter>
                 <action android:name="cn.jiguang.user.service.action" />
             </intent-filter>
-        </service>
-
-        <!-- Required since 3.0.7 -->
+        </service> <!-- Required since 3.0.7 -->
         <!-- 新的 tag/alias 接口结果返回需要开发者配置一个自定的广播 -->
         <!-- 3.3.0开始所有事件将通过该类回调 -->
         <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
@@ -232,8 +295,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".View.Activity.SignInActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".View.Activity.SignInActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

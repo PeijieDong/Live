@@ -195,6 +195,26 @@
                             android:background="@drawable/back_home_top" />
                     </RelativeLayout>
                     <LinearLayout
+                        android:id="@+id/flow_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/blank"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="5dp"
+                            android:text="标签:"/>
+                        <com.zhy.view.flowlayout.TagFlowLayout
+                            android:id="@+id/flowLayout"
+                            android:padding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/detail_ll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -274,6 +294,25 @@
                         android:layout_marginTop="3dp"
                         android:layout_marginBottom="3dp"
                         android:textSize="16sp"/>
+                    <LinearLayout
+                        android:id="@+id/flow_ll2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/blank"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="5dp"
+                            android:text="标签:"/>
+                        <com.zhy.view.flowlayout.TagFlowLayout
+                            android:id="@+id/flowLayout2"
+                            android:padding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
                     <LinearLayout
                         android:id="@+id/go_friend_detail2"
                         android:layout_width="match_parent"

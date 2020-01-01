@@ -200,4 +200,8 @@ public class UrlManager {
     public static final String ABOUT = BaseUrl + "index/customerService";
 
     public static final String SIGNIN = BaseUrl + "users/record";
+
+    public static final String VIP_LIST = BaseUrl+"home/user/scorelist";
+
+    public static final String VIP_TIME =BaseUrl + "home/user/scoretotime";
 }

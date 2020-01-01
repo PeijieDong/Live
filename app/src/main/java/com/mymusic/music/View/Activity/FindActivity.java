@@ -189,7 +189,7 @@ public class FindActivity extends BaseActivity {
     }
 
     private void initNet(String s) {
-        if (SharedPrefrenceUtils.getStringList(this, "history") != null) {
+        if (SharedPrefrenceUtils.getStringList(this, "findHistory") != null) {
             List<String> history = SharedPrefrenceUtils.getStringList(this, "findHistory");
             if (!history.contains(s)) {
                 list.add(s);
@@ -220,6 +220,7 @@ public class FindActivity extends BaseActivity {
                     @Override
                     public void onItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                         Intent intent = new Intent(FindActivity.this, DetailsActivity.class);
+                        intent.putExtra("new",true);
                         intent.putExtra("id",item.getData().getList().get(i).getId());
                         startActivity(intent);
                     }

@@ -27,6 +27,7 @@ import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LogUtils;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.SharedPrefrenceUtils;
@@ -100,6 +101,7 @@ public class FoundActivity extends BaseActivity implements View.OnKeyListener {
         NetRequest.getFormRequest(UrlManager.Home_Find, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                LogUtils.d("httpresult",result);
                 Hot hot = GsonUtil.GsonToBean(result, Hot.class);
                 list2 = hot.getData().getList();
                 //初始化流式布局

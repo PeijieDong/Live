@@ -19,6 +19,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.Login.LoginActivity;
 import com.mymusic.music.View.Activity.MoneyDetailActivity;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MywalletActivity;
@@ -58,6 +59,10 @@ public class TopUpFragment extends BaseFragment {
     TextView goMoney;
     @BindView(R.id.card_vip)
     CardView cardVip;
+    @BindView(R.id.vip_date)
+    TextView vipDate;
+    private int fragmentID=0;
+
     @Override
     protected View CreateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.activity_mywallet,container,false);
@@ -78,13 +83,18 @@ public class TopUpFragment extends BaseFragment {
         initNet();
     }
 
-
+    WalletFragment fragment;
+    WalletOnLineFragment fragment2;
     private void initNet() {
 //        if(Live.getInstance().getToken(getContext()) == null){
 //            Intent intent = new Intent(getContext(), LoginActivity.class);
 //            startActivity(intent);
 //            return;
 //        }
+        String overtime = Live.getInstance().getUser(getContext()).getData().getOvertime();
+        if(overtime != null){
+            vipDate.setText(overtime);
+        }
         NetRequest.postFormHeadRequest(UrlManager.Get_Wallet, null, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
@@ -98,9 +108,9 @@ public class TopUpFragment extends BaseFragment {
                 List<Fragment> list = new ArrayList<>();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("wallet",bean);
-                WalletFragment fragment = new WalletFragment();
+                fragment = new WalletFragment();
                 fragment.setArguments(bundle);
-                WalletOnLineFragment fragment2 = new WalletOnLineFragment();
+                fragment2 = new WalletOnLineFragment();
                 fragment2.setArguments(bundle);
                 TopVipFragment fragment3 = new TopVipFragment();
                 list.add(fragment);
@@ -116,6 +126,7 @@ public class TopUpFragment extends BaseFragment {
 
                     @Override
                     public void onPageSelected(int i) {
+                        fragmentID = i;
                         if(i == 2){
                             cardVip.setVisibility(View.GONE);
                         }else{
@@ -181,30 +192,40 @@ public class TopUpFragment extends BaseFragment {
     }
 
     private void initMoney() {
-        HashMap<String, String> map = new HashMap<>();
-        map.put("money","100");
-        map.put("coin","1000");
-        map.put("type","1");
-        NetRequest.postFormHeadRequest(UrlManager.Money, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
-            @Override
-            public void requestSuccess(String result) throws Exception {
-                Money money = GsonUtil.GsonToBean(result, Money.class);
-                Intent intent1 = new Intent(getContext(), WebActivity.class);
-                intent1.putExtra("url",money.getData().getUrl());
-                intent1.putExtra("title","充值");
-                startActivity(intent1);
+        if(fragmentID == 0){
+            if(fragment != null){
+                fragment.inittopup();
             }
+        }else if(fragmentID == 1){
+            if(fragment2 != null){
+                fragment2.inittopup();
+            }
+        }
 
-            @Override
-            public void requestFailure(Request request, IOException e) {
-
-            }
-            @Override
-            public void TokenFail() {
-                LoginDialog dialog = new LoginDialog(getActivity());
-                dialog.Show();
-            }
-        });
+//        HashMap<String, String> map = new HashMap<>();
+//        map.put("money","100");
+//        map.put("coin","1000");
+//        map.put("type","1");
+//        NetRequest.postFormHeadRequest(UrlManager.Money, map, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
+//            @Override
+//            public void requestSuccess(String result) throws Exception {
+//                Money money = GsonUtil.GsonToBean(result, Money.class);
+//                Intent intent1 = new Intent(getContext(), WebActivity.class);
+//                intent1.putExtra("url",money.getData().getUrl());
+//                intent1.putExtra("title","充值");
+//                startActivity(intent1);
+//            }
+//
+//            @Override
+//            public void requestFailure(Request request, IOException e) {
+//
+//            }
+//            @Override
+//            public void TokenFail() {
+//                LoginDialog dialog = new LoginDialog(getActivity());
+//                dialog.Show();
+//            }
+//        });
     }
 
 }
