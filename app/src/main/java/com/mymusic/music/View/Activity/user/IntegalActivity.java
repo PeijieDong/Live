@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aigestudio.wheelpicker.WheelPicker;
+import com.mymusic.music.DataBean.CommonData;
 import com.mymusic.music.DataBean.VipList;
 import com.mymusic.music.DiyTab.TabLayout;
 import com.mymusic.music.R;
@@ -30,6 +31,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.sql.CommonDataSource;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -164,8 +167,8 @@ public class IntegalActivity extends BaseActivity {
         NetRequest.postFormRequest(UrlManager.VIP_TIME, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
-                ToastUtil.show(IntegalActivity.this,"兌換成功",1500);
-                finish();
+                CommonData bean = GsonUtil.GsonToBean(result, CommonData.class);
+                ToastUtil.show(IntegalActivity.this,bean.getInfo(),1500);
             }
 
             @Override

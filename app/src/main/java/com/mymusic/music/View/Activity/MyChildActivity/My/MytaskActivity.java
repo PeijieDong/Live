@@ -74,7 +74,7 @@ public class MytaskActivity extends BaseActivity {
                         switch (view.getId()){
                             case R.id.doit:
                                 if (bean.getData().getList().get(1).getList().get(position).getType().equals("1")){
-                                    Intent intent = new Intent(MytaskActivity.this, ShareDetailActivity.class);
+                                    Intent intent = new Intent(MytaskActivity.this, ShareActivity.class);
                                     startActivity(intent);
 //                                    Intent intent1 = new Intent(MytaskActivity.this, WebActivity.class);
 //                                    intent1.putExtra("url","http://live.shuiqiao.net/users/share");
