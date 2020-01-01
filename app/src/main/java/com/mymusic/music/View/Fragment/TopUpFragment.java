@@ -238,6 +238,11 @@ public class TopUpFragment extends BaseFragment {
                 if(overtime != null){
                     vipDate.setText(overtime);
                 }
+            }else{
+                overtime = "未登录";
+                if(overtime != null){
+                    vipDate.setText(overtime);
+                }
             }
         }
     }
