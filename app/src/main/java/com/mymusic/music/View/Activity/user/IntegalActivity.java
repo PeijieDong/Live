@@ -57,7 +57,7 @@ public class IntegalActivity extends BaseActivity {
     TextView cencel;
     @BindView(R.id.bootom_chose)
     LinearLayout bottomChose;
-
+    private VipList list;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -90,6 +90,7 @@ public class IntegalActivity extends BaseActivity {
         list.add(fragment2);
         viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager(),tablist,list));
         tab.setupWithViewPager(viewPager);
+        initVipList();
     }
 
     @OnClick({R.id.back,R.id.get_Score,R.id.help_iv})
@@ -103,29 +104,10 @@ public class IntegalActivity extends BaseActivity {
 //                intent.putExtra("url","http://live.shuiqiao.net/users/jifen");
 //                intent.putExtra("title","获取攻略");
 //                startActivity(intent);
-                initVipList();
-
-                break;
-            case R.id.help_iv:
-                Dialog dialog = new Dialog(IntegalActivity.this,R.style.transparentDialog);
-                View view2 = LayoutInflater.from(IntegalActivity.this).inflate(R.layout.video_integal_dialog, null);
-                view2.findViewById(R.id.sure).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.setContentView(view2);
-                dialog.show();
-                break;
-        }
-    }
-
-    private void initVipList() {
-        NetRequest.postFormRequest(UrlManager.VIP_LIST, null, new NetRequest.DataCallBack() {
-            @Override
-            public void requestSuccess(String result) throws Exception {
-                VipList list = GsonUtil.GsonToBean(result, VipList.class);
+                if(list == null){
+                    initVipList();
+                    return;
+                }
                 ArrayList<String> vipList = new ArrayList<>();
                 for (VipList.DataBean.ListBean vip : list.getData().getList()){
                     vipList.add("消耗"+vip.getGold() +"金币,兑换"+ vip.getTimes()+"天");
@@ -147,6 +129,37 @@ public class IntegalActivity extends BaseActivity {
                         bottomChose.setVisibility(View.GONE);
                     }
                 });
+                break;
+            case R.id.help_iv:
+                Dialog dialog = new Dialog(IntegalActivity.this,R.style.transparentDialog);
+                View view2 = LayoutInflater.from(IntegalActivity.this).inflate(R.layout.video_integal_dialog, null);
+                TextView des = view2.findViewById(R.id.dialog_des);
+                if(list != null){
+                    List<VipList.DataBean.ListBean> beans = this.list.getData().getList();
+                    StringBuilder builder = new StringBuilder();
+                    builder.append("金币可用于兑换会员卡： \n");
+                    for (VipList.DataBean.ListBean bean : beans){
+                        builder.append(bean.getGold()).append("币可抵用").append(bean.getTimes()).append("天.");
+                    }
+                    des.setText(builder.toString());
+                }
+                view2.findViewById(R.id.sure).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.setContentView(view2);
+                dialog.show();
+                break;
+        }
+    }
+
+    private void initVipList() {
+        NetRequest.postFormRequest(UrlManager.VIP_LIST, null, new NetRequest.DataCallBack() {
+            @Override
+            public void requestSuccess(String result) throws Exception {
+                list = GsonUtil.GsonToBean(result, VipList.class);
             }
 
             @Override

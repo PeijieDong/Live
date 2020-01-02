@@ -99,11 +99,14 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnTab
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.navi_title_color));
                     }
+                }else if(position == 3){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.three_color));
+                    }
                 }else{
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
                     }
-
                 }
                 transaction.show(list.get(i));
             }else{

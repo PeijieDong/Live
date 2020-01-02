@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:background="@drawable/radio_white_two">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="15dp"
-        android:textSize="18sp"
-        android:textColor="@color/blank"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="金币说明"/>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="@color/blank"
-        android:padding="15dp"
-        android:text="金币可用于福利房、时长房、收费房可抵用此金币，100金币可兑换一分钟时长观看福利房和计费房"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#F2F2F2"/>
-    <TextView
-        android:id="@+id/sure"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textColor="@color/navi_title_color"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:text="我知道了"/>
-</LinearLayout>
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:textSize="18sp"
+            android:textColor="@color/blank"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="金币说明"/>
+        <TextView
+            android:id="@+id/dialog_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/blank"
+            android:layout_gravity="center"
+            android:padding="15dp"
+            android:text="金币可用于福利房、时长房、收费房可抵用此金币，100金币可兑换一分钟时长观看福利房和计费房"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F2F2F2"/>
+        <TextView
+            android:id="@+id/sure"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textColor="@color/navi_title_color"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="我知道了"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -8,6 +8,7 @@
     <color name="text_gray">#FF999999</color>
     <color name="blue">#499BF7</color>
     <color name="friend_text_pressed">#EB5F59</color>
+    <color name="three_color">#EF8F64</color>
     <color name="friend_text_normal">#999999</color>
     <color name="transparent">#00000000</color>
     <color name="login_normal">#CECECE</color>
