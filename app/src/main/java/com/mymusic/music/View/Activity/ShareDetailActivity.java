@@ -31,6 +31,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyshareActivity;
 import com.mymusic.music.base.BaseActivity;
@@ -50,6 +51,8 @@ public class ShareDetailActivity extends BaseActivity {
     ImageView code;
     @BindView(R.id.copy_text)
     TextView copyText;
+    @BindView(R.id.my_code)
+    TextView myCode;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -63,6 +66,7 @@ public class ShareDetailActivity extends BaseActivity {
 
     @Override
     protected void LoadData() {
+        myCode.setText(SharedPrefrenceUtils.getString(this,"code"));
         initNet();
     }
 

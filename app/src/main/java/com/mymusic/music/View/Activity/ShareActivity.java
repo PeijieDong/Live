@@ -33,6 +33,7 @@ import com.mymusic.music.Util.AppUtil;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.MyChildActivity.My.MyshareActivity;
 import com.mymusic.music.View.Adapter.MyShareRcAdapter;
@@ -55,6 +56,8 @@ public class ShareActivity extends BaseActivity {
     TextView shareEarning;
     @BindView(R.id.share_num)
     TextView shareNum;
+    @BindView(R.id.my_code)
+    TextView myCode;
 
     @Override
     protected void initVariables(Intent intent) {
@@ -73,6 +76,7 @@ public class ShareActivity extends BaseActivity {
 
     private void initNet() {
         loading();
+        myCode.setText("我的邀请码："+SharedPrefrenceUtils.getString(this,"code"));
         NetRequest.postFormRequest(UrlManager.YAOQING, null, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
