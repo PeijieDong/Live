@@ -115,7 +115,7 @@
     <string name="account_name">账号</string>
     <string name="phone_bind">手机号绑定</string>
     <string name="change_pas">修改密码</string>
-    <string name="integral">积分</string>
+    <string name="integral">金币</string>
     <string name="task_share">推广任务</string>
     <string name="today_share">日常任务</string>
     <string name="task">任务中心</string>
@@ -140,7 +140,7 @@
     <string name="come">来吧，尽情发挥。。</string>
     <string name="chose_sign">选择标签</string>
     <string name="chose_sign_press">已选标签</string>
-    <string name="chose_sign_des">亲，添加标签除享受优先审核特权外，同时可获得更多经验值和积分。（最多可添加6个标签））</string>
+    <string name="chose_sign_des">亲，添加标签除享受优先审核特权外，同时可获得更多经验值和金币。（最多可添加6个标签））</string>
     <string name="gologin">立即登录</string>
     <string name="look_one">只看楼主</string>
     <string name="newhot">最新</string>

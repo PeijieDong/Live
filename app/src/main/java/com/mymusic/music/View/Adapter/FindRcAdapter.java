@@ -24,7 +24,7 @@ public class FindRcAdapter extends BaseQuickAdapter<VideoFind.DataBean.ListBean,
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, VideoFind.DataBean.ListBean s) {
-        Glide.with(mContext).load(s.getImage()).into((ImageView) baseViewHolder.getView(R.id.image));
+        Glide.with(mContext).load(s.getImage()).error(R.drawable.fq_ic_placeholder).into((ImageView) baseViewHolder.getView(R.id.image));
         baseViewHolder.setText(R.id.title,s.getTitle())
         .setText(R.id.playNum,s.getClick()+"次播放");
 //        .setText(R.id.score,s.get);

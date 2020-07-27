@@ -63,7 +63,7 @@
                     app:layout_constraintHorizontal_bias="0.2"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="10dp"
-                    android:text="10积分观看"/>
+                    android:text="10金币观看"/>
                 <TextView
                     android:id="@+id/goMoney"
                     android:layout_width="80dp"
@@ -76,7 +76,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintHorizontal_bias="0.7"
-                    android:text="10积分观看"/>
+                    android:text="10金币观看"/>
             </android.support.constraint.ConstraintLayout>
 
 
@@ -195,6 +195,25 @@
                             android:background="@drawable/back_home_top" />
                     </RelativeLayout>
                     <LinearLayout
+                        android:id="@+id/flow_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:textSize="16sp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginTop="5dp"
+                            android:text="标签:"/>
+                        <com.zhy.view.flowlayout.TagFlowLayout
+                            android:id="@+id/flowLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/detail_ll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -275,6 +294,24 @@
                         android:layout_marginBottom="3dp"
                         android:textSize="16sp"/>
                     <LinearLayout
+                        android:id="@+id/flow_ll2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:textSize="16sp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginTop="5dp"
+                            android:text="标签:"/>
+                        <com.zhy.view.flowlayout.TagFlowLayout
+                            android:id="@+id/flowLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
                         android:id="@+id/go_friend_detail2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -291,7 +328,6 @@
                             android:id="@+id/playNum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
                             android:textSize="13sp"/>
                     </LinearLayout>
                 </LinearLayout>

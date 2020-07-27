@@ -127,6 +127,15 @@ public class UserBean {
         private String guanying;
         private int notice;
         private int isanchor;
+        private String overtime;
+
+        public String getOvertime() {
+            return overtime;
+        }
+
+        public void setOvertime(String overtime) {
+            this.overtime = overtime;
+        }
 
         public int getIsanchor() {
             return isanchor;

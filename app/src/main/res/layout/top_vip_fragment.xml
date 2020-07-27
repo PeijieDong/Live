@@ -15,10 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textColor="#888"
+            android:textColor="#333"
+            android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
-            android:text="会员尊贵特权"/>
+            android:text="VIP会员权益"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,33 +31,20 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:paddingTop="15dp"
-                android:background="@drawable/topup_back_bt">
+                android:layout_marginRight="5dp">
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/top_vip_1"/>
+                    android:src="@drawable/top_vip_one"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/blank"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="7dp"
                     android:layout_gravity="center_horizontal"
                     android:text="评论特权"/>
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="#333"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:text="和水友一起嗨聊"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="3dp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -64,33 +52,20 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:orientation="vertical"
-                android:paddingTop="15dp"
-                android:background="@drawable/topup_back_bt">
+                android:orientation="vertical">
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/top_vip_2"/>
+                    android:src="@drawable/top_vip_two"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/blank"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="7dp"
                     android:layout_gravity="center_horizontal"
                     android:text="观影特权"/>
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="#333"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:text="无限观影次数畅想全程"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="3dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -99,33 +74,41 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp"
-                android:orientation="vertical"
-                android:paddingTop="15dp"
-                android:background="@drawable/topup_back_bt">
+                android:orientation="vertical">
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/top_vip_3"/>
+                    android:src="@drawable/top_vip_three"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/blank"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="7dp"
                     android:layout_gravity="center_horizontal"
                     android:text="看私密权限"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/top_vip_four"/>
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="#333"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:text="解锁私密视频私密照片"
+                    android:textColor="@color/blank"
+                    android:gravity="center_horizontal"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="3dp"/>
+                    android:text="看私密权限"/>
             </LinearLayout>
         </LinearLayout>
         <TextView
@@ -134,8 +117,9 @@
             android:textSize="16sp"
             android:textColor="#888"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:text="会员充值"/>
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:text="VIP套餐"/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rc"
             android:layout_width="match_parent"

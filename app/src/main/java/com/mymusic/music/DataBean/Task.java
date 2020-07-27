@@ -10,7 +10,7 @@ import java.util.List;
 public class Task {
 
     /**
-     * data : {"list":[{"score":"0","consumption":"0","title":"推广任务","list":[{"id":"1","title":"邀请用户，下载并登陆","icon":"","integral":"10","experience":"4","type":"1","desc":"积分+10 经验+ ","completeValue":"0","totalValue":"2","status":"1"},{"id":"2","title":"分享帖子或啪啪","icon":"","integral":"10","experience":"5","type":"2","desc":"积分+10 经验+ ","completeValue":"0","totalValue":"5","status":"1"}]},{"title":"推广任务","list":[{"id":"1","title":"邀请用户，下载并登陆","icon":"","integral":"10","experience":"4","type":"1","desc":"积分+10 经验+ ","completeValue":"0","totalValue":"2","status":"1"},{"id":"2","title":"分享帖子或啪啪","icon":"","integral":"10","experience":"5","type":"2","desc":"积分+10 经验+ ","completeValue":"0","totalValue":"5","status":"1"}]},{"title":"新手任务","list":[{"id":"3","title":"浏览帖子","desc":"积分+10 经验+ ","icon":"","integral":"10","experience":"5","completeValue":"0","totalValue":"5","type":"3","status":"1"},{"id":"4","title":"观看啪啪视频","desc":"积分+10 经验+ ","icon":"","integral":"10","experience":"4","completeValue":"0","totalValue":"2","type":"4","status":"1"},{"id":"5","title":"成功发表帖子","desc":"积分+10 经验+ ","icon":"","integral":"10","experience":"5","completeValue":"0","totalValue":"1","type":"5","status":"1"},{"id":"6","title":"收到其他用户评论","desc":"积分+10 经验+ ","icon":"","integral":"10","experience":"5","completeValue":"0","totalValue":"1","type":"6","status":"1"},{"id":"7","title":"收到点赞","desc":"积分+10 经验+ ","icon":"","integral":"10","experience":"5","completeValue":"0","totalValue":"1","type":"7","status":"1"},{"id":"8","title":"修改个人资料","desc":"积分+10 经验+ ","icon":"","integral":"10","experience":"5","completeValue":"0","totalValue":"1","type":"8","status":"1"}]}]}
+     * data : {"list":[{"score":"0","consumption":"0","title":"推广任务","list":[{"id":"1","title":"邀请用户，下载并登陆","icon":"","integral":"10","experience":"4","type":"1","desc":"金币+10 经验+ ","completeValue":"0","totalValue":"2","status":"1"},{"id":"2","title":"分享帖子或啪啪","icon":"","integral":"10","experience":"5","type":"2","desc":"金币+10 经验+ ","completeValue":"0","totalValue":"5","status":"1"}]},{"title":"推广任务","list":[{"id":"1","title":"邀请用户，下载并登陆","icon":"","integral":"10","experience":"4","type":"1","desc":"金币+10 经验+ ","completeValue":"0","totalValue":"2","status":"1"},{"id":"2","title":"分享帖子或啪啪","icon":"","integral":"10","experience":"5","type":"2","desc":"金币+10 经验+ ","completeValue":"0","totalValue":"5","status":"1"}]},{"title":"新手任务","list":[{"id":"3","title":"浏览帖子","desc":"金币+10 经验+ ","icon":"","integral":"10","experience":"5","completeValue":"0","totalValue":"5","type":"3","status":"1"},{"id":"4","title":"观看啪啪视频","desc":"金币+10 经验+ ","icon":"","integral":"10","experience":"4","completeValue":"0","totalValue":"2","type":"4","status":"1"},{"id":"5","title":"成功发表帖子","desc":"金币+10 经验+ ","icon":"","integral":"10","experience":"5","completeValue":"0","totalValue":"1","type":"5","status":"1"},{"id":"6","title":"收到其他用户评论","desc":"金币+10 经验+ ","icon":"","integral":"10","experience":"5","completeValue":"0","totalValue":"1","type":"6","status":"1"},{"id":"7","title":"收到点赞","desc":"金币+10 经验+ ","icon":"","integral":"10","experience":"5","completeValue":"0","totalValue":"1","type":"7","status":"1"},{"id":"8","title":"修改个人资料","desc":"金币+10 经验+ ","icon":"","integral":"10","experience":"5","completeValue":"0","totalValue":"1","type":"8","status":"1"}]}]}
      * status : 1
      * referer :
      * state : 1
@@ -69,7 +69,7 @@ public class Task {
              * score : 0
              * consumption : 0
              * title : 推广任务
-             * list : [{"id":"1","title":"邀请用户，下载并登陆","icon":"","integral":"10","experience":"4","type":"1","desc":"积分+10 经验+ ","completeValue":"0","totalValue":"2","status":"1"},{"id":"2","title":"分享帖子或啪啪","icon":"","integral":"10","experience":"5","type":"2","desc":"积分+10 经验+ ","completeValue":"0","totalValue":"5","status":"1"}]
+             * list : [{"id":"1","title":"邀请用户，下载并登陆","icon":"","integral":"10","experience":"4","type":"1","desc":"金币+10 经验+ ","completeValue":"0","totalValue":"2","status":"1"},{"id":"2","title":"分享帖子或啪啪","icon":"","integral":"10","experience":"5","type":"2","desc":"金币+10 经验+ ","completeValue":"0","totalValue":"5","status":"1"}]
              */
 
             private String score;
@@ -117,7 +117,7 @@ public class Task {
                  * integral : 10
                  * experience : 4
                  * type : 1
-                 * desc : 积分+10 经验+
+                 * desc : 金币+10 经验+
                  * completeValue : 0
                  * totalValue : 2
                  * status : 1

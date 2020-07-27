@@ -18,6 +18,7 @@ import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.OrderFindAvtivity;
 import com.mymusic.music.View.Adapter.WalletAdapter;
+import com.mymusic.music.View.Fragment.TopUpFragment;
 import com.mymusic.music.base.BaseFragment;
 import com.mymusic.music.base.UrlManager;
 
@@ -60,6 +61,8 @@ public class WalletFragment extends BaseFragment {
     protected void LoadData() {
         WalletAdapter adapter = new WalletAdapter(getContext(),bean);
         gridView.setAdapter(adapter);
+        money = bean.getData().getList().getAgent().get(0).getMoney();
+        coin = bean.getData().getList().getAgent().get(0).getCoin();
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -71,13 +74,13 @@ public class WalletFragment extends BaseFragment {
         });
     }
 
-    private void inittopup() {
+    public void inittopup() {
         checkLogin();
         HashMap<String, String> map = new HashMap<>();
         map.put("money",money);
         map.put("coin",coin);
         map.put("type","3");
-        NetRequest.postFormHeadRequest(UrlManager.TopUp, null, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
+        NetRequest.postFormHeadRequest(UrlManager.Money, null, Live.getInstance().getToken(getContext()), new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
                 ToastUtil.show(getContext(),"下单成功",Toast.LENGTH_SHORT);
@@ -94,5 +97,6 @@ public class WalletFragment extends BaseFragment {
             }
         });
     }
+
 
 }

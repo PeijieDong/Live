@@ -23,6 +23,7 @@ import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.Util.SharedPrefrenceUtils;
 import com.mymusic.music.Util.ToastUtil;
 import com.mymusic.music.View.Activity.message.NoticeActivity;
 import com.mymusic.music.base.ActivityCollector;
@@ -121,6 +122,10 @@ public class LoginActivity extends BaseActivity {
                         public void requestSuccess(String result) throws Exception {
                             Log.e("33",result);
                             User user = GsonUtil.GsonToBean(result, User.class);
+                            if(user != null && user.getList()!=null && user.getList().getCode() != null){
+                                String code = user.getList().getCode();
+                                SharedPrefrenceUtils.saveString(LoginActivity.this,"code",code);
+                            }
                             if(user.getMsg().equals("登录成功")){
                                 Live.getInstance().put(LoginActivity.this,result);
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);

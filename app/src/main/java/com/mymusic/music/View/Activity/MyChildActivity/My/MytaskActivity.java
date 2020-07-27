@@ -15,6 +15,8 @@ import com.mymusic.music.MainActivity;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
 import com.mymusic.music.Util.NetRequest;
+import com.mymusic.music.View.Activity.ShareActivity;
+import com.mymusic.music.View.Activity.ShareDetailActivity;
 import com.mymusic.music.View.Activity.WebActivity;
 import com.mymusic.music.View.Activity.user.ExpActivity;
 import com.mymusic.music.View.Activity.user.IntegalActivity;
@@ -72,11 +74,13 @@ public class MytaskActivity extends BaseActivity {
                         switch (view.getId()){
                             case R.id.doit:
                                 if (bean.getData().getList().get(1).getList().get(position).getType().equals("1")){
-                                    Intent intent1 = new Intent(MytaskActivity.this, WebActivity.class);
-                                    intent1.putExtra("url","http://live.shuiqiao.net/users/share");
-                                    intent1.putExtra("title","推广分享");
-                                    intent1.putExtra("share",true);
-                                    startActivity(intent1);
+                                    Intent intent = new Intent(MytaskActivity.this, ShareActivity.class);
+                                    startActivity(intent);
+//                                    Intent intent1 = new Intent(MytaskActivity.this, WebActivity.class);
+//                                    intent1.putExtra("url","http://live.shuiqiao.net/users/share");
+//                                    intent1.putExtra("title","推广分享");
+//                                    intent1.putExtra("share",true);
+//                                    startActivity(intent1);
                                 }else if(bean.getData().getList().get(1).getList().get(position).getId().equals("2")){
                                     Intent intent = new Intent(MytaskActivity.this, MainActivity.class);
                                     intent.putExtra("position",1);
