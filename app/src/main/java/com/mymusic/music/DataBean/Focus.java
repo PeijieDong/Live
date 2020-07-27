@@ -94,6 +94,7 @@ public class Focus {
             private String title;
             private String description;
             private String cid;
+            private String id;
             private String guanzhu;
 
             public String getUid() {
@@ -150,6 +151,14 @@ public class Focus {
 
             public void setGuanzhu(String guanzhu) {
                 this.guanzhu = guanzhu;
+            }
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
             }
         }
     }

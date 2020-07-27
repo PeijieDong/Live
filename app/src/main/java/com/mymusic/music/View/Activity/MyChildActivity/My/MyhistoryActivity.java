@@ -17,6 +17,7 @@ import com.mymusic.music.DataBean.HomeData;
 import com.mymusic.music.Live;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LogUtils;
 import com.mymusic.music.Util.LoginDialog;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.Util.ToastUtil;
@@ -87,14 +88,15 @@ public class MyhistoryActivity extends BaseActivity {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                LogUtils.d("tag","这是数据="+GsonUtil.GsonString(bean.getData().getList().get(position)));
                 if(bean.getData().getList().get(position).getType().equals("小视频")){
                     changeData(bean.getData().getList().get(position));
                     Intent intent = new Intent(MyhistoryActivity.this, DetailsActivity.class);
-//                    intent.putExtra("playData",);
+                    intent.putExtra("id", bean.getData().getList().get(position).getId());
                     startActivity(intent);
                 }else {
                     Intent intent = new Intent(MyhistoryActivity.this, DetailsActivity.class);
-                    intent.putExtra("id", bean.getData().getList().get(position).getVid());
+                    intent.putExtra("id", bean.getData().getList().get(position).getId());
                     startActivity(intent);
                 }
             }

@@ -11,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.gson.Gson;
 import com.mymusic.music.DataBean.VideoItem;
 import com.mymusic.music.R;
 import com.mymusic.music.Util.GlideImageLoader;
 import com.mymusic.music.Util.GsonUtil;
+import com.mymusic.music.Util.LogUtils;
 import com.mymusic.music.Util.NetRequest;
 import com.mymusic.music.View.Activity.VideoPindaoActivity;
 import com.mymusic.music.View.Adapter.RcAdpaterVideo;
@@ -70,6 +72,7 @@ public class VideoItemFragment extends BaseFragment {
         NetRequest.postFormRequest(UrlManager.GET_PINDAO_DETAIL, map, new NetRequest.DataCallBack() {
             @Override
             public void requestSuccess(String result) throws Exception {
+                LogUtils.d("ds","返回数据"+ GsonUtil.GsonString(result));
                 refreshLayout.finishRefresh();
                 VideoItem bean = GsonUtil.GsonToBean(result, VideoItem.class);
                 List<VideoItem.DataBean.AdBean> ad = bean.getData().getAd();

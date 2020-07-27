@@ -105,7 +105,7 @@ public class FocusFragment extends BaseFragment {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                             Intent intent = new Intent(getContext(), UserDetailActivity.class);
-                            intent.putExtra("UserId",bean.getData().getList().get(position).getUid());
+                            intent.putExtra("UserId",bean.getData().getList().get(position).getId());
                             getContext().startActivity(intent);
                         }
                     });

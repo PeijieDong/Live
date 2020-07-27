@@ -102,9 +102,12 @@ public class UserActivity extends BaseActivity {
         picker.setAtmospheric(true);
     }
 
-    @OnClick({R.id.chose_head,R.id.change_name,R.id.change_sign,R.id.change_sex,R.id.change_birthday,R.id.friend_direction,R.id.marray,R.id.chose_sex})
+    @OnClick({R.id.back,R.id.chose_head,R.id.change_name,R.id.change_sign,R.id.change_sex,R.id.change_birthday,R.id.friend_direction,R.id.marray,R.id.chose_sex})
     public void ClickEvent(View view){
         switch (view.getId()){
+            case R.id.back:
+                finish();
+                break;
             case R.id.chose_head:
                 PictureSelector
                         .create(UserActivity.this, PictureSelector.SELECT_REQUEST_CODE)

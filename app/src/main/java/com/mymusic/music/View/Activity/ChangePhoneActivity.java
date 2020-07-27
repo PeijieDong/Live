@@ -59,7 +59,6 @@ public class ChangePhoneActivity extends BaseActivity {
                 StringBuilder builder = new StringBuilder(phone);
                 builder.replace(3,7,"****");
                 nowPhone.setText(builder.toString());
-                nowPhone.setText("132****1231");
             }else{
                 nowPhone.setText("手机号码错误");
             }
